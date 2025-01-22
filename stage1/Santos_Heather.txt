@@ -1,0 +1,7 @@
+Heather Santos 
+
+1. Customer: customers of the movie theater
+
+2. Staff: staff of the movie theater
+
+3. Payment: all payment related operations
