@@ -1,0 +1,8 @@
+Logan Cordova job done:
+Created:
+* Movie Class
+* Showtime Class
+* Screen Class
+Inherited Customer Class to make work distribution amongst peers more fair. 
+
+
