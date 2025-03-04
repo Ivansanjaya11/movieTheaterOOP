@@ -1,0 +1,5 @@
+Heather Santos stage 2 
+
+Job done: created the customer class, staff class, ticket staff subclass, food staff subclass, payment class, ticket payment subclass, food payment subclass.  Ivan is doing food payment code since our classes are so closely related.
+We redistributed the customer class to Logan based on the size/workload for fair work distribution. We decided on whole payment amounts (ie a movie price is 7 dollars, and a food combo like nachos and popcorn with a drink is 12 dollars, tax included in the price like on base pricing.)
+

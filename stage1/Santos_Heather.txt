@@ -2,6 +2,20 @@ Heather Santos
 
 1. Customer: customers of the movie theater
 
+	have the option to add a loyalty account with individually created id numbers
+
 2. Staff: staff of the movie theater
 
+	staffing schedule and assignment of duties
+
+	assign managers and task them with running/operating movie theater (ie food stand inventory, cash register proceeds at close, costs to operate) 
+
 3. Payment: all payment related operations
+	
+	ability to receive payments from customers
+
+	ability to pay vendors 
+	
+	a database where financial accountability and profits can be accessed by managers
+	
+	
