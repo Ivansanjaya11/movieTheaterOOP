@@ -10,14 +10,10 @@ public class ReceiptGenerator {
 
     }
 
-    static {
-
-    }
-
     /**
      * Generates the receipt for the customer's order, displaying the ordered food and total price.
      */
-    public static String generateFoodReceipt(ArrayList<Pair<Food, Byte>> orderedFood, Customer customer, String paymentType, short PaymentAmount) {
+    public static String generateFoodReceipt(ArrayList<Pair<Food, Byte>> orderedFood, String customerName, String paymentType, short paymentAmount) {
 
         // check the date (and update if needed)
         LocalDate date = LocalDate.now();
@@ -35,9 +31,7 @@ public class ReceiptGenerator {
             zeroes += "0";
         }
 
-
-
-
+        String paymentId = date + "-" + zeroes + DateAndPaymentTracker.foodCustomerNumOfTheDay;
 
         // updates the inventory (reduce the number of certain ingredients used for the ordered food)
 
@@ -45,7 +39,7 @@ public class ReceiptGenerator {
 
         // prints out the detail of the transaction on screen
         System.out.println("Order #" + paymentId);
-        System.out.println("This order is for " + customer.getName());
+        System.out.println("This order is for " + customerName);
         for (int i=1; i<=orderedFood.size(); i++) {
             System.out.print(i + ". ");
             System.out.print(orderedFood.get(i).getKey().getMenuName() + "\t");
@@ -58,10 +52,10 @@ public class ReceiptGenerator {
 
         DateAndPaymentTracker.foodCustomerNumOfTheDay++;
 
-        return date + "-" + zeroes + DateAndPaymentTracker.foodCustomerNumOfTheDay;
+        return paymentId;
     }
 
-    public static void generateTicketReceipt() {
-
+    public static String generateTicketReceipt() {
+        return "";
     }
 }

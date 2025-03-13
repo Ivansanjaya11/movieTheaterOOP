@@ -118,36 +118,13 @@ public class Inventory {
 			}
 		}
 
-		this.updateInventoryFile(); // update the state of the inventory file
+		FilesUpdateManager.updateInventoryFile(itemList); // update the state of the inventory file
 
 		// call a method that will alert for low stock if the item is low in quantity
 		this.alertLowStock();
 	}
 
-	/**
-	 * Updates the inventory file with the current inventory state.
-	 * Writes the item name and its remaining quantity to the file.
-	 */
-	private void updateInventoryFile() {
-		// store all the data in an array of Strings
-		String[] lines = new String[itemList.size()];
-		for (int i = 0; i < itemList.size(); i++) {
-			Item item = itemList.get(i);
-			if (item.hasItemName() && item.hasQuantity()) {
-				lines[i] = item.getItemName() + "," + item.getQuantity();
-			}
-		}
 
-		// overwrites the previous data with the lines of String already prepared
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.INVENTORY_REPORT_PATH))) {
-			for (String aLine : lines) {
-				writer.write(aLine);
-				writer.newLine();
-			}
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-	}
 
 	/**
 	 * Checks for items with low stock and alerts if their quantity is below the threshold.
@@ -184,35 +161,12 @@ public class Inventory {
 		System.out.println("Ordering item " + item.getItemName() + " by " + buyingQuantity + " quantity unit at $" + totalPrice);
 
 		// update the transaction record of item order
-		this.updateItemOrderFile(item, buyingQuantity, totalPrice);
+		FilesUpdateManager.updateItemOrderFile(item, buyingQuantity, totalPrice);
 
 		// sets the new quantity after ordering new items
 		item.setQuantity((short) (item.getQuantity() + buyingQuantity));
 		System.out.println("Order completed");
 	}
 
-	/**
-	 * Updates the item order file with the details of the ordered item, including the
-	 * item name, quantity ordered, and total price.
-	 *
-	 * @param item The item being ordered.
-	 * @param buyingQuantity The quantity of the item being ordered.
-	 * @param totalPrice The total price for the ordered quantity.
-	 */
-	private void updateItemOrderFile(Item item, short buyingQuantity, short totalPrice) {
-		LocalDateTime dateTime = LocalDateTime.now(ZoneId.of("US/Mountain"));
-		String line = "";
-		line += (dateTime + "," + item.getItemName() + "," + buyingQuantity + "," + totalPrice);
 
-		/*
-		 * stores the item order receipt into a file with the following format:
-		 * LocalDateTime, item name, quantity bought, and the total price
-		 */
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.ITEM_ORDER_REPORT_PATH, true))) {
-			writer.newLine();
-			writer.write(line);
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-	}
 }

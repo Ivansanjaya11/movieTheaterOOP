@@ -1,4 +1,5 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -30,7 +31,6 @@ public class FoodPayment extends Payment {
 	 * Constructor for the FoodPayment class.
 	 * Initializes the ordered food list and scanner.
 	 *
-	 * @param paymentId the payment ID for the transaction
 	 * @param customer the customer making the payment
 	 */
 	public FoodPayment(Customer customer) {
@@ -180,50 +180,16 @@ public class FoodPayment extends Payment {
 		}
 
 		// generate the receipt for the order
-		String paymentId = ReceiptGenerator.generateFoodReceipt(orderedFood, super.getCustomer(), super.getPaymentType(), super.getPaymentAmount());
+		String paymentId = ReceiptGenerator.generateFoodReceipt(orderedFood, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
 
 		super.setPaymentId(paymentId);
 
-		this.updateFoodSalesFile(); // updates the food sales report file with the new transaction
+		// updates the food sales report file with the new transaction
+		FilesUpdateManager.updateFoodSalesFile(super.getPaymentId(), super.getPaymentAmount(), orderedFood);
 	}
 
 
-	/**
-	 * Updates the food sales file with the current order's details.
-	 */
-	private void updateFoodSalesFile() {
-		/*
-		 * adds the information about the transaction in the following format:
-		 * LocalDateTime object, Payment amount (total price)
-		 * then separate these two with ";"
-		 * after that, append in an alternating way, separated by ","
-		 * the food name, the quantity, and the total price of one food menu
-		 */
 
-		String line = "";
-		line += super.getPaymentId();
-		line += ",";
-		line +=  LocalDateTime.now(ZoneId.of("US/Mountain")).toString();
-		line += ",";
-		line += super.getPaymentAmount();
-		line += ";";
-		for (Pair<Food, Byte> anOrder : this.orderedFood) {
-			line += anOrder.getKey().getMenuName();
-			line += ",";
-			line += String.valueOf(anOrder.getValue());
-			line += ",";
-			line += String.valueOf(anOrder.getKey().getPrice() * anOrder.getValue());
-			line += ",";
-		}
-
-		// append to a new line in the food sales report file
-		try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.FOOD_SALES_REPORT_PATH, true))) {
-			writer.newLine();
-			writer.write(line);
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-		}
-	}
 
 	/**
 	 * Reviews the customer's order to confirm if it is correct.
