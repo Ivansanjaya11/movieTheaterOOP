@@ -180,55 +180,12 @@ public class FoodPayment extends Payment {
 		}
 
 		// generate the receipt for the order
-		this.generateReceipt();
-	}
+		String paymentId = ReceiptGenerator.generateFoodReceipt(orderedFood, super.getCustomer(), super.getPaymentType(), super.getPaymentAmount());
 
-	/**
-	 * Generates the receipt for the customer's order, displaying the ordered food and total price.
-	 */
-	public void generateReceipt() {
-		// check the date (and update if needed)
-		LocalDate date = LocalDate.now();
-		if (DateAndPaymentTracker.currentDate.isBefore(date)) {
-			DateAndPaymentTracker.currentDate = date;
-			DateAndPaymentTracker.foodCustomerNumOfTheDay = 1;
-			DateAndPaymentTracker.ticketCustomerNumOfTheDay = 1;
-		}
-
-		// set the paymentId
-		byte numOfZeroes = (byte) (4-String.valueOf(DateAndPaymentTracker.foodCustomerNumOfTheDay).length());
-		String zeroes = "";
-
-		for (int i=0; i<numOfZeroes; i++) {
-			zeroes += "0";
-		}
-
-		super.setPaymentId(date + "-" + zeroes + DateAndPaymentTracker.foodCustomerNumOfTheDay);
+		super.setPaymentId(paymentId);
 
 		this.updateFoodSalesFile(); // updates the food sales report file with the new transaction
-
-		// updates the inventory (reduce the number of certain ingredients used for the ordered food)
-
-		InventoryManager.updateInventory(orderedFood);
-
-		// prints out the detail of the transaction on screen
-		System.out.println("Order #" + super.getPaymentId());
-		System.out.println("This order is for " + super.getCustomer().getName());
-		for (int i=1; i<=orderedFood.size(); i++) {
-			System.out.print(i + ". ");
-			System.out.print(orderedFood.get(i).getKey().getMenuName() + "\t");
-			System.out.print(orderedFood.get(i).getValue() + "\t");
-			System.out.println("$" + orderedFood.get(i).getKey().getPrice());
-		}
-		System.out.print("Total price is $" + super.getPaymentAmount());
-		if (super.hasPaymentType()) {
-			System.out.print(", paid by " + super.getPaymentType());
-		}
-		System.out.println("\nThank you for watching with us!");
-
-		DateAndPaymentTracker.foodCustomerNumOfTheDay++;
 	}
-
 
 
 	/**
