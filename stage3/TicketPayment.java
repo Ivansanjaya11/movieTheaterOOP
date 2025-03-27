@@ -6,8 +6,15 @@ public class TicketPayment extends Payment {
     private byte imaxPrice;
 
     public TicketPayment(byte normalTicket, byte imaxTicket) {
+        super(null); 
         this.normalTicket = normalTicket;
         this. imaxTicket = imaxTicket;
+
+        this.normalPrice = 10;
+        this.imaxPrice = 15;
+
+        short total = (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
+        setPaymentAmount(total);
     }
 
     public byte getNormalTicket() {
@@ -27,7 +34,7 @@ public class TicketPayment extends Payment {
     }
 
     public short getTotalPrice() {
-        return paymentAmount;
+        return (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
     }
 
     public void setNormalTicket(byte normalTicket) {
@@ -46,31 +53,23 @@ public class TicketPayment extends Payment {
         this.imaxPrice = imaxPrice;
     }
 
-    public void setTotalPrice(short paymentAmount) {
-        this.paymentAmount = paymentAmount;
+    public void setTotalPrice(short totalPrice) {
+        setPaymentAmount(totalPrice);
     }
 
     public boolean hasNormalPrice() {
-
+        return normalPrice > 0;
     }
 
     public boolean hasImaxPrice() {
-
+        return imaxPrice > 0;
     }
 
     public boolean hasNormalTicket() {
-
+        return normalTicket > 0;
     }
 
     public boolean hasImaxTicket() {
-
-    }
-
-    public void generateReceipt() {
-
-    }
-
-    public void reviewOrder() {
-
+        return imaxTicket > 0;
     }
 }
