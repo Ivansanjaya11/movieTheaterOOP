@@ -5,13 +5,13 @@ public class Staff {
     protected byte hourlyRate;
     protected byte hoursWorked;
     protected String schedule;
-    protected Analytics analytics;
 
     public Staff(String employeeName,byte employeeId, byte hourlyRate, String schedule) {
         this.employeeName = employeeName;
         this.employeeId = employeeId;
         this.hourlyRate = hourlyRate;
         this.schedule = schedule;
+        this.hoursWorked = 0;
     }
 
     public String getEmployeeName() {
@@ -22,16 +22,20 @@ public class Staff {
         return employeeId;
     }
 
+    public byte getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public byte getHoursWorked() {
+        return hoursWorked;
+    }
+
     public short getWeeklySalary() {
-        return (short) (hourlyRate * hoursWorked);
+        return (short)(hourlyRate * hoursWorked);
     }
 
     public String getSchedule() {
         return schedule;
-    }
-
-    public Analytics getAnalytics() {
-        return analytics;
     }
 
     public void setEmployeeName(String employeeName) {
@@ -42,8 +46,11 @@ public class Staff {
         this.employeeId = employeeId;
     }
 
-    public void setWeeklySalary(byte hourlyRate, byte hoursWorked) {
+    public void setHourlyrate(byte hourlyRate) {
         this.hourlyRate = hourlyRate;
+    }
+
+    public void setHoursWorked(byte hoursWorked) {
         this.hoursWorked = hoursWorked;
     }
 
@@ -55,7 +62,5 @@ public class Staff {
         this.schedule = schedule;
     }
 
-    public void setAnalytics(Analytics analytics) {
-        this.analytics = analytics;
-    }
+    
 }
