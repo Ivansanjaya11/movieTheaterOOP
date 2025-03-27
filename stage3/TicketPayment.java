@@ -53,6 +53,13 @@ public class TicketPayment extends Payment {
         this.imaxPrice = imaxPrice;
     }
 
+    /*
+     * this should be setPaymentAmount overriding from parent class
+     * doesnt require arguments
+     * will check if all 4 fields are filled correctly
+     * if true, calcuate the total amount
+     * access the paymentAmount in the parent class directly and assign the total price to it
+     */
     public void setTotalPrice(short totalPrice) {
         setPaymentAmount(totalPrice);
     }

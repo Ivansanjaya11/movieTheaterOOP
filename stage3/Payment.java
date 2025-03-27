@@ -31,7 +31,11 @@ public class Payment {
         public void setPaymentId(String paymentId) {
             this.paymentId = paymentId;
         }
-
+	
+	/*
+	 * doesn't require any arguments
+	 * make it private abstract
+	 */
         public void setPaymentAmount(short paymentAmount) {
             this.paymentAmount = paymentAmount;
         }
