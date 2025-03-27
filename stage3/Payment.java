@@ -1,16 +1,18 @@
 public class Payment {
 
-    protected short paymentId;
+    protected String paymentId;
     protected short paymentAmount;
     protected String paymentType;
     protected Customer customer;
 
-    public Payment(short paymentID, Customer customer) {
-        this.paymentId = paymentId;
+    public Payment(Customer customer) {
+        this.paymentId = generatePaymentId();
         this.customer = customer;
+        this.paymentType = "Undeclared";
+        this.paymentAmount = 0;
     }
 
-        public short getPaymentId() {
+        public String getPaymentId() {
             return paymentId;
         }
 
@@ -26,7 +28,7 @@ public class Payment {
             return customer;
         }
 
-        public void setPaymentId(short paymentId) {
+        public void setPaymentId(String paymentId) {
             this.paymentId = paymentId;
         }
 
@@ -39,7 +41,7 @@ public class Payment {
         }
 
         public void setCustomer(Customer customer) {
-            this.Customer = Customer;
+            this.Customer = customer;
         }
 
         public boolean hasPaymentType() {
@@ -47,24 +49,13 @@ public class Payment {
         }
 
         public void processPaymentWithCard() {
-            if("Card".equalsIgnoreCase(paymentType)) {
-                System.out.println("Processing payment of $" + paymentAmount + " using card.");
-            } else {
-                System.out.println("You paid with cash.");    ///need help here with the logic
-            }
+            this.paymentType = "Card";
+            System.out.println("Payment processed with card.");
         }
 
         public void processPaymentWithCash() {
-            if("Cash".equalsIgnoreCase(paymentType)) {
-                System.out.println("Cash required to pick up tickets in store.");
-            } else {
-                System.err.println("You paid with card.");
-            }
+            this.paymentType = "Cash";
+            System.out.println("Payment processed with cash.");
         }
-
-        public void generateReceipt() {
-
-        }
-
     }
 
