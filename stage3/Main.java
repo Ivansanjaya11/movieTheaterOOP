@@ -51,15 +51,15 @@ public class Main {
 		ticketStaff3.getMovieManager().addMovie(new Movie((byte) 6, "The Mummy", "Action", (short) 124));
 
 		// add food to menu
-		foodStaff1.getMenuManager().addMenu(1, "Cheeseburger", 10);
-		foodStaff2.getMenuManager().addMenu(2, "Dr. Pepper", 4);
-		foodStaff3.getMenuManager().addMenu(3, "Hot Dog", 5);
+		foodStaff1.getMenuManager().addMenu(1, "Cheeseburger", 8);
+		foodStaff2.getMenuManager().addMenu(2, "Dr. Pepper", 3);
+		foodStaff3.getMenuManager().addMenu(3, "Hot Dog", 3);
 		foodStaff1.getMenuManager().addMenu(4, "Pizza", 10);
 		foodStaff2.getMenuManager().addMenu(5, "Popcorn", 4);
 		foodStaff3.getMenuManager().addMenu(6, "Nachos", 5);
-		foodStaff1.getMenuManager().addMenu(7, "Cookies", 10);
-		foodStaff2.getMenuManager().addMenu(8, "Pepsi", 4);
-		foodStaff3.getMenuManager().addMenu(9, "Coca-cola", 5);
+		foodStaff1.getMenuManager().addMenu(7, "Cookies", 2);
+		foodStaff2.getMenuManager().addMenu(8, "Pepsi", 3);
+		foodStaff3.getMenuManager().addMenu(9, "Coca-cola", 3);
 
 		// customers buying from food stand
 		foodStaff1.addNewFoodPayment(customer3);
