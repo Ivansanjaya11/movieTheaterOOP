@@ -59,9 +59,11 @@ public class FoodPayment extends Payment {
 			byte paymentOption = input.nextByte();
 			if (paymentOption>0 && paymentOption<=2) {
 				if (paymentOption==1) {
-					super.setPaymentType("card");
+					//super.setPaymentType("card");
+					processPaymentWithCard();
 				} else {
-					super.setPaymentType("cash");
+					//super.setPaymentType("cash");
+					processPaymentWithCash();
 				}
 				break;
 			}
@@ -69,13 +71,13 @@ public class FoodPayment extends Payment {
 		} while (true);
 
 		// process the payment
-		if (super.hasPaymentType() && super.hasPaymentAmount()) {
+		/*if (super.hasPaymentType() && super.hasPaymentAmount()) {
 			if (super.getPaymentType().equalsIgnoreCase("card")) {
 				super.processPaymentWithCard();
 			} else {
 				super.processPaymentWithCash();
 			}
-		}
+		}*/
 
 		// generate the receipt for the order
 		String paymentId = ReceiptGenerator.generateFoodReceipt(orderedFood, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
