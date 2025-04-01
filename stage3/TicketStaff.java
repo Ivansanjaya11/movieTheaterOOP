@@ -1,3 +1,4 @@
+import util.DateAndPaymentTracker;
 import java.util.ArrayList;
 
 class TicketStaff extends Staff {
@@ -5,13 +6,17 @@ class TicketStaff extends Staff {
 
     public TicketStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
         super(employeeName, employeeId, hourlyRate, schedule);
+        this.role = "Ticket Sales";
         this.ticketPayments = new ArrayList<>();
     }
 
-    public void addNewTicketPayment(byte normalTickets, byte imaxTickets) {
-        TicketPayment payment = new TicketPayment(normalTickets, imaxTickets);
+    public void addNewTicketPayment(Customer customer) {
+        if(DateAndPaymentTracker.ticketNumOfTheDay == 0) {
+            clearOrderHistory();
+        }
+        TicketPayment payment = new TicketPayment(customer);
+        payment.chooseTicket();
         ticketPayments.add(payment);
-        System.out.println("Ticket payment successful.");
     }
 
     public void clearOrderHistory() {
@@ -19,7 +24,7 @@ class TicketStaff extends Staff {
         System.out.println("Order history cleared.");
     }
 
-    public ArrayList<TicketPayments> getOrderHistory() {
+    public ArrayList<TicketPayment> getOrderHistory() {
         return ticketPayments;
     }
 
@@ -31,13 +36,5 @@ class TicketStaff extends Staff {
             } else {
                 System.out.println("Seat unavailable, please choose another.");
             }
-    }
-
-    public String getEmployeeRoles() {
-        return "Ticket Seller";
-    }
-
-    public void setEmployeeRoles(String roleDescription) {
-        System.out.println("Employee role: " + roleDescription);
     }
 }

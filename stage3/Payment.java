@@ -6,7 +6,6 @@ public class Payment {
     protected Customer customer;
 
     public Payment(Customer customer) {
-        this.paymentId = generatePaymentId();
         this.customer = customer;
         this.paymentType = "Undeclared";
         this.paymentAmount = 0;
@@ -31,14 +30,6 @@ public class Payment {
         public void setPaymentId(String paymentId) {
             this.paymentId = paymentId;
         }
-	
-	/*
-	 * doesn't require any arguments
-	 * make it private abstract
-	 */
-        public void setPaymentAmount(short paymentAmount) {
-            this.paymentAmount = paymentAmount;
-        }
 
         public void setPaymentType(String paymentType) {
             this.paymentType = paymentType;
@@ -52,6 +43,10 @@ public class Payment {
             return paymentType != null && !paymentType.isEmpty();
         }
 
+        public boolean hasPaymentAmount() {
+            return paymentAmount > 0;
+        }
+
         public void processPaymentWithCard() {
             this.paymentType = "Card";
             System.out.println("Payment processed with card.");
@@ -61,5 +56,7 @@ public class Payment {
             this.paymentType = "Cash";
             System.out.println("Payment processed with cash.");
         }
+
+        protected abstract void setPaymentAmount();
     }
 

@@ -2,19 +2,33 @@ public class TicketPayment extends Payment {
 
     private byte normalTicket;
     private byte imaxTicket;
-    private byte normalPrice;
-    private byte imaxPrice;
+    private static byte normalPrice;
+    private static byte imaxPrice;
 
-    public TicketPayment(byte normalTicket, byte imaxTicket) {
-        super(null); 
-        this.normalTicket = normalTicket;
-        this. imaxTicket = imaxTicket;
+    static {
+        normalPrice = 10;
+        imaxPrice = 15;
+    }
 
-        this.normalPrice = 10;
-        this.imaxPrice = 15;
+    public TicketPayment(Customer customer) {
+        super(customer); 
+        this.normalTicket = 0;
+        this. imaxTicket = 0;
+    }
 
-        short total = (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
-        setPaymentAmount(total);
+    public void chooseTicket(byte normalQty, byte imaxQty) {
+        this.normalTicket = normalQty;
+        this.imaxTicket = imaxQty;
+        setPaymentAmount();
+    }
+
+    @Override
+    protected void setPaymentAmount() {
+        if(normalTicket >= 0 && imaxTicket >= 0 && normalPrice > 0 && imaxPrice > 0) {
+            this.paymentAmount = (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
+        } else {
+            this.paymentAmount = 0;
+        }
     }
 
     public byte getNormalTicket() {
@@ -33,35 +47,22 @@ public class TicketPayment extends Payment {
         return imaxPrice;
     }
 
-    public short getTotalPrice() {
-        return (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
-    }
-
     public void setNormalTicket(byte normalTicket) {
         this.normalTicket = normalTicket;
+        setPaymentAmount();
     }
 
     public void setImaxTicket(byte imaxTicket) {
         this.imaxTicket = imaxTicket;
+        setPaymentAmount();
     }
 
-    public void setNormalPrice(byte normalPrice) {
-        this.normalPrice = normalPrice;
+    public void setNormalPrice(byte newPrice) {
+        normalPrice = newPrice;
     }
 
-    public void setImaxPrice(byte imaxPrice) {
-        this.imaxPrice = imaxPrice;
-    }
-
-    /*
-     * this should be setPaymentAmount overriding from parent class
-     * doesnt require arguments
-     * will check if all 4 fields are filled correctly
-     * if true, calcuate the total amount
-     * access the paymentAmount in the parent class directly and assign the total price to it
-     */
-    public void setTotalPrice(short totalPrice) {
-        setPaymentAmount(totalPrice);
+    public void setImaxPrice(byte newPrice) {
+        imaxPrice = newPrice;
     }
 
     public boolean hasNormalPrice() {
