@@ -1,4 +1,6 @@
-import java.utill.ArrayList;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.ListIterator;
 
 /** This class manages multiple showtimes within the theater
  * @author Logan Cordova
@@ -6,7 +8,7 @@ import java.utill.ArrayList;
 
 public class ShowtimeManager {
     
-    private ArrayList<ShowTime> screening;
+    private ArrayList<Showtime> screening;
 
     /**
      * Constructs ShowtimeManager object
@@ -17,7 +19,7 @@ public class ShowtimeManager {
 
     /**
      * Adds showtime to list
-     * @param showtime
+     * @param showtime 
      */
     public void addShowtime(Showtime showtime) {
         screening.add(showtime);
@@ -28,9 +30,17 @@ public class ShowtimeManager {
      * @param showtimeID
      */
     public void removeShowtime(int showtimeID) {
-        if (screening.getShowtimeID == showtimeID) {
-            screening.remove; 
+        Iterator<Showtime> iterator = screening.iterator();
+
+        while (iterator.hasNext()); {
+            Showtime showtime = iterator.next();
+            if (showtime.getShowtimeID() == showtimeID) {
+                System.out.println("Showtime " + showtimeID + " removed successfully.");
+                return
+            }
         }
+        System.out.println("Showtime with ID " + showtimeID + " was not found.");
+    
     }
 
     /**
@@ -52,7 +62,8 @@ public class ShowtimeManager {
      */
     public void showAllShowtimeSchedule() {
         for (Showtime showtime : screening) {
-            System.out.println("Showtime ID: " + showtime.getShowtimeID() + ", Movie: " + showtime.getMovie());
+            System.out.println("Showtime ID: " + showtime.getShowtimeID() + ", Movie: " + showtime.getTitle()
+             + "Start time: " + startTime() + "End time: " + endTime());
         }
     }
 }
