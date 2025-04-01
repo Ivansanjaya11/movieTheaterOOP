@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 
+import TheaterOOP.Movie;
+import TheaterOOP.Showtime;
+
 /** This class manages a collection of movies
  * @author Logan Cordova
  */
@@ -10,18 +13,26 @@ public class MovieManager {
     //List to store movies
     private ArrayList<Movie> movies;
 
-    //Constructor initializes movie list
+    /**
+     * Constructor initializes movie list
+     */
     public MovieManager() {
         this.movies = new ArrayList<>();
     }
 
-    //Adds movie to movie list
-    public addMovie(Movie movie) {
+    /**
+     * Adds movie to movie list
+     * @param movie
+     */
+    public void addMovie(Movie movie) {
         movies.add(movie); 
     }
 
-    //Removes movie from movie list
-    public removeMovie(byte movieID) {
+    /**
+     * Removes movie from movie list
+     * @param movieID
+     */
+    public void removeMovie(byte movieID) {
         for (int i = 0; i < movies.size(); i++) {
             if (movies.get(i).getMovieID() == movieID) {
                 movies.remove(i);
@@ -32,7 +43,9 @@ public class MovieManager {
         System.out.println("Movie not found");
     }   
 
-    //Displays all movies in movie list
+    /**
+     * Displays all movies in movie list
+     */
     public void displayAllMovies() {
         for (Movie movie : movies) {
             System.out.println("ID: " + movie.getMovieID() + ", Title; " + movie.getTitle() + 
@@ -40,13 +53,72 @@ public class MovieManager {
         }
     }
  
-    //Searches for movie in movie list
-    public movieSearch(byte movieID) {
+    /**
+     * Searches movie list for movie by movie ID
+     * @param movieID
+     */
+    public void searchMovie(byte movieID) {
         for (Movie movie : movies) {
             if (movie.getMovieID() == movieID) {
                 return movie;
             }
         }
         System.out.println("Movie not found");
+    }
+
+    /**
+     * Checks if movie with specific movie ID exists in list
+     * @param movieID
+     * @return
+     */
+    public boolean hasMovieID(byte movieID) {
+         for (Movie movie : movies) {
+            if (movie.getMovieID() == movieID) {
+                return true;
+            }
+         }
+         return false;
+    }
+
+    /**
+     * Checks if movie with specific title exists in list
+     * @param title
+     * @return
+     */
+    public boolean hasTitle(String title) {
+        for (Movie movie : movies) {
+            if (movie.getTitle().equals(title)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if movie with specific genre exists in list
+     * @param genre
+     * @return
+     */
+    public boolean hasGenre(String genre) {
+        for (Movie movie : movies) {
+            if (movie.getGenre().equals(genre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if movie with specific duration exists in movie list
+     * @param duration
+     * @return
+     */
+    public boolean hasDuration(int duration) {
+        for (Movie movie : movies) {
+            if (movie.getDurationMinutes() == duration) {
+                return true;
+            }
+        }
+        return false;
     }
 }
