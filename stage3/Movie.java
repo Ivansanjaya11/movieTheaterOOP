@@ -12,7 +12,7 @@ public class Movie {
     /**
      * Constructor initializes Movie object
      * @param movieID - unique movie ID
-     * @param title - moive title
+     * @param title - movie title
      * @param genre - movie genre
      * @param durationMinutes - duration of move
      */
