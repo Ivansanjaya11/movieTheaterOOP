@@ -50,6 +50,18 @@ public class Main {
 		ticketStaff2.getMovieManager().addMovie(new Movie((byte) 5, "28 Days Later", "Thriller", (short) 113));
 		ticketStaff3.getMovieManager().addMovie(new Movie((byte) 6, "The Mummy", "Action", (short) 124));
 
+		// add screen
+		Screen screen1 = new Screen(1, "imax");
+		Screen screen2 = new Screen(2, "imax");
+		Screen screen3 = new Screen(3, "normal");
+		Screen screen4 = new Screen(4, "normal");
+		Screen screen5 = new Screen(5, "normal");
+		Screen screen6 = new Screen(6, "normal");
+
+		// add showtime
+
+
+
 		// add food to menu
 		foodStaff1.getMenuManager().addMenu(1, "Cheeseburger", 8);
 		foodStaff2.getMenuManager().addMenu(2, "Dr. Pepper", 3);
