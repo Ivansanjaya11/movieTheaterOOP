@@ -5,18 +5,15 @@
 public class SeatingArrangement {
     
     private boolean[][] seatStatus;
-    private short capacity;
-    private final int ROWS;
-    private final int COLS;
+    private static short capacity = 100;
+    private static final int ROWS = (capacity / 10) + (capacity % 10 == 0 ? 0 : 1);
+    private static final int COLS = 10;
 
     /**
      * Constructs a seating arrangement with a set capacity
-     * @param capacity
      */
-    public SeatingArrangement(short capacity) {
-        this.capacity = capacity;
-        this.ROWS = (capacity / 10) + (capacity % 10 == 0 ? 0 : 1);
-        this.COLS = 10;
+    public SeatingArrangement() {
+
         this.seatStatus = new boolean[ROWS][COLS];
 
         // Initializes all seats as availiable

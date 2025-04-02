@@ -4,10 +4,10 @@
 
 public class Screen {
 
-    private byte screenID; 
+    private byte screenID;
     private String screenType;
-    private DurationTime startTime;
-    private DurationTime endTime;
+    private TimeSchedule startTime;
+    private TimeSchedule endTime;
     private SeatingArrangement seating;
 
     /**
@@ -15,15 +15,14 @@ public class Screen {
      * @param screenID - unique screen ID
      * @param screenType - type of screen
      * @param startTime - start time of screening
-     * @param endTime - end time of screening 
-     * @param seating - seating arrangement
+     * @param endTime - end time of screening
      */
-    public Screen(byte screenID, Stiring screenType, DurationTime startTime, DurationTime endTime, SeatingArrangement seating) {
+    public Screen(byte screenID, String screenType, TimeSchedule startTime, TimeSchedule endTime) {
         this.screenID = screenID;
         this.screenType = screenType;
         this.startTime = startTime;
         this.endTime = endTime;
-        this.screenID = seating;
+        this.seating = new SeatingArrangement();
     }
 
     /**
@@ -46,7 +45,7 @@ public class Screen {
      * Returns start time of screening
      * @return
      */
-    public DurationTime getStartTime() {
+    public TimeSchedule getStartTime() {
         return startTime;
     }
 
@@ -54,7 +53,7 @@ public class Screen {
      * Returns end time of screening
      * @return
      */
-    public DurationTime getEndTime() {
+    public TimeSchedule getEndTime() {
         return endTime;
     }
 
@@ -71,7 +70,7 @@ public class Screen {
      * @param screenID
      */
     public void setScreenID(byte screenID) {
-        this.screenID - screenID;
+        this.screenID = screenID;
     }
 
     /**
@@ -86,7 +85,7 @@ public class Screen {
      * Sets screening start time
      * @param startTime
      */
-    public void setStartTime(DurationTime startTime) {
+    public void setStartTime(TimeSchedule startTime) {
         this.startTime = startTime;
     }
 
@@ -94,7 +93,8 @@ public class Screen {
      * Sets screening end time
      * @param endTime
      */
-    public void setEndTime(DurationTime endTime) {
+    public void setEndTime(TimeSchedule endTime) {
         this.endTime = endTime;
     }
+
 }

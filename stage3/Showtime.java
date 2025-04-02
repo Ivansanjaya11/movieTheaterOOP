@@ -3,55 +3,121 @@
  */
 
 public class Showtime {
-    
+
     private int showtimeID;
-    private Moive movie;
+    private Movie movie;
     private Screen screen;
-    private DurationTime screenDurationTime;
+    private TimeSchedule startTime;
+    private TimeSchedule endTime;
 
     /**
      * Constructs Showtime object
      * @param showtimeID - unique showtime ID
-     * @param moivie - movie being shown
+     * @param movie - movie being shown
      * @param screen - screen where the movie is being shown
-     * @param screeningDurationTime - duration of the screening
+     * @param startTime - start time of the screening
+     * @param endTime - end time of the screening
      */
-    public Showtime(int showtimeID, Movie movie, Screen screen, DurationTime screenDurationTime) {
+    public Showtime(int showtimeID, Movie movie, Screen screen, TimeSchedule startTime, TimeSchedule endTime) {
         this.showtimeID = showtimeID;
         this.movie = movie;
         this.screen = screen;
-        this.screenDurationTime = screenDurationTime;
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     /**
      * Returns showtime ID
-     * @return 
+     * @return
      */
     public int getShowtimeID() {
         return showtimeID;
     }
 
-     /**
+    /**
      * Returns movie
-     * @return 
+     * @return
      */
     public Movie getMovie() {
         return movie;
     }
 
-     /**
-     * Returns screen 
-     * @return 
+    /**
+     * Returns screen
+     * @return
      */
     public Screen getScreen() {
         return screen;
     }
 
-     /**
-     * Returns duration of showtime
-     * @return 
+    /**
+     * Returns start time of showtime
+     * @return
      */
-    public DurationTime getShowtimeDurationTime() {
-        return screenDurationTime;
+    public TimeSchedule getStartTime() {
+        return startTime;
+    }
+
+    /**
+     * Returns end time of showtime
+     * @return
+     */
+    public TimeSchedule getEndTime() {
+        return endTime;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean hasShowtimeID() {
+        if (showtimeID > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean hasMovie() {
+        if (this.movie != null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean hasScreen() {
+        if (this.screen != null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean hasStartTime() {
+        if (this.startTime != null) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean hasEndTime() {
+        if (this.endTime != null) {
+            return true;
+        }
+        return false;
     }
 }

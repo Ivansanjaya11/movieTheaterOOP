@@ -1,28 +1,27 @@
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.ListIterator;
 
 /** This class manages multiple showtimes within the theater
  * @author Logan Cordova
  */
 
 public class ShowtimeManager {
-    
-    private ArrayList<Showtime> screening;
+
+    private ArrayList<Showtime> showtimes;
 
     /**
      * Constructs ShowtimeManager object
      */
     public ShowtimeManager() {
-        this.screening = new ArrayList<>();
+        this.showtimes = new ArrayList<>();
     }
 
     /**
      * Adds showtime to list
-     * @param showtime 
+     * @param showtime
      */
     public void addShowtime(Showtime showtime) {
-        screening.add(showtime);
+        showtimes.add(showtime);
     }
 
     /**
@@ -30,17 +29,17 @@ public class ShowtimeManager {
      * @param showtimeID
      */
     public void removeShowtime(int showtimeID) {
-        Iterator<Showtime> iterator = screening.iterator();
+        Iterator<Showtime> iterator = showtimes.iterator();
 
         while (iterator.hasNext()); {
             Showtime showtime = iterator.next();
             if (showtime.getShowtimeID() == showtimeID) {
                 System.out.println("Showtime " + showtimeID + " removed successfully.");
-                return
+                return;
             }
         }
         System.out.println("Showtime with ID " + showtimeID + " was not found.");
-    
+
     }
 
     /**
@@ -49,7 +48,7 @@ public class ShowtimeManager {
      * @return - True if screen ID exists, else: false
      */
     public boolean hasScreenID(byte screenID) {
-        for (Showtime showtime : screening) {
+        for (Showtime showtime : showtimes) {
             if (showtime.getScreen().getScreenID() == screenID) {
                 return true;
             }
@@ -61,9 +60,10 @@ public class ShowtimeManager {
      * Displays all scheduled showtimes
      */
     public void showAllShowtimeSchedule() {
-        for (Showtime showtime : screening) {
-            System.out.println("Showtime ID: " + showtime.getShowtimeID() + ", Movie: " + showtime.getTitle()
-             + "Start time: " + startTime() + "End time: " + endTime());
+        for (Showtime showtime : showtimes) {
+            System.out.println("Showtime ID: " + showtime.getShowtimeID() + ", Movie: " +
+                    showtime.getMovie().getTitle() + "Start time: " + showtime.getStartTime() +
+                    "End time: " + showtime.getEndTime());
         }
     }
 }

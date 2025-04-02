@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import TheaterOOP.Movie;
-import TheaterOOP.Showtime;
 
 /** This class manages a collection of movies
  * @author Logan Cordova
@@ -9,7 +7,7 @@ import TheaterOOP.Showtime;
 
 
 public class MovieManager {
-    
+
     //List to store movies
     private ArrayList<Movie> movies;
 
@@ -25,7 +23,7 @@ public class MovieManager {
      * @param movie
      */
     public void addMovie(Movie movie) {
-        movies.add(movie); 
+        movies.add(movie);
     }
 
     /**
@@ -41,29 +39,30 @@ public class MovieManager {
             }
         }
         System.out.println("Movie not found");
-    }   
+    }
 
     /**
      * Displays all movies in movie list
      */
     public void displayAllMovies() {
         for (Movie movie : movies) {
-            System.out.println("ID: " + movie.getMovieID() + ", Title; " + movie.getTitle() + 
-            ", Genre: " + movie.getGenre() + ", Duration: " + movie.getDurationMinutes() + " minutes");
+            System.out.println("ID: " + movie.getMovieID() + ", Title; " + movie.getTitle() +
+                    ", Genre: " + movie.getGenre() + ", Duration: " + movie.getDurationMinutes() + " minutes");
         }
     }
- 
+
     /**
      * Searches movie list for movie by movie ID
      * @param movieID
      */
-    public void searchMovie(byte movieID) {
+    public byte searchMovie(byte movieID) {
         for (Movie movie : movies) {
             if (movie.getMovieID() == movieID) {
-                return movie;
+                return movieID;
             }
         }
         System.out.println("Movie not found");
+        return -1;
     }
 
     /**
@@ -72,12 +71,12 @@ public class MovieManager {
      * @return
      */
     public boolean hasMovieID(byte movieID) {
-         for (Movie movie : movies) {
+        for (Movie movie : movies) {
             if (movie.getMovieID() == movieID) {
                 return true;
             }
-         }
-         return false;
+        }
+        return false;
     }
 
     /**
