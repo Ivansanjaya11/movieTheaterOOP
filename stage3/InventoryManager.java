@@ -1,6 +1,5 @@
-import javafx.util.Pair;
-
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 public class InventoryManager {
     private static Inventory inventory;
@@ -48,7 +47,7 @@ public class InventoryManager {
     /**
      * Updates the inventory after the food items have been ordered.
      */
-    public static void updateInventory(ArrayList<Pair<Food, Byte>> orderedFood) {
+    public static void updateInventory(TreeMap<Food, Byte> orderedFood) {
         try {
             if (hasInventory()) {
                 // calls the updateInventory method in Inventory object and passes the ordered food array list

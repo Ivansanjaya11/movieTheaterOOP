@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public class Food {
+public class Food implements Comparable<Food>{
 	private byte menuId;
 	private String menuName;
 	private byte price;
@@ -24,7 +24,10 @@ public class Food {
 	 * @return The menu ID.
 	 */
 	public byte getMenuId() {
-		return this.menuId;
+		if (hasMenuId()) {
+			return this.menuId;
+		}
+		return -1;
 	}
 
 	/**
@@ -32,7 +35,10 @@ public class Food {
 	 * @return The menu name.
 	 */
 	public String getMenuName() {
-		return this.menuName;
+		if (hasMenuName()) {
+			return this.menuName;
+		}
+		return "Menu name not assigned!";
 	}
 
 	/**
@@ -40,7 +46,10 @@ public class Food {
 	 * @return The price.
 	 */
 	public byte getPrice() {
-		return this.price;
+		if (hasPrice()) {
+			return this.price;
+		}
+		return -1;
 	}
 
 	/**
@@ -130,5 +139,15 @@ public class Food {
 		System.out.println("This is menu number " + this.menuId);
 		System.out.println("The name is " + this.menuName);
 		System.out.println("The price for 1 portion is " + this.price);
+	}
+
+	/**
+	 * method to compare 2 Food objects using the menu id
+	 * @param otherFood the object to be compared.
+	 * @return
+	 */
+	@Override
+	public int compareTo(Food otherFood) {
+		return Integer.compare(this.menuId, otherFood.getMenuId());
 	}
 }

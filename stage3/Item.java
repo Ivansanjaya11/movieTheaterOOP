@@ -33,7 +33,10 @@ public class Item {
 	 * @return The item ID.
 	 */
 	public byte getItemId() {
-		return this.itemId;
+		if (hasItemId()) {
+			return this.itemId;
+		}
+		return -1;
 	}
 
 	/**
@@ -41,7 +44,10 @@ public class Item {
 	 * @return The item name.
 	 */
 	public String getItemName() {
-		return this.itemName;
+		if (hasItemName()) {
+			return this.itemName;
+		}
+		return "Item has no name yet!";
 	}
 
 	/**
@@ -49,7 +55,10 @@ public class Item {
 	 * @return The quantity of the item.
 	 */
 	public short getQuantity() {
-		return this.quantity;
+		if (hasQuantity()) {
+			return this.quantity;
+		}
+		return -1;
 	}
 
 	/**
@@ -57,7 +66,10 @@ public class Item {
 	 * @return The buying cost.
 	 */
 	public short getBuyingCost() {
-		return this.buyingCost;
+		if (hasBuyingCost()) {
+			return this.buyingCost;
+		}
+		return -1;
 	}
 
 	/**

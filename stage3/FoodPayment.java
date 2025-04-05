@@ -1,9 +1,8 @@
 import java.util.Scanner;
-import java.util.ArrayList;
-import javafx.util.Pair;
+import java.util.TreeMap;
 
 public class FoodPayment extends Payment {
-	private ArrayList<Pair<Food, Byte>> orderedFood;
+	private TreeMap<Food, Byte> orderedFood;
 	private static Scanner input;
 
 	/**
@@ -14,7 +13,7 @@ public class FoodPayment extends Payment {
 	 */
 	public FoodPayment(Customer customer) {
 		super(customer);
-		this.orderedFood = new ArrayList<Pair<Food, Byte>>();
+		this.orderedFood = new TreeMap<>();
 	}
 
 	static {
@@ -25,13 +24,13 @@ public class FoodPayment extends Payment {
 	 * Sets the total payment amount based on the ordered food items.
 	 */
 	@Override
-	private void setPaymentAmount() {
+	public void setPaymentAmount() {
 		short total = 0;
 		// add up the total with the total price of each food menu
-		for (Pair<Food, Byte> anOrder : orderedFood) {
-			total += (anOrder.getKey().getPrice() * anOrder.getValue());
+		for (Food aFood : this.orderedFood.keySet()) {
+			total += (aFood.getPrice() * this.orderedFood.get(aFood));
 		}
-		super.setPaymentAmount(total);
+		this.paymentAmount = total;
 	}
 
 	/**
@@ -70,21 +69,12 @@ public class FoodPayment extends Payment {
 			System.out.println("Invalid input!");
 		} while (true);
 
-		// process the payment
-		/*if (super.hasPaymentType() && super.hasPaymentAmount()) {
-			if (super.getPaymentType().equalsIgnoreCase("card")) {
-				super.processPaymentWithCard();
-			} else {
-				super.processPaymentWithCash();
-			}
-		}*/
-
 		// generate the receipt for the order
-		String paymentId = ReceiptGenerator.generateFoodReceipt(orderedFood, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
+		String paymentId = ReceiptGenerator.generateFoodReceipt(this.orderedFood, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
 
 		super.setPaymentId(paymentId);
 
 		// updates the food sales report file with the new transaction
-		FilesUpdateManager.updateFoodSalesFile(super.getPaymentId(), super.getPaymentAmount(), orderedFood);
+		FilesUpdateManager.updateFoodSalesFile(super.getPaymentId(), super.getPaymentAmount(), this.orderedFood);
 	}
 }

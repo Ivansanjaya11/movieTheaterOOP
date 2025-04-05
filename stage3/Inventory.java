@@ -1,10 +1,9 @@
 import java.io.*;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.HashMap;
-import javafx.util.Pair;
-import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
+
 import util.Path;
 
 public class Inventory {
@@ -107,14 +106,15 @@ public class Inventory {
 	 *
 	 * @param foodOrder The list of food orders containing food and quantity.
 	 */
-	public void updateInventory(ArrayList<Pair<Food, Byte>> foodOrder) {
-		for (Pair<Food, Byte> anOrder : foodOrder) {
+	public void updateInventory(TreeMap<Food, Byte> foodOrder) {
+		for (Food aFood : foodOrder.keySet()) {
 			// for every food object in the order, get the recipe containing ingredients used to make it
-			HashMap<Item, Byte> recipe = anOrder.getKey().getRecipe();
+			HashMap<Item, Byte> recipe = aFood.getRecipe();
 			// for every item (ingredients), reduce the quantity in inventory by the amount set in the order
 			for (Item recipeItem : recipe.keySet()) {
 				byte quantityUsed = recipe.get(recipeItem);
-				recipeItem.setQuantity((short) (recipeItem.getQuantity() - quantityUsed * anOrder.getValue()));
+				short newQuantity = (short) (recipeItem.getQuantity() - quantityUsed * foodOrder.get(aFood));
+				recipeItem.setQuantity(newQuantity);
 			}
 		}
 

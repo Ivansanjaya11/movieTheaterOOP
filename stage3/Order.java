@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Order {
-    private static Scanner input;
+    protected static Scanner input;
 
     private Order(){
 
@@ -20,8 +22,8 @@ public class Order {
 
     }
 
-    public static ArrayList<Pair<Food, Byte>> takeFoodOrder() {
-        ArrayList<Pair<Food, Byte>> orderedFood = new ArrayList<>();
+    public static TreeMap<Food, Byte> takeFoodOrder() {
+        TreeMap<Food, Byte> orderedFood = new TreeMap<>();
 
         ArrayList<Food> menuList = MenuManager.getMenuList();
         do {
@@ -48,8 +50,7 @@ public class Order {
                     if (quantity > 0) {
 
                         // set the ordered food and quantity to a tuple and store to array list of ordered food
-                        Pair<Food, Byte> anOrder = new Pair<>(menuList.get(menuOption-1), quantity);
-                        orderedFood.add(anOrder);
+                        orderedFood.put(menuList.get(menuOption-1), quantity);
 
                         // ask if user still wants to order
                         System.out.print("Do you still want to order more? (y/n)");
@@ -77,16 +78,17 @@ public class Order {
                     byte j = 1;
 
                     // list all ordered food to choose which to remove from order
-                    for (Pair<Food, Byte> anOrder : orderedFood) {
+                    for (Food aFood : orderedFood.keySet()) {
                         System.out.print(j + ". ");
-                        System.out.print(anOrder.getKey().getMenuName() + ": ");
-                        System.out.println(anOrder.getValue());
+                        System.out.print(aFood.getMenuName() + ": ");
+                        System.out.println(orderedFood.get(aFood));
                     }
+
                     byte removeOption = input.nextByte();
                     if (removeOption >=1 && removeOption <= orderedFood.size()) {
 
                         // remove the order
-                        orderedFood.remove(removeOption-1);
+                        orderedFood.remove(MenuManager.getMenu(removeOption));
 
                         // ask if the user still wants to order
                         System.out.print("Do you still want to order more? (y/n)");
@@ -117,13 +119,13 @@ public class Order {
      *
      * @return true if the order is correct, false otherwise
      */
-    private static boolean reviewFoodOrder(ArrayList<Pair<Food, Byte>> orderedFood) {
+    private static boolean reviewFoodOrder(TreeMap<Food, Byte> orderedFood) {
         // print out the ordered food one by one
         byte i = 1;
-        for (Pair<Food, Byte> anOrder : orderedFood) {
+        for (Food aFood : orderedFood.keySet()) {
             System.out.print(i + ". ");
-            System.out.print(anOrder.getKey().getMenuName() + ": ");
-            System.out.println(anOrder.getValue());
+            System.out.print(aFood.getMenuName() + ": ");
+            System.out.println(orderedFood.get(aFood));
         }
 
         // ask the user if the order is correct

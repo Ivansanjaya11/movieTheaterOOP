@@ -1,13 +1,9 @@
 import java.util.ArrayList;
 
 public class MenuManager {
-    private static ArrayList<Food> menuList;
+    private ArrayList<Food> menuList;
 
     private MenuManager() {
-
-    }
-
-    static {
         menuList = new ArrayList<Food>();
     }
 
@@ -16,17 +12,30 @@ public class MenuManager {
      *
      * @return the list of available food items
      */
-    public static ArrayList<Food> getMenuList() {
-        return menuList;
+    public ArrayList<Food> getMenuList() {
+        return this.menuList;
     }
+
+    /**
+     * method to get the Food object with a certain id
+     */
+    public Food getMenu(byte id) {
+        for (Food aFood : menuList) {
+            if (aFood.getMenuId() == id) {
+                return aFood;
+            }
+        }
+        return null;
+    }
+
 
     /**
      * Sets the menu list of available food items.
      *
      * @param newMenuList the new list of available food items
      */
-    public static void setMenuList(ArrayList<Food> newMenuList) {
-        menuList = newMenuList;
+    public void setMenuList(ArrayList<Food> newMenuList) {
+        this.menuList = newMenuList;
     }
 
     /**
@@ -34,8 +43,8 @@ public class MenuManager {
      *
      * @return true if there are items in the menu, false otherwise
      */
-    public static boolean hasMenu() {
-        return !(menuList.size()==0);
+    public boolean hasMenu() {
+        return !(this.menuList.size()==0);
     }
 
     /**
@@ -43,8 +52,8 @@ public class MenuManager {
      *
      * @param menuItem the food item to be added to the menu
      */
-    public static void addMenu(Food menuItem) {
-        menuList.add(menuItem);
+    public void addMenu(Food menuItem) {
+        this.menuList.add(menuItem);
     }
 
     /**
@@ -52,15 +61,15 @@ public class MenuManager {
      *
      * @param menuId the menu ID of the item to be removed
      */
-    public static void removeMenu(byte menuId) {
+    public void removeMenu(byte menuId) {
         try {
             if (hasMenu()) {
                 boolean found = false;
                 // iterate through menu list and check if the menu id is found
                 // if yes, remove from menu list
-                for(int i=0; i<menuList.size(); i++) {
-                    if (menuList.get(i).getMenuId()==menuId) {
-                        menuList.remove(i);
+                for(int i=0; i<this.menuList.size(); i++) {
+                    if (this.menuList.get(i).getMenuId()==menuId) {
+                        this.menuList.remove(i);
                         found = true;
                         break;
                     }

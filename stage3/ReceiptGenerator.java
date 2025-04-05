@@ -1,8 +1,7 @@
-import javafx.util.Pair;
 import util.DateAndPaymentTracker;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class ReceiptGenerator {
 
@@ -13,7 +12,7 @@ public class ReceiptGenerator {
     /**
      * Generates the receipt for the customer's order, displaying the ordered food and total price.
      */
-    public static String generateFoodReceipt(ArrayList<Pair<Food, Byte>> orderedFood, String customerName, String paymentType, short paymentAmount) {
+    public static String generateFoodReceipt(TreeMap<Food, Byte> orderedFood, String customerName, String paymentType, short paymentAmount) {
 
         // check the date (and update if needed)
         LocalDate date = LocalDate.now();
@@ -40,14 +39,16 @@ public class ReceiptGenerator {
         // prints out the detail of the transaction on screen
         System.out.println("Order #" + paymentId);
         System.out.println("This order is for " + customerName);
-        for (int i=1; i<=orderedFood.size(); i++) {
-            System.out.print(i + ". ");
-            System.out.print(orderedFood.get(i).getKey().getMenuName() + "\t");
-            System.out.print(orderedFood.get(i).getValue() + "\t");
-            System.out.println("$" + orderedFood.get(i).getKey().getPrice());
+
+        for (Food aFood : orderedFood.keySet()) {
+            System.out.print(aFood.getMenuId() + ". ");
+            System.out.print(aFood.getMenuName() + "\t");
+            System.out.print(orderedFood.get(aFood) + "\t");
+            System.out.println("$" + aFood.getPrice());
         }
+
         System.out.print("Total price is $" + paymentAmount);
-        System.out.print(", paid by " + paymentType);
+        System.out.print(", paid with " + paymentType);
         System.out.println("\nThank you for watching with us!");
 
         DateAndPaymentTracker.foodCustomerNumOfTheDay++;

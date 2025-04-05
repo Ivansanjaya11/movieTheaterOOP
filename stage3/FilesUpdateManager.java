@@ -1,4 +1,3 @@
-import javafx.util.Pair;
 import util.Path;
 
 import java.io.BufferedWriter;
@@ -7,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.TreeMap;
 
 public class FilesUpdateManager {
 
@@ -24,7 +24,7 @@ public class FilesUpdateManager {
     /**
      * Updates the food sales file with the current order's details.
      */
-    public static void updateFoodSalesFile(String paymentId, short paymentAmount, ArrayList<Pair<Food, Byte>> orderedFood) {
+    public static void updateFoodSalesFile(String paymentId, short paymentAmount, TreeMap<Food, Byte> orderedFood) {
         /*
          * adds the information about the transaction in the following format:
          * LocalDateTime object, Payment amount (total price)
@@ -40,12 +40,13 @@ public class FilesUpdateManager {
         line += ",";
         line += paymentAmount;
         line += ";";
-        for (Pair<Food, Byte> anOrder : orderedFood) {
-            line += anOrder.getKey().getMenuName();
+
+        for (Food aFood : orderedFood.keySet()) {
+            line += aFood.getMenuName();
             line += ",";
-            line += String.valueOf(anOrder.getValue());
+            line += String.valueOf(orderedFood.get(aFood));
             line += ",";
-            line += String.valueOf(anOrder.getKey().getPrice() * anOrder.getValue());
+            line += String.valueOf(aFood.getPrice() * orderedFood.get(aFood));
             line += ",";
         }
 
