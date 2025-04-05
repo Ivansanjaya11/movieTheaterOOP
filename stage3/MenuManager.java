@@ -25,11 +25,13 @@ public class MenuManager {
     /**
      * method to get the Food object with a certain id
      */
-    public static Food getMenu(byte id) {
+    public static Food getMenu(byte idx) {
+        byte i = 1;
         for (Food aFood : menuList) {
-            if (aFood.getMenuId() == id) {
+            if (i == idx) {
                 return aFood;
             }
+            i++;
         }
         return null;
     }
