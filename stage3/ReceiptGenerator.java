@@ -55,7 +55,7 @@ public class ReceiptGenerator {
         return paymentId;
     }
 
-    public static String generateTicketReceipt() {
-        return "";
+    public static String generateTicketReceipt(byte[] ticketOrder, String customerName, String paymentType, short paymentAmount) {
+        return ""; 
     }
 }

@@ -17,7 +17,7 @@ public class FilesUpdateManager {
     /**
      * Updates the ticket sales file with the current order's details.
      */
-    public static void updateTicketSalesFile() {
+    public static void updateTicketSalesFile(String paymentId, short paymentAmount, byte[] ticketOrder) {
 
     }
 

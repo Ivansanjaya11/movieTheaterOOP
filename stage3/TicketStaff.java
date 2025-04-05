@@ -3,9 +3,11 @@ import java.util.ArrayList;
 
 class TicketStaff extends Staff {
     private ArrayList<TicketPayment> ticketPayments;
+    private static ShowtimeManager showtimeManager;
     private static MovieManager movieManager;
 
     static {
+        showtimeManager = new ShowtimeManager();
         movieManager = new MovieManager();
     }
 
@@ -15,8 +17,24 @@ class TicketStaff extends Staff {
         this.ticketPayments = new ArrayList<>();
     }
 
+    public ShowtimeManager getShowtimeManager() {
+        return showtimeManager;
+    }
+
+    public MovieManager getMovieManager() {
+        return movieManager;
+    }
+
+    public void setShowtimeManager(ShowtimeManager showtimeManager) {
+        this.showtimeManager = showtimeManager;
+    }
+
+    public void setMovieManager(MovieManager movieManager) {
+        this.movieManager = movieManager;
+    }
+
     public void addNewTicketPayment(Customer customer) {
-        if(DateAndPaymentTracker.ticketNumOfTheDay == 0) {
+        if(DateAndPaymentTracker.ticketCustomerNumOfTheDay == 0) {
             clearOrderHistory();
         }
         TicketPayment payment = new TicketPayment(customer);

@@ -1,4 +1,4 @@
-import javafx.util.Pair;
+import java.util.Scanner;
 
 public class TicketPayment extends Payment {
 
@@ -6,6 +6,7 @@ public class TicketPayment extends Payment {
     private byte imaxTicket;
     private static byte normalPrice;
     private static byte imaxPrice;
+    private Scanner input;
 
     static {
         normalPrice = 10;
@@ -14,23 +15,49 @@ public class TicketPayment extends Payment {
 
     public TicketPayment(Customer customer) {
         super(customer); 
+        this.input = new Scanner(System.in);
     }
 
     public void chooseTicket() {
-        Pair<Byte, Byte> ticketOrder = Order.takeTicketOrder();
+        byte[] ticketOrder = Order.takeTicketOrder();
 
-        this.normalTicket = ticketOrder.getKey();
-        this.imaxTicket = ticketOrder.getValue();
+        this.normalTicket = ticketOrder[0];
+        this.imaxTicket = ticketOrder[1];
         setPaymentAmount();
+
+        do {
+			// ask for payment method
+			System.out.println("How would you like to pay?");
+			System.out.println("1. With card");
+			System.out.println("2. With cash");
+			byte paymentOption = input.nextByte();
+			if (paymentOption>0 && paymentOption<=2) {
+				if (paymentOption==1) {
+					//super.setPaymentType("card");
+					processPaymentWithCard();
+				} else {
+					//super.setPaymentType("cash");
+					processPaymentWithCash();
+				}
+				break;
+			}
+			System.out.println("Invalid input!");
+		} while (true);
+
+        // generate the receipt for the order
+		String paymentId = ReceiptGenerator.generateTicketReceipt(ticketOrder, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
+
+		super.setPaymentId(paymentId);
+
+		// updates the food sales report file with the new transaction
+		FilesUpdateManager.updateTicketSalesFile(super.getPaymentId(), super.getPaymentAmount(), ticketOrder);
     }
 
     @Override
     protected void setPaymentAmount() {
         if(hasNormalTicket() && hasImaxTicket() && hasNormalPrice() && hasImaxPrice()) {
             this.paymentAmount = (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
-        } else {
-            this.paymentAmount = 0;
-        }
+        } 
     }
 
     public byte getNormalTicket() {

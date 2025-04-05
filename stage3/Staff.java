@@ -70,6 +70,10 @@ public class Staff {
         return role;
     }
 
+    public Analytics getAnalytics() {
+        return analytics;
+    }
+
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
@@ -89,5 +93,9 @@ public class Staff {
     
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public void setAnalytics(Analytics analytics) {
+        this.analytics = analytics;
     }
 }

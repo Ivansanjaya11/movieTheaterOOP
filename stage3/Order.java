@@ -1,5 +1,3 @@
-import javafx.util.Pair;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +12,7 @@ public class Order {
         input = new Scanner(System.in);
     }
 
-    public static void takeTicketOrder() {
+    public static byte[] takeTicketOrder() {
 
     }
 

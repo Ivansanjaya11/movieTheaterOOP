@@ -7,11 +7,19 @@ public class FoodStaff extends Staff {
     static {
         menuManager = new MenuManager();
     }
-    
+
     public FoodStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Concession Stand";
         this.foodPayments = new ArrayList<>();
+    }
+
+    public MenuManager getMenuManager() {
+        return menuManager;
+    }
+
+    public void setMenuManager(MenuManager menuManager) {
+        this.menuManager = menuManager;
     }
 
     public void addNewFoodPayment(Customer customer) {
