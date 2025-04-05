@@ -12,20 +12,23 @@ public class Staff {
     protected String schedule;
     protected String role;
 
+    private Analytics analytics;
+
     public Staff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
         this.employeeName = employeeName;
         this.employeeId = employeeId;
         this.hourlyRate = hourlyRate;
         this.schedule = schedule;
-        this.hoursWorked = 0;
+        this.hoursWorked = calculateWeeklyHours(schedule);
         this.role = "Unassigned";
+        this.analytics = new Analytics();
 
         this.hoursWorked = calculateWeeklyHours(schedule);
     }
 
     private byte calculateWeeklyHours(String scheduleStr) {
         try {
-            String[] parts = scheduleStr.split("");
+            String[] parts = scheduleStr.split("-");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
             LocalTime start = LocalTime.parse(parts[0], formatter);
@@ -34,7 +37,7 @@ public class Staff {
             long hoursPerDay = ChronoUnit.HOURS.between(start, end);
             return (byte)(hoursPerDay * 5);
         } catch (Exception e) {
-            System.out.println("Invaild schedule format. Expected HH:mm-HH:mm.");
+            System.out.println("Invalid schedule format. Expected HH:mm-HH:mm.");
             return 0;
         }
     }
@@ -81,7 +84,7 @@ public class Staff {
 
     public void setSchedule(String schedule) {
         this.schedule = schedule;
-        this.hourWorked = calculateWeeklyHours(schedule);
+        this.hoursWorked = calculateWeeklyHours(schedule);
     } 
     
     public void setRole(String role) {

@@ -3,6 +3,11 @@ import java.util.ArrayList;
 
 class TicketStaff extends Staff {
     private ArrayList<TicketPayment> ticketPayments;
+    private static MovieManager movieManager;
+
+    static {
+        movieManager = new MovieManager();
+    }
 
     public TicketStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
         super(employeeName, employeeId, hourlyRate, schedule);
@@ -26,15 +31,5 @@ class TicketStaff extends Staff {
 
     public ArrayList<TicketPayment> getOrderHistory() {
         return ticketPayments;
-    }
-
-    public void chooseSeat(Screen screen, byte row, byte col) {
-        boolean seatTaken = screen.getSeatStatus(row, col);
-        if(!seatTaken) {
-            screen.setSeatStatus(row, col, true);
-            System.out.println("Seat chosen at row " + row + ", column " + col);
-            } else {
-                System.out.println("Seat unavailable, please choose another.");
-            }
     }
 }

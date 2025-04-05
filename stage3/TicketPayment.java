@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 public class TicketPayment extends Payment {
 
     private byte normalTicket;
@@ -12,19 +14,19 @@ public class TicketPayment extends Payment {
 
     public TicketPayment(Customer customer) {
         super(customer); 
-        this.normalTicket = 0;
-        this. imaxTicket = 0;
     }
 
-    public void chooseTicket(byte normalQty, byte imaxQty) {
-        this.normalTicket = normalQty;
-        this.imaxTicket = imaxQty;
+    public void chooseTicket() {
+        Pair<Byte, Byte> ticketOrder = Order.takeTicketOrder();
+
+        this.normalTicket = ticketOrder.getKey();
+        this.imaxTicket = ticketOrder.getValue();
         setPaymentAmount();
     }
 
     @Override
     protected void setPaymentAmount() {
-        if(normalTicket >= 0 && imaxTicket >= 0 && normalPrice > 0 && imaxPrice > 0) {
+        if(hasNormalTicket() && hasImaxTicket() && hasNormalPrice() && hasImaxPrice()) {
             this.paymentAmount = (short)((normalTicket * normalPrice) + (imaxTicket * imaxPrice));
         } else {
             this.paymentAmount = 0;

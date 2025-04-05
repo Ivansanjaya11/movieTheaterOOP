@@ -1,4 +1,4 @@
-public class Payment {
+public abstract class Payment {
 
     protected String paymentId;
     protected short paymentAmount;
@@ -36,7 +36,7 @@ public class Payment {
         }
 
         public void setCustomer(Customer customer) {
-            this.Customer = customer;
+            this.customer = customer;
         }
 
         public boolean hasPaymentType() {
