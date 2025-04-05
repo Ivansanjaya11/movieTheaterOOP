@@ -1,4 +1,3 @@
-import javafx.util.Pair;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -39,8 +38,9 @@ public class Analytics {
 	 *
 	 * @return A Pair containing the start and end times of the report.
 	 */
-	public Pair<LocalDateTime, LocalDateTime> getTimePeriod() {
-		return new Pair<LocalDateTime, LocalDateTime>(this.timePeriodStart, this.timePeriodEnd);
+	public LocalDateTime[] getTimePeriod() {
+		LocalDateTime[] dateTime = {this.timePeriodStart, this.timePeriodEnd};
+		return dateTime;
 	}
 
 	/**

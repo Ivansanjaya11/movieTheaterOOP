@@ -1,18 +1,11 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Order {
-    protected static Scanner input;
+    protected static Scanner input = new Scanner(System.in);
 
-    private Order(){
-
-    }
-
-    static {
-        input = new Scanner(System.in);
-    }
+    private Order() {}
 
     public static byte[] takeTicketOrder() {
 

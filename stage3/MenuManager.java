@@ -1,10 +1,16 @@
 import java.util.ArrayList;
 
 public class MenuManager {
-    private ArrayList<Food> menuList;
+    private static MenuManager menuManager;
+    private static ArrayList<Food> menuList = new ArrayList<>();
 
-    private MenuManager() {
-        menuList = new ArrayList<Food>();
+    private MenuManager() {}
+
+    public static MenuManager getInstance() {
+        if (menuManager == null) {
+            menuManager = new MenuManager();
+        }
+        return menuManager;
     }
 
     /**
@@ -12,14 +18,14 @@ public class MenuManager {
      *
      * @return the list of available food items
      */
-    public ArrayList<Food> getMenuList() {
-        return this.menuList;
+    public static ArrayList<Food> getMenuList() {
+        return menuList;
     }
 
     /**
      * method to get the Food object with a certain id
      */
-    public Food getMenu(byte id) {
+    public static Food getMenu(byte id) {
         for (Food aFood : menuList) {
             if (aFood.getMenuId() == id) {
                 return aFood;
@@ -34,8 +40,8 @@ public class MenuManager {
      *
      * @param newMenuList the new list of available food items
      */
-    public void setMenuList(ArrayList<Food> newMenuList) {
-        this.menuList = newMenuList;
+    public static void setMenuList(ArrayList<Food> newMenuList) {
+        menuList = newMenuList;
     }
 
     /**
@@ -43,8 +49,8 @@ public class MenuManager {
      *
      * @return true if there are items in the menu, false otherwise
      */
-    public boolean hasMenu() {
-        return !(this.menuList.size()==0);
+    public static boolean hasMenu() {
+        return !(menuList.size()==0);
     }
 
     /**
@@ -52,8 +58,8 @@ public class MenuManager {
      *
      * @param menuItem the food item to be added to the menu
      */
-    public void addMenu(Food menuItem) {
-        this.menuList.add(menuItem);
+    public static void addMenu(Food menuItem) {
+        menuList.add(menuItem);
     }
 
     /**
@@ -61,15 +67,15 @@ public class MenuManager {
      *
      * @param menuId the menu ID of the item to be removed
      */
-    public void removeMenu(byte menuId) {
+    public static void removeMenu(byte menuId) {
         try {
             if (hasMenu()) {
                 boolean found = false;
                 // iterate through menu list and check if the menu id is found
                 // if yes, remove from menu list
-                for(int i=0; i<this.menuList.size(); i++) {
-                    if (this.menuList.get(i).getMenuId()==menuId) {
-                        this.menuList.remove(i);
+                for(int i=0; i<menuList.size(); i++) {
+                    if (menuList.get(i).getMenuId()==menuId) {
+                        menuList.remove(i);
                         found = true;
                         break;
                     }

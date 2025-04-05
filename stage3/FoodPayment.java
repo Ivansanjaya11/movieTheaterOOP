@@ -58,10 +58,8 @@ public class FoodPayment extends Payment {
 			byte paymentOption = input.nextByte();
 			if (paymentOption>0 && paymentOption<=2) {
 				if (paymentOption==1) {
-					//super.setPaymentType("card");
 					processPaymentWithCard();
 				} else {
-					//super.setPaymentType("cash");
 					processPaymentWithCash();
 				}
 				break;
