@@ -13,6 +13,17 @@ public class Analytics {
 	 * Constructs an Analytics object with a specified start time for the reporting period.
 	 * The end time is set to the current time.
 	 *
+	 */
+	public Analytics() {
+		this.timePeriodStart = null;
+		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
+		this.input = new Scanner(System.in);
+	}
+
+	/**
+	 * Constructs an Analytics object with a specified start time for the reporting period.
+	 * The end time is set to the current time.
+	 *
 	 * @param timePeriodStart The start time for the report period.
 	 */
 	public Analytics(LocalDateTime timePeriodStart) {
