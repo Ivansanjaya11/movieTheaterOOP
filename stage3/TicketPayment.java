@@ -66,7 +66,7 @@ public class TicketPayment extends Payment {
 		} while (true);
 
         // generate the ticket receipt
-		String paymentId = ReceiptGenerator.generateTicketReceipt(ticketOrder, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
+		String paymentId = ReceiptGenerator.generateTicketReceipt(ticketOrder, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount(), normalPrice, imaxPrice);
 
 		super.setPaymentId(paymentId);
 
