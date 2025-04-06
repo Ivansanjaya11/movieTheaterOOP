@@ -1,4 +1,5 @@
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Scanner;
@@ -59,8 +60,8 @@ public class Analytics {
 	 *
 	 * @param timePeriodStart The new start time for the report period.
 	 */
-	public void setTimePeriod(LocalDateTime timePeriodStart){
-		this.timePeriodStart = timePeriodStart;
+	public void setTimePeriod(LocalDate timePeriodStart){
+		this.timePeriodStart = timePeriodStart.atStartOfDay();
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 	}
 
@@ -70,9 +71,9 @@ public class Analytics {
 	 * @param timePeriodStart The new start time for the report period.
 	 * @param timePeriodEnd The new end time for the report period.
 	 */
-	public void setTimePeriod(LocalDateTime timePeriodStart, LocalDateTime timePeriodEnd){
-		this.timePeriodStart = timePeriodStart;
-		this.timePeriodEnd = timePeriodEnd;
+	public void setTimePeriod(LocalDate timePeriodStart, LocalDate timePeriodEnd){
+		this.timePeriodStart = timePeriodStart.atStartOfDay();
+		this.timePeriodEnd = timePeriodEnd.atStartOfDay();
 	}
 
 	/**
