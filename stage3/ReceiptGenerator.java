@@ -56,7 +56,50 @@ public class ReceiptGenerator {
         return paymentId;
     }
 
+    /**
+     * Generates and prints a ticket order receipt for a given customer
+     * @param ticketOrder array with [0] = normal ticket count, [1] IMAX ticket count
+     * @param customerName name of customer
+     * @param paymentType type of payment used ("card" or "cash")
+     * @param paymentAmount total amount paid
+     * @return unique payment ID for this transaction
+     */
+
     public static String generateTicketReceipt(byte[] ticketOrder, String customerName, String paymentType, short paymentAmount) {
-        return ""; 
+
+        LocalDate date = LocalDate.now();
+
+        //Resets daily counters if the date has changed
+        if(DateAndPaymentTracker.currentDate.isBefore(date)) {
+            DateAndPaymentTracker.currentDate = date;
+            DateAndPaymentTracker.foodCustomerNumOfTheDay = 1;
+            DateAndPaymentTracker.ticketCustomerNumOfTheDay = 1;
+        }
+
+        //Create zero padded ticket order number (ie., 0001, 0010)
+        byte numOfZeroes = (byte) (4 - String.valueOf(DateAndPaymentTracker.ticketCustomerNumOfTheDay).length);
+        String zeros = "";
+
+        for(int i = 0; i < numOfZeroes; i++) {
+            zeros += "0";
+        }
+
+        String paymentId = date + "-T" + zeros + DateAndPaymentTracker.ticketCustomerNumOfTheDay;
+
+        //Print the receipt
+        System.out.println("Order #" + paymentId);
+        System.out.println("Order Name: " + customerName);
+        
+        System.out.println("Admission\t " + ticketOrder[0] + "\t$" + (ticketOrder[0] * TicketPayment.getNormalPrice()));
+        System.out.println("IMAX Admission\t\t" + ticketOrder[1] + "\t$" + (ticketOrder[1] * TicketPayment.getImaxPrice()));
+
+        System.out.print("Total price is $" + paymentAmount);
+        System.out.println(", paid with " + paymentType);
+        System.out.println("\nThank you for watching with us!");
+
+        //Increment the customer count for the day
+        DateAndPaymentTracker.ticketCustomerNumOfTheDay++;
+
+        return paymentId;
     }
 }
