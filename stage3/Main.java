@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 
 public class Main {
-	public void main(String[] args) {
+	public static void main(String[] args) {
 		// Creating food staffs
 		FoodStaff foodStaff1 = new FoodStaff("Emma", (byte) 1, (byte) 16, "8am-3pm");
 		FoodStaff foodStaff2 = new FoodStaff("John", (byte) 2, (byte) 16, "9am-4pm");
