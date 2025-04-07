@@ -14,11 +14,11 @@ import java.time.temporal.ChronoUnit;
 
 public class Staff {
 
-    protected String employeeName;
-    protected byte employeeId;
-    protected byte hourlyRate;
+    private String employeeName;
+    private byte employeeId;
+    private byte hourlyRate;
     protected byte hoursWorked;
-    protected String schedule;
+    private String schedule;
     protected String role;
 
     private Analytics analytics;

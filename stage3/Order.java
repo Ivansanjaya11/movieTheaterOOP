@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.TreeMap;
+import java.util.*;
 
 public class Order {
     protected static Scanner input = new Scanner(System.in);
@@ -8,7 +6,7 @@ public class Order {
     private Order() {}
 
     public static byte[] takeTicketOrder() {
-
+        return new byte[2];
     }
 
     public static void reviewTicketOrder() {
@@ -61,7 +59,16 @@ public class Order {
 
             byte removeOption = input.nextByte();
             if (removeOption >= 1 && removeOption <= orderedFood.size()) {
-                orderedFood.remove(MenuManager.getMenu(removeOption));
+
+                byte idx = 1;
+                Map.Entry<Food, Byte> foodToRemove = null;
+                Iterator<Map.Entry<Food, Byte>> iter = orderedFood.entrySet().iterator();
+
+                while (idx < removeOption) {
+                    foodToRemove = iter.next();
+                }
+
+                orderedFood.remove(foodToRemove.getKey());
             } else {
                 System.out.println("There is no such item in your order!");
             }
@@ -86,6 +93,7 @@ public class Order {
         TreeMap<Food, Byte> orderedFood = new TreeMap<>();
 
         ArrayList<Food> menuList = MenuManager.getMenuList();
+
         do {
             System.out.println("Choose:");
             System.out.println("1. Add order");

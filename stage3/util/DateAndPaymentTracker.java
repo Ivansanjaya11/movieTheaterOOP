@@ -18,8 +18,8 @@ public class DateAndPaymentTracker {
     }
 
     static {
-        foodCustomerNumOfTheDay = 1;
-        ticketCustomerNumOfTheDay = 1;
+        foodCustomerNumOfTheDay = 0;
+        ticketCustomerNumOfTheDay = 0;
         currentDate = LocalDate.now();
     }
 }

@@ -3,21 +3,17 @@
  */
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Represents a concession stand staff member 
  */
 
 public class FoodStaff extends Staff {
-    private static MenuManager menuManager;
+    private static MenuManager menuManager = new MenuManager();
     private ArrayList<FoodPayment> foodPayments;
     
-    //static initializer to initialize the sharded MenuManager
-    static {
-        menuManager = new MenuManager();
-    }
-
-    /**
+     /**
      * Constructs a new FoodStaff object with the given employee details
      * @param employeeName the name of the employee
      * @param employeeId the ID of the employee
@@ -59,6 +55,9 @@ public class FoodStaff extends Staff {
         FoodPayment foodPayment = new FoodPayment(customer);
         foodPayment.chooseFood();
         this.foodPayments.add(foodPayment);
+
+        IntStream.range(0, 25).forEach(i -> System.out.print(i));
+        System.out.println();
     }
 
     /**

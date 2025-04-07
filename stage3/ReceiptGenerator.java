@@ -19,8 +19,8 @@ public class ReceiptGenerator {
         LocalDate date = LocalDate.now();
         if (DateAndPaymentTracker.currentDate.isBefore(date)) {
             DateAndPaymentTracker.currentDate = date;
-            DateAndPaymentTracker.foodCustomerNumOfTheDay = 1;
-            DateAndPaymentTracker.ticketCustomerNumOfTheDay = 1;
+            DateAndPaymentTracker.foodCustomerNumOfTheDay = 0;
+            DateAndPaymentTracker.ticketCustomerNumOfTheDay = 0;
         }
 
         // set the paymentId
@@ -79,8 +79,8 @@ public class ReceiptGenerator {
         //Resets daily counters if the date has changed
         if(DateAndPaymentTracker.currentDate.isBefore(date)) {
             DateAndPaymentTracker.currentDate = date;
-            DateAndPaymentTracker.foodCustomerNumOfTheDay = 1;
-            DateAndPaymentTracker.ticketCustomerNumOfTheDay = 1;
+            DateAndPaymentTracker.foodCustomerNumOfTheDay = 0;
+            DateAndPaymentTracker.ticketCustomerNumOfTheDay = 0;
         }
 
         //Create zero padded ticket order number (ie., 0001, 0010)

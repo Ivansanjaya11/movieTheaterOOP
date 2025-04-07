@@ -4,13 +4,13 @@
 
 public abstract class Payment {
 
-    protected String paymentId;
+    private String paymentId;
     protected short paymentAmount;
-    protected String paymentType;
-    protected Customer customer;
+    private String paymentType;
+    private Customer customer;
 
     /**
-     * COnstructs a Payment object for a given customer
+     * Constructs a Payment object for a given customer
      * @param customer the customer making the payment
      */
 
@@ -26,7 +26,7 @@ public abstract class Payment {
      */
 
         public String getPaymentId() {
-            return paymentId;
+            return this.paymentId;
         }
 
         /**
@@ -35,7 +35,7 @@ public abstract class Payment {
          */
 
         public short getPaymentAmount() {
-            return paymentAmount;
+            return this.paymentAmount;
         }
 
         /**
@@ -44,7 +44,7 @@ public abstract class Payment {
          */
 
         public String getPaymentType() {
-            return paymentType;
+            return this.paymentType;
         }
 
         /**
@@ -53,7 +53,7 @@ public abstract class Payment {
          */
 
         public Customer getCustomer() {
-            return customer;
+            return this.customer;
         }
 
         /**
@@ -89,7 +89,7 @@ public abstract class Payment {
          */
 
         public boolean hasPaymentType() {
-            return paymentType != null && !paymentType.isEmpty();
+            return this.paymentType != null && !this.paymentType.isEmpty();
         }
 
         /**
@@ -98,7 +98,7 @@ public abstract class Payment {
          */
 
         public boolean hasPaymentAmount() {
-            return paymentAmount > 0;
+            return this.paymentAmount > 0;
         }
 
         /**
@@ -106,7 +106,7 @@ public abstract class Payment {
          */
 
         public void processPaymentWithCard() {
-            this.paymentType = "Card";
+            this.setPaymentType("card");
             System.out.println("Payment processed with card.");
         }
 
@@ -115,7 +115,7 @@ public abstract class Payment {
          */
 
         public void processPaymentWithCash() {
-            this.paymentType = "Cash";
+            this.setPaymentType("cash");
             System.out.println("Payment processed with cash.");
         }
 

@@ -1,17 +1,9 @@
 import java.util.ArrayList;
 
 public class MenuManager {
-    private static MenuManager menuManager;
     private static ArrayList<Food> menuList = new ArrayList<>();
 
-    private MenuManager() {}
-
-    public static MenuManager getInstance() {
-        if (menuManager == null) {
-            menuManager = new MenuManager();
-        }
-        return menuManager;
-    }
+    public MenuManager() {}
 
     /**
      * Gets the menu list of available food items.
@@ -21,21 +13,6 @@ public class MenuManager {
     public static ArrayList<Food> getMenuList() {
         return menuList;
     }
-
-    /**
-     * method to get the Food object with a certain id
-     */
-    public static Food getMenu(byte idx) {
-        byte i = 1;
-        for (Food aFood : menuList) {
-            if (i == idx) {
-                return aFood;
-            }
-            i++;
-        }
-        return null;
-    }
-
 
     /**
      * Sets the menu list of available food items.
@@ -51,7 +28,7 @@ public class MenuManager {
      *
      * @return true if there are items in the menu, false otherwise
      */
-    public static boolean hasMenu() {
+    public boolean hasMenu() {
         return !(menuList.size()==0);
     }
 
@@ -60,7 +37,7 @@ public class MenuManager {
      *
      * @param menuItem the food item to be added to the menu
      */
-    public static void addMenu(Food menuItem) {
+    public void addMenu(Food menuItem) {
         menuList.add(menuItem);
     }
 
@@ -69,9 +46,9 @@ public class MenuManager {
      *
      * @param menuId the menu ID of the item to be removed
      */
-    public static void removeMenu(byte menuId) {
+    public void removeMenu(byte menuId) {
         try {
-            if (hasMenu()) {
+            if (this.hasMenu()) {
                 boolean found = false;
                 // iterate through menu list and check if the menu id is found
                 // if yes, remove from menu list

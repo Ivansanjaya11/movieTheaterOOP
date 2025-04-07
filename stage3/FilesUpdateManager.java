@@ -10,9 +10,7 @@ import java.util.TreeMap;
 
 public class FilesUpdateManager {
 
-   private FilesUpdateManager() {
-
-   }
+   private FilesUpdateManager() {}
 
     /**
      * Updates the ticket sales file with the current order's details.

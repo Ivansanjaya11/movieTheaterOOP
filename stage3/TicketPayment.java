@@ -13,15 +13,9 @@ public class TicketPayment extends Payment {
 
     private byte normalTicket;
     private byte imaxTicket;
-    private static byte normalPrice;
-    private static byte imaxPrice;
+    private static byte normalPrice = 10;
+    private static byte imaxPrice = 15;
     private Scanner input;
-
-    //static initializer to set default prices
-    static {
-        normalPrice = 10;
-        imaxPrice = 15;
-    }
 
     /**
      * Constructs a TicketPayment object for a specified customer
@@ -44,6 +38,7 @@ public class TicketPayment extends Payment {
 
         this.normalTicket = ticketOrder[0];
         this.imaxTicket = ticketOrder[1];
+
         this.setPaymentAmount();
 
         do {
@@ -68,7 +63,7 @@ public class TicketPayment extends Payment {
         // generate the ticket receipt
 		String paymentId = ReceiptGenerator.generateTicketReceipt(ticketOrder, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount(), normalPrice, imaxPrice);
 
-		super.setPaymentId(paymentId);
+		this.setPaymentId(paymentId);
 
 		// updates the tickets sales report file with the new transaction
 		FilesUpdateManager.updateTicketSalesFile(super.getPaymentId(), super.getPaymentAmount(), ticketOrder);
@@ -110,7 +105,7 @@ public class TicketPayment extends Payment {
      */
 
     public byte getNormalPrice() {
-        return normalPrice;
+        return this.normalPrice;
     }
 
     /**
@@ -119,7 +114,7 @@ public class TicketPayment extends Payment {
      */
 
     public byte getImaxPrice() {
-        return imaxPrice;
+        return this.imaxPrice;
     }
 
     /**
@@ -129,7 +124,6 @@ public class TicketPayment extends Payment {
 
     public void setNormalTicket(byte normalTicket) {
         this.normalTicket = normalTicket;
-        this.setPaymentAmount();
     }
 
     /**
@@ -139,7 +133,6 @@ public class TicketPayment extends Payment {
 
     public void setImaxTicket(byte imaxTicket) {
         this.imaxTicket = imaxTicket;
-        this.setPaymentAmount();
     }
 
     /**
@@ -148,7 +141,7 @@ public class TicketPayment extends Payment {
      */
 
     public void setNormalPrice(byte newPrice) {
-        normalPrice = newPrice;
+        this.normalPrice = newPrice;
     }
 
     /**
@@ -157,7 +150,7 @@ public class TicketPayment extends Payment {
      */
 
     public void setImaxPrice(byte newPrice) {
-        imaxPrice = newPrice;
+        this.imaxPrice = newPrice;
     }
 
     /**
@@ -166,7 +159,7 @@ public class TicketPayment extends Payment {
      */
 
     public boolean hasNormalPrice() {
-        return normalPrice > 0;
+        return this.normalPrice > 0;
     }
 
     /**
@@ -175,7 +168,7 @@ public class TicketPayment extends Payment {
      */
 
     public boolean hasImaxPrice() {
-        return imaxPrice > 0;
+        return this.imaxPrice > 0;
     }
 
     /**

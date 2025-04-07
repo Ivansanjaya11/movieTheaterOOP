@@ -4,6 +4,7 @@
 
 import util.DateAndPaymentTracker;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Represents a staff member responsible for ticket sales operations
@@ -12,14 +13,8 @@ import java.util.ArrayList;
 
 class TicketStaff extends Staff {
     private ArrayList<TicketPayment> ticketPayments;
-    private static ShowtimeManager showtimeManager;
-    private static MovieManager movieManager;
-
-    //static initializer block to set up shared managers
-    static {
-        showtimeManager = new ShowtimeManager();
-        movieManager = new MovieManager();
-    }
+    private static ShowtimeManager showtimeManager = new ShowtimeManager();
+    private static MovieManager movieManager = new MovieManager();
 
     /**
      * Constructs a TicketStaff member with provided employee details
@@ -55,20 +50,20 @@ class TicketStaff extends Staff {
 
     /**
      * Sets the static ShowtimeManager
-     * @param showtimeManager the new ShowtimeManager to set
+     * @param newShowtimeManager the new ShowtimeManager to set
      */
 
-    public void setShowtimeManager(ShowtimeManager showtimeManager) {
-        this.showtimeManager = showtimeManager;
+    public void setShowtimeManager(ShowtimeManager newShowtimeManager) {
+        showtimeManager = newShowtimeManager;
     }
 
     /**
      * Sets the MovieManager
-     * @param movieManager the new MovieManager to set
+     * @param newMovieManager the new MovieManager to set
      */
 
-    public void setMovieManager(MovieManager movieManager) {
-        this.movieManager = movieManager;
+    public void setMovieManager(MovieManager newMovieManager) {
+        movieManager = newMovieManager;
     }
 
     /**
@@ -84,6 +79,9 @@ class TicketStaff extends Staff {
         TicketPayment payment = new TicketPayment(customer);
         payment.chooseTicket();
         this.ticketPayments.add(payment);
+
+        IntStream.range(0, 25).forEach(i -> System.out.print(i));
+        System.out.println();
     }
 
     /**
