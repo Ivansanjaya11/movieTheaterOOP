@@ -5,9 +5,30 @@ public class Order {
 
     private Order() {}
 
+    private static Showtime showTicketOptionToAdd() {
+
+    }
+
+    private static byte askTicketQuantityToAdd(Showtime showtime) {
+
+    }
+
+    private static byte[] updateNumTickets(Showtime showtime, byte quantity) {
+
+    }
+
+    private static byte[] showOptionToRemove(byte[] orderedTicket) {
+
+    }
+
+    private static boolean reviewTicketOrder(Showtime showtime, byte[] orderedTicket) {
+
+    }
+
     public static byte[] takeTicketOrder() {
         byte[] orderedTicket = new byte[2];
 
+        Showtime showtime = null;
 
         do {
             System.out.println("Choose:");
@@ -16,24 +37,24 @@ public class Order {
             byte addOrRemove = input.nextByte();
 
             if (addOrRemove == 1) {
-                Showtime showtime = showOptionToAdd();
-                byte quantity = askQuantityToAdd(showtime);
+                showtime = showTicketOptionToAdd();
+                byte quantity = askTicketQuantityToAdd(showtime);
                 orderedTicket = updateNumTickets(showtime, quantity);
 
                 boolean stillContinue = askStillContinue();
 
                 if (!stillContinue) {
-                    boolean isCorrect = reviewTicketOrder(orderedTicket);
+                    boolean isCorrect = reviewTicketOrder(showtime, orderedTicket);
                     if (isCorrect) {
                         break;
                     }
                 }
             } else {
-                showOptionToRemove(orderedTicket);
+                orderedTicket = showOptionToRemove(orderedTicket);
                 boolean stillContinue = askStillContinue();
 
                 if (!stillContinue) {
-                    boolean isCorrect = reviewTicketOrder(orderedTicket);
+                    boolean isCorrect = reviewTicketOrder(showtime, orderedTicket);
                     if (isCorrect) {
                         break;
                     }
@@ -69,7 +90,7 @@ public class Order {
             System.out.println("There is no such item in the menu!");
         }
         return null;
-    }
+    } byte
 
     private static byte askQuantityToAdd() {
         System.out.print("How many do you want? ");
@@ -80,7 +101,7 @@ public class Order {
         return -1;
     }
 
-    private static void showOptionToRemove(TreeMap<Food, Byte> orderedFood) {
+    private static TreeMap<Food, Byte> showOptionToRemove(TreeMap<Food, Byte> orderedFood) {
         if (!orderedFood.isEmpty()) {
             System.out.print("Choose which one to remove: ");
             byte j = 1;
@@ -110,6 +131,8 @@ public class Order {
         } else {
             System.out.println("You haven't ordered anything yet!");
         }
+
+        return orderedFood;
     }
 
     private static boolean askStillContinue() {
@@ -159,7 +182,7 @@ public class Order {
             // remove order
             } else {
                 // remove the order
-                showOptionToRemove(orderedFood);
+                orderedFood = showOptionToRemove(orderedFood);
 
                 // ask if the user still wants to order
                 boolean stillContinue = askStillContinue();
