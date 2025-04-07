@@ -46,14 +46,18 @@ public class FoodPayment extends Payment {
 	 * Allows the customer to choose food items, either adding or removing orders.
 	 */
 	public boolean chooseFood() {
-		this.orderedFood = Order.takeFoodOrder();
+		DetailFoodBought detail = new DetailFoodBought();
+		detail = OrderFood.takeFoodOrder(detail);
+		this.orderedFood = detail.getOrderedFood();
 
-		if (this.orderedFood == null) {
+		if (detail.isEmpty()) {
 			System.out.println("Transaction cancelled!");
 			return false;
 		}
 
 		this.setPaymentAmount();
+
+		detail.setPaymentAmount(this.getPaymentAmount());
 
 		do {
 			// ask for payment method
@@ -72,13 +76,15 @@ public class FoodPayment extends Payment {
 			System.out.println("Invalid input!");
 		} while (true);
 
+		detail.setCustomer(this.getCustomer());
+
 		// generate the receipt for the order
-		String paymentId = ReceiptGenerator.generateFoodReceipt(this.orderedFood, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount());
+		String paymentId = ReceiptGenerator.generateFoodReceipt(detail);
 
 		super.setPaymentId(paymentId);
 
 		// updates the food sales report file with the new transaction
-		FilesUpdateManager.updateFoodSalesFile(super.getPaymentId(), super.getPaymentAmount(), this.orderedFood);
+		FilesUpdateManager.updateFoodSalesFile(super.getPaymentId(), detail);
 
 		return true;
 	}

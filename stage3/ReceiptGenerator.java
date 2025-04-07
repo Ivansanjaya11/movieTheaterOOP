@@ -14,7 +14,12 @@ public class ReceiptGenerator {
     /**
      * Generates the receipt for the customer's order, displaying the ordered food and total price.
      */
-    public static String generateFoodReceipt(TreeMap<Food, Byte> orderedFood, String customerName, String paymentType, short paymentAmount) {
+    public static String generateFoodReceipt(DetailFoodBought detail) {
+        TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
+        String customerName = detail.getCustomer().getName();
+        String paymentType = detail.getPaymentType();
+        short paymentAmount = detail.getPaymentAmount();
+
 
         // check the date (and update if needed)
         LocalDate date = LocalDate.now();
@@ -66,14 +71,21 @@ public class ReceiptGenerator {
 
     /**
      * Generates and prints a ticket order receipt for a given customer
-     * @param ticketOrder array with [0] = normal ticket count, [1] IMAX ticket count
-     * @param customerName name of customer
-     * @param paymentType type of payment used ("card" or "cash")
-     * @param paymentAmount total amount paid
      * @return unique payment ID for this transaction
      */
 
-    public static String generateTicketReceipt(byte[] ticketOrder, ArrayList<byte[]> chosenSeats, String customerName, String paymentType, short paymentAmount, byte normalPrice, byte imaxPrice) {
+    public static String generateTicketReceipt(DetailTicketBought detail) {
+
+        byte normalNum = detail.getNormalNum();
+        byte imaxNum = detail.getImaxNum();
+
+        byte normalPrice = detail.getNormalPrice();
+        byte imaxPrice = detail.getImaxPrice();
+
+        ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
+        String customerName = detail.getCustomer().getName();
+        String paymentType = detail.getPaymentType();
+        short paymentAmount = detail.getPaymentAmount();
 
         LocalDate date = LocalDate.now();
 
@@ -98,15 +110,19 @@ public class ReceiptGenerator {
         System.out.println("Order #" + paymentId);
         System.out.println("Order Name: " + customerName);
 
+        System.out.println("Movie: " + detail.getShowtime().getMovie().getTitle());
+        System.out.println("Start time: " + detail.getShowtime().getStartTime().toString());
+        System.out.println("Screen room #" + detail.getShowtime().getScreen().getScreenID());
+
         IntStream.range(0, 25).forEach(i -> System.out.print("-"));
         System.out.println();
 
-        if (ticketOrder[0] > 0) {
-            System.out.println("Admission\t " + ticketOrder[0] + "\t$" + (ticketOrder[0] * normalPrice));
+        if (normalNum > 0) {
+            System.out.println("Normal ticket\t " + normalNum + "\t$" + (normalNum * normalPrice));
         }
 
-        if (ticketOrder[1] > 0) {
-            System.out.println("IMAX Admission\t\t" + ticketOrder[1] + "\t$" + (ticketOrder[1] * imaxPrice));
+        if (imaxNum > 0) {
+            System.out.println("IMAX ticket\t\t" + imaxNum + "\t$" + (imaxNum * imaxPrice));
         }
 
         IntStream.range(0, 25).forEach(i -> System.out.print("-"));

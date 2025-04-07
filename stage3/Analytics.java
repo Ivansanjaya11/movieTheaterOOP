@@ -3,6 +3,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Scanner;
+import java.util.stream.IntStream;
+
 import util.Path;
 
 public class Analytics {
@@ -123,7 +125,92 @@ public class Analytics {
 	 * Generates a ticket sales report. (Implementation to be added later.)
 	 */
 	private void generateTicketSalesReport() {
-		// implement after ticket sales has been properly handled
+		/*
+		 * ===================== Report Generator =====================
+		 *
+		 * This section of code reads each line from a text-based report file,
+		 * parses the order information and seat positions, then displays a
+		 * formatted table-like analytics view to the console, filtered by
+		 * a specific time period (if specified).
+		 *
+		 * -------------------------------------------------------------
+		 * Each line in the report file has the following structure:
+		 *
+		 *    orderInfo;seatsInfo
+		 *
+		 *    - orderInfo: paymentId, timestamp, paymentAmount, quantity,
+		 *                 screenType, screenId, movieTitle, startTime
+		 *    - seatsInfo: a comma-separated list of seat positions (row, col)
+		 *
+		 * Example of a single line in the report file:
+		 *    P12345,2025-04-06T15:42:00,250,3,IMAX,S3,Interstellar,2025-04-06T17:00:00;0,5,0,6,1,3
+		 *
+		 * This will be printed to the console (if timestamp is in the time range) as:
+		 *
+		 *    P12345     |2025-04-06T15:42:00      |250    |3    |IMAX   |S3    |Interstellar   |2025-04-06T17:00:00 |(0,5), (0,6), (1,3)     |
+		 *    -------------------------
+		 *
+		 * Explanation:
+		 *    - Only lines with timestamps falling between `timePeriodStart`
+		 *      and `timePeriodEnd` are displayed.
+		 *    - Each seat is printed in (row,col) format.
+		 *    - A horizontal line is printed after each entry for visual separation.
+		 *
+		 * This formatting is useful for CLI-based analytics tools where quick
+		 * viewing of ticket sales, seating patterns, and screen/movies data
+		 * is necessary.
+		 *
+		 */
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH))) {
+			System.out.println("Below is the ticket sales report for the specified time period: ");
+			System.out.println("Payment ID\t\t|Timestamp\t\t|Total Price\t|Qty\t|Screen Type\t|Screen ID\t|Movie\t\t|Start Time\t|Seats\t\t|");
+
+			IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+			System.out.println();
+
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				String orderInfo = line.split(";")[0];
+				String seatsInfo = line.split(";")[1];
+				String[] seatsPosition = seatsInfo.split(",");
+
+				String paymentId = orderInfo.split(",")[0];
+				LocalDateTime timestamp = LocalDateTime.parse(orderInfo.split(",")[1]);
+				String paymentAmount = orderInfo.split(",")[2];
+				String quantity = orderInfo.split(",")[3];
+				String screenType = orderInfo.split(",")[4];
+				String screenId = orderInfo.split(",")[5];
+				String movieTitle = orderInfo.split(",")[6];
+				String startTime = orderInfo.split(",")[7];
+
+
+				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
+					System.out.print(paymentId + "\t\t|" + timestamp.toString() + "\t\t|" + paymentAmount + "\t|" + quantity + "\t|" + screenType + "\t|" + screenId + "\t|" + movieTitle + "\t|" + startTime + "\t|");
+					for (int i=0; i<seatsPosition.length; i+=2) {
+						String row = seatsPosition[i].trim();
+						String col = seatsPosition[i+1].trim();
+
+						String pos = "(" + row + "," + col + ")";
+						System.out.print(pos);
+						if (i+2 == seatsPosition.length) {
+							System.out.println("\t|");
+						} else {
+							System.out.print(", ");
+						}
+					}
+				}
+
+				IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+				System.out.println();
+			}
+
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
+
+
 	}
 
 	/**
@@ -341,7 +428,70 @@ public class Analytics {
 	 * Exports the ticket sales report. (Implementation to be added later.)
 	 */
 	private void exportTicketSalesReport() {
-		// implement after ticket sales has been properly handled
+		// format is the same as generateTicketSalesReport
+		String ticketSalesExportPath = Path.TICKET_SALES_EXPORT_PATH + "ticketSales:" + this.timePeriodStart + "->" + this.timePeriodEnd + ".txt";
+		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH));
+			 BufferedWriter writer = new BufferedWriter(new FileWriter(ticketSalesExportPath, true))) {
+
+
+
+
+
+
+			writer.write("Below is the ticket sales report for the specified time period: ");
+			writer.newLine();
+			writer.write("Payment ID\t\t|Timestamp\t\t|Total Price\t|Qty\t|Screen Type\t|Screen ID\t|Movie\t\t|Start Time\t|Seats\t\t|");
+			writer.newLine();
+
+            for (int i = 0; i < 25; i++) {
+                writer.write("-");
+            }
+
+            writer.newLine();
+
+			String line;
+
+			while ((line = reader.readLine()) != null) {
+				String orderInfo = line.split(";")[0];
+				String seatsInfo = line.split(";")[1];
+				String[] seatsPosition = seatsInfo.split(",");
+
+				String paymentId = orderInfo.split(",")[0];
+				LocalDateTime timestamp = LocalDateTime.parse(orderInfo.split(",")[1]);
+				String paymentAmount = orderInfo.split(",")[2];
+				String quantity = orderInfo.split(",")[3];
+				String screenType = orderInfo.split(",")[4];
+				String screenId = orderInfo.split(",")[5];
+				String movieTitle = orderInfo.split(",")[6];
+				String startTime = orderInfo.split(",")[7];
+
+
+				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
+					writer.write(paymentId + "\t\t|" + timestamp.toString() + "\t\t|" + paymentAmount + "\t|" + quantity + "\t|" + screenType + "\t|" + screenId + "\t|" + movieTitle + "\t|" + startTime + "\t|");
+					for (int i=0; i<seatsPosition.length; i+=2) {
+						String row = seatsPosition[i].trim();
+						String col = seatsPosition[i+1].trim();
+
+						String pos = "(" + row + "," + col + ")";
+						writer.write(pos);
+						if (i+2 == seatsPosition.length) {
+							writer.write("\t|");
+							writer.newLine();
+						} else {
+							writer.write(", ");
+						}
+					}
+				}
+
+				for (int i = 0; i < 25; i++) {
+                	writer.write("-");
+            	}
+
+				writer.newLine();
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+		}
 	}
 
 	/**

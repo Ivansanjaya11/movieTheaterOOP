@@ -35,23 +35,22 @@ public class TicketPayment extends Payment {
      */
 
     public boolean chooseTicket() {
-        ArrayList<byte[]> chosenSeatsAndOrderedTicket = Order.takeTicketOrder(normalPrice, imaxPrice);
+        DetailTicketBought detail = new DetailTicketBought(normalPrice, imaxPrice);
+        detail = OrderTicket.takeTicketOrder(detail);
 
-        byte[] orderedTicket = chosenSeatsAndOrderedTicket.get(chosenSeatsAndOrderedTicket.size()-1);
-
-        chosenSeatsAndOrderedTicket.remove(chosenSeatsAndOrderedTicket.size()-1);
-
-        ArrayList<byte[]> chosenSeats = chosenSeatsAndOrderedTicket;
-
-        if (orderedTicket == null) {
+        if (detail.isEmpty()) {
             System.out.println("Transaction cancelled!");
             return false;
         }
 
-        normalTicket = orderedTicket[0];
-        imaxTicket = orderedTicket[1];
+        ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
+
+        normalTicket = detail.getNormalNum();
+        imaxTicket = detail.getImaxNum();
 
         this.setPaymentAmount();
+
+        detail.setPaymentAmount(this.getPaymentAmount());
 
         do {
 			// ask for payment method
@@ -61,10 +60,10 @@ public class TicketPayment extends Payment {
 			byte paymentOption = this.input.nextByte();
 			if (paymentOption>0 && paymentOption<=2) {
 				if (paymentOption==1) {
-					//super.setPaymentType("card");
+                    detail.setPaymentType("card");
 					this.processPaymentWithCard();
 				} else {
-					//super.setPaymentType("cash");
+                    detail.setPaymentType("cash");
 					this.processPaymentWithCash();
 				}
 				break;
@@ -72,13 +71,15 @@ public class TicketPayment extends Payment {
 			System.out.println("Invalid input!");
 		} while (true);
 
+        detail.setCustomer(this.getCustomer());
+
         // generate the ticket receipt
-		String paymentId = ReceiptGenerator.generateTicketReceipt(orderedTicket, chosenSeats, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount(), normalPrice, imaxPrice);
+		String paymentId = ReceiptGenerator.generateTicketReceipt(detail);
 
 		this.setPaymentId(paymentId);
 
 		// updates the tickets sales report file with the new transaction
-		FilesUpdateManager.updateTicketSalesFile(super.getPaymentId(), super.getPaymentAmount(), orderedTicket);
+		FilesUpdateManager.updateTicketSalesFile(super.getPaymentId(), detail);
 
         return true;
     }

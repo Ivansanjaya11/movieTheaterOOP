@@ -15,14 +15,56 @@ public class FilesUpdateManager {
     /**
      * Updates the ticket sales file with the current order's details.
      */
-    public static void updateTicketSalesFile(String paymentId, short paymentAmount, byte[] ticketOrder) {
+    public static void updateTicketSalesFile(String paymentId, DetailTicketBought detail) {
+        String movieTitle = detail.getShowtime().getMovie().getTitle();
+        byte screenId = detail.getShowtime().getScreen().getScreenID();
+        String startTime = detail.getShowtime().getStartTime().toString();
+        ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
+        String screenType = detail.getShowtime().getScreen().getScreenType();
+        byte quantity = (byte) (detail.getImaxNum() + detail.getNormalNum());
+        short paymentAmount = detail.getPaymentAmount();
 
+        String line = "";
+
+        line += paymentId;
+        line += ",";
+        line += LocalDateTime.now(ZoneId.of("US/Mountain")).toString();
+        line += ",";
+        line += paymentAmount;
+        line += ",";
+        line += quantity;
+        line += ",";
+        line += screenType;
+        line += ",";
+        line += screenId;
+        line += ",";
+        line += movieTitle;
+        line += ",";
+        line += startTime;
+        line += ";";
+
+        for (byte[] aSeat : chosenSeats) {
+            line += aSeat[0];
+            line += ",";
+            line += aSeat[1];
+            line += ",";
+        }
+
+        // append to a new line in the ticket sales report file
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.TICKET_SALES_REPORT_PATH, true))) {
+            writer.newLine();
+            writer.write(line);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
     /**
      * Updates the food sales file with the current order's details.
      */
-    public static void updateFoodSalesFile(String paymentId, short paymentAmount, TreeMap<Food, Byte> orderedFood) {
+    public static void updateFoodSalesFile(String paymentId, DetailFoodBought detail) {
+        short paymentAmount = detail.getPaymentAmount();
+        TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
         /*
          * adds the information about the transaction in the following format:
          * LocalDateTime object, Payment amount (total price)
