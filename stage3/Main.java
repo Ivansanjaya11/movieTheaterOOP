@@ -61,12 +61,12 @@ public class Main {
 		ticketStaff3.getMovieManager().addMovie(movie6);
 
 		// add screen
-		Screen screen1 = new Screen(1, "imax");
-		Screen screen2 = new Screen(2, "imax");
-		Screen screen3 = new Screen(3, "normal");
-		Screen screen4 = new Screen(4, "normal");
-		Screen screen5 = new Screen(5, "normal");
-		Screen screen6 = new Screen(6, "normal");
+		Screen screen1 = new Screen((byte) 1, "imax");
+		Screen screen2 = new Screen((byte)  2, "imax");
+		Screen screen3 = new Screen((byte) 3, "normal");
+		Screen screen4 = new Screen((byte) 4, "normal");
+		Screen screen5 = new Screen((byte) 5, "normal");
+		Screen screen6 = new Screen((byte) 6, "normal");
 
 		// add showtime
 		Showtime showtime1 = new Showtime(1, movie1, screen1, LocalTime.of(10, 0));
