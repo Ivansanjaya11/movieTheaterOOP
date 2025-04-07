@@ -164,7 +164,7 @@ public class Order {
             System.out.println("There is no such item in the menu!");
         }
         return null;
-    } byte
+    }
 
     private static byte askQuantityToAdd() {
         System.out.print("How many do you want? ");
