@@ -105,7 +105,7 @@ public class TicketPayment extends Payment {
      */
 
     public byte getNormalPrice() {
-        return this.normalPrice;
+        return normalPrice;
     }
 
     /**
@@ -114,7 +114,7 @@ public class TicketPayment extends Payment {
      */
 
     public byte getImaxPrice() {
-        return this.imaxPrice;
+        return imaxPrice;
     }
 
     /**
@@ -141,7 +141,7 @@ public class TicketPayment extends Payment {
      */
 
     public void setNormalPrice(byte newPrice) {
-        this.normalPrice = newPrice;
+        normalPrice = newPrice;
     }
 
     /**
@@ -150,7 +150,7 @@ public class TicketPayment extends Payment {
      */
 
     public void setImaxPrice(byte newPrice) {
-        this.imaxPrice = newPrice;
+        imaxPrice = newPrice;
     }
 
     /**
@@ -159,7 +159,7 @@ public class TicketPayment extends Payment {
      */
 
     public boolean hasNormalPrice() {
-        return this.normalPrice > 0;
+        return normalPrice > 0;
     }
 
     /**
@@ -168,7 +168,7 @@ public class TicketPayment extends Payment {
      */
 
     public boolean hasImaxPrice() {
-        return this.imaxPrice > 0;
+        return imaxPrice > 0;
     }
 
     /**
