@@ -1,16 +1,90 @@
 import java.util.*;
+import java.util.stream.IntStream;
 
 public class Order {
     protected static Scanner input = new Scanner(System.in);
 
     private Order() {}
 
-    private static Showtime showTicketOptionToAdd() {
+    private static Showtime showTicketOptionToAdd(ArrayList<Movie> movieList, byte normalPrice, byte imaxPrice) {
+        System.out.println("Select movie: ");
+        Movie selectedMovie = null;
 
+        for (Movie movie : movieList) {
+            System.out.print(movie.getMovieID() + ". ");
+            System.out.println(movie.getTitle());
+            System.out.println("\tMovie duration: " + selectedMovie.getDurationMinutes());
+            System.out.println("\tMovie genre: " + selectedMovie.getGenre());
+
+        }
+        byte ticketOption = input.nextByte();
+        if (ticketOption >= 1 && ticketOption <= movieList.size()) {
+            for (Movie aMovie : movieList) {
+                if (aMovie.getMovieID() == ticketOption) {
+                    selectedMovie = aMovie;
+                    break;
+                }
+            }
+        }
+
+        ArrayList<Showtime> showtimeList = ShowtimeManager.getShowtimes();
+        System.out.println("Here is the schedule for the movie '" + selectedMovie.getTitle() + "':");
+        System.out.println("Normal screen price: $" + normalPrice);
+        System.out.println("Imax screen price: $" + imaxPrice);
+
+        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        System.out.println();
+
+        for (Showtime showtime : showtimeList) {
+            if (showtime.getMovie().getMovieID() == selectedMovie.getMovieID()) {
+                Screen aScreen = showtime.getScreen();
+                System.out.println("Screen room # " + aScreen.getScreenID());
+                System.out.println("Screen type: " + aScreen.getScreenType());
+                System.out.println("Start time: " + showtime.getStartTime().toString());
+                System.out.println("End time: " + showtime.getEndTime().toString());
+
+                IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+                System.out.println();
+            }
+        }
+
+        byte showtimeOption = input.nextByte();
+        if (showtimeOption >= 1 && showtimeOption <= showtimeList.size()) {
+            for (Showtime showtime : showtimeList) {
+                if (showtime.getShowtimeID() == showtimeOption) {
+                    return showtime;
+                }
+            }
+        }
+        return null;
     }
 
     private static byte askTicketQuantityToAdd(Showtime showtime) {
+        byte seatingCount = 0;
 
+        Screen aScreen = showtime.getScreen();
+        SeatingArrangement seatings = aScreen.getSeating();
+
+
+        do {
+            seatings.viewSeating();
+            byte rowNum = input.nextByte();
+            byte colNum = input.nextByte();
+
+            if (rowNum >= 1 && rowNum <= seatings.getRowCapacity() && colNum >= 1 && colNum <= seatings.getColCapacity()) {
+                seatingCount++;
+                //change the status of the seat
+            }
+
+            System.out.print("Select another seat? (y/n) ");
+
+            if (input.next().equalsIgnoreCase("n")){
+                break;
+            }
+
+        } while (true);
+
+        return seatingCount;
     }
 
     private static byte[] updateNumTickets(Showtime showtime, byte quantity) {
@@ -25,7 +99,7 @@ public class Order {
 
     }
 
-    public static byte[] takeTicketOrder() {
+    public static byte[] takeTicketOrder(byte normalPrice, byte imaxPrice) {
         byte[] orderedTicket = new byte[2];
 
         Showtime showtime = null;
@@ -37,7 +111,7 @@ public class Order {
             byte addOrRemove = input.nextByte();
 
             if (addOrRemove == 1) {
-                showtime = showTicketOptionToAdd();
+                showtime = showTicketOptionToAdd(MovieManager.getMovies(), normalPrice, imaxPrice);
                 byte quantity = askTicketQuantityToAdd(showtime);
                 orderedTicket = updateNumTickets(showtime, quantity);
 

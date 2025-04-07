@@ -7,13 +7,21 @@ import java.util.Iterator;
 
 public class ShowtimeManager {
 
-    private ArrayList<Showtime> showtimes;
+    private static ArrayList<Showtime> showtimes = new ArrayList<>();
 
     /**
      * Constructs ShowtimeManager object
      */
     public ShowtimeManager() {
-        this.showtimes = new ArrayList<>();
+
+    }
+
+    /**
+     * Returns list of showtimes for a movie
+     * @return
+     */
+    public static ArrayList<Showtime> getShowtimes() {
+        return showtimes;
     }
 
     /**

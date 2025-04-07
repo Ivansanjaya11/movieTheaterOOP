@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class MovieManager {
 
     //List to store movies
-    private ArrayList<Movie> movies;
+    private static ArrayList<Movie> movies;
 
     /**
      * Constructor initializes movie list
@@ -18,6 +18,13 @@ public class MovieManager {
         this.movies = new ArrayList<>();
     }
 
+    /**
+     * Returns array list of movies
+     * @return
+     */
+    public static ArrayList<Movie> getMovies() {
+        return movies;
+    }
     /**
      * Adds movie to movie list
      * @param movie

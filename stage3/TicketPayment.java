@@ -34,10 +34,10 @@ public class TicketPayment extends Payment {
      */
 
     public void chooseTicket() {
-        byte[] ticketOrder = Order.takeTicketOrder();
+        byte[] ticketOrder = Order.takeTicketOrder(normalPrice, imaxPrice);
 
-        this.normalTicket = ticketOrder[0];
-        this.imaxTicket = ticketOrder[1];
+        normalTicket = ticketOrder[0];
+        imaxTicket = ticketOrder[1];
 
         this.setPaymentAmount();
 

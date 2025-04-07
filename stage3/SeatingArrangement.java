@@ -59,7 +59,7 @@ public class SeatingArrangement {
     public void viewSeating() {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                System.out.println(seatStatus[i][j] ? "X " : "O ");
+                System.out.print(seatStatus[i][j] ? "X " : "O ");
             }
             System.out.println();
         }
