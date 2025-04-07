@@ -1,3 +1,5 @@
+import java.time.LocalTime;
+
 /** This class represents a move showtime
  * @author Logan Cordova
  */
@@ -7,8 +9,8 @@ public class Showtime {
     private int showtimeID;
     private Movie movie;
     private Screen screen;
-    private TimeSchedule startTime;
-    private TimeSchedule endTime;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     /**
      * Constructs Showtime object
@@ -16,14 +18,13 @@ public class Showtime {
      * @param movie - movie being shown
      * @param screen - screen where the movie is being shown
      * @param startTime - start time of the screening
-     * @param endTime - end time of the screening
      */
-    public Showtime(int showtimeID, Movie movie, Screen screen, TimeSchedule startTime, TimeSchedule endTime) {
+    public Showtime(int showtimeID, Movie movie, Screen screen, LocalTime startTime) {
         this.showtimeID = showtimeID;
         this.movie = movie;
         this.screen = screen;
         this.startTime = startTime;
-        this.endTime = endTime;
+        this.endTime = this.startTime.plusMinutes(this.movie.getDurationMinutes());
     }
 
     /**
@@ -54,7 +55,7 @@ public class Showtime {
      * Returns start time of showtime
      * @return
      */
-    public TimeSchedule getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
@@ -62,7 +63,7 @@ public class Showtime {
      * Returns end time of showtime
      * @return
      */
-    public TimeSchedule getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
