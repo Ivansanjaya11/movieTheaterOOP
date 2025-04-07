@@ -6,7 +6,42 @@ public class Order {
     private Order() {}
 
     public static byte[] takeTicketOrder() {
-        return new byte[2];
+        byte[] orderedTicket = new byte[2];
+
+
+        do {
+            System.out.println("Choose:");
+            System.out.println("1. Add order");
+            System.out.println("2. Remove order");
+            byte addOrRemove = input.nextByte();
+
+            if (addOrRemove == 1) {
+                Showtime showtime = showOptionToAdd();
+                byte quantity = askQuantityToAdd(showtime);
+                orderedTicket = updateNumTickets(showtime, quantity);
+
+                boolean stillContinue = askStillContinue();
+
+                if (!stillContinue) {
+                    boolean isCorrect = reviewTicketOrder(orderedTicket);
+                    if (isCorrect) {
+                        break;
+                    }
+                }
+            } else {
+                showOptionToRemove(orderedTicket);
+                boolean stillContinue = askStillContinue();
+
+                if (!stillContinue) {
+                    boolean isCorrect = reviewTicketOrder(orderedTicket);
+                    if (isCorrect) {
+                        break;
+                    }
+                }
+            }
+        } while(true);
+
+        return orderedTicket;
     }
 
     public static void reviewTicketOrder() {
