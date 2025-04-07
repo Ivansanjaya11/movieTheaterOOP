@@ -2,6 +2,7 @@
  * @author Heather Santos
  */
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -33,11 +34,22 @@ public class TicketPayment extends Payment {
      * and generates a receipt
      */
 
-    public void chooseTicket() {
-        byte[] ticketOrder = Order.takeTicketOrder(normalPrice, imaxPrice);
+    public boolean chooseTicket() {
+        ArrayList<byte[]> chosenSeatsAndOrderedTicket = Order.takeTicketOrder(normalPrice, imaxPrice);
 
-        normalTicket = ticketOrder[0];
-        imaxTicket = ticketOrder[1];
+        byte[] orderedTicket = chosenSeatsAndOrderedTicket.get(chosenSeatsAndOrderedTicket.size()-1);
+
+        chosenSeatsAndOrderedTicket.remove(chosenSeatsAndOrderedTicket.size()-1);
+
+        ArrayList<byte[]> chosenSeats = chosenSeatsAndOrderedTicket;
+
+        if (orderedTicket == null) {
+            System.out.println("Transaction cancelled!");
+            return false;
+        }
+
+        normalTicket = orderedTicket[0];
+        imaxTicket = orderedTicket[1];
 
         this.setPaymentAmount();
 
@@ -61,12 +73,14 @@ public class TicketPayment extends Payment {
 		} while (true);
 
         // generate the ticket receipt
-		String paymentId = ReceiptGenerator.generateTicketReceipt(ticketOrder, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount(), normalPrice, imaxPrice);
+		String paymentId = ReceiptGenerator.generateTicketReceipt(orderedTicket, chosenSeats, super.getCustomer().getName(), super.getPaymentType(), super.getPaymentAmount(), normalPrice, imaxPrice);
 
 		this.setPaymentId(paymentId);
 
 		// updates the tickets sales report file with the new transaction
-		FilesUpdateManager.updateTicketSalesFile(super.getPaymentId(), super.getPaymentAmount(), ticketOrder);
+		FilesUpdateManager.updateTicketSalesFile(super.getPaymentId(), super.getPaymentAmount(), orderedTicket);
+
+        return true;
     }
 
     /**

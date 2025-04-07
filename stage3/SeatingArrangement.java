@@ -6,8 +6,8 @@ public class SeatingArrangement {
     
     private boolean[][] seatStatus;
     private static short capacity = 100;
-    private static final int ROWS = (capacity / 10) + (capacity % 10 == 0 ? 0 : 1);
-    private static final int COLS = 10;
+    private static final byte ROWS = (byte) ((capacity / 10) + (capacity % 10 == 0 ? 0 : 1));
+    private static final byte COLS = 10;
 
     /**
      * Constructs a seating arrangement with a set capacity
@@ -22,6 +22,22 @@ public class SeatingArrangement {
                 seatStatus[i][j] = false;
             }
         }
+    }
+
+    /**
+     * method to get the row capacity
+     * @return
+     */
+    public byte getRowCapacity() {
+        return ROWS;
+    }
+
+    /**
+     * method to get the column capacity
+     * @return
+     */
+    public byte getColCapacity() {
+        return COLS;
     }
 
     /**
@@ -42,14 +58,13 @@ public class SeatingArrangement {
      * Sets status of a specific seat
      * @param row
      * @param col
-     * @param status
      */
-    public void setSeatStatus(int row, int col, boolean status) {
+    public void setSeatStatus(int row, int col) {
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
             System.out.println("Invalid seat selection.");
             return;
     }
-    seatStatus[row][col] = status;
+    seatStatus[row][col] = !seatStatus[row][col];
 }
 
     /**

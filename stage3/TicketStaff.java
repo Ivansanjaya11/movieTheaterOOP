@@ -77,9 +77,11 @@ class TicketStaff extends Staff {
             this.clearOrderHistory();
         }
         TicketPayment payment = new TicketPayment(customer);
-        payment.chooseTicket();
-        this.ticketPayments.add(payment);
+        boolean isSuccessful = payment.chooseTicket();
 
+        if (isSuccessful) {
+            this.ticketPayments.add(payment);
+        }
         IntStream.range(0, 25).forEach(i -> System.out.print(i));
         System.out.println();
     }

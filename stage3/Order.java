@@ -17,6 +17,7 @@ public class Order {
             System.out.println("\tMovie genre: " + selectedMovie.getGenre());
 
         }
+
         byte ticketOption = input.nextByte();
         if (ticketOption >= 1 && ticketOption <= movieList.size()) {
             for (Movie aMovie : movieList) {
@@ -59,12 +60,12 @@ public class Order {
         return null;
     }
 
-    private static byte askTicketQuantityToAdd(Showtime showtime) {
-        byte seatingCount = 0;
+    private static ArrayList<byte[]> askTicketQuantityToAdd(Showtime showtime) {
 
         Screen aScreen = showtime.getScreen();
         SeatingArrangement seatings = aScreen.getSeating();
 
+        ArrayList<byte[]> chosenSeats = new ArrayList<>();
 
         do {
             seatings.viewSeating();
@@ -72,8 +73,9 @@ public class Order {
             byte colNum = input.nextByte();
 
             if (rowNum >= 1 && rowNum <= seatings.getRowCapacity() && colNum >= 1 && colNum <= seatings.getColCapacity()) {
-                seatingCount++;
-                //change the status of the seat
+                seatings.setSeatStatus(rowNum-1, colNum-1);
+                byte[] aSeat = {(byte) ( rowNum-1), (byte) (colNum-1)};
+                chosenSeats.add(aSeat);
             }
 
             System.out.print("Select another seat? (y/n) ");
@@ -84,25 +86,59 @@ public class Order {
 
         } while (true);
 
-        return seatingCount;
+        return chosenSeats;
     }
 
     private static byte[] updateNumTickets(Showtime showtime, byte quantity) {
-
+        if (showtime.getScreen().getScreenType().equals("normal")) {
+            return new byte[]{quantity, 0};
+        } else {
+            return new byte[]{0, quantity};
+        }
     }
 
-    private static byte[] showOptionToRemove(byte[] orderedTicket) {
-
+    private static byte[] removeTicketOrder(byte[] orderedTicket) {
+        return new byte[]{0, 0};
     }
 
-    private static boolean reviewTicketOrder(Showtime showtime, byte[] orderedTicket) {
+    private static boolean reviewTicketOrder(Showtime showtime, ArrayList<byte[]> chosenSeats, byte quantity, byte normalPrice, byte imaxPrice) {
+        Movie aMovie = showtime.getMovie();
+        Screen aScreen = showtime.getScreen();
 
+        System.out.println(quantity + " tickets of Movie '" + aMovie.getTitle() + "'.");
+        System.out.println("Screen room #" + aScreen.getScreenID() + "; type: " + aScreen.getScreenType());
+
+        System.out.print("The price for each ticket is $");
+        if (aScreen.getScreenType() == "normal") {
+            System.out.println(normalPrice);
+        } else {
+            System.out.println(imaxPrice);
+        }
+
+        System.out.println("The following is the seats you ordered:");
+        for (byte[] aSeat : chosenSeats) {
+            System.out.println("\t- Seat at (" + aSeat[0] + ", " + aSeat[1] + ")");
+        }
+
+        System.out.print("Is this correct? (y/n)");
+
+        char option = input.next().charAt(0);
+
+        // if yes then return true, otherwise, false
+        if (String.valueOf(option).equalsIgnoreCase("y")) {
+            return true;
+        }
+        return false;
     }
 
-    public static byte[] takeTicketOrder(byte normalPrice, byte imaxPrice) {
+    public static ArrayList<byte[]> takeTicketOrder(byte normalPrice, byte imaxPrice) {
         byte[] orderedTicket = new byte[2];
 
         Showtime showtime = null;
+
+        ArrayList<byte[]> chosenSeats = null;
+
+        byte quantity = 0;
 
         do {
             System.out.println("Choose:");
@@ -112,23 +148,25 @@ public class Order {
 
             if (addOrRemove == 1) {
                 showtime = showTicketOptionToAdd(MovieManager.getMovies(), normalPrice, imaxPrice);
-                byte quantity = askTicketQuantityToAdd(showtime);
+                chosenSeats = askTicketQuantityToAdd(showtime);
+                quantity = (byte) chosenSeats.size();
                 orderedTicket = updateNumTickets(showtime, quantity);
 
                 boolean stillContinue = askStillContinue();
 
                 if (!stillContinue) {
-                    boolean isCorrect = reviewTicketOrder(showtime, orderedTicket);
+                    boolean isCorrect = reviewTicketOrder(showtime, chosenSeats, quantity, normalPrice, imaxPrice);
                     if (isCorrect) {
                         break;
                     }
                 }
             } else {
-                orderedTicket = showOptionToRemove(orderedTicket);
+                orderedTicket = removeTicketOrder(orderedTicket);
+                chosenSeats = resetTicketSeats(chosenSeats, showtime);
                 boolean stillContinue = askStillContinue();
 
                 if (!stillContinue) {
-                    boolean isCorrect = reviewTicketOrder(showtime, orderedTicket);
+                    boolean isCorrect = reviewTicketOrder(showtime, chosenSeats, quantity, normalPrice, imaxPrice);
                     if (isCorrect) {
                         break;
                     }
@@ -136,17 +174,27 @@ public class Order {
             }
         } while(true);
 
-        return orderedTicket;
+        if (orderedTicket[0] == 0 && orderedTicket[1] == 0) {
+            return null;
+        }
+
+        chosenSeats.add(orderedTicket);
+
+        return chosenSeats;
     }
 
-    public static void reviewTicketOrder() {
+    private static ArrayList<byte[]> resetTicketSeats(ArrayList<byte[]> chosenSeats, Showtime showtime) {
+        Screen aScreen = showtime.getScreen();
+        SeatingArrangement seatings = aScreen.getSeating();
 
+        for (byte[] aSeat : chosenSeats) {
+            seatings.setSeatStatus(aSeat[0], aSeat[1]);
+        }
+
+        return new ArrayList<>();
     }
 
-
-
-
-    private static Food showOptionToAdd(ArrayList<Food> menuList) {
+    private static Food showFoodOptionToAdd(ArrayList<Food> menuList) {
         System.out.println("Choose from the following menu: ");
         for (Food food : menuList) {
             System.out.print(food.getMenuId() + ". ");
@@ -175,7 +223,7 @@ public class Order {
         return -1;
     }
 
-    private static TreeMap<Food, Byte> showOptionToRemove(TreeMap<Food, Byte> orderedFood) {
+    private static TreeMap<Food, Byte> showFoodOptionToRemove(TreeMap<Food, Byte> orderedFood) {
         if (!orderedFood.isEmpty()) {
             System.out.print("Choose which one to remove: ");
             byte j = 1;
@@ -235,7 +283,7 @@ public class Order {
             // add order
             if (addOrRemove==1) {
                 // ask the user to choose from a list of food menu
-                Food aFood = showOptionToAdd(menuList);
+                Food aFood = showFoodOptionToAdd(menuList);
 
                 // ask for order quantity
                 byte quantity = askQuantityToAdd();
@@ -256,7 +304,7 @@ public class Order {
             // remove order
             } else {
                 // remove the order
-                orderedFood = showOptionToRemove(orderedFood);
+                orderedFood = showFoodOptionToRemove(orderedFood);
 
                 // ask if the user still wants to order
                 boolean stillContinue = askStillContinue();
@@ -270,6 +318,10 @@ public class Order {
 
             }
         } while (true);
+
+        if (orderedFood.isEmpty()) {
+            return null;
+        }
 
         return orderedFood;
     }

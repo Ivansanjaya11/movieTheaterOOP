@@ -1,6 +1,7 @@
 import util.DateAndPaymentTracker;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.TreeMap;
 import java.util.stream.IntStream;
 
@@ -72,7 +73,7 @@ public class ReceiptGenerator {
      * @return unique payment ID for this transaction
      */
 
-    public static String generateTicketReceipt(byte[] ticketOrder, String customerName, String paymentType, short paymentAmount, byte normalPrice, byte imaxPrice) {
+    public static String generateTicketReceipt(byte[] ticketOrder, ArrayList<byte[]> chosenSeats, String customerName, String paymentType, short paymentAmount, byte normalPrice, byte imaxPrice) {
 
         LocalDate date = LocalDate.now();
 
@@ -106,6 +107,15 @@ public class ReceiptGenerator {
 
         if (ticketOrder[1] > 0) {
             System.out.println("IMAX Admission\t\t" + ticketOrder[1] + "\t$" + (ticketOrder[1] * imaxPrice));
+        }
+
+        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        System.out.println();
+
+        System.out.println("Seats ordered:");
+
+        for (byte[] aSeat : chosenSeats) {
+            System.out.println("\t- Seat at (" + aSeat[0] + ", " + aSeat[1] + ")");
         }
 
         IntStream.range(0, 25).forEach(i -> System.out.print("-"));

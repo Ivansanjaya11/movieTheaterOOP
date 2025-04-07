@@ -53,8 +53,11 @@ public class FoodStaff extends Staff {
 
     public void addNewFoodPayment(Customer customer) {
         FoodPayment foodPayment = new FoodPayment(customer);
-        foodPayment.chooseFood();
-        this.foodPayments.add(foodPayment);
+        boolean isSuccessful = foodPayment.chooseFood();
+
+        if (isSuccessful) {
+            this.foodPayments.add(foodPayment);
+        }
 
         IntStream.range(0, 25).forEach(i -> System.out.print(i));
         System.out.println();

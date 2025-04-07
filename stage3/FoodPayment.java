@@ -45,8 +45,13 @@ public class FoodPayment extends Payment {
 	/**
 	 * Allows the customer to choose food items, either adding or removing orders.
 	 */
-	public void chooseFood() {
+	public boolean chooseFood() {
 		this.orderedFood = Order.takeFoodOrder();
+
+		if (this.orderedFood == null) {
+			System.out.println("Transaction cancelled!");
+			return false;
+		}
 
 		this.setPaymentAmount();
 
@@ -74,5 +79,7 @@ public class FoodPayment extends Payment {
 
 		// updates the food sales report file with the new transaction
 		FilesUpdateManager.updateFoodSalesFile(super.getPaymentId(), super.getPaymentAmount(), this.orderedFood);
+
+		return true;
 	}
 }
