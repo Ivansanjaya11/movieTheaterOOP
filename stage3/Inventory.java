@@ -1,22 +1,31 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.NoSuchElementException;
-import java.util.TreeMap;
+import java.util.*;
 
 import util.Path;
 
 public class Inventory {
-	private ArrayList<Item> itemList;
+	private static ArrayList<Item> itemList = new ArrayList<>();
 	private static File inventoryFile;
+
+	public static final String RESET = "\033[0m";
+	public static final String RED = "\033[0;31m";
+
+	static {
+		try {
+			inventoryFile = new File(Path.INVENTORY_REPORT_PATH);
+			if (inventoryFile.createNewFile()) {
+
+			}
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+        }
+    }
 
 	/**
 	 * Constructs an Inventory object and initializes the item list by reading
 	 * inventory data from the file if it is not empty.
 	 */
 	public Inventory() {
-		this.itemList = new ArrayList<Item>();
-
 		/*
 		 * whenever the program starts and the inventory object is initialized,
 		 * access the inventory path to get the latest inventory state.
@@ -44,6 +53,10 @@ public class Inventory {
 		}
 	}
 
+	public static ArrayList<Item> getItemList() {
+		return itemList;
+	}
+
 	/**
 	 * Retrieves an item from the inventory based on the provided item ID.
 	 *
@@ -52,16 +65,12 @@ public class Inventory {
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
 	public Item getItem(byte itemId) {
-		try {
-			for (Item item : itemList) {
-				if (item.hasItemId() && item.getItemId() == itemId) {
-					return item;
-				}
+		for (Item item : itemList) {
+			if (item.hasItemId() && item.getItemId() == itemId) {
+				return item;
 			}
-			throw new NoSuchElementException("There is no such item in the inventory");
-		} catch (NoSuchElementException e) {
-			System.err.println(e.getMessage());
 		}
+		System.out.println(RED + "There is no item with id #"+ itemId + " in the inventory" + RESET);
 		return null;
 	}
 
@@ -71,7 +80,7 @@ public class Inventory {
 	 * @param item The item to be added to the inventory.
 	 */
 	public void addItem(Item item) {
-		this.itemList.add(item);
+		itemList.add(item);
 	}
 
 	/**
@@ -87,7 +96,7 @@ public class Inventory {
 			for (Item item : itemList) {
 				if (item.hasItemId() && item.getItemId() == itemId) {
 					found = true;
-					this.itemList.remove(i);
+					itemList.remove(i);
 					break;
 				}
 				i++;
@@ -107,14 +116,29 @@ public class Inventory {
 	 * @param foodOrder The list of food orders containing food and quantity.
 	 */
 	public void updateInventory(TreeMap<Food, Byte> foodOrder) {
+		TreeMap<Item, Short> itemsToBeUpdated = new TreeMap<>();
 		for (Food aFood : foodOrder.keySet()) {
 			// for every food object in the order, get the recipe containing ingredients used to make it
-			HashMap<Item, Byte> recipe = aFood.getRecipe();
+			TreeMap<Item, Byte> recipe = aFood.getRecipe();
 			// for every item (ingredients), reduce the quantity in inventory by the amount set in the order
 			for (Item recipeItem : recipe.keySet()) {
 				byte quantityUsed = recipe.get(recipeItem);
 				short newQuantity = (short) (recipeItem.getQuantity() - quantityUsed * foodOrder.get(aFood));
+
+				itemsToBeUpdated.put(recipeItem, newQuantity);
+
+				System.out.println(quantityUsed + "|||" + newQuantity);
 				recipeItem.setQuantity(newQuantity);
+			}
+		}
+
+		for (Item item : itemsToBeUpdated.keySet()) {
+			ListIterator<Item> iter = itemList.listIterator();
+			while (iter.hasNext()) {
+				Item anItem = iter.next();
+				if (item.getItemId() == anItem.getItemId()) {
+					anItem.setQuantity(itemsToBeUpdated.get(item));
+				}
 			}
 		}
 
@@ -132,7 +156,7 @@ public class Inventory {
 	 */
 	private void alertLowStock() {
 		byte minimum = 15; // sets the limit of low stock in a certain unit quantity
-		for (Item item : this.itemList) {
+		for (Item item : itemList) {
 			if (item.hasQuantity()) {
 				// if quantity gets lower than the limit, order more item
 				if (item.getQuantity() <= minimum) {

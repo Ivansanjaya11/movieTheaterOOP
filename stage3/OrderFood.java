@@ -66,6 +66,7 @@ public class OrderFood extends Order {
             System.out.print(i + ". ");
             System.out.print(aFood.getMenuName() + ": ");
             System.out.println(orderedFood.get(aFood));
+            i++;
         }
 
         // ask the user if the order is correct

@@ -9,6 +9,10 @@ public class SeatingArrangement {
     private static final byte ROWS = (byte) ((capacity / 10) + (capacity % 10 == 0 ? 0 : 1));
     private static final byte COLS = 10;
 
+    public static final String RESET = "\033[0m";
+    public static final String RED = "\033[0;31m";
+    public static final String GREEN = "\033[0;32m";
+
     /**
      * Constructs a seating arrangement with a set capacity
      */
@@ -74,10 +78,16 @@ public class SeatingArrangement {
     public void viewSeating() {
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
-                System.out.print(seatStatus[i][j] ? "X " : "O ");
+                if (getSeatStatus(i, j)) {
+                    System.out.print(RED + "X ");
+                } else {
+                    System.out.print(GREEN + "O ");
+                }
+                //System.out.print(seatStatus[i][j] ? "X " : "O ");
             }
             System.out.println();
         }
+        System.out.print(RESET);
     }
 
 }

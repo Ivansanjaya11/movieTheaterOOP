@@ -1,4 +1,4 @@
-public class Item {
+public class Item implements Comparable<Item> {
 	private byte itemId;
 	private String itemName;
 	private short quantity;
@@ -143,5 +143,15 @@ public class Item {
 		System.out.println("Item name is " + this.itemName + " with id no " + this.itemId);
 		System.out.println("The quantity available in the inventory is " + this.quantity);
 		System.out.println("The price of buying a single quantity unit from suppliers is " + this.buyingCost);
+	}
+
+	/**
+	 * method to compare 2 Item objects using the menu id
+	 * @param otherItem the object to be compared.
+	 * @return
+	 */
+	@Override
+	public int compareTo(Item otherItem) {
+		return Integer.compare(this.itemId, otherItem.getItemId());
 	}
 }

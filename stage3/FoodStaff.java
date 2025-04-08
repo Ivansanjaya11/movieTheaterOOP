@@ -2,7 +2,6 @@
  * @author Heather Santos
  */
 
-import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 /**
@@ -11,8 +10,7 @@ import java.util.stream.IntStream;
 
 public class FoodStaff extends Staff {
     private static MenuManager menuManager = new MenuManager();
-    private ArrayList<FoodPayment> foodPayments;
-    
+
      /**
      * Constructs a new FoodStaff object with the given employee details
      * @param employeeName the name of the employee
@@ -24,7 +22,6 @@ public class FoodStaff extends Staff {
     public FoodStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Concession Stand";
-        this.foodPayments = new ArrayList<>();
     }
 
     /**
@@ -56,27 +53,10 @@ public class FoodStaff extends Staff {
         boolean isSuccessful = foodPayment.chooseFood();
 
         if (isSuccessful) {
-            this.foodPayments.add(foodPayment);
+           System.out.println("Transaction completed!");
         }
 
-        IntStream.range(0, 25).forEach(i -> System.out.print(i));
+        IntStream.range(0, 40).forEach(i -> System.out.print("-"));
         System.out.println();
-    }
-
-    /**
-     * Clears the entire order history for this food staff member
-     */
-
-    public void clearOrderHistory() {
-        this.foodPayments.clear();
-    }
-
-    /**
-     * Retrieves the list of all food payments made
-     * @return the list of FoodPayment objects
-     */
-
-    public ArrayList<FoodPayment> getOrderHistory() {
-        return this.foodPayments;
     }
 }

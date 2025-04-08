@@ -45,12 +45,12 @@ public class TicketPayment extends Payment {
 
         ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
 
-        normalTicket = detail.getNormalNum();
-        imaxTicket = detail.getImaxNum();
+        this.normalTicket = detail.getNormalNum();
+        this.imaxTicket = detail.getImaxNum();
 
         this.setPaymentAmount();
 
-        detail.setPaymentAmount(this.getPaymentAmount());
+        detail.setPaymentAmount(super.getPaymentAmount());
 
         do {
 			// ask for payment method
@@ -91,7 +91,7 @@ public class TicketPayment extends Payment {
 
     @Override
     protected void setPaymentAmount() {
-        if(this.hasNormalTicket() && this.hasImaxTicket() && this.hasNormalPrice() && this.hasImaxPrice()) {
+        if((this.hasNormalTicket() || this.hasImaxTicket()) && (this.hasNormalPrice() || this.hasImaxPrice())) {
             this.paymentAmount = (short)((this.normalTicket * normalPrice) + (this.imaxTicket * imaxPrice));
         } 
     }

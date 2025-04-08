@@ -10,8 +10,8 @@ public class OrderTicket extends Order {
         for (Movie movie : movieList) {
             System.out.print(movie.getMovieID() + ". ");
             System.out.println(movie.getTitle());
-            System.out.println("\tMovie duration: " + selectedMovie.getDurationMinutes());
-            System.out.println("\tMovie genre: " + selectedMovie.getGenre());
+            System.out.println("\tMovie duration: " + movie.getDurationMinutes() + " minutes");
+            System.out.println("\tMovie genre: " + movie.getGenre());
 
         }
 
@@ -26,16 +26,18 @@ public class OrderTicket extends Order {
         }
 
         ArrayList<Showtime> showtimeList = ShowtimeManager.getShowtimes();
-        System.out.println("Here is the schedule for the movie '" + selectedMovie.getTitle() + "':");
         System.out.println("Normal screen price: $" + detail.getNormalPrice());
         System.out.println("Imax screen price: $" + detail.getImaxPrice());
+
+        System.out.println("Here is the schedule for the movie '" + selectedMovie.getTitle() + "':");
 
         IntStream.range(0, 25).forEach(i -> System.out.print("-"));
         System.out.println();
 
         for (Showtime showtime : showtimeList) {
-            if (showtime.getMovie().getMovieID() == selectedMovie.getMovieID()) {
+            if (showtime.getMovie() == selectedMovie) {
                 Screen aScreen = showtime.getScreen();
+                System.out.println("Showtime ID #" + showtime.getShowtimeID());
                 System.out.println("Screen room # " + aScreen.getScreenID());
                 System.out.println("Screen type: " + aScreen.getScreenType());
                 System.out.println("Start time: " + showtime.getStartTime().toString());
@@ -46,7 +48,9 @@ public class OrderTicket extends Order {
             }
         }
 
+        System.out.println("Enter the showtime ID you want:");
         byte showtimeOption = input.nextByte();
+
         if (showtimeOption >= 1 && showtimeOption <= showtimeList.size()) {
             for (Showtime showtime : showtimeList) {
                 if (showtime.getShowtimeID() == showtimeOption) {
@@ -122,7 +126,7 @@ public class OrderTicket extends Order {
 
         System.out.println("The following is the seats you ordered:");
         for (byte[] aSeat : chosenSeats) {
-            System.out.println("\t- Seat at (" + aSeat[0] + ", " + aSeat[1] + ")");
+            System.out.println("\t- Seat at (" + (aSeat[0] + 1) + ", " + (aSeat[1] + 1) + ")");
         }
 
         System.out.print("Is this correct? (y/n)");

@@ -30,6 +30,7 @@ public final class Path {
         File inventoryReportFile = new File(INVENTORY_REPORT_PATH);
         if (!inventoryReportFile.exists()) {
             try {
+                inventoryReportFile.getParentFile().mkdirs();
                 inventoryReportFile.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -40,6 +41,7 @@ public final class Path {
         File itemOrderReportFile = new File(ITEM_ORDER_REPORT_PATH);
         if (!itemOrderReportFile.exists()) {
             try {
+                itemOrderReportFile.getParentFile().mkdirs();
                 itemOrderReportFile.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -50,6 +52,7 @@ public final class Path {
         File foodSalesReportFile = new File(FOOD_SALES_REPORT_PATH);
         if (!foodSalesReportFile.exists()) {
             try {
+                foodSalesReportFile.getParentFile().mkdirs();
                 foodSalesReportFile.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -60,6 +63,7 @@ public final class Path {
         File ticketSalesReportFile = new File(TICKET_SALES_REPORT_PATH);
         if (!ticketSalesReportFile.exists()) {
             try {
+                ticketSalesReportFile.getParentFile().mkdirs();
                 ticketSalesReportFile.createNewFile();
             } catch (IOException e) {
                 throw new RuntimeException(e);

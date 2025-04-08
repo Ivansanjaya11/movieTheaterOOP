@@ -1,10 +1,12 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class Food implements Comparable<Food>{
 	private byte menuId;
 	private String menuName;
 	private byte price;
-	private HashMap<Item, Byte> recipe;
+	private TreeMap<Item, Byte> recipe;
 
 	/**
 	 * Constructs a Food object with the specified menu ID, name, and price.
@@ -16,7 +18,7 @@ public class Food implements Comparable<Food>{
 		this.menuId = menuId;
 		this.menuName = menuName;
 		this.price = price;
-		this.recipe = new HashMap<Item, Byte>();
+		this.recipe = new TreeMap<>();
 	}
 
 	/**
@@ -56,7 +58,7 @@ public class Food implements Comparable<Food>{
 	 * Gets the recipe as a HashMap of items and their quantities.
 	 * @return The recipe HashMap.
 	 */
-	public HashMap<Item, Byte> getRecipe() {
+	public TreeMap<Item, Byte> getRecipe() {
 		return this.recipe;
 	}
 
@@ -91,7 +93,15 @@ public class Food implements Comparable<Food>{
 	 */
 	public void addRecipe(Item item, byte quantityUsed) {
 		// have to add the unavailable items in the item list in the inventory
+		if (InventoryManager.getInventory().getItem(item.getItemId())==null) {
+			InventoryManager.getInventory().addItem(item);
+		}
+
+		System.out.println("Creating the item in the inventory and add to the recipe...");
 		this.recipe.put(item, quantityUsed);
+
+		ArrayList<Item> itemList = Inventory.getItemList();
+		FilesUpdateManager.updateInventoryFile(itemList);
 	}
 
 	/**

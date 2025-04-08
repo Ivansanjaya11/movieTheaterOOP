@@ -2,8 +2,6 @@
  * @author Heather Santos
  */
 
-import util.DateAndPaymentTracker;
-import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 /**
@@ -12,7 +10,6 @@ import java.util.stream.IntStream;
  */
 
 class TicketStaff extends Staff {
-    private ArrayList<TicketPayment> ticketPayments;
     private static ShowtimeManager showtimeManager = new ShowtimeManager();
     private static MovieManager movieManager = new MovieManager();
 
@@ -27,7 +24,6 @@ class TicketStaff extends Staff {
     public TicketStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Ticket Sales";
-        this.ticketPayments = new ArrayList<>();
     }
 
     /**
@@ -73,34 +69,14 @@ class TicketStaff extends Staff {
      */
 
     public void addNewTicketPayment(Customer customer) {
-        if(DateAndPaymentTracker.ticketCustomerNumOfTheDay == 0) {
-            this.clearOrderHistory();
-        }
         TicketPayment payment = new TicketPayment(customer);
         boolean isSuccessful = payment.chooseTicket();
 
         if (isSuccessful) {
-            this.ticketPayments.add(payment);
+            System.out.println("Transaction completed!");
         }
-        IntStream.range(0, 25).forEach(i -> System.out.print(i));
+
+        IntStream.range(0, 40).forEach(i -> System.out.print("-"));
         System.out.println();
-    }
-
-    /**
-     * Clears the list of ticket payments for this staff member
-     */
-
-    public void clearOrderHistory() {
-        this.ticketPayments.clear();
-        System.out.println("Order history cleared.");
-    }
-
-    /**
-     * Returns the order history containing all ticket payments
-     * @return list of TicketPayment objects
-     */
-
-    public ArrayList<TicketPayment> getOrderHistory() {
-        return this.ticketPayments;
     }
 }

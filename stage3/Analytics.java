@@ -267,6 +267,7 @@ public class Analytics {
 				String totalPrice = orderInfo.split(",")[2];
 
 				String[] orderArray = orderList.split(",");
+
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
 					System.out.println(paymentId + "\t\t|" + time + "\t\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|" + orderArray[2]);
 
@@ -325,8 +326,8 @@ public class Analytics {
 			System.out.println("--------------------------------------------------");
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String itemName = line.split(",")[0];
-				short quantity = Short.parseShort(line.split(",")[1]);
+				String itemName = line.split(",")[1];
+				short quantity = Short.parseShort(line.split(",")[2]);
 				System.out.println(itemName + "\t\t|" + quantity);
 			}
 		} catch (IOException e) {

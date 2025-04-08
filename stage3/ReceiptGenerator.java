@@ -29,6 +29,8 @@ public class ReceiptGenerator {
             DateAndPaymentTracker.ticketCustomerNumOfTheDay = 0;
         }
 
+        DateAndPaymentTracker.foodCustomerNumOfTheDay++;
+
         // set the paymentId
         byte numOfZeroes = (byte) (4-String.valueOf(DateAndPaymentTracker.foodCustomerNumOfTheDay).length());
         String zeroes = "";
@@ -43,28 +45,35 @@ public class ReceiptGenerator {
 
         InventoryManager.updateInventory(orderedFood);
 
+        byte width = 40;
+
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
+        System.out.println();
+
         // prints out the detail of the transaction on screen
         System.out.println("Order #" + paymentId);
         System.out.println("This order is for " + customerName);
 
-        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
+        System.out.println();
+
+        System.out.println("Food\t\tQty\t\tprice per qty");
+
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
         System.out.println();
 
         for (Food aFood : orderedFood.keySet()) {
-            System.out.print(aFood.getMenuId() + ". ");
-            System.out.print(aFood.getMenuName() + "\t");
-            System.out.print(orderedFood.get(aFood) + "\t");
+            System.out.print(aFood.getMenuName() + "\t\t");
+            System.out.print(orderedFood.get(aFood) + "\t\t");
             System.out.println("$" + aFood.getPrice());
         }
 
-        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
         System.out.println();
 
         System.out.print("Total price is $" + paymentAmount);
         System.out.print(", paid with " + paymentType);
         System.out.println("\nThank you for eating with us!");
-
-        DateAndPaymentTracker.foodCustomerNumOfTheDay++;
 
         return paymentId;
     }
@@ -96,6 +105,9 @@ public class ReceiptGenerator {
             DateAndPaymentTracker.ticketCustomerNumOfTheDay = 0;
         }
 
+        //Increment the customer count for the day
+        DateAndPaymentTracker.ticketCustomerNumOfTheDay++;
+
         //Create zero padded ticket order number (ie., 0001, 0010)
         byte numOfZeroes = (byte) (4 - String.valueOf(DateAndPaymentTracker.ticketCustomerNumOfTheDay).length());
         String zeros = "";
@@ -106,13 +118,26 @@ public class ReceiptGenerator {
 
         String paymentId = date + "-" + zeros + DateAndPaymentTracker.ticketCustomerNumOfTheDay;
 
+        byte width = 40;
+
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
+        System.out.println();
+
         //Print the receipt
         System.out.println("Order #" + paymentId);
         System.out.println("Order Name: " + customerName);
 
-        System.out.println("Movie: " + detail.getShowtime().getMovie().getTitle());
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
+        System.out.println();
+
+        System.out.println("Movie: '" + detail.getShowtime().getMovie().getTitle() + "'");
         System.out.println("Start time: " + detail.getShowtime().getStartTime().toString());
         System.out.println("Screen room #" + detail.getShowtime().getScreen().getScreenID());
+
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
+        System.out.println();
+
+        System.out.println("Ticket type\t\tQty\tTotal price");
 
         IntStream.range(0, 25).forEach(i -> System.out.print("-"));
         System.out.println();
@@ -125,7 +150,7 @@ public class ReceiptGenerator {
             System.out.println("IMAX ticket\t\t" + imaxNum + "\t$" + (imaxNum * imaxPrice));
         }
 
-        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
         System.out.println();
 
         System.out.println("Seats ordered:");
@@ -139,10 +164,7 @@ public class ReceiptGenerator {
 
         System.out.print("Total price is $" + paymentAmount);
         System.out.println(", paid with " + paymentType);
-        System.out.println("\nThank you for watching with us!");
-
-        //Increment the customer count for the day
-        DateAndPaymentTracker.ticketCustomerNumOfTheDay++;
+        System.out.println("Thank you for watching with us!");
 
         return paymentId;
     }

@@ -108,8 +108,8 @@ public class FilesUpdateManager {
         String[] lines = new String[itemList.size()];
         for (int i = 0; i < itemList.size(); i++) {
             Item item = itemList.get(i);
-            if (item.hasItemName() && item.hasQuantity()) {
-                lines[i] = item.getItemName() + "," + item.getQuantity();
+            if (item.hasItemName() && item.hasQuantity() && item.hasItemId() && item.hasBuyingCost()) {
+                lines[i] = item.getItemId() + ","+ item.getItemName() + "," + item.getQuantity() + "," + item.getBuyingCost();
             }
         }
 
