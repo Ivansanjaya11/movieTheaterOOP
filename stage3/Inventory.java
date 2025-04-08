@@ -127,7 +127,6 @@ public class Inventory {
 
 				itemsToBeUpdated.put(recipeItem, newQuantity);
 
-				System.out.println(quantityUsed + "|||" + newQuantity);
 				recipeItem.setQuantity(newQuantity);
 			}
 		}
@@ -142,10 +141,10 @@ public class Inventory {
 			}
 		}
 
-		FilesUpdateManager.updateInventoryFile(itemList); // update the state of the inventory file
-
 		// call a method that will alert for low stock if the item is low in quantity
 		this.alertLowStock();
+
+		FilesUpdateManager.updateInventoryFile(itemList); // update the state of the inventory file
 	}
 
 
@@ -180,7 +179,7 @@ public class Inventory {
 	 */
 	private void orderMoreItems(Item item) {
 		short buyingQuantity = 250; // sets the quantity bought everytime the item quantity gets low
-		short totalPrice = (short) (item.getQuantity() * item.getBuyingCost());
+		short totalPrice = (short) (buyingQuantity * item.getBuyingCost());
 
 		System.out.println("Ordering item " + item.getItemName() + " by " + buyingQuantity + " quantity unit at $" + totalPrice);
 

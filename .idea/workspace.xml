@@ -5,23 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="886cad6f-6a8e-4679-a8a2-8e8e2c86ffa4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/Analytics.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/Analytics.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/FilesUpdateManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/FilesUpdateManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/Food.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/FoodPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/FoodPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/FoodStaff.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/FoodStaff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/movieTheaterOOP/Inventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/movieTheaterOOP/Inventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/foodSalesReport.txt" beforeDir="false" afterPath="$PROJECT_DIR$/report/foodSalesReport.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/inventoryReport.txt" beforeDir="false" afterPath="$PROJECT_DIR$/report/inventoryReport.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/itemOrderReport.txt" beforeDir="false" afterPath="$PROJECT_DIR$/report/itemOrderReport.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/stage3/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/InventoryManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/Item.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/Item.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/OrderFood.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/OrderFood.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/OrderTicket.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/OrderTicket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/ReceiptGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/ReceiptGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/SeatingArrangement.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/SeatingArrangement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/TicketPayment.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/TicketPayment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/TicketStaff.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/TicketStaff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/stage3/util/Path.java" beforeDir="false" afterPath="$PROJECT_DIR$/stage3/util/Path.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
