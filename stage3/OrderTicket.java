@@ -181,10 +181,6 @@ public class OrderTicket extends Order {
             }
         } while(true);
 
-        if (detail.isEmpty()) {
-            return null;
-        }
-
         return detail;
     }
 
