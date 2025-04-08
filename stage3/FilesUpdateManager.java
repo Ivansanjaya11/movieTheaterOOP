@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.TreeMap;
 
@@ -28,7 +29,7 @@ public class FilesUpdateManager {
 
         line += paymentId;
         line += ",";
-        line += LocalDateTime.now(ZoneId.of("US/Mountain")).toString();
+        line += LocalDateTime.now(ZoneId.of("US/Mountain")).truncatedTo(ChronoUnit.MINUTES).toString();
         line += ",";
         line += paymentAmount;
         line += ",";
@@ -52,8 +53,8 @@ public class FilesUpdateManager {
 
         // append to a new line in the ticket sales report file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.TICKET_SALES_REPORT_PATH, true))) {
-            writer.newLine();
             writer.write(line);
+            writer.newLine();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -76,7 +77,7 @@ public class FilesUpdateManager {
         String line = "";
         line += paymentId;
         line += ",";
-        line +=  LocalDateTime.now(ZoneId.of("US/Mountain")).toString();
+        line +=  LocalDateTime.now(ZoneId.of("US/Mountain")).truncatedTo(ChronoUnit.MINUTES).toString();
         line += ",";
         line += paymentAmount;
         line += ";";
@@ -92,8 +93,8 @@ public class FilesUpdateManager {
 
         // append to a new line in the food sales report file
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.FOOD_SALES_REPORT_PATH, true))) {
-            writer.newLine();
             writer.write(line);
+            writer.newLine();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
@@ -133,7 +134,7 @@ public class FilesUpdateManager {
      * @param totalPrice The total price for the ordered quantity.
      */
     public static void updateItemOrderFile(Item item, short buyingQuantity, short totalPrice) {
-        LocalDateTime dateTime = LocalDateTime.now(ZoneId.of("US/Mountain"));
+        LocalDateTime dateTime = LocalDateTime.now(ZoneId.of("US/Mountain")).truncatedTo(ChronoUnit.MINUTES);
         String line = "";
         line += (dateTime + "," + item.getItemName() + "," + buyingQuantity + "," + totalPrice);
 
@@ -142,8 +143,8 @@ public class FilesUpdateManager {
          * LocalDateTime, item name, quantity bought, and the total price
          */
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.ITEM_ORDER_REPORT_PATH, true))) {
-            writer.newLine();
             writer.write(line);
+            writer.newLine();
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

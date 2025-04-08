@@ -44,10 +44,10 @@ public class Main {
 		Customer customer16 = new Customer("Rydia");
 
 		// create movies
-		Movie movie1 = new Movie((byte) 1, "Star Wars: The Empire Strikes Back", "Science Fiction", (short) 124);
+		Movie movie1 = new Movie((byte) 1, "Star Wars", "Science Fiction", (short) 124);
 		Movie movie2 = new Movie((byte) 2, "Back To The Future", "Science Fiction", (short) 116);
 		Movie movie3 = new Movie((byte) 3, "Jaws", "Thriller", (short) 130);
-		Movie movie4 = new Movie((byte) 4, "The Lord Of The Rings: The Return Of The King", "Fantasy", (short) 201);
+		Movie movie4 = new Movie((byte) 4, "Lord Of The Rings", "Fantasy", (short) 201);
 		Movie movie5 = new Movie((byte) 5, "28 Days Later", "Thriller", (short) 113);
 		Movie movie6 = new Movie((byte) 6, "The Mummy", "Action", (short) 124);
 
@@ -70,15 +70,15 @@ public class Main {
 
 		// add showtime
 		Showtime showtime1 = new Showtime(1, movie1, screen1, LocalTime.of(10, 0));
-		Showtime showtime2 = new Showtime(1, movie1, screen1, LocalTime.of(15, 0));
-		Showtime showtime3 = new Showtime(1, movie2, screen2, LocalTime.of(12, 0));
-		Showtime showtime4 = new Showtime(1, movie3, screen3, LocalTime.of(13, 0));
-		Showtime showtime5 = new Showtime(1, movie3, screen4, LocalTime.of(10, 0));
-		Showtime showtime6 = new Showtime(1, movie3, screen4, LocalTime.of(15, 0));
-		Showtime showtime7 = new Showtime(1, movie4, screen5, LocalTime.of(11, 0));
-		Showtime showtime8 = new Showtime(1, movie5, screen6, LocalTime.of(10, 0));
-		Showtime showtime9 = new Showtime(1, movie6, screen6, LocalTime.of(13, 0));
-		Showtime showtime10 = new Showtime(1, movie6, screen6, LocalTime.of(16, 0));
+		Showtime showtime2 = new Showtime(2, movie1, screen1, LocalTime.of(15, 0));
+		Showtime showtime3 = new Showtime(3, movie2, screen2, LocalTime.of(12, 0));
+		Showtime showtime4 = new Showtime(4, movie3, screen3, LocalTime.of(13, 0));
+		Showtime showtime5 = new Showtime(5, movie3, screen4, LocalTime.of(10, 0));
+		Showtime showtime6 = new Showtime(6, movie3, screen4, LocalTime.of(15, 0));
+		Showtime showtime7 = new Showtime(7, movie4, screen5, LocalTime.of(11, 0));
+		Showtime showtime8 = new Showtime(8, movie5, screen6, LocalTime.of(10, 0));
+		Showtime showtime9 = new Showtime(9, movie6, screen6, LocalTime.of(13, 0));
+		Showtime showtime10 = new Showtime(10, movie6, screen6, LocalTime.of(16, 0));
 
 		// register showtimes
 		ticketStaff1.getShowtimeManager().addShowtime(showtime1);
@@ -143,7 +143,7 @@ public class Main {
 
 		// customers buying from food stand
 		//foodStaff1.addNewFoodPayment(customer3);
-		foodStaff3.addNewFoodPayment(customer2);
+		//foodStaff3.addNewFoodPayment(customer2);
 		/*foodStaff2.addNewFoodPayment(customer1);
 		foodStaff2.addNewFoodPayment(customer6);
 		foodStaff1.addNewFoodPayment(customer13);
@@ -159,9 +159,9 @@ public class Main {
 		foodStaff2.addNewFoodPayment(customer14);*/
 
 		// customers buying ticket from ticket booth
-		//ticketStaff1.addNewTicketPayment(customer2);
-		/*ticketStaff3.addNewTicketPayment(customer3);
-		ticketStaff2.addNewTicketPayment(customer1);
+		ticketStaff1.addNewTicketPayment(customer2);
+		//ticketStaff3.addNewTicketPayment(customer3);
+		/*ticketStaff2.addNewTicketPayment(customer1);
 		ticketStaff2.addNewTicketPayment(customer6);
 		ticketStaff1.addNewTicketPayment(customer10);
 		ticketStaff2.addNewTicketPayment(customer14);

@@ -101,7 +101,12 @@ public class OrderFood extends Order {
 
             byte quantity = askQuantityToAdd();
 
+            if (detail.isExist(chosenFood)) {
+                quantity += detail.getOrderedFood().get(chosenFood);
+            }
+
             detail.addFood(chosenFood, quantity);
+
             return detail;
         } else {
             System.out.println("There is no such item in the menu!");

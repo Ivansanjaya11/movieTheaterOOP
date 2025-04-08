@@ -162,11 +162,11 @@ public class Analytics {
 		 *
 		 */
 
-		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH))) {
+		try (BufferedReader reader = new BufferedReader(new FileReader(Path.TICKET_SALES_REPORT_PATH))) {
 			System.out.println("Below is the ticket sales report for the specified time period: ");
-			System.out.println("Payment ID\t\t|Timestamp\t\t|Total Price\t|Qty\t|Screen Type\t|Screen ID\t|Movie\t\t|Start Time\t|Seats\t\t|");
+			System.out.println("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
 
-			IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+			IntStream.range(0, 150).forEach(i -> System.out.print("-"));
 			System.out.println();
 
 			String line;
@@ -174,6 +174,7 @@ public class Analytics {
 			while ((line = reader.readLine()) != null) {
 				String orderInfo = line.split(";")[0];
 				String seatsInfo = line.split(";")[1];
+
 				String[] seatsPosition = seatsInfo.split(",");
 
 				String paymentId = orderInfo.split(",")[0];
@@ -187,7 +188,7 @@ public class Analytics {
 
 
 				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
-					System.out.print(paymentId + "\t\t|" + timestamp.toString() + "\t\t|" + paymentAmount + "\t|" + quantity + "\t|" + screenType + "\t|" + screenId + "\t|" + movieTitle + "\t|" + startTime + "\t|");
+					System.out.print(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
 					for (int i=0; i<seatsPosition.length; i+=2) {
 						String row = seatsPosition[i].trim();
 						String col = seatsPosition[i+1].trim();
@@ -195,14 +196,14 @@ public class Analytics {
 						String pos = "(" + row + "," + col + ")";
 						System.out.print(pos);
 						if (i+2 == seatsPosition.length) {
-							System.out.println("\t|");
+							System.out.println();
 						} else {
 							System.out.print(", ");
 						}
 					}
 				}
 
-				IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+				IntStream.range(0, 150).forEach(i -> System.out.print("-"));
 				System.out.println();
 			}
 
@@ -255,7 +256,7 @@ public class Analytics {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH))) {
 			System.out.println("Below is the food sales report for the specified time period: ");
-			System.out.println("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Quantity\t\t|Price");
+			System.out.println("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
 			System.out.println("-----------------------------------------------------------------");
 			String line;
 			while ((line = reader.readLine()) != null) {
@@ -268,16 +269,31 @@ public class Analytics {
 
 				String[] orderArray = orderList.split(",");
 
+				if (orderArray[0].length()<7) {
+					int trailing = 7-orderArray[0].length();
+					for (int j=0; j<trailing; j++) {
+						orderArray[0] += " ";
+					}
+				}
+
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					System.out.println(paymentId + "\t\t|" + time + "\t\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|" + orderArray[2]);
+					System.out.println(paymentId + "\t|" + time + "\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|$" + orderArray[2]);
 
 					if (orderArray.length > 3) {
 						for (int i=3; i<orderArray.length; i+=3) {
-							System.out.println("\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1]);
+							if (orderArray[i].length()<7) {
+								int trailing = 7-orderArray[i].length();
+								for (int j=0; j<trailing; j++) {
+									orderArray[i] += " ";
+								}
+
+							}
+
+							System.out.println("\t\t\t\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1] + "\t\t|$" + orderArray[i+2]);
 						}
 					}
 					System.out.println("-----------------------------------------------------------------");
-					System.out.println("\t\t\t\t\t\ttotalPrice\t\t|" + totalPrice);
+					System.out.println("\t\t\t\t\t\t\t\t\t\t\t\ttotal Price\t|$" + totalPrice);
 					System.out.println("-----------------------------------------------------------------");
 				}
 			}
@@ -328,7 +344,7 @@ public class Analytics {
 			while ((line = reader.readLine()) != null) {
 				String itemName = line.split(",")[1];
 				short quantity = Short.parseShort(line.split(",")[2]);
-				System.out.println(itemName + "\t\t|" + quantity);
+				System.out.println(itemName + "\t\t\t|" + quantity);
 			}
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
@@ -374,8 +390,9 @@ public class Analytics {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.ITEM_ORDER_REPORT_PATH))) {
 			System.out.println("Below is the inventory item order history: ");
-			System.out.println("Date & Time\t\t|Item Name\t\t|Quantity Bought\t\t|TotalPrice");
-			System.out.println("-----------------------------------------------------------------");
+			System.out.println("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|Total Price");
+			IntStream.range(0, 70).forEach(i -> System.out.print("-"));
+			System.out.println();
 			String line;
 			while ((line = reader.readLine()) != null) {
 				LocalDateTime time = LocalDateTime.parse(line.split(",")[0]);
@@ -383,7 +400,7 @@ public class Analytics {
 				short quantity = Short.parseShort(line.split(",")[2]);
 				short totalPrice = Short.parseShort(line.split(",")[3]);
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					System.out.println(time + "\t\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
+					System.out.println(time + "\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
 				}
 			}
 		} catch (IOException e) {

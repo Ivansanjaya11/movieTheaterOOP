@@ -31,6 +31,10 @@ public class DetailTicketBought {
         return this.imaxNum == 0 && this.normalNum == 0;
     }
 
+    public boolean checkSeat(byte rowNum, byte colNum) {
+        return this.showtime.getScreen().getSeating().getSeatStatus(rowNum-1, colNum-1);
+    }
+
     /**
      * Gets the list of chosen seat positions.
      *

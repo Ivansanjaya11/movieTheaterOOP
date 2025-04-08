@@ -139,7 +139,7 @@ public class ReceiptGenerator {
 
         System.out.println("Ticket type\t\tQty\tTotal price");
 
-        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
         System.out.println();
 
         if (normalNum > 0) {
@@ -159,7 +159,7 @@ public class ReceiptGenerator {
             System.out.println("\t- Seat at (" + aSeat[0] + ", " + aSeat[1] + ")");
         }
 
-        IntStream.range(0, 25).forEach(i -> System.out.print("-"));
+        IntStream.range(0, width).forEach(i -> System.out.print("-"));
         System.out.println();
 
         System.out.print("Total price is $" + paymentAmount);

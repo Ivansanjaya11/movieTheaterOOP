@@ -1,3 +1,4 @@
+import java.util.Map;
 import java.util.TreeMap;
 
 public class DetailFoodBought {
@@ -8,6 +9,15 @@ public class DetailFoodBought {
 
     public DetailFoodBought() {
         this.orderedFood = new TreeMap<>();
+    }
+
+    public boolean isExist(Food aFood) {
+        for (Map.Entry<Food, Byte> anOrder : orderedFood.entrySet()) {
+            if (anOrder.getKey().getMenuId() == aFood.getMenuId()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean isEmpty() {

@@ -75,14 +75,22 @@ public class OrderTicket extends Order {
             byte colNum = input.nextByte();
 
             if (rowNum >= 1 && rowNum <= seatings.getRowCapacity() && colNum >= 1 && colNum <= seatings.getColCapacity()) {
-                seatings.setSeatStatus(rowNum-1, colNum-1);
-                byte[] aSeat = {(byte) ( rowNum-1), (byte) (colNum-1)};
-                chosenSeats.add(aSeat);
-                if (showtime.getScreen().getScreenType().equals("normal")) {
-                    detail.addNormalNum();
+
+                if (detail.checkSeat(rowNum, colNum)) {
+                    System.out.println("Seat is occupied!");
                 } else {
-                    detail.addImaxNum();
+                    seatings.setSeatStatus(rowNum-1, colNum-1);
+                    byte[] aSeat = {(byte) ( rowNum-1), (byte) (colNum-1)};
+                    chosenSeats.add(aSeat);
+                    if (showtime.getScreen().getScreenType().equals("normal")) {
+                        detail.addNormalNum();
+                    } else {
+                        detail.addImaxNum();
+                    }
                 }
+
+            } else {
+                System.out.println("Invalid seating position!");
             }
 
             System.out.print("Select another seat? (y/n) ");
