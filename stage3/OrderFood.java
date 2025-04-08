@@ -1,7 +1,4 @@
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class OrderFood extends Order {
 
@@ -119,7 +116,7 @@ public class OrderFood extends Order {
 
 
         if (!orderedFood.isEmpty()) {
-            System.out.print("Choose which one to remove: ");
+            System.out.println("Choose which one to remove: ");
             byte j = 1;
 
             // list all ordered food to choose which to remove from order
@@ -133,7 +130,7 @@ public class OrderFood extends Order {
             byte removeOption = input.nextByte();
             if (removeOption >= 1 && removeOption <= orderedFood.size()) {
 
-                byte idx = 1;
+                byte idx = 0;
                 Map.Entry<Food, Byte> foodToRemove = null;
                 Iterator<Map.Entry<Food, Byte>> iter = orderedFood.entrySet().iterator();
 
