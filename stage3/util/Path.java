@@ -17,7 +17,7 @@ public final class Path {
     private static String exportPath = "export/";
     // all paths to the export files
     public static final String INVENTORY_EXPORT_PATH = exportPath + "inventory/";
-    public static final String ITEM_ORDER_EXPORT_PATH = exportPath = "itemOrder/";
+    public static final String ITEM_ORDER_EXPORT_PATH = exportPath + "itemOrder/";
     public static final String FOOD_SALES_EXPORT_PATH = exportPath + "foodSales/";
     public static final String TICKET_SALES_EXPORT_PATH = exportPath + "ticketSales/";
 

@@ -2,6 +2,8 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
@@ -11,6 +13,7 @@ public class Analytics {
 	private LocalDateTime timePeriodStart;
 	private LocalDateTime timePeriodEnd;
 	private Scanner input;
+	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 
 	/**
 	 * Constructs an Analytics object with a specified start time for the reporting period.
@@ -277,7 +280,7 @@ public class Analytics {
 				}
 
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					System.out.println(paymentId + "\t|" + time + "\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|$" + orderArray[2]);
+					System.out.println(paymentId + "\t\t|" + time + "\t\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|$" + orderArray[2]);
 
 					if (orderArray.length > 3) {
 						for (int i=3; i<orderArray.length; i+=3) {
@@ -447,26 +450,26 @@ public class Analytics {
 	 */
 	private void exportTicketSalesReport() {
 		// format is the same as generateTicketSalesReport
-		String ticketSalesExportPath = Path.TICKET_SALES_EXPORT_PATH + "ticketSales:" + this.timePeriodStart + "->" + this.timePeriodEnd + ".txt";
-		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH));
+		String start = this.timePeriodStart.format(formatter);
+		String end = this.timePeriodEnd.format(formatter);
+		String ticketSalesExportPath = Path.TICKET_SALES_EXPORT_PATH + "TS-" + start + "TO" + end + ".txt";
+
+		File file = new File(ticketSalesExportPath);
+		file.getParentFile().mkdirs();
+
+		try (BufferedReader reader = new BufferedReader(new FileReader(Path.TICKET_SALES_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(ticketSalesExportPath, true))) {
-
-
-
-
-
 
 			writer.write("Below is the ticket sales report for the specified time period: ");
 			writer.newLine();
-			writer.write("Payment ID\t\t|Timestamp\t\t|Total Price\t|Qty\t|Screen Type\t|Screen ID\t|Movie\t\t|Start Time\t|Seats\t\t|");
+			writer.write("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
 			writer.newLine();
 
-            for (int i = 0; i < 25; i++) {
+            for (int i = 0; i < 150; i++) {
                 writer.write("-");
             }
 
             writer.newLine();
-
 			String line;
 
 			while ((line = reader.readLine()) != null) {
@@ -485,7 +488,7 @@ public class Analytics {
 
 
 				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
-					writer.write(paymentId + "\t\t|" + timestamp.toString() + "\t\t|" + paymentAmount + "\t|" + quantity + "\t|" + screenType + "\t|" + screenId + "\t|" + movieTitle + "\t|" + startTime + "\t|");
+					writer.write(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
 					for (int i=0; i<seatsPosition.length; i+=2) {
 						String row = seatsPosition[i].trim();
 						String col = seatsPosition[i+1].trim();
@@ -493,7 +496,6 @@ public class Analytics {
 						String pos = "(" + row + "," + col + ")";
 						writer.write(pos);
 						if (i+2 == seatsPosition.length) {
-							writer.write("\t|");
 							writer.newLine();
 						} else {
 							writer.write(", ");
@@ -501,7 +503,7 @@ public class Analytics {
 					}
 				}
 
-				for (int i = 0; i < 25; i++) {
+				for (int i = 0; i < 150; i++) {
                 	writer.write("-");
             	}
 
@@ -517,12 +519,19 @@ public class Analytics {
 	 */
 	private void exportFoodSalesReport() {
 		// format is the same as generateFoodSalesReport
-		String foodSalesExportPath = Path.FOOD_SALES_EXPORT_PATH + "foodSales:" + this.timePeriodStart + "->" + this.timePeriodEnd + ".txt";
+		String start = this.timePeriodStart.format(formatter);
+		String end = this.timePeriodEnd.format(formatter);
+
+		String foodSalesExportPath = Path.FOOD_SALES_EXPORT_PATH + "foodSales" + start + "TO" + end + ".txt";
+
+		File file = new File(foodSalesExportPath);
+		file.getParentFile().mkdirs();
+
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(foodSalesExportPath, true))) {
 			writer.write("Below is the food sales report for the specified time period: ");
 			writer.newLine();
-			writer.write("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Quantity\t\t|Price");
+			writer.write("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
 			writer.newLine();
 			writer.write("-----------------------------------------------------------------");
 			writer.newLine();
@@ -536,21 +545,39 @@ public class Analytics {
 				String totalPrice = orderInfo.split(",")[2];
 
 				String[] orderArray = orderList.split(",");
+
+				if (orderArray[0].length()<7) {
+					int trailing = 7-orderArray[0].length();
+					for (int j=0; j<trailing; j++) {
+						orderArray[0] += " ";
+					}
+				}
+
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					writer.write(paymentId + "\t\t|" + time + "\t\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|" + orderArray[2]);
+					writer.write(paymentId + "\t|" + time + "\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|$" + orderArray[2]);
 					writer.newLine();
 
 					if (orderArray.length > 3) {
 						for (int i=3; i<orderArray.length; i+=3) {
-							writer.write("\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1]);
+
+							if (orderArray[i].length()<7) {
+								int trailing = 7-orderArray[i].length();
+								for (int j=0; j<trailing; j++) {
+									orderArray[i] += " ";
+								}
+
+							}
+
+							writer.write("\t\t\t\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1] + "\t\t|$" + orderArray[i+2]);
 							writer.newLine();
 						}
 					}
 					writer.write("-----------------------------------------------------------------");
 					writer.newLine();
-					writer.write("\t\t\t\t\t\ttotalPrice\t\t|" + totalPrice);
+					writer.write("\t\t\t\t\t\t\t\t\t\t\t\ttotalPrice\t|$" + totalPrice);
 					writer.newLine();
 					writer.write("-----------------------------------------------------------------");
+					writer.newLine();
 				}
 			}
 		} catch (IOException e) {
@@ -563,7 +590,12 @@ public class Analytics {
 	 */
 	private void exportInventoryReport() {
 		// format is the same as generateInventoryReport
-		String inventoryExportFilePath = Path.INVENTORY_EXPORT_PATH + "inventory:" + LocalDateTime.now() + ".txt";
+		String timeNow = LocalDateTime.now().format(formatter);
+		String inventoryExportFilePath = Path.INVENTORY_EXPORT_PATH + "I-" + timeNow + ".txt";
+
+		File file = new File(inventoryExportFilePath);
+		file.getParentFile().mkdirs();
+
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.INVENTORY_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(inventoryExportFilePath, true))){
 			writer.write("Below is the content of the inventory as of " + LocalDateTime.now() + ":");
@@ -574,9 +606,9 @@ public class Analytics {
 			writer.newLine();
 			String line;
 			while ((line = reader.readLine()) != null) {
-				String itemName = line.split(",")[0];
-				short quantity = Short.parseShort(line.split(",")[1]);
-				writer.write(itemName + "\t\t|" + quantity);
+				String itemName = line.split(",")[1];
+				short quantity = Short.parseShort(line.split(",")[2]);
+				writer.write(itemName + "\t\t\t|" + quantity);
 				writer.newLine();
 			}
 		} catch (IOException e) {
@@ -589,12 +621,18 @@ public class Analytics {
 	 */
 	private void exportItemOrderReport() {
 		// format is the same as generateItemOrderReport
-		String itemOrderExportPath = Path.ITEM_ORDER_EXPORT_PATH + "itemOrderHistory:" + this.timePeriodStart + "->" + this.timePeriodEnd + ".txt";
+		String start = this.timePeriodStart.format(formatter);
+		String end = this.timePeriodEnd.format(formatter);
+		String itemOrderExportPath = Path.ITEM_ORDER_EXPORT_PATH + "IO-" + start + "TO" + end + ".txt";
+
+		File file = new File(itemOrderExportPath);
+		file.getParentFile().mkdirs();
+
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.ITEM_ORDER_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(itemOrderExportPath, true))) {
 			writer.write("Below is the inventory item order history: ");
 			writer.newLine();
-			writer.write("Date & Time\t\t|Item Name\t\t|Quantity Bought\t\t|TotalPrice");
+			writer.write("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|TotalPrice");
 			writer.newLine();
 			writer.write("-----------------------------------------------------------------");
 			writer.newLine();
@@ -605,7 +643,7 @@ public class Analytics {
 				short quantity = Short.parseShort(line.split(",")[2]);
 				short totalPrice = Short.parseShort(line.split(",")[3]);
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					writer.write(time + "\t\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
+					writer.write(time + "\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
 					writer.newLine();
 				}
 			}

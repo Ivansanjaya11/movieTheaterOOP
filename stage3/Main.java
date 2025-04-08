@@ -159,7 +159,7 @@ public class Main {
 		foodStaff2.addNewFoodPayment(customer14);*/
 
 		// customers buying ticket from ticket booth
-		ticketStaff1.addNewTicketPayment(customer2);
+		//ticketStaff1.addNewTicketPayment(customer2);
 		//ticketStaff3.addNewTicketPayment(customer3);
 		/*ticketStaff2.addNewTicketPayment(customer1);
 		ticketStaff2.addNewTicketPayment(customer6);
@@ -180,13 +180,13 @@ public class Main {
 		//foodStaff1.getAnalytics().setTimePeriod(LocalDate.of(2024, 10, 26));
 		//foodStaff1.getAnalytics().generateReport();
 
-	/*	ticketStaff3.getAnalytics().setTimePeriod(LocalDate.of(2025, 1, 13));
+		ticketStaff3.getAnalytics().setTimePeriod(LocalDate.of(2025, 1, 13));
 		ticketStaff3.getAnalytics().exportReport();
 
-		foodStaff2.getAnalytics().setTimePeriod(LocalDate.of(2024, 8, 22), LocalDate.of(2025, 1, 15));
-		foodStaff2.getAnalytics().generateReport();
+		//foodStaff2.getAnalytics().setTimePeriod(LocalDate.of(2024, 8, 22), LocalDate.of(2025, 1, 15));
+		//foodStaff2.getAnalytics().generateReport();
 
-		ticketStaff1.getAnalytics().setTimePeriod(LocalDate.of(2023, 1, 13));
-		ticketStaff1.getAnalytics().exportReport();*/
+		//ticketStaff1.getAnalytics().setTimePeriod(LocalDate.of(2023, 1, 13));
+		//ticketStaff1.getAnalytics().exportReport();
 	}
 }

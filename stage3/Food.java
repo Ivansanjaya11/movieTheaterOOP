@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.TreeMap;
 
 public class Food implements Comparable<Food>{
@@ -10,7 +9,7 @@ public class Food implements Comparable<Food>{
 
 	/**
 	 * Constructs a Food object with the specified menu ID, name, and price.
-	 * @param menuId The unique ID of the menu.
+	 * @param menuId - The unique ID of the menu.
 	 * @param menuName The name of the menu item.
 	 * @param price The price of the menu item.
 	 */
