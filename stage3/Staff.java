@@ -10,8 +10,6 @@ import java.time.temporal.ChronoUnit;
  * Represents a staff member in a movie theater
  * Stores employee details, work schedule, and analytics
  */
-
-
 public class Staff {
 
     private String employeeName;
@@ -20,7 +18,6 @@ public class Staff {
     protected byte hoursWorked;
     private String schedule;
     protected String role;
-
     private Analytics analytics;
 
     /**
@@ -48,17 +45,20 @@ public class Staff {
      * @param scheduleStr the schedule string in HH:mm-HH:mm format
      * @return total weekly hours worked, assuming 5 work days
      */
-
     private byte calculateWeeklyHours(String scheduleStr) {
         try {
-            String[] parts = scheduleStr.split("-");
+            // create a formatter to validate the format of the schedule
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
 
+            // splits the start and end time and parse them
+            String[] parts = scheduleStr.split("-");
             LocalTime start = LocalTime.parse(parts[0], formatter);
             LocalTime end = LocalTime.parse(parts[1], formatter);
 
+            // calculates and returns the number of hours worked per week
             long hoursPerDay = ChronoUnit.HOURS.between(start, end);
             return (byte)(hoursPerDay * 5);
+
         } catch (Exception e) {
             System.out.println("Invalid schedule format. Expected HH:mm-HH:mm.");
             return 0;
@@ -66,16 +66,15 @@ public class Staff {
     }
 
     /**
-     * 
+     * gets the name of the staff
      * @return the employees name
      */
-
     public String getEmployeeName() {
         return this.employeeName;
     }
 
     /**
-     * 
+     * gets the ID of the staff
      * @return the employees ID
      */
 
@@ -84,10 +83,9 @@ public class Staff {
     }
 
     /**
-     * 
+     * gets the hourly rate of the staff
      * @return the hourly rate
      */
-
     public byte getHourlyRate() {
         return this.hourlyRate;
     }
@@ -132,7 +130,6 @@ public class Staff {
      * 
      * @return the analytics object linked to a staff member
      */
-
     public Analytics getAnalytics() {
         return this.analytics;
     }
@@ -141,7 +138,6 @@ public class Staff {
      * Sets the employee name
      * @param employeeName the new name
      */
-
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
@@ -150,7 +146,6 @@ public class Staff {
      * Sets the employee ID
      * @param employeeId the new ID
      */
-
     public void setEmployeeId(byte employeeId) {
         this.employeeId = employeeId;
     }
@@ -159,7 +154,6 @@ public class Staff {
      * Sets the hourly rate
      * @param hourlyRate the new hourly rate
      */
-
     public void setHourlyRate(byte hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
@@ -168,7 +162,6 @@ public class Staff {
      * Updates the employees schedule and recalculates hours worked
      * @param schedule the new schedule in HH:mm-HH:mm format
      */
-
     public void setSchedule(String schedule) {
         this.schedule = schedule;
         this.hoursWorked = calculateWeeklyHours(schedule);
@@ -178,7 +171,6 @@ public class Staff {
      * Sets the employee role
      * @param role the new role
      */
-    
     public void setRole(String role) {
         this.role = role;
     }
@@ -187,7 +179,6 @@ public class Staff {
      * Sets a new analytics object
      * @param analytics the analytics object to assign
      */
-
     public void setAnalytics(Analytics analytics) {
         this.analytics = analytics;
     }

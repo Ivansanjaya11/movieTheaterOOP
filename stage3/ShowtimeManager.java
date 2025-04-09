@@ -7,18 +7,16 @@ import java.util.Iterator;
 
 public class ShowtimeManager {
 
-    private static ArrayList<Showtime> showtimes = new ArrayList<>();
+    private static final ArrayList<Showtime> showtimes = new ArrayList<>();
 
     /**
      * Constructs ShowtimeManager object
      */
-    public ShowtimeManager() {
-
-    }
+    public ShowtimeManager() {}
 
     /**
      * Returns list of showtimes for a movie
-     * @return
+     * @return list of showtimes available
      */
     public static ArrayList<Showtime> getShowtimes() {
         return showtimes;
@@ -26,7 +24,7 @@ public class ShowtimeManager {
 
     /**
      * Adds showtime to list
-     * @param showtime
+     * @param showtime a showtime to be added
      */
     public void addShowtime(Showtime showtime) {
         showtimes.add(showtime);
@@ -34,26 +32,27 @@ public class ShowtimeManager {
 
     /**
      * Removes showtime from list using showtime ID
-     * @param showtimeID
+     * @param showtimeID the id of the showtime to be removed
      */
     public void removeShowtime(int showtimeID) {
         Iterator<Showtime> iterator = showtimes.iterator();
 
         while (iterator.hasNext()); {
             Showtime showtime = iterator.next();
+
             if (showtime.getShowtimeID() == showtimeID) {
                 System.out.println("Showtime " + showtimeID + " removed successfully.");
                 return;
             }
         }
-        System.out.println("Showtime with ID " + showtimeID + " was not found.");
 
+        System.out.println("Showtime with ID " + showtimeID + " was not found.");
     }
 
     /**
      * Checks if screen ID exists in scheduled showtime
-     * @param screenID - checks screen ID
-     * @return - True if screen ID exists, else: false
+     * @param screenID checks screen ID
+     * @return True if screen ID exists, else: false
      */
     public boolean hasScreenID(byte screenID) {
         for (Showtime showtime : showtimes) {

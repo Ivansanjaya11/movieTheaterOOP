@@ -21,13 +21,12 @@ public final class Path {
     public static final String FOOD_SALES_EXPORT_PATH = exportPath + "foodSales/";
     public static final String TICKET_SALES_EXPORT_PATH = exportPath + "ticketSales/";
 
-    private Path() {
-
-    }
+    private Path() {}
 
     static {
         // create the inventory report file if not exists yet
         File inventoryReportFile = new File(INVENTORY_REPORT_PATH);
+
         if (!inventoryReportFile.exists()) {
             try {
                 inventoryReportFile.getParentFile().mkdirs();
@@ -39,6 +38,7 @@ public final class Path {
 
         // create the item order report file if not exists yet
         File itemOrderReportFile = new File(ITEM_ORDER_REPORT_PATH);
+
         if (!itemOrderReportFile.exists()) {
             try {
                 itemOrderReportFile.getParentFile().mkdirs();
@@ -50,6 +50,7 @@ public final class Path {
 
         // create the food sales report file if not exists yet
         File foodSalesReportFile = new File(FOOD_SALES_REPORT_PATH);
+
         if (!foodSalesReportFile.exists()) {
             try {
                 foodSalesReportFile.getParentFile().mkdirs();
@@ -61,6 +62,7 @@ public final class Path {
 
         // create the ticket sales report file if not exists yet
         File ticketSalesReportFile = new File(TICKET_SALES_REPORT_PATH);
+
         if (!ticketSalesReportFile.exists()) {
             try {
                 ticketSalesReportFile.getParentFile().mkdirs();

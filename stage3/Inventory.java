@@ -4,22 +4,11 @@ import java.util.*;
 import util.Path;
 
 public class Inventory {
-	private static ArrayList<Item> itemList = new ArrayList<>();
-	private static File inventoryFile;
+	private static final ArrayList<Item> itemList = new ArrayList<>();
+	private static final File inventoryFile = new File(Path.INVENTORY_REPORT_PATH);
 
 	public static final String RESET = "\033[0m";
 	public static final String RED = "\033[0;31m";
-
-	static {
-		try {
-			inventoryFile = new File(Path.INVENTORY_REPORT_PATH);
-			if (inventoryFile.createNewFile()) {
-
-			}
-		} catch (IOException e) {
-			System.err.println(e.getMessage());
-        }
-    }
 
 	/**
 	 * Constructs an Inventory object and initializes the item list by reading
@@ -35,25 +24,28 @@ public class Inventory {
 		 * every time the Inventory object is initialized,
 		 * except if the inventory state is empty in the file
 		 */
-
 		if (inventoryFile.length() != 0) {
 			try (BufferedReader reader = new BufferedReader(new FileReader(Path.INVENTORY_REPORT_PATH))) {
 				String line;
+
 				while ((line = reader.readLine()) != null) {
 					byte itemId = Byte.parseByte(line.split(",")[0]);
 					String itemName = line.split(",")[1];
 					short itemQuantity = Short.parseShort(line.split(",")[2]);
 					short buyingCost = Short.parseShort(line.split(",")[3]);
 
-					itemList.add(new Item(itemId, itemName, itemQuantity, buyingCost));
+					this.addItem(new Item(itemId, itemName, itemQuantity, buyingCost));
+
+					System.out.println("Item already exist in inventory. Quantity in stock is pulled");
 				}
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 			}
 		}
+
 	}
 
-	public static ArrayList<Item> getItemList() {
+	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
 
@@ -112,15 +104,17 @@ public class Inventory {
 	/**
 	 * Updates the inventory based on the food orders provided.
 	 * Reduces the quantity of items based on their usage in food recipes.
-	 *
 	 * @param foodOrder The list of food orders containing food and quantity.
 	 */
 	public void updateInventory(TreeMap<Food, Byte> foodOrder) {
 		TreeMap<Item, Short> itemsToBeUpdated = new TreeMap<>();
+
 		for (Food aFood : foodOrder.keySet()) {
 			// for every food object in the order, get the recipe containing ingredients used to make it
 			TreeMap<Item, Byte> recipe = aFood.getRecipe();
-			// for every item (ingredients), reduce the quantity in inventory by the amount set in the order
+
+			// get all the items in the recipe that are used to make the food
+			// then store the new quantity to the itemsToBeUpdated
 			for (Item recipeItem : recipe.keySet()) {
 				byte quantityUsed = recipe.get(recipeItem);
 				short newQuantity = (short) (recipeItem.getQuantity() - quantityUsed * foodOrder.get(aFood));
@@ -155,11 +149,13 @@ public class Inventory {
 	 */
 	private void alertLowStock() {
 		byte minimum = 15; // sets the limit of low stock in a certain unit quantity
+
 		for (Item item : itemList) {
+
 			if (item.hasQuantity()) {
-				// if quantity gets lower than the limit, order more item
 				if (item.getQuantity() <= minimum) {
-					System.out.println("Item quantity in the inventory is low!");
+					// if quantity gets lower than the limit, order more item
+					System.out.println("Item quantity of " + item.getItemName() + " in the inventory is low!");
 					this.orderMoreItems(item);
 				}
 			} else {
@@ -167,6 +163,7 @@ public class Inventory {
 				System.out.println("Item in the inventory is empty!");
 				this.orderMoreItems(item);
 			}
+
 		}
 	}
 
@@ -179,7 +176,7 @@ public class Inventory {
 	 */
 	private void orderMoreItems(Item item) {
 		short buyingQuantity = 250; // sets the quantity bought everytime the item quantity gets low
-		short totalPrice = (short) (buyingQuantity * item.getBuyingCost());
+		short totalPrice = (short) (buyingQuantity * item.getBuyingCost()); // calculate the total price
 
 		System.out.println("Ordering item " + item.getItemName() + " by " + buyingQuantity + " quantity unit at $" + totalPrice);
 
@@ -188,6 +185,7 @@ public class Inventory {
 
 		// sets the new quantity after ordering new items
 		item.setQuantity((short) (item.getQuantity() + buyingQuantity));
+
 		System.out.println("Order completed");
 	}
 

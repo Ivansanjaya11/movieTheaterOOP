@@ -4,14 +4,13 @@
  */
 
 public class Customer {
-
     private String name;
     private String email;
     private String phoneNumber;
 
     /**
      * Constructor initializing customer with name
-     * @param name
+     * @param name customer's name
      */
      public Customer(String name) {
         this.name = name;
@@ -19,9 +18,9 @@ public class Customer {
 
      /**
       * Constructor initializing name, email address, and phone number of customer
-      * @param name
-      * @param email
-      * @param phoneNumber
+      * @param name customer's name
+      * @param email customer's email
+      * @param phoneNumber customer's phone number
       */
      public Customer(String name, String email, String phoneNumber) {
         this.name = name;
@@ -31,7 +30,7 @@ public class Customer {
 
      /**
       * Returns name of customer
-      * @return
+      * @return customer's name
       */
      public String getName() {
         return name;
@@ -39,7 +38,7 @@ public class Customer {
 
      /**
       * Returns email of customer
-      * @return
+      * @return customer's email
       */
      public String getEmail() {
         return email;
@@ -47,7 +46,7 @@ public class Customer {
 
      /**
       * Returns phone number of customer
-      * @return
+      * @return customer's phone number
       */
      public String getPhoneNumber() {
         return phoneNumber;
@@ -56,7 +55,7 @@ public class Customer {
      /**
       * Updates customer name
       * Sets new customer name
-      * @param name
+      * @param name customer's name
       */
      public void setName(String name) {
         this.name = name;
@@ -65,7 +64,7 @@ public class Customer {
      /**
       * Updates customer email
       * Sets new customer email
-      * @param email
+      * @param email customer's email
       */
      public void setEmail(String email) {
         this.email = email;
@@ -74,7 +73,7 @@ public class Customer {
      /**
       * Updates customer phone number
       * Sets new customer phone number 
-      * @param phoneNumber
+      * @param phoneNumber customer's phone number
       */
      public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;

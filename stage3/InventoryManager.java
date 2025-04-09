@@ -1,19 +1,12 @@
 import java.util.TreeMap;
 
 public class InventoryManager {
-    private static Inventory inventory;
+    private static Inventory inventory = new Inventory();
 
-    private InventoryManager() {
-
-    }
-
-    static {
-        inventory = new Inventory();
-    }
+    private InventoryManager() {}
 
     /**
      * Gets the inventory of available food items.
-     *
      * @return the inventory of food items
      */
     public static Inventory getInventory() {
@@ -26,7 +19,6 @@ public class InventoryManager {
 
     /**
      * Sets the inventory of available food items.
-     *
      * @param newInventory the new inventory of food items
      */
     public static void setInventory(Inventory newInventory) {

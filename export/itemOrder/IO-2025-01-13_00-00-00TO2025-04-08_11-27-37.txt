@@ -1,5 +1,0 @@
-Below is the inventory item order history: 
-Date & Time						|Name		|Qty		|TotalPrice
------------------------------------------------------------------
-2025-04-07T19:27:22.309551300	|buns		|250		|250
-2025-04-07T19:52:15.264221900	|buns		|250		|250

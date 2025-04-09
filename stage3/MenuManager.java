@@ -7,7 +7,6 @@ public class MenuManager {
 
     /**
      * Gets the menu list of available food items.
-     *
      * @return the list of available food items
      */
     public static ArrayList<Food> getMenuList() {
@@ -16,7 +15,6 @@ public class MenuManager {
 
     /**
      * Sets the menu list of available food items.
-     *
      * @param newMenuList the new list of available food items
      */
     public static void setMenuList(ArrayList<Food> newMenuList) {
@@ -25,16 +23,14 @@ public class MenuManager {
 
     /**
      * Checks if there are any food items in the menu.
-     *
      * @return true if there are items in the menu, false otherwise
      */
     public boolean hasMenu() {
-        return !(menuList.size()==0);
+        return !(menuList.isEmpty());
     }
 
     /**
      * Adds a food item to the menu list.
-     *
      * @param menuItem the food item to be added to the menu
      */
     public void addMenu(Food menuItem) {
@@ -43,30 +39,31 @@ public class MenuManager {
 
     /**
      * Removes a food item from the menu list based on its menu ID.
-     *
      * @param menuId the menu ID of the item to be removed
      */
     public void removeMenu(byte menuId) {
-        try {
-            if (this.hasMenu()) {
-                boolean found = false;
-                // iterate through menu list and check if the menu id is found
-                // if yes, remove from menu list
-                for(int i=0; i<menuList.size(); i++) {
-                    if (menuList.get(i).getMenuId()==menuId) {
-                        menuList.remove(i);
-                        found = true;
-                        break;
-                    }
+
+        if (this.hasMenu()) {
+
+            boolean found = false;
+
+            // iterate through menu list and check if the menu id is found
+            // if yes, remove from menu list
+            for(int i=0; i<menuList.size(); i++) {
+                if (menuList.get(i).getMenuId()==menuId) {
+                    menuList.remove(i);
+                    found = true;
+                    break;
                 }
-                if (!found) {
-                    System.out.println("The item is not found in the menu!");
-                }
-            } else {
-                throw new IndexOutOfBoundsException("There is no item in the menu!");
             }
-        } catch (IndexOutOfBoundsException e) {
-            System.err.println(e.getMessage());
+
+            if (!found) {
+                System.out.println("The item is not found in the menu!");
+            }
+
+        } else {
+            System.out.println("There is no item in the menu!");
         }
+
     }
 }

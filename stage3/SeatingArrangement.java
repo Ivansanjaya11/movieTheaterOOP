@@ -4,9 +4,9 @@
 
 public class SeatingArrangement {
     
-    private boolean[][] seatStatus;
-    private static short capacity = 100;
-    private static final byte ROWS = (byte) ((capacity / 10) + (capacity % 10 == 0 ? 0 : 1));
+    private final boolean[][] seatStatus;
+
+    private static final byte ROWS = 10;
     private static final byte COLS = 10;
 
     public static final String RESET = "\033[0m";
@@ -20,7 +20,7 @@ public class SeatingArrangement {
 
         this.seatStatus = new boolean[ROWS][COLS];
 
-        // Initializes all seats as availiable
+        // Initializes all seats as available
         for (int i = 0; i < ROWS; i++) {
             for (int j = 0; j < COLS; j++) {
                 seatStatus[i][j] = false;
@@ -29,8 +29,8 @@ public class SeatingArrangement {
     }
 
     /**
-     * method to get the row capacity
-     * @return
+     * method to get the max row capacity
+     * @return max capacity of row
      */
     public byte getRowCapacity() {
         return ROWS;
@@ -38,7 +38,7 @@ public class SeatingArrangement {
 
     /**
      * method to get the column capacity
-     * @return
+     * @return max capacity of column
      */
     public byte getColCapacity() {
         return COLS;
@@ -46,30 +46,33 @@ public class SeatingArrangement {
 
     /**
      * Gets status of a specific seat
-     * @param row
-     * @param col
-     * @return
+     * @param row row position
+     * @param col column position
+     * @return the current status of the seat
      */
     public boolean getSeatStatus(int row, int col) {
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
             System.out.println("Invalid seat selection.");
             return false;
         }
+
         return seatStatus[row][col];
     }
 
     /**
      * Sets status of a specific seat
-     * @param row
-     * @param col
+     * @param row row position
+     * @param col column position
      */
     public void setSeatStatus(int row, int col) {
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
             System.out.println("Invalid seat selection.");
-            return;
+        } else {
+            // flips the status of the seat
+            seatStatus[row][col] = !seatStatus[row][col];
+        }
     }
-    seatStatus[row][col] = !seatStatus[row][col];
-}
+
 
     /**
      * Displays current seating arrangement.
@@ -77,17 +80,19 @@ public class SeatingArrangement {
      */
     public void viewSeating() {
         for (int i = 0; i < ROWS; i++) {
+
             for (int j = 0; j < COLS; j++) {
                 if (getSeatStatus(i, j)) {
-                    System.out.print(RED + "X ");
+                    System.out.print(RED + "X "); // prints in red for taken
                 } else {
-                    System.out.print(GREEN + "O ");
+                    System.out.print(GREEN + "O "); // prints in green for available
                 }
-                //System.out.print(seatStatus[i][j] ? "X " : "O ");
             }
-            System.out.println();
+
+            System.out.println(); // create line for the next row
         }
-        System.out.print(RESET);
+
+        System.out.print(RESET); // resets the console text printing color
     }
 
 }

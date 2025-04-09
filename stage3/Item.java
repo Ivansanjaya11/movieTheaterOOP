@@ -33,7 +33,7 @@ public class Item implements Comparable<Item> {
 	 * @return The item ID.
 	 */
 	public byte getItemId() {
-		if (hasItemId()) {
+		if (this.hasItemId()) {
 			return this.itemId;
 		}
 		return -1;
@@ -44,7 +44,7 @@ public class Item implements Comparable<Item> {
 	 * @return The item name.
 	 */
 	public String getItemName() {
-		if (hasItemName()) {
+		if (this.hasItemName()) {
 			return this.itemName;
 		}
 		return "Item has no name yet!";
@@ -55,7 +55,7 @@ public class Item implements Comparable<Item> {
 	 * @return The quantity of the item.
 	 */
 	public short getQuantity() {
-		if (hasQuantity()) {
+		if (this.hasQuantity()) {
 			return this.quantity;
 		}
 		return -1;
@@ -66,7 +66,7 @@ public class Item implements Comparable<Item> {
 	 * @return The buying cost.
 	 */
 	public short getBuyingCost() {
-		if (hasBuyingCost()) {
+		if (this.hasBuyingCost()) {
 			return this.buyingCost;
 		}
 		return -1;
@@ -117,7 +117,7 @@ public class Item implements Comparable<Item> {
 	 * @return True if the item name is not empty, otherwise false.
 	 */
 	public boolean hasItemName() {
-		return !(this.itemName.length() == 0);
+		return !(this.itemName.isEmpty());
 	}
 
 	/**
@@ -148,7 +148,6 @@ public class Item implements Comparable<Item> {
 	/**
 	 * method to compare 2 Item objects using the menu id
 	 * @param otherItem the object to be compared.
-	 * @return
 	 */
 	@Override
 	public int compareTo(Item otherItem) {

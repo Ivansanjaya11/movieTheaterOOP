@@ -5,7 +5,6 @@ import java.time.LocalTime;
  */
 
 public class Showtime {
-
     private int showtimeID;
     private Movie movie;
     private Screen screen;
@@ -29,69 +28,71 @@ public class Showtime {
 
     /**
      * Returns showtime ID
-     * @return
+     * @return the showtime ID
      */
     public int getShowtimeID() {
-        return showtimeID;
+        return this.showtimeID;
     }
 
     /**
      * Returns movie
-     * @return
+     * @return the movie displayed during that showtime (schedule)
      */
     public Movie getMovie() {
-        return movie;
+        return this.movie;
     }
 
     /**
      * Returns screen
-     * @return
+     * @return the screen (specific room) where the movie is displayed
      */
     public Screen getScreen() {
-        return screen;
+        return this.screen;
     }
 
     /**
      * Returns start time of showtime
-     * @return
+     * @return the starting time of the showtime
      */
     public LocalTime getStartTime() {
-        return startTime;
+        return this.startTime;
     }
 
     /**
      * Returns end time of showtime
-     * @return
+     * @return end time of the showtime
      */
     public LocalTime getEndTime() {
-        return endTime;
+        return this.endTime;
     }
 
     /**
-     *
-     * @return
+     * checks if the showtime has a showtime ID
+     * @return true if the ID is set, otherwise false
      */
     public boolean hasShowtimeID() {
-        if (showtimeID > 0) {
+        if (this.showtimeID > 0) {
             return true;
         }
+
         return false;
     }
 
     /**
-     *
-     * @return
+     * checks if the showtime has a movie assigned to it
+     * @return true if the movie has been set, otherwise false
      */
     public boolean hasMovie() {
         if (this.movie != null) {
             return true;
         }
+
         return false;
     }
 
     /**
-     *
-     * @return
+     * checks if the showtime has a screen assigned to it
+     * @return true if the screen has been set, otherwise false
      */
     public boolean hasScreen() {
         if (this.screen != null) {
@@ -101,24 +102,26 @@ public class Showtime {
     }
 
     /**
-     *
-     * @return
+     * checks if the showtime has a starting time set
+     * @return true if starting time has been set, otherwise false
      */
     public boolean hasStartTime() {
         if (this.startTime != null) {
             return true;
         }
+
         return false;
     }
 
     /**
-     *
-     * @return
+     * checks if the showtime has an end time set
+     * @return true if end time has been set, otherwise false
      */
     public boolean hasEndTime() {
         if (this.endTime != null) {
             return true;
         }
+
         return false;
     }
 }

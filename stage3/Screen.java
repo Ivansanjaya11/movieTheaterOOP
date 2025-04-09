@@ -1,12 +1,11 @@
-/** This class represents a screen within a movie theater
+/** This class represents a screen (room) within a movie theater
  * @author Logan Cordova
  */
 
 public class Screen {
-
     private byte screenID;
     private String screenType;
-    private SeatingArrangement seating;
+    private final SeatingArrangement seating;
 
     /**
      * Constructs a Screen object
@@ -21,15 +20,15 @@ public class Screen {
 
     /**
      * Returns screen iD
-     * @return
+     * @return screen's ID
      */
     public byte getScreenID() {
         return screenID;
     }
 
     /**
-     * Retruns screen type
-     * @return
+     * Returns screen type
+     * @return screen's type
      */
     public String getScreenType() {
         return screenType;
@@ -37,7 +36,7 @@ public class Screen {
 
     /**
      * Returns seating arrangement of screen
-     * @return
+     * @return seating arrangement object
      */
     public SeatingArrangement getSeating() {
         return seating;
@@ -45,7 +44,7 @@ public class Screen {
 
     /**
      * Sets screen ID
-     * @param screenID
+     * @param screenID screen's ID
      */
     public void setScreenID(byte screenID) {
         this.screenID = screenID;
@@ -53,7 +52,7 @@ public class Screen {
 
     /**
      * Sets screen type
-     * @param screenType
+     * @param screenType screen's type
      */
     public void setScreenType(String screenType) {
         this.screenType = screenType;

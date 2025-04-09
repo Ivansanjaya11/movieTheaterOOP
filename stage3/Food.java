@@ -25,7 +25,7 @@ public class Food implements Comparable<Food>{
 	 * @return The menu ID.
 	 */
 	public byte getMenuId() {
-		if (hasMenuId()) {
+		if (this.hasMenuId()) {
 			return this.menuId;
 		}
 		return -1;
@@ -36,7 +36,7 @@ public class Food implements Comparable<Food>{
 	 * @return The menu name.
 	 */
 	public String getMenuName() {
-		if (hasMenuName()) {
+		if (this.hasMenuName()) {
 			return this.menuName;
 		}
 		return "Menu name not assigned!";
@@ -47,15 +47,15 @@ public class Food implements Comparable<Food>{
 	 * @return The price.
 	 */
 	public byte getPrice() {
-		if (hasPrice()) {
+		if (this.hasPrice()) {
 			return this.price;
 		}
 		return -1;
 	}
 
 	/**
-	 * Gets the recipe as a HashMap of items and their quantities.
-	 * @return The recipe HashMap.
+	 * Gets the recipe as a TreeMap of items and their quantities.
+	 * @return The recipe TreeMap.
 	 */
 	public TreeMap<Item, Byte> getRecipe() {
 		return this.recipe;
@@ -91,16 +91,17 @@ public class Food implements Comparable<Food>{
 	 * @param quantityUsed The quantity of the item used.
 	 */
 	public void addRecipe(Item item, byte quantityUsed) {
-		// have to add the unavailable items in the item list in the inventory
+		// if item is not available in the inventory, then add the item to the inventory first
 		if (InventoryManager.getInventory().getItem(item.getItemId())==null) {
 			InventoryManager.getInventory().addItem(item);
+
+			// update the inventory file with the new item added
+			ArrayList<Item> itemList = InventoryManager.getInventory().getItemList();
+			FilesUpdateManager.updateInventoryFile(itemList);
 		}
 
 		System.out.println("Creating the item in the inventory and add to the recipe...");
-		this.recipe.put(item, quantityUsed);
-
-		ArrayList<Item> itemList = Inventory.getItemList();
-		FilesUpdateManager.updateInventoryFile(itemList);
+		this.recipe.put(item, quantityUsed); // add to recipe tree map
 	}
 
 	/**
@@ -108,10 +109,10 @@ public class Food implements Comparable<Food>{
 	 * @param itemId The ID of the item to be removed.
 	 */
 	public void removeRecipe(byte itemId) {
-		// no need to remove items in the inventory. Save the stock for possible usage in the future and not waste money
-		for (Item item : recipe.keySet()) {
+		// iterates through the recipe treemap until the item is found and remove it
+		for (Item item : this.recipe.keySet()) {
 			if (item.getItemId() == itemId) {
-				recipe.remove(item);
+				this.recipe.remove(item);
 				break;
 			}
 		}
@@ -130,7 +131,7 @@ public class Food implements Comparable<Food>{
 	 * @return True if the menu name is not empty, otherwise false.
 	 */
 	public boolean hasMenuName() {
-		return !(this.menuName.length() == 0);
+		return !(this.menuName.isEmpty());
 	}
 
 	/**
@@ -151,10 +152,9 @@ public class Food implements Comparable<Food>{
 	}
 
 	/**
-	 * method to compare 2 Food objects using the menu id
+	 * Compares 2 Food objects using the menu id
 	 * @param otherFood the object to be compared.
-	 * @return
-	 */
+     */
 	@Override
 	public int compareTo(Food otherFood) {
 		return Integer.compare(this.menuId, otherFood.getMenuId());
