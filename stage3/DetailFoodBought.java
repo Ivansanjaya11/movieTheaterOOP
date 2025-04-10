@@ -20,14 +20,27 @@ public class DetailFoodBought {
         return false;
     }
 
+    /**
+     * Checks if food ordered is empty
+     * @return true / false
+     */
     public boolean isEmpty() {
         return orderedFood.isEmpty();
     }
 
+    /**
+     * Adds food and quantity to order
+     * @param aFood a selected food item
+     * @param quantity of the selected food item
+     */
     public void addFood(Food aFood, byte quantity) {
         orderedFood.put(aFood, quantity);
     }
 
+    /**
+     * Removes selected food from order
+     * @param aFood
+     */
     public void removeFood(Food aFood) {
         orderedFood.remove(aFood);
     }

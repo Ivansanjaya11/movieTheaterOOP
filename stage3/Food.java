@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class Food implements Comparable<Food>{
+
+	// Initializes variables for food class
 	private byte menuId;
 	private String menuName;
 	private byte price;

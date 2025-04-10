@@ -2,6 +2,8 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class FoodPayment extends Payment {
+
+	// Initializes variables for FoodPayment class
 	private TreeMap<Food, Byte> orderedFood;
 	private static Scanner input;
 

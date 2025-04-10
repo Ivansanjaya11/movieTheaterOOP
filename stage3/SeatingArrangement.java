@@ -3,7 +3,8 @@
  */
 
 public class SeatingArrangement {
-    
+
+    // Initializes Seating chart with final variables
     private final boolean[][] seatStatus;
 
     private static final byte ROWS = 10;

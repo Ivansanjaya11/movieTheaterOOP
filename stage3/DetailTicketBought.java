@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public class DetailTicketBought {
+
+    // Initializes variables to be used for customer tickets
     private ArrayList<byte[]> chosenSeats;
     private byte normalNum;
     private byte imaxNum;
@@ -10,16 +12,29 @@ public class DetailTicketBought {
     private byte imaxPrice;
     private Showtime showtime;
 
+    /**
+     * Gets payment type from customer
+     * @return payment type
+     */
     public String getPaymentType() {
         return this.paymentType;
     }
 
+    /**
+     * Sets payment type
+     * @param paymentType cash / card
+     */
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
 
     private String paymentType;
 
+    /**
+     * Constructs DetailTicketBought method
+     * @param normalPrice for normal movie screen
+     * @param imaxPrice for imax movie screen
+     */
     public DetailTicketBought(byte normalPrice, byte imaxPrice) {
         this.normalPrice = normalPrice;
         this.imaxPrice = imaxPrice;
@@ -27,10 +42,20 @@ public class DetailTicketBought {
         this.imaxNum = 0;
     }
 
+    /**
+     * Checks if screen room exists
+     * @return true / false
+     */
     public boolean isEmpty() {
         return this.imaxNum == 0 && this.normalNum == 0;
     }
 
+    /**
+     * Checks if there are available seats in the selected movie screen
+     * @param rowNum row number for seating
+     * @param colNum colum number for seating
+     * @return
+     */
     public boolean checkSeat(byte rowNum, byte colNum) {
         return this.showtime.getScreen().getSeating().getSeatStatus(rowNum-1, colNum-1);
     }

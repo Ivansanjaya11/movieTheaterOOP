@@ -4,6 +4,8 @@ import java.util.*;
 import util.Path;
 
 public class Inventory {
+
+	// Initializes Final variables for Inventory
 	private static final ArrayList<Item> itemList = new ArrayList<>();
 	private static final File inventoryFile = new File(Path.INVENTORY_REPORT_PATH);
 
@@ -45,6 +47,10 @@ public class Inventory {
 
 	}
 
+	/**
+	 * Returns item list
+	 * @return item list
+	 */
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}

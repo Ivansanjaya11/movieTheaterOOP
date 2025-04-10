@@ -1,8 +1,8 @@
-1,buns,262,1
-2,tomato,31,1
-3,cheese,20,2
-4,meat,43,4
-6,soda,349,2
+1,buns,264,1
+2,tomato,32,1
+3,cheese,21,2
+4,meat,44,4
+6,soda,98,2
 5,sausage,301,3
 7,dough,326,3
 8,corn,349,1

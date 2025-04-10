@@ -9,14 +9,21 @@ public class MainMenu {
     private static Scanner input = new Scanner(System.in);
     private static ArrayList<Staff> staffs = new ArrayList<>();
 
+    /**
+     * Constructs main menu class
+     */
     private MainMenu() {}
 
+    /**
+     * Method creating Food Staff, workers information
+     */
     private static void createObjects() {
         // Creating food staffs
         FoodStaff foodStaff1 = new FoodStaff("John", (byte) 1, (byte) 16, "09:00-16:00");
         FoodStaff foodStaff2 = new FoodStaff("Logan", (byte) 2, (byte) 16, "09:00-16:00");
         FoodStaff foodStaff3 = new FoodStaff("Tim", (byte) 3, (byte) 16, "11:00-18:00");
 
+        // Adds food staff
         staffs.add(foodStaff1);
         staffs.add(foodStaff2);
         staffs.add(foodStaff3);
@@ -26,6 +33,7 @@ public class MainMenu {
         TicketStaff ticketStaff2 = new TicketStaff("Michelle", (byte) 5, (byte) 16, "11:00-17:00");
         TicketStaff ticketStaff3 = new TicketStaff("Jack", (byte) 6, (byte) 15, "10:00-19:00");
 
+        //Adds ticket staff
         staffs.add(ticketStaff1);
         staffs.add(ticketStaff2);
         staffs.add(ticketStaff3);
@@ -127,28 +135,40 @@ public class MainMenu {
         foodStaff1.getMenuManager().addMenu(coke);
     }
 
+    /**
+     * Propts user to sign in for Food Staff duties
+     * @return staff information and duties
+     */
     private static Staff askForStaff() {
         System.out.print("LOG IN");
         PrettyPrinter.printDashLine((short) 50);
 
+        // Asks for staff ID
         do {
             System.out.print("Enter staff ID: ");
             byte id = input.nextByte();
             input.nextLine();
 
+            // Asks for staff name
             System.out.print("Enter name: ");
             String name = input.nextLine();
 
+            // Gets staff name and ID
             for (Staff staff : staffs) {
                 if (staff.getEmployeeId()==id && staff.getEmployeeName().equalsIgnoreCase(name)) {
                     return staff;
                 }
             }
 
+            // Invalid Staff ID or name input
             System.out.println("Invalid! You are not our staff!");
         } while (true);
     }
 
+    /**
+     * Prompts user for their customer name
+     * @return customer name
+     */
     private static Customer askForCustomer() {
         System.out.print("Enter customer's name: ");
         String name = input.nextLine();
@@ -156,6 +176,10 @@ public class MainMenu {
         return new Customer(name);
     }
 
+    /**
+     * Prompts user to enter the date
+     * @return current local date
+     */
     private static LocalDate askForDate() {
         do {
             try {
@@ -178,6 +202,9 @@ public class MainMenu {
         } while (true);
     }
 
+    /**
+     * Prints menu for user to select from
+     */
     public static void showMenu() {
         createObjects();
 
@@ -200,6 +227,7 @@ public class MainMenu {
             input.nextLine();
 
             switch (option) {
+                // Ticket staff attempting to perform a job they are not assigned
                 case 1:
                     if (staff instanceof TicketStaff) {
                         TicketStaff ticketStaff = (TicketStaff) staff;
@@ -209,6 +237,7 @@ public class MainMenu {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
                     break;
+                // Food staff attempting to perform a job they are not assigned
                 case 2:
                     if (staff instanceof  FoodStaff) {
                         FoodStaff foodStaff = (FoodStaff) staff;
@@ -218,6 +247,7 @@ public class MainMenu {
                         System.out.println("Invalid! You are working at the ticket booth!");
                     }
                     break;
+                // Generates report for date
                 case 3:
                     System.out.print("Enter start time:");
                     LocalDate startReport = askForDate();
@@ -226,6 +256,7 @@ public class MainMenu {
                     staff.getAnalytics().setTimePeriod(startReport, endReport);
                     staff.getAnalytics().generateReport();
                     break;
+                // Exports report for date
                 case 4:
                     System.out.print("Enter start time:");
                     LocalDate startExport = askForDate();
@@ -234,6 +265,7 @@ public class MainMenu {
                     staff.getAnalytics().setTimePeriod(startExport, endExport);
                     staff.getAnalytics().exportReport();
                     break;
+                // If the user chooses to no longer continue
                 case 5:
                     stillContinue = false;
                     break;

@@ -605,6 +605,7 @@ public class Analytics {
 			writer.write("--------------------------------------------------");
 			writer.newLine();
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				String itemName = line.split(",")[1];
 				short quantity = Short.parseShort(line.split(",")[2]);

@@ -25,6 +25,7 @@ public class FilesUpdateManager {
         byte quantity = (byte) (detail.getImaxNum() + detail.getNormalNum());
         short paymentAmount = detail.getPaymentAmount();
 
+        // Formats file
         String line = "";
 
         line += paymentId;
@@ -44,6 +45,7 @@ public class FilesUpdateManager {
         line += startTime;
         line += ";";
 
+        // Selected seats
         for (byte[] aSeat : chosenSeats) {
             line += aSeat[0];
             line += ",";
