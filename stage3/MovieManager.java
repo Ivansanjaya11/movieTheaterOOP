@@ -15,6 +15,10 @@ public class MovieManager {
      */
     public MovieManager() {}
 
+    public static boolean hasMovies() {
+        return !movies.isEmpty();
+    }
+
     /**
      * Returns array list of movies
      * @return the list of available movies
@@ -22,29 +26,31 @@ public class MovieManager {
     public static ArrayList<Movie> getMovies() {
         return movies;
     }
+
+    public static boolean contains(byte id) {
+        for (Movie movie : movies) {
+            if (movie.getMovieID() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Adds movie to movie list
      * @param movie the movie to be added
      */
-    public void addMovie(Movie movie) {
+    public static void addMovie(Movie movie) {
         movies.add(movie);
     }
 
     /**
      * Removes movie from movie list
-     * @param movieID the id of the movie to be removed
+     * @param idx index of the movie
      */
-    public void removeMovie(byte movieID) {
-        for (int i = 0; i < movies.size(); i++) {
-            if (movies.get(i).getMovieID() == movieID) {
-                movies.remove(i);
-
-                System.out.println("Movie " + movieID + " has been removed successfully.");
-                return;
-            }
-        }
-
-        System.out.println("Movie not found");
+    public static void removeMovie(byte idx) {
+        movies.remove(idx);
+        System.out.println("Movie has been removed successfully.");
     }
 
     /**

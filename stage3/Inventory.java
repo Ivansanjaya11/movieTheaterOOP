@@ -36,7 +36,7 @@ public class Inventory {
 					short itemQuantity = Short.parseShort(line.split(",")[2]);
 					short buyingCost = Short.parseShort(line.split(",")[3]);
 
-					this.addItem(new Item(itemId, itemName, itemQuantity, buyingCost));
+					Inventory.addItem(new Item(itemId, itemName, itemQuantity, buyingCost));
 
 					System.out.println("Item already exist in inventory. Quantity in stock is pulled");
 				}
@@ -47,11 +47,24 @@ public class Inventory {
 
 	}
 
+	public static boolean hasItems() {
+		return !itemList.isEmpty();
+	}
+
+	public static boolean contains(byte id) {
+		for (Item item : itemList) {
+			if (item.getItemId() == id) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Returns item list
 	 * @return item list
 	 */
-	public ArrayList<Item> getItemList() {
+	public static ArrayList<Item> getItemList() {
 		return itemList;
 	}
 
@@ -77,7 +90,7 @@ public class Inventory {
 	 *
 	 * @param item The item to be added to the inventory.
 	 */
-	public void addItem(Item item) {
+	public static void addItem(Item item) {
 		itemList.add(item);
 	}
 
@@ -87,7 +100,7 @@ public class Inventory {
 	 * @param itemId The ID of the item to be removed.
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
-	public void removeItem(byte itemId) {
+	public static void removeItem(byte itemId) {
 		try {
 			byte i = 0;
 			boolean found = false;

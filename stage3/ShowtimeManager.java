@@ -14,6 +14,19 @@ public class ShowtimeManager {
      */
     public ShowtimeManager() {}
 
+    public static boolean hasShowtimes() {
+        return !showtimes.isEmpty();
+    }
+
+    public static boolean contains(byte id) {
+        for (Showtime showtime : showtimes) {
+            if (showtime.getShowtimeID() == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Returns list of showtimes for a movie
      * @return list of showtimes available
@@ -26,27 +39,17 @@ public class ShowtimeManager {
      * Adds showtime to list
      * @param showtime a showtime to be added
      */
-    public void addShowtime(Showtime showtime) {
+    public static void addShowtime(Showtime showtime) {
         showtimes.add(showtime);
     }
 
     /**
      * Removes showtime from list using showtime ID
-     * @param showtimeID the id of the showtime to be removed
+     * @param index the index of the showtime to be removed
      */
-    public void removeShowtime(int showtimeID) {
-        Iterator<Showtime> iterator = showtimes.iterator();
-
-        while (iterator.hasNext()); {
-            Showtime showtime = iterator.next();
-
-            if (showtime.getShowtimeID() == showtimeID) {
-                System.out.println("Showtime " + showtimeID + " removed successfully.");
-                return;
-            }
-        }
-
-        System.out.println("Showtime with ID " + showtimeID + " was not found.");
+    public static void removeShowtime(int index) {
+        showtimes.remove(index);
+        System.out.println("Showtime " + index + " removed successfully.");
     }
 
     /**

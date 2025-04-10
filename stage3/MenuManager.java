@@ -21,11 +21,20 @@ public class MenuManager {
         menuList = newMenuList;
     }
 
+   public static boolean contains(byte id) {
+        for (Food food : menuList) {
+            if (food.getMenuId() == id) {
+                return true;
+            }
+        }
+        return false;
+   }
+
     /**
      * Checks if there are any food items in the menu.
      * @return true if there are items in the menu, false otherwise
      */
-    public boolean hasMenu() {
+    public static boolean hasMenu() {
         return !(menuList.isEmpty());
     }
 
@@ -33,7 +42,7 @@ public class MenuManager {
      * Adds a food item to the menu list.
      * @param menuItem the food item to be added to the menu
      */
-    public void addMenu(Food menuItem) {
+    public static void addMenu(Food menuItem) {
         menuList.add(menuItem);
     }
 
@@ -41,9 +50,9 @@ public class MenuManager {
      * Removes a food item from the menu list based on its menu ID.
      * @param menuId the menu ID of the item to be removed
      */
-    public void removeMenu(byte menuId) {
+    public static void removeMenu(byte menuId) {
 
-        if (this.hasMenu()) {
+        if (hasMenu()) {
 
             boolean found = false;
 
@@ -66,4 +75,5 @@ public class MenuManager {
         }
 
     }
+
 }

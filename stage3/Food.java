@@ -95,10 +95,11 @@ public class Food implements Comparable<Food>{
 	public void addRecipe(Item item, byte quantityUsed) {
 		// if item is not available in the inventory, then add the item to the inventory first
 		if (InventoryManager.getInventory().getItem(item.getItemId())==null) {
-			InventoryManager.getInventory().addItem(item);
+			Inventory.addItem(item);
 
 			// update the inventory file with the new item added
-			ArrayList<Item> itemList = InventoryManager.getInventory().getItemList();
+            InventoryManager.getInventory();
+            ArrayList<Item> itemList = Inventory.getItemList();
 			FilesUpdateManager.updateInventoryFile(itemList);
 		}
 
