@@ -2,16 +2,30 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public class DetailFoodBought {
+
+    // Initializes variables for food bought by the customer
     private TreeMap<Food, Byte> orderedFood;
     private Customer customer;
     private String paymentType;
     private short paymentAmount;
 
+    /**
+     * Constructs DetailFoodBought method
+     */
+
     public DetailFoodBought() {
+
         this.orderedFood = new TreeMap<>();
     }
 
+    /**
+     * Checks if an input food item exists
+     * @param aFood item input
+     * @return true / false
+     */
+
     public boolean isExist(Food aFood) {
+
         for (Map.Entry<Food, Byte> anOrder : orderedFood.entrySet()) {
             if (anOrder.getKey().getMenuId() == aFood.getMenuId()) {
                 return true;
@@ -24,7 +38,9 @@ public class DetailFoodBought {
      * Checks if food ordered is empty
      * @return true / false
      */
+
     public boolean isEmpty() {
+
         return orderedFood.isEmpty();
     }
 
@@ -33,15 +49,19 @@ public class DetailFoodBought {
      * @param aFood a selected food item
      * @param quantity of the selected food item
      */
+
     public void addFood(Food aFood, byte quantity) {
+
         orderedFood.put(aFood, quantity);
     }
 
     /**
      * Removes selected food from order
-     * @param aFood
+     * @param aFood from order
      */
+
     public void removeFood(Food aFood) {
+
         orderedFood.remove(aFood);
     }
 
@@ -50,6 +70,7 @@ public class DetailFoodBought {
      *
      * @return a TreeMap of Food items to quantities ordered
      */
+
     public TreeMap<Food, Byte> getOrderedFood() {
         return orderedFood;
     }
@@ -59,6 +80,7 @@ public class DetailFoodBought {
      *
      * @param orderedFood a TreeMap of Food items to quantities
      */
+
     public void setOrderedFood(TreeMap<Food, Byte> orderedFood) {
         this.orderedFood = orderedFood;
     }
@@ -68,6 +90,7 @@ public class DetailFoodBought {
      *
      * @return true if orderedFood is not null and not empty; false otherwise
      */
+
     public boolean hasOrderedFood() {
         return orderedFood != null && !orderedFood.isEmpty();
     }
@@ -77,6 +100,7 @@ public class DetailFoodBought {
      *
      * @return the Customer object
      */
+
     public Customer getCustomer() {
         return customer;
     }
@@ -86,6 +110,7 @@ public class DetailFoodBought {
      *
      * @param customer the Customer object to set
      */
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -95,6 +120,7 @@ public class DetailFoodBought {
      *
      * @return true if customerName is not null; false otherwise
      */
+
     public boolean hasCustomerName() {
         return customer != null;
     }
@@ -104,6 +130,7 @@ public class DetailFoodBought {
      *
      * @return the payment type as a string
      */
+
     public String getPaymentType() {
         return paymentType;
     }
@@ -113,6 +140,7 @@ public class DetailFoodBought {
      *
      * @param paymentType the payment type to set
      */
+
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
     }
@@ -122,6 +150,7 @@ public class DetailFoodBought {
      *
      * @return true if paymentType is not null and not empty; false otherwise
      */
+
     public boolean hasPaymentType() {
         return paymentType != null && !paymentType.isEmpty();
     }
@@ -131,6 +160,7 @@ public class DetailFoodBought {
      *
      * @return the payment amount as a short
      */
+
     public short getPaymentAmount() {
         return paymentAmount;
     }
@@ -140,6 +170,7 @@ public class DetailFoodBought {
      *
      * @param paymentAmount the payment amount to set
      */
+
     public void setPaymentAmount(short paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
@@ -149,6 +180,7 @@ public class DetailFoodBought {
      *
      * @return true if paymentAmount is greater than 0; false otherwise
      */
+
     public boolean hasPaymentAmount() {
         return paymentAmount > 0;
     }

@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class TicketPayment extends Payment {
 
+    // Initializes normal and IMAX tickets and their price
     private byte normalTicket;
     private byte imaxTicket;
     private static byte normalPrice = 10;
@@ -24,7 +25,8 @@ public class TicketPayment extends Payment {
      */
 
     public TicketPayment(Customer customer) {
-        super(customer); 
+
+        super(customer);
         this.input = new Scanner(System.in);
     }
 
@@ -35,6 +37,7 @@ public class TicketPayment extends Payment {
      */
 
     public boolean chooseTicket() {
+
         DetailTicketBought detail = new DetailTicketBought(normalPrice, imaxPrice);
         detail = OrderTicket.takeTicketOrder(detail);
 
@@ -91,6 +94,7 @@ public class TicketPayment extends Payment {
 
     @Override
     protected void setPaymentAmount() {
+
         if((this.hasNormalTicket() || this.hasImaxTicket()) && (this.hasNormalPrice() || this.hasImaxPrice())) {
             this.paymentAmount = (short)((this.normalTicket * normalPrice) + (this.imaxTicket * imaxPrice));
         } 

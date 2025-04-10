@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 public class Order {
+
     protected static Scanner input = new Scanner(System.in);
 
     protected Order() {}
@@ -9,7 +10,10 @@ public class Order {
      * asks the user if they still want to continue ordering
      * @return true if yes, otherwise false
      */
+
     protected static boolean askStillContinue() {
+
+        // Prompts user if they have purchased enough
         System.out.print("Do you still want to order more? (y/n)");
         char option1 = input.next().charAt(0);
 

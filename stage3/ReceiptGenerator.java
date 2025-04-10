@@ -15,7 +15,9 @@ public class ReceiptGenerator {
      * @param customerCount customer count
      * @return payment ID
      */
+
     private static String createPaymentID(LocalDate date, short customerCount) {
+
         // uses four digits to display the customer count in the payment ID
         byte numOfZeroes = (byte) (4-String.valueOf(customerCount).length());
         String zeroes = "";
@@ -34,7 +36,9 @@ public class ReceiptGenerator {
      * checks the date and update the customer counter if needed
      * @return current date
      */
+
     private static LocalDate checkDate() {
+
         // check the date (and update if needed)
         LocalDate date = LocalDate.now();
 
@@ -50,7 +54,9 @@ public class ReceiptGenerator {
     /**
      * Generates the receipt for the customer's order, displaying the ordered food and total price.
      */
+
     public static String generateFoodReceipt(DetailFoodBought detail) {
+
         // get all the necessary data to create the receipt
         TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
         String customerName = detail.getCustomer().getName();
@@ -112,6 +118,7 @@ public class ReceiptGenerator {
      */
 
     public static String generateTicketReceipt(DetailTicketBought detail) {
+
         // get all the necessary data to create the receipt
         byte normalNum = detail.getNormalNum();
         byte imaxNum = detail.getImaxNum();

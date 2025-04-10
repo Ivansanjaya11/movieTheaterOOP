@@ -17,6 +17,7 @@ public class SeatingArrangement {
     /**
      * Constructs a seating arrangement with a set capacity
      */
+
     public SeatingArrangement() {
 
         this.seatStatus = new boolean[ROWS][COLS];
@@ -33,6 +34,7 @@ public class SeatingArrangement {
      * method to get the max row capacity
      * @return max capacity of row
      */
+
     public byte getRowCapacity() {
         return ROWS;
     }
@@ -41,6 +43,7 @@ public class SeatingArrangement {
      * method to get the column capacity
      * @return max capacity of column
      */
+
     public byte getColCapacity() {
         return COLS;
     }
@@ -51,7 +54,9 @@ public class SeatingArrangement {
      * @param col column position
      * @return the current status of the seat
      */
+
     public boolean getSeatStatus(int row, int col) {
+
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
             System.out.println("Invalid seat selection.");
             return false;
@@ -65,7 +70,9 @@ public class SeatingArrangement {
      * @param row row position
      * @param col column position
      */
+
     public void setSeatStatus(int row, int col) {
+
         if (row < 0 || row >= ROWS || col < 0 || col >= COLS) {
             System.out.println("Invalid seat selection.");
         } else {
@@ -79,7 +86,9 @@ public class SeatingArrangement {
      * Displays current seating arrangement.
      * 'O' represents available, 'X' represents taken
      */
+
     public void viewSeating() {
+
         for (int i = 0; i < ROWS; i++) {
 
             for (int j = 0; j < COLS; j++) {

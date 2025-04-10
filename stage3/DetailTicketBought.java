@@ -11,12 +11,15 @@ public class DetailTicketBought {
     private byte normalPrice;
     private byte imaxPrice;
     private Showtime showtime;
+    private String paymentType;
 
     /**
      * Gets payment type from customer
      * @return payment type
      */
+
     public String getPaymentType() {
+
         return this.paymentType;
     }
 
@@ -24,18 +27,20 @@ public class DetailTicketBought {
      * Sets payment type
      * @param paymentType cash / card
      */
+
     public void setPaymentType(String paymentType) {
+
         this.paymentType = paymentType;
     }
-
-    private String paymentType;
 
     /**
      * Constructs DetailTicketBought method
      * @param normalPrice for normal movie screen
      * @param imaxPrice for imax movie screen
      */
+
     public DetailTicketBought(byte normalPrice, byte imaxPrice) {
+
         this.normalPrice = normalPrice;
         this.imaxPrice = imaxPrice;
         this.normalNum = 0;
@@ -46,7 +51,9 @@ public class DetailTicketBought {
      * Checks if screen room exists
      * @return true / false
      */
+
     public boolean isEmpty() {
+
         return this.imaxNum == 0 && this.normalNum == 0;
     }
 
@@ -54,9 +61,11 @@ public class DetailTicketBought {
      * Checks if there are available seats in the selected movie screen
      * @param rowNum row number for seating
      * @param colNum colum number for seating
-     * @return
+     * @return screen, seating, and seat status
      */
+
     public boolean checkSeat(byte rowNum, byte colNum) {
+
         return this.showtime.getScreen().getSeating().getSeatStatus(rowNum-1, colNum-1);
     }
 
@@ -65,6 +74,7 @@ public class DetailTicketBought {
      *
      * @return an ArrayList of byte arrays representing chosen seats
      */
+
     public ArrayList<byte[]> getChosenSeats() {
         return chosenSeats;
     }
@@ -74,6 +84,7 @@ public class DetailTicketBought {
      *
      * @param chosenSeats the list of seat positions to set
      */
+
     public void setChosenSeats(ArrayList<byte[]> chosenSeats) {
         this.chosenSeats = chosenSeats;
     }
@@ -83,6 +94,7 @@ public class DetailTicketBought {
      *
      * @return true if chosenSeats is not null and not empty; false otherwise
      */
+
     public boolean hasChosenSeats() {
         return chosenSeats != null && !chosenSeats.isEmpty();
     }
@@ -92,11 +104,17 @@ public class DetailTicketBought {
      *
      * @return the number of normal tickets
      */
+
     public byte getNormalNum() {
         return normalNum;
     }
 
+    /**
+     * Adds to normal theater screen tickets
+     */
+
     public void addNormalNum() {
+
         this.normalNum++;
     }
 
@@ -105,6 +123,7 @@ public class DetailTicketBought {
      *
      * @param normalNum the number of normal tickets to set
      */
+
     public void setNormalNum(byte normalNum) {
         this.normalNum = normalNum;
     }
@@ -114,6 +133,7 @@ public class DetailTicketBought {
      *
      * @return true if normalNum is greater than 0; false otherwise
      */
+
     public boolean hasNormalNum() {
         return normalNum > 0;
     }
@@ -123,11 +143,17 @@ public class DetailTicketBought {
      *
      * @return the number of IMAX tickets
      */
+
     public byte getImaxNum() {
         return imaxNum;
     }
 
+    /**
+     * Adds to IMAX theater screen tickets
+     */
+
     public void addImaxNum() {
+
         this.imaxNum++;
     }
 
@@ -136,6 +162,7 @@ public class DetailTicketBought {
      *
      * @param imaxNum the number of IMAX tickets to set
      */
+
     public void setImaxNum(byte imaxNum) {
         this.imaxNum = imaxNum;
     }
@@ -145,6 +172,7 @@ public class DetailTicketBought {
      *
      * @return true if imaxNum is greater than 0; false otherwise
      */
+
     public boolean hasImaxNum() {
         return imaxNum > 0;
     }
@@ -154,6 +182,7 @@ public class DetailTicketBought {
      *
      * @return the name of the customer
      */
+
     public Customer getCustomer() {
         return customer;
     }
@@ -163,6 +192,7 @@ public class DetailTicketBought {
      *
      * @param customer the name of the customer to set
      */
+
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -172,6 +202,7 @@ public class DetailTicketBought {
      *
      * @return true if customerName is not null or empty; false otherwise
      */
+
     public boolean hasCustomerName() {
         return customer != null;
     }
@@ -181,6 +212,7 @@ public class DetailTicketBought {
      *
      * @return the payment amount
      */
+
     public short getPaymentAmount() {
         return paymentAmount;
     }
@@ -190,6 +222,7 @@ public class DetailTicketBought {
      *
      * @param paymentAmount the payment amount to set
      */
+
     public void setPaymentAmount(short paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
@@ -199,6 +232,7 @@ public class DetailTicketBought {
      *
      * @return true if paymentAmount is greater than 0; false otherwise
      */
+
     public boolean hasPaymentAmount() {
         return paymentAmount > 0;
     }
@@ -208,6 +242,7 @@ public class DetailTicketBought {
      *
      * @return the normal ticket price
      */
+
     public byte getNormalPrice() {
         return normalPrice;
     }
@@ -217,6 +252,7 @@ public class DetailTicketBought {
      *
      * @param normalPrice the price to set
      */
+
     public void setNormalPrice(byte normalPrice) {
         this.normalPrice = normalPrice;
     }
@@ -226,6 +262,7 @@ public class DetailTicketBought {
      *
      * @return true if normalPrice is greater than 0; false otherwise
      */
+
     public boolean hasNormalPrice() {
         return normalPrice > 0;
     }
@@ -235,6 +272,7 @@ public class DetailTicketBought {
      *
      * @return the IMAX ticket price
      */
+
     public byte getImaxPrice() {
         return imaxPrice;
     }
@@ -244,6 +282,7 @@ public class DetailTicketBought {
      *
      * @param imaxPrice the price to set
      */
+
     public void setImaxPrice(byte imaxPrice) {
         this.imaxPrice = imaxPrice;
     }
@@ -253,6 +292,7 @@ public class DetailTicketBought {
      *
      * @return true if imaxPrice is greater than 0; false otherwise
      */
+
     public boolean hasImaxPrice() {
         return imaxPrice > 0;
     }
@@ -262,6 +302,7 @@ public class DetailTicketBought {
      *
      * @return the Showtime object
      */
+
     public Showtime getShowtime() {
         return showtime;
     }
@@ -271,6 +312,7 @@ public class DetailTicketBought {
      *
      * @param showtime the Showtime to set
      */
+
     public void setShowtime(Showtime showtime) {
         this.showtime = showtime;
     }
@@ -280,6 +322,7 @@ public class DetailTicketBought {
      *
      * @return true if showtime is not null; false otherwise
      */
+
     public boolean hasShowtime() {
         return showtime != null;
     }

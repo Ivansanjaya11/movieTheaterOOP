@@ -9,6 +9,8 @@ import java.util.stream.IntStream;
  */
 
 public class FoodStaff extends Staff {
+
+    // Initializes menu manager
     private static MenuManager menuManager = new MenuManager();
 
      /**
@@ -20,6 +22,7 @@ public class FoodStaff extends Staff {
      */
 
     public FoodStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
+
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Concession Stand";
     }
@@ -49,6 +52,7 @@ public class FoodStaff extends Staff {
      */
 
     public void addNewFoodPayment(Customer customer) {
+
         FoodPayment foodPayment = new FoodPayment(customer);
         boolean isSuccessful = foodPayment.chooseFood();
 

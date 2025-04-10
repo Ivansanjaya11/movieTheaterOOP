@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
  */
 
 class TicketStaff extends Staff {
+
+    // Initializes ShowtimeManager and MovieManager to be used by ticket staff
     private static ShowtimeManager showtimeManager = new ShowtimeManager();
     private static MovieManager movieManager = new MovieManager();
 
@@ -22,6 +24,7 @@ class TicketStaff extends Staff {
      */
 
     public TicketStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
+
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Ticket Sales";
     }
@@ -69,7 +72,9 @@ class TicketStaff extends Staff {
      */
 
     public void addNewTicketPayment(Customer customer) {
+
         TicketPayment payment = new TicketPayment(customer);
+
         boolean isSuccessful = payment.chooseTicket();
 
         if (isSuccessful) {

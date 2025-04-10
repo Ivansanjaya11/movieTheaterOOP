@@ -4,6 +4,7 @@
 
 public abstract class Payment {
 
+    // Initializes variables to be used for customer payment
     private String paymentId;
     protected short paymentAmount;
     private String paymentType;
@@ -15,6 +16,7 @@ public abstract class Payment {
      */
 
     public Payment(Customer customer) {
+
         this.customer = customer;
         this.paymentType = "Undeclared";
         this.paymentAmount = 0;
@@ -25,12 +27,12 @@ public abstract class Payment {
      * @return the payment ID
      */
 
-        public String getPaymentId() {
+    public String getPaymentId() {
             return this.paymentId;
         }
 
         /**
-         * Gets the amount of the payment
+         * * Gets the amount of the payment
          * @return the payment amount
          */
 
@@ -106,6 +108,7 @@ public abstract class Payment {
          */
 
         public void processPaymentWithCard() {
+
             this.setPaymentType("card");
             System.out.println("Payment processed with card.");
         }
@@ -115,6 +118,7 @@ public abstract class Payment {
          */
 
         public void processPaymentWithCash() {
+
             this.setPaymentType("cash");
             System.out.println("Payment processed with cash.");
         }

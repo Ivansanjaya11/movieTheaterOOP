@@ -10,6 +10,8 @@ import java.util.stream.IntStream;
 import util.Path;
 
 public class Analytics {
+
+	// Initializes variables used for movie theater analytics
 	private LocalDateTime timePeriodStart;
 	private LocalDateTime timePeriodEnd;
 	private Scanner input;
@@ -20,7 +22,9 @@ public class Analytics {
 	 * The end time is set to the current time.
 	 *
 	 */
+
 	public Analytics() {
+
 		this.timePeriodStart = null;
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 		this.input = new Scanner(System.in);
@@ -32,7 +36,9 @@ public class Analytics {
 	 *
 	 * @param timePeriodStart The start time for the report period.
 	 */
+
 	public Analytics(LocalDateTime timePeriodStart) {
+
 		this.timePeriodStart = timePeriodStart;
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 		this.input = new Scanner(System.in);
@@ -44,7 +50,9 @@ public class Analytics {
 	 * @param timePeriodStart The start time for the report period.
 	 * @param timePeriodEnd The end time for the report period.
 	 */
+
 	public Analytics(LocalDateTime timePeriodStart, LocalDateTime timePeriodEnd) {
+
 		this.timePeriodStart = timePeriodStart;
 		this.timePeriodEnd = timePeriodEnd;
 		this.input = new Scanner(System.in);
@@ -55,7 +63,9 @@ public class Analytics {
 	 *
 	 * @return A Pair containing the start and end times of the report.
 	 */
+
 	public LocalDateTime[] getTimePeriod() {
+
 		LocalDateTime[] dateTime = {this.timePeriodStart, this.timePeriodEnd};
 		return dateTime;
 	}
@@ -65,7 +75,9 @@ public class Analytics {
 	 *
 	 * @param timePeriodStart The new start time for the report period.
 	 */
+
 	public void setTimePeriod(LocalDate timePeriodStart){
+
 		this.timePeriodStart = timePeriodStart.atStartOfDay();
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 	}
@@ -76,7 +88,9 @@ public class Analytics {
 	 * @param timePeriodStart The new start time for the report period.
 	 * @param timePeriodEnd The new end time for the report period.
 	 */
+
 	public void setTimePeriod(LocalDate timePeriodStart, LocalDate timePeriodEnd){
+
 		this.timePeriodStart = timePeriodStart.atStartOfDay();
 		this.timePeriodEnd = timePeriodEnd.atStartOfDay();
 	}
@@ -86,6 +100,7 @@ public class Analytics {
 	 *
 	 * @return True if both start and end times are set; false otherwise.
 	 */
+
 	public boolean hasTimePeriod() {
 		return !(timePeriodStart==null || timePeriodEnd==null);
 	}
@@ -93,8 +108,11 @@ public class Analytics {
 	/**
 	 * Prompts the user to select and generate a report based on the available options.
 	 */
+
 	public void generateReport() {
+
 		byte option;
+
 		do {
 			System.out.println("Which report would you like to generate?");
 			System.out.println("1. Ticket sales report");
@@ -106,6 +124,7 @@ public class Analytics {
 				System.out.println("Invalid option!");
 			}
 		} while (option<0 || option>4);
+
 		switch (option) {
 			case 1:
 				generateTicketSalesReport();
@@ -127,7 +146,9 @@ public class Analytics {
 	/**
 	 * Generates a ticket sales report. (Implementation to be added later.)
 	 */
+
 	private void generateTicketSalesReport() {
+
 		/*
 		 * ===================== Report Generator =====================
 		 *
@@ -144,9 +165,6 @@ public class Analytics {
 		 *    - orderInfo: paymentId, timestamp, paymentAmount, quantity,
 		 *                 screenType, screenId, movieTitle, startTime
 		 *    - seatsInfo: a comma-separated list of seat positions (row, col)
-		 *
-		 * Example of a single line in the report file:
-		 *    P12345,2025-04-06T15:42:00,250,3,IMAX,S3,Interstellar,2025-04-06T17:00:00;0,5,0,6,1,3
 		 *
 		 * This will be printed to the console (if timestamp is in the time range) as:
 		 *
@@ -166,6 +184,7 @@ public class Analytics {
 		 */
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.TICKET_SALES_REPORT_PATH))) {
+
 			System.out.println("Below is the ticket sales report for the specified time period: ");
 			System.out.println("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
 
@@ -181,7 +200,9 @@ public class Analytics {
 				String[] seatsPosition = seatsInfo.split(",");
 
 				String paymentId = orderInfo.split(",")[0];
+
 				LocalDateTime timestamp = LocalDateTime.parse(orderInfo.split(",")[1]);
+
 				String paymentAmount = orderInfo.split(",")[2];
 				String quantity = orderInfo.split(",")[3];
 				String screenType = orderInfo.split(",")[4];
@@ -191,7 +212,9 @@ public class Analytics {
 
 
 				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
+
 					System.out.print(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
+
 					for (int i=0; i<seatsPosition.length; i+=2) {
 						String row = seatsPosition[i].trim();
 						String col = seatsPosition[i+1].trim();
@@ -221,7 +244,9 @@ public class Analytics {
 	 * Generates a food sales report for the specified time period.
 	 * Reads data from a file and displays it in a tabular format.
 	 */
+
 	private void generateFoodSalesReport() {
+
 		/*
 		 * The report generated by the generateFoodSalesReport method is formatted as follows:
 		 *
@@ -258,10 +283,13 @@ public class Analytics {
 		 */
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH))) {
+
 			System.out.println("Below is the food sales report for the specified time period: ");
 			System.out.println("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
 			System.out.println("-----------------------------------------------------------------");
+
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				String orderInfo = line.split(";")[0];
 				String orderList = line.split(";")[1];
@@ -309,7 +337,9 @@ public class Analytics {
 	 * Generates an inventory report for the current time.
 	 * Reads data from a file and displays the inventory items and quantities.
 	 */
+
 	private void generateInventoryReport() {
+
 		/*
 		 * The report generated by the generateInventoryReport method is formatted as follows:
 		 *
@@ -340,10 +370,13 @@ public class Analytics {
 		 */
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.INVENTORY_REPORT_PATH))) {
+
 			System.out.println("Below is the current content of the inventory: ");
 			System.out.println("Item Name\t\t|Quantity");
 			System.out.println("--------------------------------------------------");
+
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				String itemName = line.split(",")[1];
 				short quantity = Short.parseShort(line.split(",")[2]);
@@ -358,7 +391,9 @@ public class Analytics {
 	 * Generates a report of the item order history for the specified time period.
 	 * Reads data from a file and displays the item order history.
 	 */
+
 	private void generateItemOrderReport() {
+
 		/*
 		 * The report generated by the generateItemOrderReport method is formatted as follows:
 		 *
@@ -392,11 +427,15 @@ public class Analytics {
 		 */
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.ITEM_ORDER_REPORT_PATH))) {
+
 			System.out.println("Below is the inventory item order history: ");
 			System.out.println("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|Total Price");
+
 			IntStream.range(0, 70).forEach(i -> System.out.print("-"));
 			System.out.println();
+
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				LocalDateTime time = LocalDateTime.parse(line.split(",")[0]);
 				String itemName = line.split(",")[1];
@@ -414,8 +453,11 @@ public class Analytics {
 	/**
 	 * Prompts the user to select and export a report based on the available options.
 	 */
+
 	public void exportReport() {
+
 		byte option;
+
 		do {
 			System.out.println("Which report would you like to export?");
 			System.out.println("1. Ticket sales report");
@@ -427,6 +469,7 @@ public class Analytics {
 				System.out.println("Invalid option!");
 			}
 		} while (option<0 || option>4);
+
 		switch (option) {
 			case 1:
 				this.exportTicketSalesReport();
@@ -448,7 +491,9 @@ public class Analytics {
 	/**
 	 * Exports the ticket sales report. (Implementation to be added later.)
 	 */
+
 	private void exportTicketSalesReport() {
+
 		// format is the same as generateTicketSalesReport
 		String start = this.timePeriodStart.format(formatter);
 		String end = this.timePeriodEnd.format(formatter);
@@ -517,7 +562,9 @@ public class Analytics {
 	/**
 	 * Exports the food sales report for the specified time period to a file.
 	 */
+
 	private void exportFoodSalesReport() {
+
 		// format is the same as generateFoodSalesReport
 		String start = this.timePeriodStart.format(formatter);
 		String end = this.timePeriodEnd.format(formatter);
@@ -536,6 +583,7 @@ public class Analytics {
 			writer.write("-----------------------------------------------------------------");
 			writer.newLine();
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				String orderInfo = line.split(";")[0];
 				String orderList = line.split(";")[1];
@@ -588,7 +636,9 @@ public class Analytics {
 	/**
 	 * Exports the inventory report to a file for the current time.
 	 */
+
 	private void exportInventoryReport() {
+
 		// format is the same as generateInventoryReport
 		String timeNow = LocalDateTime.now().format(formatter);
 		String inventoryExportFilePath = Path.INVENTORY_EXPORT_PATH + "I-" + timeNow + ".txt";
@@ -598,12 +648,14 @@ public class Analytics {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.INVENTORY_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(inventoryExportFilePath, true))){
+
 			writer.write("Below is the content of the inventory as of " + LocalDateTime.now() + ":");
 			writer.newLine();
 			writer.write("Item Name\t\t|Quantity");
 			writer.newLine();
 			writer.write("--------------------------------------------------");
 			writer.newLine();
+
 			String line;
 
 			while ((line = reader.readLine()) != null) {
@@ -620,7 +672,9 @@ public class Analytics {
 	/**
 	 * Exports the item order history report to a file for the specified time period.
 	 */
+
 	private void exportItemOrderReport() {
+
 		// format is the same as generateItemOrderReport
 		String start = this.timePeriodStart.format(formatter);
 		String end = this.timePeriodEnd.format(formatter);
@@ -631,13 +685,16 @@ public class Analytics {
 
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.ITEM_ORDER_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(itemOrderExportPath, true))) {
+
 			writer.write("Below is the inventory item order history: ");
 			writer.newLine();
 			writer.write("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|TotalPrice");
 			writer.newLine();
 			writer.write("-----------------------------------------------------------------");
 			writer.newLine();
+
 			String line;
+
 			while ((line = reader.readLine()) != null) {
 				LocalDateTime time = LocalDateTime.parse(line.split(",")[0]);
 				String itemName = line.split(",")[1];

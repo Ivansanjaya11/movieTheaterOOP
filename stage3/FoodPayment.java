@@ -13,7 +13,9 @@ public class FoodPayment extends Payment {
 	 *
 	 * @param customer the customer making the payment
 	 */
+
 	public FoodPayment(Customer customer) {
+
 		super(customer);
 		this.orderedFood = new TreeMap<>();
 	}
@@ -25,8 +27,10 @@ public class FoodPayment extends Payment {
 	/**
 	 * Sets the total payment amount based on the ordered food items.
 	 */
+
 	@Override
 	public void setPaymentAmount() {
+
 		short total = 0;
 		// add up the total with the total price of each food menu
 		for (Food aFood : this.orderedFood.keySet()) {
@@ -40,6 +44,7 @@ public class FoodPayment extends Payment {
 	 *
 	 * @return true if the customer has placed an order, false otherwise
 	 */
+
 	public boolean hasOrder() {
 		return !orderedFood.isEmpty();
 	}
@@ -47,7 +52,9 @@ public class FoodPayment extends Payment {
 	/**
 	 * Allows the customer to choose food items, either adding or removing orders.
 	 */
+
 	public boolean chooseFood() {
+
 		DetailFoodBought detail = new DetailFoodBought();
 		detail = OrderFood.takeFoodOrder(detail);
 		this.orderedFood = detail.getOrderedFood();

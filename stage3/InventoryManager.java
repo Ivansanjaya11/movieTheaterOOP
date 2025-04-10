@@ -1,7 +1,13 @@
 import java.util.TreeMap;
 
 public class InventoryManager {
+
+    // Initializes new inventory
     private static Inventory inventory = new Inventory();
+
+    /**
+     * Constructs inventory manager class
+     */
 
     private InventoryManager() {}
 
@@ -9,7 +15,9 @@ public class InventoryManager {
      * Gets the inventory of available food items.
      * @return the inventory of food items
      */
+
     public static Inventory getInventory() {
+
         if (hasInventory()) {
             return inventory;
         }
@@ -21,6 +29,7 @@ public class InventoryManager {
      * Sets the inventory of available food items.
      * @param newInventory the new inventory of food items
      */
+
     public static void setInventory(Inventory newInventory) {
         inventory = newInventory;
     }
@@ -30,6 +39,7 @@ public class InventoryManager {
 	 *
 	 * @return true if the inventory is not null, false otherwise
 	 */
+
 	public static boolean hasInventory() {
 		return !(inventory==null);
 	}
@@ -38,7 +48,9 @@ public class InventoryManager {
     /**
      * Updates the inventory after the food items have been ordered.
      */
+
     public static void updateInventory(TreeMap<Food, Byte> orderedFood) {
+
         try {
             if (hasInventory()) {
                 // calls the updateInventory method in Inventory object and passes the ordered food array list

@@ -2,7 +2,14 @@ import java.util.*;
 
 public class OrderFood extends Order {
 
+    /**
+     * Method that prompts and records user food order
+     * @param detail of user food order
+     * @return details about user food order
+     */
+
     public static DetailFoodBought takeFoodOrder(DetailFoodBought detail) {
+
         do {
             System.out.println("Choose:");
             System.out.println("1. Add order");
@@ -54,7 +61,9 @@ public class OrderFood extends Order {
      *
      * @return true if the order is correct, false otherwise
      */
+
     private static boolean reviewFoodOrder(DetailFoodBought detail) {
+
         TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
 
         // print out the ordered food one by one
@@ -77,9 +86,18 @@ public class OrderFood extends Order {
         return false;
     }
 
+    /**
+     * Prompts user to add more food to their order
+     * @param detail of food being purchased
+     * @return menu idem ID, Name, and Price
+     */
+
     private static DetailFoodBought showFoodOptionToAdd(DetailFoodBought detail) {
+
         ArrayList<Food> menuList = MenuManager.getMenuList();
+
         System.out.println("Choose from the following menu: ");
+
         for (Food food : menuList) {
             System.out.print(food.getMenuId() + ". ");
             System.out.print(food.getMenuName() + ": $");
@@ -111,7 +129,14 @@ public class OrderFood extends Order {
         return null;
     }
 
+    /**
+     * Allows users to remove food items from their order
+     * @param detail of current food order
+     * @return removed food item(s)
+     */
+
     private static DetailFoodBought showFoodOptionToRemove(DetailFoodBought detail) {
+
         TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
 
 
@@ -128,6 +153,7 @@ public class OrderFood extends Order {
             }
 
             byte removeOption = input.nextByte();
+
             if (removeOption >= 1 && removeOption <= orderedFood.size()) {
 
                 byte idx = 0;
@@ -151,7 +177,13 @@ public class OrderFood extends Order {
     }
 
 
+    /**
+     * Asks user the quantity of the food item they would like to purchase
+     * @return quantity of selected food item
+     */
+
     private static byte askQuantityToAdd() {
+
         System.out.print("How many do you want? ");
         byte quantity = input.nextByte();
         if (quantity > 0) {

@@ -4,6 +4,7 @@
 
 public class Movie {
 
+    // Initializes movie variables: ID, title, genre, and duration
     private byte movieID;
     private String title;
     private String genre;
@@ -16,6 +17,7 @@ public class Movie {
      * @param genre - movie genre
      * @param durationMinutes - duration of move
      */
+
     public Movie(byte movieID, String title, String genre, short durationMinutes) {
 
         this.movieID = movieID;
@@ -28,6 +30,7 @@ public class Movie {
      * Returns movie ID
      * @return ID of the movie
      */
+
     public byte getMovieID() {
         return movieID;
     }
@@ -36,6 +39,7 @@ public class Movie {
      * Returns movie title
      * @return title of the movie
      */
+
     public String getTitle() {
         return title;
     }
@@ -44,6 +48,7 @@ public class Movie {
      * Returns movie genre
      * @return genre of the movie
      */
+
     public String getGenre() {
         return genre;
     }
@@ -52,6 +57,7 @@ public class Movie {
      * Returns movie duration
      * @return duration of the movie in minutes
      */
+
     public short getDurationMinutes() {
         return durationMinutes;
     }
@@ -60,6 +66,7 @@ public class Movie {
      * Sets movie title
      * @param title title of the movie
      */
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -68,6 +75,7 @@ public class Movie {
      * Sets movie genre
      * @param genre genre of the movie
      */
+
     public void setGenre(String genre) {
         this.genre = genre;
     }
@@ -76,6 +84,7 @@ public class Movie {
      * Sets movie duration, in minutes
      * @param durationMinutes duration of the movie in minutes
      */
+
     public void setDurationMinutes(short durationMinutes) {
         this.durationMinutes = durationMinutes;
     }

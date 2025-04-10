@@ -11,18 +11,27 @@ import java.util.TreeMap;
 
 public class FilesUpdateManager {
 
+   // Initializes Files Update Manager
    private FilesUpdateManager() {}
 
     /**
      * Updates the ticket sales file with the current order's details.
      */
+
     public static void updateTicketSalesFile(String paymentId, DetailTicketBought detail) {
+
         String movieTitle = detail.getShowtime().getMovie().getTitle();
+
         byte screenId = detail.getShowtime().getScreen().getScreenID();
+
         String startTime = detail.getShowtime().getStartTime().toString();
+
         ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
+
         String screenType = detail.getShowtime().getScreen().getScreenType();
+
         byte quantity = (byte) (detail.getImaxNum() + detail.getNormalNum());
+
         short paymentAmount = detail.getPaymentAmount();
 
         // Formats file
@@ -65,8 +74,11 @@ public class FilesUpdateManager {
     /**
      * Updates the food sales file with the current order's details.
      */
+
     public static void updateFoodSalesFile(String paymentId, DetailFoodBought detail) {
+
         short paymentAmount = detail.getPaymentAmount();
+
         TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
         /*
          * adds the information about the transaction in the following format:
@@ -106,9 +118,12 @@ public class FilesUpdateManager {
      * Updates the inventory file with the current inventory state.
      * Writes the item name and its remaining quantity to the file.
      */
+
     public static void updateInventoryFile(ArrayList<Item> itemList) {
+
         // store all the data in an array of Strings
         String[] lines = new String[itemList.size()];
+
         for (int i = 0; i < itemList.size(); i++) {
             Item item = itemList.get(i);
             if (item.hasItemName() && item.hasQuantity() && item.hasItemId() && item.hasBuyingCost()) {
@@ -135,9 +150,13 @@ public class FilesUpdateManager {
      * @param buyingQuantity The quantity of the item being ordered.
      * @param totalPrice The total price for the ordered quantity.
      */
+
     public static void updateItemOrderFile(Item item, short buyingQuantity, short totalPrice) {
+
         LocalDateTime dateTime = LocalDateTime.now(ZoneId.of("US/Mountain")).truncatedTo(ChronoUnit.MINUTES);
+
         String line = "";
+
         line += (dateTime + "," + item.getItemName() + "," + buyingQuantity + "," + totalPrice);
 
         /*

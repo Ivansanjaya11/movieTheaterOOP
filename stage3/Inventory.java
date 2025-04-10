@@ -16,7 +16,9 @@ public class Inventory {
 	 * Constructs an Inventory object and initializes the item list by reading
 	 * inventory data from the file if it is not empty.
 	 */
+
 	public Inventory() {
+
 		/*
 		 * whenever the program starts and the inventory object is initialized,
 		 * access the inventory path to get the latest inventory state.
@@ -47,11 +49,24 @@ public class Inventory {
 
 	}
 
+	/**
+	 * Ensures item list has items
+	 * @return true / false
+	 */
+
 	public static boolean hasItems() {
+
 		return !itemList.isEmpty();
 	}
 
+	/**
+	 * Checks if item list has input item ID
+	 * @param id of item in item list
+	 * @return true / false
+	 */
+
 	public static boolean contains(byte id) {
+
 		for (Item item : itemList) {
 			if (item.getItemId() == id) {
 				return true;
@@ -64,6 +79,7 @@ public class Inventory {
 	 * Returns item list
 	 * @return item list
 	 */
+
 	public static ArrayList<Item> getItemList() {
 		return itemList;
 	}
@@ -75,7 +91,9 @@ public class Inventory {
 	 * @return The item with the specified ID, or null if not found.
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
+
 	public Item getItem(byte itemId) {
+
 		for (Item item : itemList) {
 			if (item.hasItemId() && item.getItemId() == itemId) {
 				return item;
@@ -90,6 +108,7 @@ public class Inventory {
 	 *
 	 * @param item The item to be added to the inventory.
 	 */
+
 	public static void addItem(Item item) {
 		itemList.add(item);
 	}
@@ -100,7 +119,9 @@ public class Inventory {
 	 * @param itemId The ID of the item to be removed.
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
+
 	public static void removeItem(byte itemId) {
+
 		try {
 			byte i = 0;
 			boolean found = false;
@@ -125,7 +146,9 @@ public class Inventory {
 	 * Reduces the quantity of items based on their usage in food recipes.
 	 * @param foodOrder The list of food orders containing food and quantity.
 	 */
+
 	public void updateInventory(TreeMap<Food, Byte> foodOrder) {
+
 		TreeMap<Item, Short> itemsToBeUpdated = new TreeMap<>();
 
 		for (Food aFood : foodOrder.keySet()) {
@@ -166,7 +189,9 @@ public class Inventory {
 	 * Checks for items with low stock and alerts if their quantity is below the threshold.
 	 * If the quantity is low, the system will automatically order more items.
 	 */
+
 	private void alertLowStock() {
+
 		byte minimum = 15; // sets the limit of low stock in a certain unit quantity
 
 		for (Item item : itemList) {
@@ -193,7 +218,9 @@ public class Inventory {
 	 *
 	 * @param item The item that needs to be ordered.
 	 */
+
 	private void orderMoreItems(Item item) {
+
 		short buyingQuantity = 250; // sets the quantity bought everytime the item quantity gets low
 		short totalPrice = (short) (buyingQuantity * item.getBuyingCost()); // calculate the total price
 

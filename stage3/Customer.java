@@ -4,6 +4,8 @@
  */
 
 public class Customer {
+
+    // Initializes variables for customer information
     private String name;
     private String email;
     private String phoneNumber;
@@ -12,6 +14,7 @@ public class Customer {
      * Constructor initializing customer with name
      * @param name customer's name
      */
+
      public Customer(String name) {
         this.name = name;
      }
@@ -22,7 +25,9 @@ public class Customer {
       * @param email customer's email
       * @param phoneNumber customer's phone number
       */
+
      public Customer(String name, String email, String phoneNumber) {
+
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -32,6 +37,7 @@ public class Customer {
       * Returns name of customer
       * @return customer's name
       */
+
      public String getName() {
         return name;
      }
@@ -40,6 +46,7 @@ public class Customer {
       * Returns email of customer
       * @return customer's email
       */
+
      public String getEmail() {
         return email;
      }
@@ -48,6 +55,7 @@ public class Customer {
       * Returns phone number of customer
       * @return customer's phone number
       */
+
      public String getPhoneNumber() {
         return phoneNumber;
      }
@@ -57,6 +65,7 @@ public class Customer {
       * Sets new customer name
       * @param name customer's name
       */
+
      public void setName(String name) {
         this.name = name;
      }
@@ -66,6 +75,7 @@ public class Customer {
       * Sets new customer email
       * @param email customer's email
       */
+
      public void setEmail(String email) {
         this.email = email;
      }
@@ -75,6 +85,7 @@ public class Customer {
       * Sets new customer phone number 
       * @param phoneNumber customer's phone number
       */
+
      public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
      }

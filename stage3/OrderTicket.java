@@ -3,7 +3,15 @@ import java.util.stream.IntStream;
 
 public class OrderTicket extends Order {
 
+    /**
+     *
+     * @param detail of movie ticket
+     * @param movieList of movies
+     * @return movieID, movieTitle, movie duration, movie genre
+     */
+
     private static DetailTicketBought showTicketOptionToAdd(DetailTicketBought detail, ArrayList<Movie> movieList) {
+
         System.out.println("Select movie: ");
         Movie selectedMovie = null;
 
@@ -16,6 +24,7 @@ public class OrderTicket extends Order {
         }
 
         byte ticketOption = input.nextByte();
+
         if (ticketOption >= 1 && ticketOption <= movieList.size()) {
             for (Movie aMovie : movieList) {
                 if (aMovie.getMovieID() == ticketOption) {
@@ -25,6 +34,7 @@ public class OrderTicket extends Order {
             }
         }
 
+        // Normal and IMAX screen prices
         ArrayList<Showtime> showtimeList = ShowtimeManager.getShowtimes();
         System.out.println("Normal screen price: $" + detail.getNormalPrice());
         System.out.println("Imax screen price: $" + detail.getImaxPrice());
@@ -34,6 +44,7 @@ public class OrderTicket extends Order {
         IntStream.range(0, 25).forEach(i -> System.out.print("-"));
         System.out.println();
 
+        // List of movie show times and details
         for (Showtime showtime : showtimeList) {
             if (showtime.getMovie() == selectedMovie) {
                 Screen aScreen = showtime.getScreen();
@@ -49,6 +60,7 @@ public class OrderTicket extends Order {
         }
 
         System.out.println("Enter the showtime ID you want:");
+
         byte showtimeOption = input.nextByte();
 
         if (showtimeOption >= 1 && showtimeOption <= showtimeList.size()) {
@@ -62,7 +74,14 @@ public class OrderTicket extends Order {
         return null;
     }
 
+    /**
+     *
+     * @param detail of showtime, screen, and seating
+     * @return details of purchased ticket: showtime, screen, and seating
+     */
+
     private static DetailTicketBought askTicketQuantityToAdd(DetailTicketBought detail) {
+
         Showtime showtime = detail.getShowtime();
         Screen aScreen = showtime.getScreen();
         SeatingArrangement seatings = aScreen.getSeating();
@@ -106,13 +125,27 @@ public class OrderTicket extends Order {
         return detail;
     }
 
+    /**
+     * Removes customer ticket order
+     * @param detail of customer selcted movie
+     * @return removed movie ticket details
+     */
+
     private static DetailTicketBought removeTicketOrder(DetailTicketBought detail) {
+
         detail.setImaxNum((byte) 0);
         detail.setNormalNum((byte) 0);
         return detail;
     }
 
+    /**
+     * Allows users to look over their movie ticket selection
+     * @param detail of purchased ticket
+     * @return showtime, seating, price, and quantity
+     */
+
     private static boolean reviewTicketOrder(DetailTicketBought detail) {
+
         Showtime showtime = detail.getShowtime();
         ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
         byte normalPrice = detail.getNormalPrice();
@@ -122,21 +155,27 @@ public class OrderTicket extends Order {
         Movie aMovie = showtime.getMovie();
         Screen aScreen = showtime.getScreen();
 
+        // Prints movie ticke details
         System.out.println(quantity + " tickets of Movie '" + aMovie.getTitle() + "'.");
         System.out.println("Screen room #" + aScreen.getScreenID() + "; type: " + aScreen.getScreenType());
 
         System.out.print("The price for each ticket is $");
+
+        // Prices for normal / IMAX movie screen
         if (aScreen.getScreenType() == "normal") {
             System.out.println(normalPrice);
         } else {
             System.out.println(imaxPrice);
         }
 
+        // User selected seat
         System.out.println("The following is the seats you ordered:");
+
         for (byte[] aSeat : chosenSeats) {
             System.out.println("\t- Seat at (" + (aSeat[0] + 1) + ", " + (aSeat[1] + 1) + ")");
         }
 
+        // Asks if user choice is correct
         System.out.print("Is this correct? (y/n)");
 
         char option = input.next().charAt(0);
@@ -148,7 +187,14 @@ public class OrderTicket extends Order {
         return false;
     }
 
+    /**
+     * Method that prompts and takes user movie ticket order
+     * @param detail of ticket and ticket quantity
+     * @return ticket order and quantity
+     */
+
     public static DetailTicketBought takeTicketOrder(DetailTicketBought detail) {
+
         do {
             System.out.println("Choose:");
             System.out.println("1. Add order");
@@ -184,7 +230,14 @@ public class OrderTicket extends Order {
         return detail;
     }
 
+    /**
+     * Resets user selected seat if they choose to remove or change their seat
+     * @param detail of selected seat, showtime of movie, and screen where seat is
+     * @return details regarding user seating choice
+     */
+
     private static DetailTicketBought resetTicketSeats(DetailTicketBought detail) {
+
         ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
         Showtime showtime = detail.getShowtime();
 

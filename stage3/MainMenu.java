@@ -7,18 +7,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
+
+    // Initializes scanner and menu width
     private static Scanner input = new Scanner(System.in);
     private static short menuWidth = 50;
 
     /**
      * Constructs main menu class
      */
+
     private MainMenu() {}
 
     /**
      * Method creating Food Staff, workers information
      */
+
     private static void createObjects() {
+
         // Creating food staffs
         FoodStaff foodStaff1 = new FoodStaff("John", (byte) 1, (byte) 16, "09:00-16:00");
         FoodStaff foodStaff2 = new FoodStaff("Logan", (byte) 2, (byte) 16, "09:00-16:00");
@@ -140,8 +145,11 @@ public class MainMenu {
      * Propts user to sign in for Food Staff duties
      * @return staff information and duties
      */
+
     private static Staff askForStaff() {
+
         System.out.print("LOG IN");
+
         PrettyPrinter.printDashLine((short) 50);
 
         // Asks for staff ID
@@ -170,14 +178,21 @@ public class MainMenu {
      * Prompts user for their customer name
      * @return customer name
      */
+
     private static Customer askForCustomer() {
+
         System.out.print("Enter customer's name: ");
         String name = input.nextLine();
 
         return new Customer(name);
     }
 
+    /**
+     * Allows for the addition or removal of a movie screen
+     */
+
     private static void addOrRemoveScreen() {
+
         boolean stillContinue = true;
         do {
             System.out.println("Choose:");
@@ -201,7 +216,12 @@ public class MainMenu {
         } while (stillContinue);
     }
 
+    /**
+     * Allows for the selection of and removal of an input movie screen from menu list
+     */
+
     private static void removeScreenMenu() {
+
         if (!ScreenManager.hasScreens()) {
             System.out.println("No screen available!");
             return ;
@@ -225,6 +245,10 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Allows for movie screen to be added to menu list
+     */
+
     private static void addScreenMenu() {
         System.out.print("Enter screen id: ");
         byte id = input.nextByte();
@@ -240,9 +264,11 @@ public class MainMenu {
     }
 
     /**
-     *
+     * Allows for movies to be added or removed from menu list
      */
+
     private static void addOrRemoveMovie() {
+
         boolean stillContinue = true;
 
         do {
@@ -267,7 +293,12 @@ public class MainMenu {
         } while (stillContinue);
     }
 
+    /**
+     * Remvoes movie from movie menu list
+     */
+
     private static void removeMovieMenu() {
+
         if (!MovieManager.hasMovies()) {
             System.out.println("No movie available!");
             return ;
@@ -291,14 +322,23 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Allows for movie to be added to movie menu list
+     */
+
     private static void addMovieMenu() {
+
         System.out.print("Enter movie id: ");
+
         byte id = input.nextByte();
         input.nextLine();
+
         System.out.print("Enter movie title: ");
         String title = input.nextLine();
+
         System.out.print("Enter movie genre: ");
         String genre = input.nextLine();
+
         System.out.print("Enter duration in minutes: ");
         short duration = input.nextShort();
 
@@ -309,7 +349,13 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Prompts users to select a movie to watch
+     * @return movies to be selected from
+     */
+
     private static Movie askForMovie() {
+
         System.out.print("Which movie do you want: ");
         byte index;
 
@@ -329,7 +375,13 @@ public class MainMenu {
         return null;
     }
 
+    /**
+     * Prompts users to select a screen to view the selected movie
+     * @return screens to be selected from
+     */
+
     private static Screen askForScreen() {
+
         System.out.print("Which screen do you want: ");
         byte index;
 
@@ -349,7 +401,13 @@ public class MainMenu {
         return null;
     }
 
+    /**
+     * Prompts user to enter current local time
+     * @return hour and minute
+     */
+
     private static LocalTime askForTime() {
+
         try {
             System.out.print("Enter the hour:");
             int hour = input.nextInt();
@@ -360,16 +418,24 @@ public class MainMenu {
             input.nextLine();
 
             return LocalTime.of(hour, minute);
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
         return null;
     }
 
+    /**
+     * Provides showtime menu for movie, screen, and time
+     */
+
     private static void addShowtimeMenu() {
+
         System.out.print("Enter showtime id: ");
+
         byte id = input.nextByte();
         input.nextLine();
+
         Movie movie = askForMovie();
         Screen screen = askForScreen();
         LocalTime time = askForTime();
@@ -381,7 +447,12 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Removes showtime from menu
+     */
+
     private static void removeShowtimeMenu() {
+
         if (!ShowtimeManager.hasShowtimes()) {
             System.out.println("No showtime available!");
             return ;
@@ -411,7 +482,12 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Allows for the addition or removal of a movie showtime
+     */
+
     private static void addOrRemoveShowtime() {
+
         boolean stillContinue = true;
 
         do {
@@ -440,7 +516,9 @@ public class MainMenu {
      * Prompts user to enter the date
      * @return current local date
      */
+
     private static LocalDate askForDate() {
+
         do {
             try {
                 System.out.print("Enter the day:");
@@ -462,15 +540,24 @@ public class MainMenu {
         } while (true);
     }
 
+    /**
+     * Allows for items used within the theater to be purchased in a chosen quantity
+     */
+
     public static void addItemMenu() {
+
         System.out.print("Enter item id: ");
+
         byte id = input.nextByte();
         input.nextLine();
+
         System.out.print("Enter item name: ");
         String name = input.nextLine();
+
         System.out.print("Enter initial quantity: ");
         short quantity = input.nextShort();
         input.nextLine();
+
         System.out.print("Enter buying cost from supplier: ");
         short buyingCost = input.nextShort();
         input.nextLine();
@@ -482,7 +569,12 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Allows for the removal of items within the theater
+     */
+
     public static void removeItemMenu() {
+
         InventoryManager.getInventory();
 
         if (!Inventory.hasItems()) {
@@ -509,7 +601,12 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Allows for the addition or removal of movie theater items
+     */
+
     public static void addOrRemoveItem() {
+
         boolean stillContinue = true;
 
         do {
@@ -534,7 +631,12 @@ public class MainMenu {
         } while (stillContinue);
     }
 
+    /**
+     * Removes selected food item
+     */
+
     public static void addOrRemoveFood() {
+
         boolean stillContinue = true;
 
         do {
@@ -559,7 +661,12 @@ public class MainMenu {
         } while (stillContinue);
     }
 
+    /**
+     * Removes food item from food menu
+     */
+
     private static void removeFoodMenu() {
+
         if (!MenuManager.hasMenu()) {
             System.out.println("No Food available!");
             return ;
@@ -584,12 +691,19 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Adds food item to food menu
+     */
+
     private static void addFoodMenu() {
+
         System.out.print("Enter food id: ");
         byte id = input.nextByte();
         input.nextLine();
+
         System.out.print("Enter food name: ");
         String name = input.nextLine();
+
         System.out.print("Enter the price: ");
         byte price = input.nextByte();
         input.nextLine();
@@ -601,12 +715,19 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Prompts user to enter staff role
+     * @return if staff is ticket staff or food staff
+     */
+
     private static String askStaffRole(){
+
         System.out.println("Choose staff role:");
         System.out.println("1. Ticket staff");
         System.out.println("2. Food staff");
         byte option = input.nextByte();
         input.nextLine();
+
         if (option > 0 && option < 3) {
             if (option == 1) {
                 return "ticket";
@@ -617,18 +738,27 @@ public class MainMenu {
         return "Invalid";
     }
 
+    /**
+     * Adds staff to staff menu list
+     */
+
     private static void addStaffMenu() {
+
         System.out.print("Enter staff id: ");
         byte id = input.nextByte();
         input.nextLine();
+
         System.out.print("Enter staff name: ");
         String name = input.nextLine();
+
         System.out.print("Enter hourly rate: ");
         byte rate = input.nextByte();
         input.nextLine();
+
         System.out.print("Enter schedule (HH:mm-HH:mm): ");
         String schedule = input.nextLine();
         input.nextLine();
+
         String role = askStaffRole();
 
         if (!StaffManager.contains(id)) {
@@ -644,7 +774,12 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Removes staff from staff menu list
+     */
+
     private static void removeStaffMenu() {
+
         if (!StaffManager.hasStaffs()) {
             System.out.println("No staff available!");
             return ;
@@ -668,17 +803,24 @@ public class MainMenu {
         }
     }
 
+    /**
+     * Allows for the addition or removal of staff member from staff manu list
+     */
+
     private static void addOrRemoveStaff() {
+
         boolean stillContinue = true;
 
         do {
             System.out.println("Choose:");
             PrettyPrinter.printDashLine(menuWidth);
+
             System.out.println("1. Add staff");
             System.out.println("2. Remove staff");
             System.out.println("3. Return");
             byte option = input.nextByte();
             input.nextLine();
+
             switch (option) {
                 case 1:
                     addStaffMenu();
@@ -697,7 +839,9 @@ public class MainMenu {
     /**
      * Prints menu for user to select from
      */
+
     public static void showMenu() {
+
         createObjects();
 
         boolean stillContinue = true;
@@ -707,6 +851,7 @@ public class MainMenu {
         System.out.print("MAIN MENU");
 
         do {
+            // Menu shown to users
             PrettyPrinter.printDashLine(menuWidth);
             System.out.println("Choose from the following:");
             System.out.println("1.  Order movie ticket");

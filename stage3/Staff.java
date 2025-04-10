@@ -29,6 +29,7 @@ public class Staff {
      */
 
     public Staff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
+
         this.employeeName = employeeName;
         this.employeeId = employeeId;
         this.hourlyRate = hourlyRate;
@@ -45,7 +46,9 @@ public class Staff {
      * @param scheduleStr the schedule string in HH:mm-HH:mm format
      * @return total weekly hours worked, assuming 5 work days
      */
+
     private byte calculateWeeklyHours(String scheduleStr) {
+
         try {
             // create a formatter to validate the format of the schedule
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -69,6 +72,7 @@ public class Staff {
      * gets the name of the staff
      * @return the employees name
      */
+
     public String getEmployeeName() {
         return this.employeeName;
     }
@@ -86,6 +90,7 @@ public class Staff {
      * gets the hourly rate of the staff
      * @return the hourly rate
      */
+
     public byte getHourlyRate() {
         return this.hourlyRate;
     }
@@ -130,6 +135,7 @@ public class Staff {
      * 
      * @return the analytics object linked to a staff member
      */
+
     public Analytics getAnalytics() {
         return this.analytics;
     }
@@ -138,6 +144,7 @@ public class Staff {
      * Sets the employee name
      * @param employeeName the new name
      */
+
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
@@ -146,6 +153,7 @@ public class Staff {
      * Sets the employee ID
      * @param employeeId the new ID
      */
+
     public void setEmployeeId(byte employeeId) {
         this.employeeId = employeeId;
     }
@@ -154,6 +162,7 @@ public class Staff {
      * Sets the hourly rate
      * @param hourlyRate the new hourly rate
      */
+
     public void setHourlyRate(byte hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
@@ -162,7 +171,9 @@ public class Staff {
      * Updates the employees schedule and recalculates hours worked
      * @param schedule the new schedule in HH:mm-HH:mm format
      */
+
     public void setSchedule(String schedule) {
+
         this.schedule = schedule;
         this.hoursWorked = calculateWeeklyHours(schedule);
     } 
@@ -171,6 +182,7 @@ public class Staff {
      * Sets the employee role
      * @param role the new role
      */
+
     public void setRole(String role) {
         this.role = role;
     }
@@ -179,6 +191,7 @@ public class Staff {
      * Sets a new analytics object
      * @param analytics the analytics object to assign
      */
+
     public void setAnalytics(Analytics analytics) {
         this.analytics = analytics;
     }
