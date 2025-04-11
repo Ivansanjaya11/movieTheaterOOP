@@ -7,8 +7,8 @@ import java.util.Scanner;
 public class MainMenu {
 
     // Initializes scanner and menu width
-    private static Scanner input = new Scanner(System.in);
-    private static short menuWidth = 100;
+    private static final Scanner input = new Scanner(System.in);
+    private static final short menuWidth = 100;
 
     /**
      * Constructs main menu class
@@ -17,7 +17,7 @@ public class MainMenu {
     private MainMenu() {}
 
     /**
-     * Method creating Food Staff, workers information
+     * Method creating dummy information (because there's no data persistence in the system yet)
      */
 
     private static void createObjects() {
@@ -146,726 +146,6 @@ public class MainMenu {
         MenuManager.addMenu(coke);
     }
 
-    /**
-     * Propts user to sign in for Food Staff duties
-     * @return staff information and duties
-     */
-
-    private static Staff askForStaff() {
-
-        System.out.print("LOG IN");
-
-        PrettyPrinter.printDashLine((short) 50);
-
-        // Asks for staff ID
-        do {
-            System.out.print("Enter staff ID: ");
-            byte id = input.nextByte();
-            input.nextLine();
-
-            // Asks for staff name
-            System.out.print("Enter name: ");
-            String name = input.nextLine();
-
-            // Gets staff name and ID
-            for (Staff staff : StaffManager.getStaffs()) {
-                if (staff.getEmployeeId()==id && staff.getEmployeeName().equalsIgnoreCase(name)) {
-                    return staff;
-                }
-            }
-
-            // Invalid Staff ID or name input
-            System.out.println("Invalid! You are not our staff!");
-        } while (true);
-    }
-
-    /**
-     * Prompts user for their customer name
-     * @return customer name
-     */
-
-    private static Customer askForCustomer() {
-
-        System.out.print("Enter customer's name: ");
-        String name = input.nextLine();
-
-        return new Customer(name);
-    }
-
-    /**
-     * Allows for the addition or removal of a movie screen
-     */
-
-    private static void addOrRemoveScreen() {
-
-        boolean stillContinue = true;
-
-        do {
-            System.out.println("Choose:");
-
-            PrettyPrinter.printDashLine(menuWidth);
-
-            System.out.println("1. Add screen");
-            System.out.println("2. Remove screen");
-            System.out.println("3. Return");
-
-            byte option = input.nextByte();
-            input.nextLine();
-
-            switch (option) {
-                case 1:
-                    addScreenMenu();
-                    break;
-                case 2:
-                    removeScreenMenu();
-                    break;
-                default:
-                    stillContinue = false;
-                    break;
-            }
-
-        } while (stillContinue);
-    }
-
-    /**
-     * Allows for the selection of and removal of an input movie screen from menu list
-     */
-
-    private static void removeScreenMenu() {
-
-        // Checks if screen exists in theater
-        if (!ScreenManager.hasScreens()) {
-            System.out.println("No screen available!");
-            return ;
-        }
-
-        System.out.println("Which screen do you want to remove: ");
-        byte index;
-
-        for (int i=1; i<=ScreenManager.getScreens().size(); i++) {
-            System.out.println(i + ". " + ScreenManager.getScreens().get(i-1).getScreenID());
-        }
-
-        index = input.nextByte();
-        index -=1;
-        input.nextLine();
-
-        if (index >= 0 && index < ScreenManager.getScreens().size()) {
-            ScreenManager.removeScreen(index);
-        } else {
-            System.out.println("Screen does not exist!");
-        }
-    }
-
-    /**
-     * Allows for movie screen to be added to menu list
-     */
-
-    private static void addScreenMenu() {
-
-        // Prompts user for screen information to be added to menu
-        System.out.print("Enter screen id: ");
-        byte id = input.nextByte();
-        input.nextLine();
-        System.out.print("Enter screen type: (normal/imax) ");
-        String type = input.nextLine();
-
-        if (!ScreenManager.contains(id)) {
-            ScreenManager.addScreen(new Screen(id, type));
-        } else {
-            System.out.println("Screen with id " + id + " already exists");
-        }
-    }
-
-    /**
-     * Allows for movies to be added or removed from menu list
-     */
-
-    private static void addOrRemoveMovie() {
-
-        boolean stillContinue = true;
-
-        do {
-            System.out.println("Choose:");
-            PrettyPrinter.printDashLine(menuWidth);
-            System.out.println("1. Add movie");
-            System.out.println("2. Remove movie");
-            System.out.println("3. Return");
-            byte option = input.nextByte();
-            input.nextLine();
-            switch (option) {
-                case 1:
-                    addMovieMenu();
-                    break;
-                case 2:
-                    removeMovieMenu();
-                    break;
-                default:
-                    stillContinue = false;
-                    break;
-            }
-        } while (stillContinue);
-    }
-
-    /**
-     * Removes movie from movie menu list
-     */
-
-    private static void removeMovieMenu() {
-
-        // Checks if movie exists in theater
-        if (!MovieManager.hasMovies()) {
-            System.out.println("No movie available!");
-            return ;
-        }
-
-        System.out.print("Which movie do you want to remove: ");
-        byte index;
-
-        for (int i=1; i<=MovieManager.getMovies().size(); i++) {
-            System.out.println(i + ". " + MovieManager.getMovies().get(i-1).getTitle());
-        }
-
-        index = input.nextByte();
-        index -=1;
-        input.nextLine();
-
-        if (index >=0 && index < MovieManager.getMovies().size()) {
-            MovieManager.removeMovie(index);
-        } else {
-            System.out.println("Movie does not exist!");
-        }
-    }
-
-    /**
-     * Allows for movie to be added to movie menu list
-     */
-
-    private static void addMovieMenu() {
-
-        // Prompts user to enter movie information to be added to menu
-        System.out.print("Enter movie id: ");
-
-        byte id = input.nextByte();
-        input.nextLine();
-
-        System.out.print("Enter movie title: ");
-        String title = input.nextLine();
-
-        System.out.print("Enter movie genre: ");
-        String genre = input.nextLine();
-
-        System.out.print("Enter duration in minutes: ");
-        short duration = input.nextShort();
-
-        if (!MovieManager.contains(id)) {
-            MovieManager.addMovie(new Movie(id, title, genre, duration));
-        } else {
-            System.out.println("Movie with id " + id + " already exists");
-        }
-    }
-
-    /**
-     * Prompts users to select a movie to watch
-     * @return movies to be selected from
-     */
-
-    private static Movie askForMovie() {
-
-        System.out.println("Which movie do you want: ");
-        byte index;
-
-        // Provides movie selection options to user
-        for (int i=1; i<=MovieManager.getMovies().size(); i++) {
-            System.out.println(i + ". " + MovieManager.getMovies().get(i-1).getTitle());
-        }
-
-        index = input.nextByte();
-        index -=1;
-        input.nextLine();
-
-        if (index >=0 && index < MovieManager.getMovies().size()) {
-            return MovieManager.getMovies().get(index);
-        }
-
-        System.out.println("Movie does not exist!");
-        return null;
-    }
-
-    /**
-     * Prompts users to select a screen to view the selected movie
-     * @return screens to be selected from
-     */
-
-    private static Screen askForScreen() {
-
-        System.out.print("Which screen do you want: ");
-        byte index;
-
-        // Provides screen selection options to user
-        for (int i=1; i<=ScreenManager.getScreens().size(); i++) {
-            System.out.println(i + ". " + ScreenManager.getScreens().get(i-1).getScreenID());
-        }
-
-        index = input.nextByte();
-        index -=1;
-        input.nextLine();
-
-        if (index >= 0 && index < ScreenManager.getScreens().size()) {
-            return ScreenManager.getScreens().get(index);
-        }
-
-        System.out.println("Screen does not exist!");
-        return null;
-    }
-
-    /**
-     * Prompts user to enter current local time
-     * @return hour and minute
-     */
-
-    private static LocalTime askForTime() {
-
-        try {
-            System.out.print("Enter the hour:");
-            int hour = input.nextInt();
-            input.nextLine();
-
-            System.out.print("Enter the minute:");
-            int minute = input.nextInt();
-            input.nextLine();
-
-            return LocalTime.of(hour, minute);
-
-        } catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-        return null;
-    }
-
-    /**
-     * Provides showtime menu for movie, screen, and time
-     */
-
-    private static void addShowtimeMenu() {
-
-        System.out.print("Enter showtime id: ");
-
-        byte id = input.nextByte();
-        input.nextLine();
-
-        Movie movie = askForMovie();
-        Screen screen = askForScreen();
-        LocalTime time = askForTime();
-
-        if (!ShowtimeManager.contains(id)) {
-            ShowtimeManager.addShowtime(new Showtime(id, movie, screen, time));
-        } else {
-            System.out.println("Showtime with id " + id + " already exists");
-        }
-    }
-
-    /**
-     * Removes showtime from menu
-     */
-
-    private static void removeShowtimeMenu() {
-
-        // Ensures menu has provided showtime
-        if (!ShowtimeManager.hasShowtimes()) {
-            System.out.println("No showtime available!");
-            return ;
-        }
-
-        System.out.print("Which showtime do you want to remove: ");
-        byte index;
-
-        // Removes input showtime from menu
-        for (int i=1; i<=ShowtimeManager.getShowtimes().size(); i++) {
-            Showtime showtime = ShowtimeManager.getShowtimes().get(i-1);
-            Movie movie = showtime.getMovie();
-            Screen screen = showtime.getScreen();
-
-            System.out.println(i + ". " + movie.getTitle());
-            System.out.println("\t" + screen.getScreenType() + " screen");
-            System.out.println("\tStarts at " + showtime.getStartTime());
-        }
-
-        index = input.nextByte();
-        index -=1;
-        input.nextLine();
-
-        if (index >=0 && index < ShowtimeManager.getShowtimes().size()) {
-            ShowtimeManager.removeShowtime(index);
-        } else {
-            System.out.println("Movie does not exist!");
-        }
-    }
-
-    /**
-     * Allows for the addition or removal of a movie showtime
-     */
-
-    private static void addOrRemoveShowtime() {
-
-        boolean stillContinue = true;
-
-        do {
-            System.out.println("Choose:");
-            PrettyPrinter.printDashLine(menuWidth);
-            System.out.println("1. Add showtime");
-            System.out.println("2. Remove showtime");
-            System.out.println("3. Return");
-            byte option = input.nextByte();
-            input.nextLine();
-            switch (option) {
-                case 1:
-                    addShowtimeMenu();
-                    break;
-                case 2:
-                    removeShowtimeMenu();
-                    break;
-                default:
-                    stillContinue = false;
-                    break;
-            }
-        } while (stillContinue);
-    }
-
-    /**
-     * Prompts user to enter the date
-     * @return current local date
-     */
-
-    private static LocalDate askForDate() {
-
-        do {
-            try {
-                System.out.print("\tEnter the day:");
-                int day = input.nextInt();
-                input.nextLine();
-
-                System.out.print("\tEnter the month:");
-                int month = input.nextInt();
-                input.nextLine();
-
-                System.out.print("\tEnter the year:");
-                int year = input.nextInt();
-                input.nextLine();
-
-                return LocalDate.of(year, month, day);
-            } catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        } while (true);
-    }
-
-    /**
-     * Allows for items used within the theater to be purchased in a chosen quantity
-     */
-
-    public static void addItemMenu() {
-
-        // Prompts user to enter item information to be added to menu
-        System.out.print("Enter item id: ");
-
-        byte id = input.nextByte();
-        input.nextLine();
-
-        System.out.print("Enter item name: ");
-        String name = input.nextLine();
-
-        System.out.print("Enter initial quantity: ");
-        short quantity = input.nextShort();
-        input.nextLine();
-
-        System.out.print("Enter buying cost from supplier: ");
-        short buyingCost = input.nextShort();
-        input.nextLine();
-
-        if (!Inventory.contains(id)) {
-            Inventory.addItem(new Item(id, name, quantity, buyingCost));
-        } else {
-            System.out.println("Item with id " + id + " already exists");
-        }
-    }
-
-    /**
-     * Allows for the removal of items within the theater
-     */
-
-    public static void removeItemMenu() {
-        // Checks if list has the input item
-        if (!Inventory.hasItems()) {
-            System.out.println("No item available!");
-            return ;
-        }
-
-        System.out.println("Which item do you want to remove: ");
-        byte index;
-
-        for (int i=1; i<=Inventory.getItemList().size(); i++) {
-            System.out.println(i + ". " + Inventory.getItemList().get(i-1).getItemName());
-        }
-
-        index = input.nextByte();
-        index -=1;
-        input.nextLine();
-
-        if (index >=0 && index < Inventory.getItemList().size()) {
-            byte id = Inventory.getItemList().get(index).getItemId();
-            Inventory.removeItem(id);
-        } else {
-            System.out.println("Movie does not exist!");
-        }
-    }
-
-    /**
-     * Allows for the addition or removal of movie theater items
-     */
-
-    public static void addOrRemoveItem() {
-
-        boolean stillContinue = true;
-
-        do {
-            System.out.println("Choose:");
-
-            PrettyPrinter.printDashLine(menuWidth);
-
-            System.out.println("1. Add item");
-            System.out.println("2. Remove item");
-            System.out.println("3. Return");
-
-            byte option = input.nextByte();
-            input.nextLine();
-
-            switch (option) {
-                case 1:
-                    addItemMenu();
-                    break;
-                case 2:
-                    removeItemMenu();
-                    break;
-                default:
-                    stillContinue = false;
-                    break;
-            }
-
-        } while (stillContinue);
-    }
-
-    /**
-     * Removes selected food item
-     */
-
-    public static void addOrRemoveFood() {
-
-        boolean stillContinue = true;
-
-        do {
-            //Provides the user with options to add or remove food items from menu or return
-            System.out.println("Choose:");
-            PrettyPrinter.printDashLine(menuWidth);
-            System.out.println("1. Add food");
-            System.out.println("2. Remove food");
-            System.out.println("3. Return");
-            byte option = input.nextByte();
-            input.nextLine();
-            switch (option) {
-                case 1:
-                    addFoodMenu();
-                    break;
-                case 2:
-                    removeFoodMenu();
-                    break;
-                default:
-                    stillContinue = false;
-                    break;
-            }
-        } while (stillContinue);
-    }
-
-    /**
-     * Removes food item from food menu
-     */
-
-    private static void removeFoodMenu() {
-
-        // Food staff duties for removing food items from the menu
-        if (!MenuManager.hasMenu()) {
-            System.out.println("No Food available!");
-            return ;
-        }
-
-        System.out.println("Which food do you want to remove: ");
-        byte index;
-
-        for (int i=1; i<=MenuManager.getMenuList().size(); i++) {
-            System.out.println(i + ". " + MenuManager.getMenuList().get(i-1).getMenuName());
-        }
-
-        index = input.nextByte();
-        input.nextLine();
-        index -=1;
-
-        if (index >=0 && index < MenuManager.getMenuList().size()) {
-            byte id = MenuManager.getMenuList().get(index).getMenuId();
-            MenuManager.removeMenu(id);
-        } else {
-            System.out.println("Movie does not exist!");
-        }
-    }
-
-    /**
-     * Adds food item to food menu
-     */
-
-    private static void addFoodMenu() {
-
-        // Food staff duties when adding food items to the menu
-        System.out.print("Enter food id: ");
-        byte id = input.nextByte();
-        input.nextLine();
-
-        System.out.print("Enter food name: ");
-        String name = input.nextLine();
-
-        System.out.print("Enter the price: ");
-        byte price = input.nextByte();
-        input.nextLine();
-
-        if (!MenuManager.contains(id)) {
-            MenuManager.addMenu(new Food(id, name, price));
-        } else {
-            System.out.println("Showtime with id " + id + " already exists");
-        }
-    }
-
-    /**
-     * Prompts user to enter staff role
-     * @return if staff is ticket staff or food staff
-     */
-
-    private static String askStaffRole(){
-
-        System.out.println("Choose staff role:");
-        System.out.println("1. Ticket staff");
-        System.out.println("2. Food staff");
-
-        byte option = input.nextByte();
-        input.nextLine();
-
-        // Type of staff member
-        if (option > 0 && option < 3) {
-            if (option == 1) {
-                return "ticket";
-            } else {
-                return "food";
-            }
-        }
-        return "Invalid";
-    }
-
-    /**
-     * Adds staff to staff menu list
-     */
-
-    private static void addStaffMenu() {
-
-        // Prompts user to enter staff information:
-        System.out.print("Enter staff id: ");
-        byte id = input.nextByte();
-        input.nextLine();
-
-        System.out.print("Enter staff name: ");
-        String name = input.nextLine();
-
-        System.out.print("Enter hourly rate: ");
-        byte rate = input.nextByte();
-        input.nextLine();
-
-        System.out.print("Enter schedule (HH:mm-HH:mm): ");
-        String schedule = input.nextLine();
-
-        String role = askStaffRole();
-
-        // Checks if staff has given staff ID
-        if (!StaffManager.contains(id)) {
-            if (role.equals("ticket")) {
-                StaffManager.addStaff(new TicketStaff(name, id, rate, schedule));
-            } else if (role.equals("food")) {
-                StaffManager.addStaff(new FoodStaff(name, id, rate, schedule));
-            } else {
-                System.out.println("Invalid role");
-            }
-        } else {
-            System.out.println("Item with id " + id + " already exists");
-        }
-    }
-
-    /**
-     * Removes staff from staff menu list
-     */
-
-    private static void removeStaffMenu() {
-
-        //Ensures the staff list has staff members
-        if (!StaffManager.hasStaffs()) {
-            System.out.println("No staff available!");
-            return ;
-        }
-
-        System.out.println("Which staff do you want to fire: ");
-        byte index;
-
-        for (int i=1; i<=StaffManager.getStaffs().size(); i++) {
-            System.out.println(i + ". " + StaffManager.getStaffs().get(i-1).getEmployeeName());
-        }
-
-        index = input.nextByte();
-        input.nextLine();
-        index -=1;
-
-        if (index >=0 && index < StaffManager.getStaffs().size()) {
-            StaffManager.removeStaff(index);
-        } else {
-            System.out.println("Staff does not exist!");
-        }
-    }
-
-    /**
-     * Allows for the addition or removal of staff member from staff manu list
-     */
-
-    private static void addOrRemoveStaff() {
-
-        boolean stillContinue = true;
-
-        // Provides options to the user while they are still selecting
-        do {
-            System.out.println("Choose:");
-            PrettyPrinter.printDashLine(menuWidth);
-
-            System.out.println("1. Add staff");
-            System.out.println("2. Remove staff");
-            System.out.println("3. Return");
-            byte option = input.nextByte();
-            input.nextLine();
-
-            switch (option) {
-                case 1:
-                    addStaffMenu();
-                    break;
-                case 2:
-                    removeStaffMenu();
-                    break;
-                default:
-                    stillContinue = false;
-                    break;
-            }
-        } while (stillContinue);
-    }
 
 
     /**
@@ -878,7 +158,7 @@ public class MainMenu {
 
         boolean stillContinue = true;
 
-        Staff staff = askForStaff();
+        Staff staff = Prompt.askForStaff();
 
         System.out.println("MAIN MENU");
 
@@ -906,7 +186,7 @@ public class MainMenu {
                 case 1:
                     if (staff instanceof TicketStaff) {
                         TicketStaff ticketStaff = (TicketStaff) staff;
-                        Customer ticketCustomer = askForCustomer();
+                        Customer ticketCustomer = Prompt.askForCustomer();
                         ticketStaff.addNewTicketPayment(ticketCustomer);
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
@@ -917,7 +197,7 @@ public class MainMenu {
                 case 2:
                     if (staff instanceof  FoodStaff) {
                         FoodStaff foodStaff = (FoodStaff) staff;
-                        Customer foodCustomer = askForCustomer();
+                        Customer foodCustomer = Prompt.askForCustomer();
                         foodStaff.addNewFoodPayment(foodCustomer);
                     } else {
                         System.out.println("Invalid! You are working at the ticket booth!");
@@ -927,10 +207,10 @@ public class MainMenu {
                 // Generates report for date
                 case 3:
                     System.out.println("Enter start time:");
-                    LocalDate startReport = askForDate();
+                    LocalDate startReport = Prompt.askForDate();
 
                     System.out.println("Enter end time:");
-                    LocalDate endReport = askForDate();
+                    LocalDate endReport = Prompt.askForDate();
 
                     staff.getAnalytics().setTimePeriod(startReport, endReport);
                     staff.getAnalytics().generateReport();
@@ -939,10 +219,10 @@ public class MainMenu {
                 // Exports report for date
                 case 4:
                     System.out.println("Enter start time:");
-                    LocalDate startExport = askForDate();
+                    LocalDate startExport = Prompt.askForDate();
 
                     System.out.println("Enter end time:");
-                    LocalDate endExport = askForDate();
+                    LocalDate endExport = Prompt.askForDate();
 
                     staff.getAnalytics().setTimePeriod(startExport, endExport);
                     staff.getAnalytics().exportReport();
@@ -951,7 +231,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 5:
                     if (staff instanceof TicketStaff) {
-                        addOrRemoveMovie();
+                        SubMenu.addOrRemoveMovie();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -960,7 +240,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 6:
                     if (staff instanceof TicketStaff) {
-                        addOrRemoveScreen();
+                        SubMenu.addOrRemoveScreen();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -969,7 +249,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 7:
                     if (staff instanceof TicketStaff) {
-                        addOrRemoveShowtime();
+                        SubMenu.addOrRemoveShowtime();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -978,7 +258,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 8:
                     if (staff instanceof FoodStaff) {
-                        addOrRemoveFood();
+                        SubMenu.addOrRemoveFood();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -987,7 +267,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 9:
                     if (staff instanceof FoodStaff) {
-                        addOrRemoveItem();
+                        SubMenu.addOrRemoveItem();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -995,7 +275,7 @@ public class MainMenu {
                     break;
                 // Adds / Removes staff
                 case 10:
-                    addOrRemoveStaff();
+                    SubMenu.addOrRemoveStaff();
                     break;
                 // If the user chooses to no longer continue
                 default:
