@@ -34,4 +34,20 @@ public class PrettyPrinter {
 
         writer.newLine();
     }
+
+    /**
+     * method to add trailing whitespace for formatting
+     * @param str the string to be padded with extra whitespace
+     * @param intendedWidth the width of the column or space where the string is to be printed
+     * @return the string with padded whitespace
+     */
+    public static String addWhitespace(String str, byte intendedWidth) {
+        byte pad = (byte) (intendedWidth-str.length());
+
+        for (int i=0; i<pad; i++) {
+            str += " ";
+        }
+
+        return str;
+    }
 }

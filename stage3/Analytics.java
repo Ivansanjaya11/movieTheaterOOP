@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-import java.util.stream.IntStream;
 
 import util.Path;
 import util.PrettyPrinter;
@@ -17,6 +16,15 @@ public class Analytics {
 	private Scanner input;
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
 	private static short reportWidth = 150;
+
+	private static byte paymentIdWidth = 17;
+	private static byte timeWidth = 19;
+	private static byte numericWidth = 10;
+
+	private static byte veryShortStrWidth = 15;
+	private static byte shortStrWidth = 30;
+	private static byte longStrWidth = 40;
+
 
 	/**
 	 * Constructs an Analytics object with a specified start time for the reporting period.
@@ -187,7 +195,15 @@ public class Analytics {
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.TICKET_SALES_REPORT_PATH))) {
 
 			System.out.println("Below is the ticket sales report for the specified time period: ");
-			System.out.println("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
+			System.out.print(PrettyPrinter.addWhitespace("Payment ID", paymentIdWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Timestamp", timeWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Total", numericWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Qty", numericWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Type", veryShortStrWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Screen ID", numericWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Movie", longStrWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Start", numericWidth) + "|");
+			System.out.println("Seats");
 
 			PrettyPrinter.printDashLine(reportWidth);
 
@@ -213,7 +229,15 @@ public class Analytics {
 
 				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
 
-					System.out.print(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
+					System.out.print(PrettyPrinter.addWhitespace(paymentId, paymentIdWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(String.valueOf(timestamp), timeWidth) + "|");
+					System.out.print("$" + PrettyPrinter.addWhitespace(paymentAmount, (byte) (numericWidth-1)) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(quantity, numericWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(screenType, veryShortStrWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(screenId, numericWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(movieTitle, longStrWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(startTime, numericWidth) + "|");
+
 
 					for (int i=0; i<seatsPosition.length; i+=2) {
 						String row = seatsPosition[i].trim();
@@ -284,7 +308,12 @@ public class Analytics {
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.FOOD_SALES_REPORT_PATH))) {
 
 			System.out.println("Below is the food sales report for the specified time period: ");
-			System.out.println("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
+
+			System.out.print(PrettyPrinter.addWhitespace("Payment ID", paymentIdWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Date & Time", timeWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Food Name", shortStrWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Qty", numericWidth) + "|");
+			System.out.println("Price");
 
 			PrettyPrinter.printDashLine(reportWidth);
 
@@ -300,31 +329,33 @@ public class Analytics {
 
 				String[] orderArray = orderList.split(",");
 
-				if (orderArray[0].length()<7) {
-					int trailing = 7-orderArray[0].length();
-					for (int j=0; j<trailing; j++) {
-						orderArray[0] += " ";
-					}
-				}
-
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					System.out.println(paymentId + "\t\t|" + time + "\t\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|$" + orderArray[2]);
+					System.out.print(PrettyPrinter.addWhitespace(paymentId, paymentIdWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(time.toString(), timeWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(orderArray[0], shortStrWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(orderArray[1], numericWidth) + "|");
+					System.out.println("$" + PrettyPrinter.addWhitespace(orderArray[2], (byte)(numericWidth - 1)));
+
+
+					byte indentTabWidth1 = (byte) (paymentIdWidth + timeWidth + 1);
 
 					if (orderArray.length > 3) {
 						for (int i=3; i<orderArray.length; i+=3) {
-							if (orderArray[i].length()<7) {
-								int trailing = 7-orderArray[i].length();
-								for (int j=0; j<trailing; j++) {
-									orderArray[i] += " ";
-								}
 
-							}
+							System.out.print(PrettyPrinter.addWhitespace("", indentTabWidth1) + "|");
+							System.out.print(PrettyPrinter.addWhitespace(orderArray[i], shortStrWidth) + "|");
+							System.out.print(PrettyPrinter.addWhitespace(orderArray[i+1], numericWidth) + "|");
+							System.out.println("$" + PrettyPrinter.addWhitespace(orderArray[i+2], (byte)(numericWidth - 1)));
 
-							System.out.println("\t\t\t\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1] + "\t\t|$" + orderArray[i+2]);
 						}
 					}
+
+					byte indentTabWidth2 = (byte) (paymentIdWidth + timeWidth + shortStrWidth + 2);
 					PrettyPrinter.printDashLine(reportWidth);
-					System.out.println("\t\t\t\t\t\t\t\t\t\t\t\ttotal Price\t|$" + totalPrice);
+					System.out.print(PrettyPrinter.addWhitespace("", indentTabWidth2));
+					System.out.print(PrettyPrinter.addWhitespace("total Price", numericWidth) + "|");
+					System.out.println("$" + PrettyPrinter.addWhitespace(totalPrice, (byte)(numericWidth - 1)));
+
 					PrettyPrinter.printDashLine(reportWidth);
 				}
 			}
@@ -372,7 +403,9 @@ public class Analytics {
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.INVENTORY_REPORT_PATH))) {
 
 			System.out.println("Below is the current content of the inventory: ");
-			System.out.println("Item Name\t\t|Quantity");
+			System.out.print(PrettyPrinter.addWhitespace("Item Name", shortStrWidth) + "|");
+			System.out.println(PrettyPrinter.addWhitespace("Quantity", numericWidth));
+
 			PrettyPrinter.printDashLine(reportWidth);
 
 			String line;
@@ -380,7 +413,10 @@ public class Analytics {
 			while ((line = reader.readLine()) != null) {
 				String itemName = line.split(",")[1];
 				short quantity = Short.parseShort(line.split(",")[2]);
-				System.out.println(itemName + "\t\t\t|" + quantity);
+
+				System.out.print(PrettyPrinter.addWhitespace(itemName, shortStrWidth) + "|");
+				System.out.println(quantity);
+
 			}
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
@@ -429,7 +465,13 @@ public class Analytics {
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.ITEM_ORDER_REPORT_PATH))) {
 
 			System.out.println("Below is the inventory item order history: ");
-			System.out.println("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|Total Price");
+
+			System.out.print(PrettyPrinter.addWhitespace("Date & Time", timeWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Name", shortStrWidth) + "|");
+			System.out.print(PrettyPrinter.addWhitespace("Qty", numericWidth) + "|");
+			System.out.println("Total Price");
+
+			//System.out.println("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|Total Price");
 
 			PrettyPrinter.printDashLine(reportWidth);
 
@@ -440,8 +482,14 @@ public class Analytics {
 				String itemName = line.split(",")[1];
 				short quantity = Short.parseShort(line.split(",")[2]);
 				short totalPrice = Short.parseShort(line.split(",")[3]);
+
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					System.out.println(time + "\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
+					System.out.print(PrettyPrinter.addWhitespace(time.toString(), timeWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(itemName, shortStrWidth) + "|");
+					System.out.print(PrettyPrinter.addWhitespace(String.valueOf(quantity), numericWidth) + "|");
+					System.out.println("$" + PrettyPrinter.addWhitespace(String.valueOf(totalPrice), (byte)(numericWidth - 1)));
+
+					//System.out.println(time + "\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
 				}
 			}
 
@@ -506,14 +554,24 @@ public class Analytics {
 		try (BufferedReader reader = new BufferedReader(new FileReader(Path.TICKET_SALES_REPORT_PATH));
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(ticketSalesExportPath, true))) {
 
-			writer.write("Below is the ticket sales report for the specified time period: ");
-			writer.newLine();
-			writer.write("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
-			writer.newLine();
+			writer.write("Below is the ticket sales report for the specified time period:\n");
+
+			writer.write(PrettyPrinter.addWhitespace("Payment ID", paymentIdWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Timestamp", timeWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Total", numericWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Qty", numericWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Type", veryShortStrWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Screen ID", numericWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Movie", longStrWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Start", numericWidth) + "|");
+			writer.write("Seats\n");
+
+
+			//writer.write("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
+			//writer.newLine();
 
 			PrettyPrinter.writeDashLine(writer, reportWidth);
 
-            writer.newLine();
 			String line;
 
 			while ((line = reader.readLine()) != null) {
@@ -532,7 +590,17 @@ public class Analytics {
 
 
 				if (this.hasTimePeriod() && timestamp.isAfter(this.timePeriodStart) && timestamp.isBefore(this.timePeriodEnd)) {
-					writer.write(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
+
+					writer.write(PrettyPrinter.addWhitespace(paymentId, paymentIdWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(String.valueOf(timestamp), timeWidth) + "|");
+					writer.write("$" + PrettyPrinter.addWhitespace(paymentAmount, (byte) (numericWidth - 1)) + "|");
+					writer.write(PrettyPrinter.addWhitespace(quantity, numericWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(screenType, veryShortStrWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(screenId, numericWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(movieTitle, longStrWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(startTime, numericWidth) + "|");
+
+					//	writer.write(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
 					for (int i=0; i<seatsPosition.length; i+=2) {
 						String row = seatsPosition[i].trim();
 						String col = seatsPosition[i+1].trim();
@@ -548,8 +616,6 @@ public class Analytics {
 				}
 
 				PrettyPrinter.writeDashLine(writer, reportWidth);
-
-				writer.newLine();
 			}
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
@@ -575,8 +641,13 @@ public class Analytics {
 			 BufferedWriter writer = new BufferedWriter(new FileWriter(foodSalesExportPath, true))) {
 			writer.write("Below is the food sales report for the specified time period: ");
 			writer.newLine();
-			writer.write("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
-			writer.newLine();
+
+			writer.write(PrettyPrinter.addWhitespace("Payment ID", paymentIdWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Date & Time", timeWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Food Name", shortStrWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Qty", numericWidth) + "|");
+			writer.write("Price\n");
+
 			PrettyPrinter.writeDashLine(writer, reportWidth);
 			String line;
 
@@ -590,37 +661,33 @@ public class Analytics {
 
 				String[] orderArray = orderList.split(",");
 
-				if (orderArray[0].length()<7) {
-					int trailing = 7-orderArray[0].length();
-					for (int j=0; j<trailing; j++) {
-						orderArray[0] += " ";
-					}
-				}
-
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					writer.write(paymentId + "\t|" + time + "\t|" + orderArray[0] + "\t\t|" + orderArray[1] + "\t\t|$" + orderArray[2]);
-					writer.newLine();
+					writer.write(PrettyPrinter.addWhitespace(paymentId, paymentIdWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(time.toString(), timeWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(orderArray[0], shortStrWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(orderArray[1], numericWidth) + "|");
+					writer.write("$" + PrettyPrinter.addWhitespace(orderArray[2], (byte)(numericWidth - 1)) + "\n");
+
+					byte indentTabWidth1 = (byte) (paymentIdWidth + timeWidth + 1);
 
 					if (orderArray.length > 3) {
 						for (int i=3; i<orderArray.length; i+=3) {
 
-							if (orderArray[i].length()<7) {
-								int trailing = 7-orderArray[i].length();
-								for (int j=0; j<trailing; j++) {
-									orderArray[i] += " ";
-								}
+							writer.write(PrettyPrinter.addWhitespace("", indentTabWidth1) + "|");
+							writer.write(PrettyPrinter.addWhitespace(orderArray[i], shortStrWidth) + "|");
+							writer.write(PrettyPrinter.addWhitespace(orderArray[i+1], numericWidth) + "|");
+							writer.write("$" + PrettyPrinter.addWhitespace(orderArray[i+2], (byte)(numericWidth - 1)) + "\n");
 
-							}
-
-							writer.write("\t\t\t\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1] + "\t\t|$" + orderArray[i+2]);
-							writer.newLine();
 						}
 					}
 
 					PrettyPrinter.writeDashLine(writer, reportWidth);
 
-					writer.write("\t\t\t\t\t\t\t\t\t\t\t\ttotalPrice\t|$" + totalPrice);
-					writer.newLine();
+					byte indentTabWidth2 = (byte) (paymentIdWidth + timeWidth + shortStrWidth + 2);
+
+					writer.write(PrettyPrinter.addWhitespace("", indentTabWidth2));
+					writer.write(PrettyPrinter.addWhitespace("total Price", numericWidth) + "|");
+					writer.write("$" + PrettyPrinter.addWhitespace(totalPrice, (byte)(numericWidth - 1)) + "\n");
 
 					PrettyPrinter.writeDashLine(writer, reportWidth);
 

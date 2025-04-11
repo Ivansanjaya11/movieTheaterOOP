@@ -931,10 +931,10 @@ public class MainMenu {
                     break;
                 // Generates report for date
                 case 3:
-                    System.out.print("Enter start time:");
+                    System.out.println("Enter start time:");
                     LocalDate startReport = askForDate();
 
-                    System.out.print("Enter end time:");
+                    System.out.println("Enter end time:");
                     LocalDate endReport = askForDate();
 
                     staff.getAnalytics().setTimePeriod(startReport, endReport);
@@ -943,10 +943,10 @@ public class MainMenu {
                     break;
                 // Exports report for date
                 case 4:
-                    System.out.print("Enter start time:");
+                    System.out.println("Enter start time:");
                     LocalDate startExport = askForDate();
 
-                    System.out.print("Enter end time:");
+                    System.out.println("Enter end time:");
                     LocalDate endExport = askForDate();
 
                     staff.getAnalytics().setTimePeriod(startExport, endExport);
