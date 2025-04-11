@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class DetailTicketBought {
+public class DetailTicketBought extends Detail{
 
     // Initializes variables to be used for customer tickets
     private ArrayList<byte[]> chosenSeats;
@@ -14,44 +14,25 @@ public class DetailTicketBought {
     private String paymentType;
 
     /**
-     * Gets payment type from customer
-     * @return payment type
-     */
-
-    public String getPaymentType() {
-
-        return this.paymentType;
-    }
-
-    /**
-     * Sets payment type
-     * @param paymentType cash / card
-     */
-
-    public void setPaymentType(String paymentType) {
-
-        this.paymentType = paymentType;
-    }
-
-    /**
      * Constructs DetailTicketBought method
      * @param normalPrice for normal movie screen
      * @param imaxPrice for imax movie screen
      */
 
     public DetailTicketBought(byte normalPrice, byte imaxPrice) {
-
+        super();
         this.normalPrice = normalPrice;
         this.imaxPrice = imaxPrice;
         this.normalNum = 0;
         this.imaxNum = 0;
     }
 
+
     /**
      * Checks if screen room exists
      * @return true / false
      */
-
+    @Override
     public boolean isEmpty() {
 
         return this.imaxNum == 0 && this.normalNum == 0;
@@ -177,65 +158,6 @@ public class DetailTicketBought {
         return imaxNum > 0;
     }
 
-    /**
-     * Gets the customer's name.
-     *
-     * @return the name of the customer
-     */
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    /**
-     * Sets the customer's name.
-     *
-     * @param customer the name of the customer to set
-     */
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    /**
-     * Checks if a customer name has been provided.
-     *
-     * @return true if customerName is not null or empty; false otherwise
-     */
-
-    public boolean hasCustomerName() {
-        return customer != null;
-    }
-
-    /**
-     * Gets the total payment amount.
-     *
-     * @return the payment amount
-     */
-
-    public short getPaymentAmount() {
-        return paymentAmount;
-    }
-
-    /**
-     * Sets the payment amount.
-     *
-     * @param paymentAmount the payment amount to set
-     */
-
-    public void setPaymentAmount(short paymentAmount) {
-        this.paymentAmount = paymentAmount;
-    }
-
-    /**
-     * Checks if a payment amount has been set.
-     *
-     * @return true if paymentAmount is greater than 0; false otherwise
-     */
-
-    public boolean hasPaymentAmount() {
-        return paymentAmount > 0;
-    }
 
     /**
      * Gets the price of a normal ticket.
