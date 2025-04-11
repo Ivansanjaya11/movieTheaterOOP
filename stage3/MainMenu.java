@@ -310,7 +310,7 @@ public class MainMenu {
     }
 
     /**
-     * Remvoes movie from movie menu list
+     * Removes movie from movie menu list
      */
 
     private static void removeMovieMenu() {
