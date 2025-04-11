@@ -3,11 +3,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import util.Path;
+import util.PrettyPrinter;
 
 public class Analytics {
 
@@ -16,6 +16,7 @@ public class Analytics {
 	private LocalDateTime timePeriodEnd;
 	private Scanner input;
 	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+	private static short reportWidth = 150;
 
 	/**
 	 * Constructs an Analytics object with a specified start time for the reporting period.
@@ -66,8 +67,7 @@ public class Analytics {
 
 	public LocalDateTime[] getTimePeriod() {
 
-		LocalDateTime[] dateTime = {this.timePeriodStart, this.timePeriodEnd};
-		return dateTime;
+        return new LocalDateTime[]{this.timePeriodStart, this.timePeriodEnd};
 	}
 
 	/**
@@ -114,6 +114,7 @@ public class Analytics {
 		byte option;
 
 		do {
+			PrettyPrinter.printDashLine(reportWidth);
 			System.out.println("Which report would you like to generate?");
 			System.out.println("1. Ticket sales report");
 			System.out.println("2. Food sales report");
@@ -188,8 +189,7 @@ public class Analytics {
 			System.out.println("Below is the ticket sales report for the specified time period: ");
 			System.out.println("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
 
-			IntStream.range(0, 150).forEach(i -> System.out.print("-"));
-			System.out.println();
+			PrettyPrinter.printDashLine(reportWidth);
 
 			String line;
 
@@ -229,8 +229,7 @@ public class Analytics {
 					}
 				}
 
-				IntStream.range(0, 150).forEach(i -> System.out.print("-"));
-				System.out.println();
+				PrettyPrinter.printDashLine(reportWidth);
 			}
 
 		} catch (Exception e) {
@@ -286,7 +285,8 @@ public class Analytics {
 
 			System.out.println("Below is the food sales report for the specified time period: ");
 			System.out.println("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
-			System.out.println("-----------------------------------------------------------------");
+
+			PrettyPrinter.printDashLine(reportWidth);
 
 			String line;
 
@@ -323,9 +323,9 @@ public class Analytics {
 							System.out.println("\t\t\t\t\t\t\t\t\t|" + orderArray[i] + "\t\t|" + orderArray[i+1] + "\t\t|$" + orderArray[i+2]);
 						}
 					}
-					System.out.println("-----------------------------------------------------------------");
+					PrettyPrinter.printDashLine(reportWidth);
 					System.out.println("\t\t\t\t\t\t\t\t\t\t\t\ttotal Price\t|$" + totalPrice);
-					System.out.println("-----------------------------------------------------------------");
+					PrettyPrinter.printDashLine(reportWidth);
 				}
 			}
 		} catch (IOException e) {
@@ -373,7 +373,7 @@ public class Analytics {
 
 			System.out.println("Below is the current content of the inventory: ");
 			System.out.println("Item Name\t\t|Quantity");
-			System.out.println("--------------------------------------------------");
+			PrettyPrinter.printDashLine(reportWidth);
 
 			String line;
 
@@ -431,8 +431,7 @@ public class Analytics {
 			System.out.println("Below is the inventory item order history: ");
 			System.out.println("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|Total Price");
 
-			IntStream.range(0, 70).forEach(i -> System.out.print("-"));
-			System.out.println();
+			PrettyPrinter.printDashLine(reportWidth);
 
 			String line;
 
@@ -445,6 +444,8 @@ public class Analytics {
 					System.out.println(time + "\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
 				}
 			}
+
+			PrettyPrinter.printDashLine(reportWidth);
 		} catch (IOException e) {
 			System.err.println(e.getMessage());
 		}
@@ -510,9 +511,7 @@ public class Analytics {
 			writer.write("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
 			writer.newLine();
 
-            for (int i = 0; i < 150; i++) {
-                writer.write("-");
-            }
+			PrettyPrinter.writeDashLine(writer, reportWidth);
 
             writer.newLine();
 			String line;
@@ -548,9 +547,7 @@ public class Analytics {
 					}
 				}
 
-				for (int i = 0; i < 150; i++) {
-                	writer.write("-");
-            	}
+				PrettyPrinter.writeDashLine(writer, reportWidth);
 
 				writer.newLine();
 			}
@@ -580,8 +577,7 @@ public class Analytics {
 			writer.newLine();
 			writer.write("Payment ID\t\t|Date & Time\t\t|Food Name\t\t|Qty\t|Price");
 			writer.newLine();
-			writer.write("-----------------------------------------------------------------");
-			writer.newLine();
+			PrettyPrinter.writeDashLine(writer, reportWidth);
 			String line;
 
 			while ((line = reader.readLine()) != null) {
@@ -620,12 +616,14 @@ public class Analytics {
 							writer.newLine();
 						}
 					}
-					writer.write("-----------------------------------------------------------------");
-					writer.newLine();
+
+					PrettyPrinter.writeDashLine(writer, reportWidth);
+
 					writer.write("\t\t\t\t\t\t\t\t\t\t\t\ttotalPrice\t|$" + totalPrice);
 					writer.newLine();
-					writer.write("-----------------------------------------------------------------");
-					writer.newLine();
+
+					PrettyPrinter.writeDashLine(writer, reportWidth);
+
 				}
 			}
 		} catch (IOException e) {
@@ -653,8 +651,9 @@ public class Analytics {
 			writer.newLine();
 			writer.write("Item Name\t\t|Quantity");
 			writer.newLine();
-			writer.write("--------------------------------------------------");
-			writer.newLine();
+
+			PrettyPrinter.writeDashLine(writer, reportWidth);
+
 
 			String line;
 
@@ -690,8 +689,7 @@ public class Analytics {
 			writer.newLine();
 			writer.write("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|TotalPrice");
 			writer.newLine();
-			writer.write("-----------------------------------------------------------------");
-			writer.newLine();
+			PrettyPrinter.writeDashLine(writer, reportWidth);
 
 			String line;
 

@@ -10,7 +10,7 @@ public class MainMenu {
 
     // Initializes scanner and menu width
     private static Scanner input = new Scanner(System.in);
-    private static short menuWidth = 50;
+    private static short menuWidth = 100;
 
     /**
      * Constructs main menu class
@@ -54,12 +54,12 @@ public class MainMenu {
 
 
         // add movies to cinema
-        ticketStaff1.getMovieManager().addMovie(movie1);
-        ticketStaff2.getMovieManager().addMovie(movie2);
-        ticketStaff3.getMovieManager().addMovie(movie3);
-        ticketStaff1.getMovieManager().addMovie(movie4);
-        ticketStaff2.getMovieManager().addMovie(movie5);
-        ticketStaff3.getMovieManager().addMovie(movie6);
+        MovieManager.addMovie(movie1);
+        MovieManager.addMovie(movie2);
+        MovieManager.addMovie(movie3);
+        MovieManager.addMovie(movie4);
+        MovieManager.addMovie(movie5);
+        MovieManager.addMovie(movie6);
 
         // add screen
         Screen screen1 = new Screen((byte) 1, "imax");
@@ -68,6 +68,13 @@ public class MainMenu {
         Screen screen4 = new Screen((byte) 4, "normal");
         Screen screen5 = new Screen((byte) 5, "normal");
         Screen screen6 = new Screen((byte) 6, "normal");
+
+        ScreenManager.addScreen(screen1);
+        ScreenManager.addScreen(screen2);
+        ScreenManager.addScreen(screen3);
+        ScreenManager.addScreen(screen4);
+        ScreenManager.addScreen(screen5);
+        ScreenManager.addScreen(screen6);
 
         // add showtime
         Showtime showtime1 = new Showtime(1, movie1, screen1, LocalTime.of(10, 0));
@@ -82,16 +89,16 @@ public class MainMenu {
         Showtime showtime10 = new Showtime(10, movie6, screen6, LocalTime.of(16, 0));
 
         // register showtimes
-        ticketStaff1.getShowtimeManager().addShowtime(showtime1);
-        ticketStaff2.getShowtimeManager().addShowtime(showtime2);
-        ticketStaff3.getShowtimeManager().addShowtime(showtime3);
-        ticketStaff1.getShowtimeManager().addShowtime(showtime4);
-        ticketStaff2.getShowtimeManager().addShowtime(showtime5);
-        ticketStaff3.getShowtimeManager().addShowtime(showtime6);
-        ticketStaff1.getShowtimeManager().addShowtime(showtime7);
-        ticketStaff2.getShowtimeManager().addShowtime(showtime8);
-        ticketStaff3.getShowtimeManager().addShowtime(showtime9);
-        ticketStaff1.getShowtimeManager().addShowtime(showtime10);
+        ShowtimeManager.addShowtime(showtime1);
+        ShowtimeManager.addShowtime(showtime2);
+        ShowtimeManager.addShowtime(showtime3);
+        ShowtimeManager.addShowtime(showtime4);
+        ShowtimeManager.addShowtime(showtime5);
+        ShowtimeManager.addShowtime(showtime6);
+        ShowtimeManager.addShowtime(showtime7);
+        ShowtimeManager.addShowtime(showtime8);
+        ShowtimeManager.addShowtime(showtime9);
+        ShowtimeManager.addShowtime(showtime10);
 
         // create items
         Item buns = new Item((byte) 1, "buns", (short) 18, (byte) 1);
@@ -132,13 +139,13 @@ public class MainMenu {
         popcorn.addRecipe(corn, (byte) 3);
 
         // add food to menu
-        foodStaff1.getMenuManager().addMenu(burger);
-        foodStaff2.getMenuManager().addMenu(fanta);
-        foodStaff3.getMenuManager().addMenu(hotDog);
-        foodStaff1.getMenuManager().addMenu(pizza);
-        foodStaff2.getMenuManager().addMenu(popcorn);
-        foodStaff3.getMenuManager().addMenu(pepsi);
-        foodStaff1.getMenuManager().addMenu(coke);
+        MenuManager.addMenu(burger);
+        MenuManager.addMenu(fanta);
+        MenuManager.addMenu(hotDog);
+        MenuManager.addMenu(pizza);
+        MenuManager.addMenu(popcorn);
+        MenuManager.addMenu(pepsi);
+        MenuManager.addMenu(coke);
     }
 
     /**
@@ -194,14 +201,19 @@ public class MainMenu {
     private static void addOrRemoveScreen() {
 
         boolean stillContinue = true;
+
         do {
             System.out.println("Choose:");
+
             PrettyPrinter.printDashLine(menuWidth);
+
             System.out.println("1. Add screen");
             System.out.println("2. Remove screen");
             System.out.println("3. Return");
+
             byte option = input.nextByte();
             input.nextLine();
+
             switch (option) {
                 case 1:
                     addScreenMenu();
@@ -213,6 +225,7 @@ public class MainMenu {
                     stillContinue = false;
                     break;
             }
+
         } while (stillContinue);
     }
 
@@ -221,17 +234,16 @@ public class MainMenu {
      */
 
     private static void removeScreenMenu() {
-
         if (!ScreenManager.hasScreens()) {
             System.out.println("No screen available!");
             return ;
         }
 
-        System.out.print("Which screen do you want to remove: ");
+        System.out.println("Which screen do you want to remove: ");
         byte index;
 
         for (int i=1; i<=ScreenManager.getScreens().size(); i++) {
-            System.out.println(i + ". " + ScreenManager.getScreens().get(i).getScreenID());
+            System.out.println(i + ". " + ScreenManager.getScreens().get(i-1).getScreenID());
         }
 
         index = input.nextByte();
@@ -308,7 +320,7 @@ public class MainMenu {
         byte index;
 
         for (int i=1; i<=MovieManager.getMovies().size(); i++) {
-            System.out.println(i + ". " + MovieManager.getMovies().get(i).getTitle());
+            System.out.println(i + ". " + MovieManager.getMovies().get(i-1).getTitle());
         }
 
         index = input.nextByte();
@@ -356,11 +368,11 @@ public class MainMenu {
 
     private static Movie askForMovie() {
 
-        System.out.print("Which movie do you want: ");
+        System.out.println("Which movie do you want: ");
         byte index;
 
         for (int i=1; i<=MovieManager.getMovies().size(); i++) {
-            System.out.println(i + ". " + MovieManager.getMovies().get(i).getTitle());
+            System.out.println(i + ". " + MovieManager.getMovies().get(i-1).getTitle());
         }
 
         index = input.nextByte();
@@ -386,7 +398,7 @@ public class MainMenu {
         byte index;
 
         for (int i=1; i<=ScreenManager.getScreens().size(); i++) {
-            System.out.println(i + ". " + ScreenManager.getScreens().get(i).getScreenID());
+            System.out.println(i + ". " + ScreenManager.getScreens().get(i-1).getScreenID());
         }
 
         index = input.nextByte();
@@ -462,7 +474,7 @@ public class MainMenu {
         byte index;
 
         for (int i=1; i<=ShowtimeManager.getShowtimes().size(); i++) {
-            Showtime showtime = ShowtimeManager.getShowtimes().get(i);
+            Showtime showtime = ShowtimeManager.getShowtimes().get(i-1);
             Movie movie = showtime.getMovie();
             Screen screen = showtime.getScreen();
 
@@ -582,11 +594,11 @@ public class MainMenu {
             return ;
         }
 
-        System.out.print("Which item do you want to remove: ");
+        System.out.println("Which item do you want to remove: ");
         byte index;
 
         for (int i=1; i<=Inventory.getItemList().size(); i++) {
-            System.out.println(i + ". " + Inventory.getItemList().get(i));
+            System.out.println(i + ". " + Inventory.getItemList().get(i-1).getItemName());
         }
 
         index = input.nextByte();
@@ -611,12 +623,16 @@ public class MainMenu {
 
         do {
             System.out.println("Choose:");
+
             PrettyPrinter.printDashLine(menuWidth);
+
             System.out.println("1. Add item");
             System.out.println("2. Remove item");
             System.out.println("3. Return");
+
             byte option = input.nextByte();
             input.nextLine();
+
             switch (option) {
                 case 1:
                     addItemMenu();
@@ -628,6 +644,7 @@ public class MainMenu {
                     stillContinue = false;
                     break;
             }
+
         } while (stillContinue);
     }
 
@@ -725,6 +742,7 @@ public class MainMenu {
         System.out.println("Choose staff role:");
         System.out.println("1. Ticket staff");
         System.out.println("2. Food staff");
+
         byte option = input.nextByte();
         input.nextLine();
 
@@ -757,7 +775,6 @@ public class MainMenu {
 
         System.out.print("Enter schedule (HH:mm-HH:mm): ");
         String schedule = input.nextLine();
-        input.nextLine();
 
         String role = askStaffRole();
 
@@ -785,11 +802,11 @@ public class MainMenu {
             return ;
         }
 
-        System.out.print("Which staff do you want to fire: ");
+        System.out.println("Which staff do you want to fire: ");
         byte index;
 
         for (int i=1; i<=StaffManager.getStaffs().size(); i++) {
-            System.out.println(i + ". " + StaffManager.getStaffs().get(i).getEmployeeName());
+            System.out.println(i + ". " + StaffManager.getStaffs().get(i-1).getEmployeeName());
         }
 
         index = input.nextByte();
@@ -848,7 +865,7 @@ public class MainMenu {
 
         Staff staff = askForStaff();
 
-        System.out.print("MAIN MENU");
+        System.out.println("MAIN MENU");
 
         do {
             // Menu shown to users
@@ -879,6 +896,7 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
+
                     break;
                 // Food staff attempting to perform a job they are not assigned
                 case 2:
@@ -889,24 +907,31 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the ticket booth!");
                     }
+
                     break;
                 // Generates report for date
                 case 3:
                     System.out.print("Enter start time:");
                     LocalDate startReport = askForDate();
+
                     System.out.print("Enter end time:");
                     LocalDate endReport = askForDate();
+
                     staff.getAnalytics().setTimePeriod(startReport, endReport);
                     staff.getAnalytics().generateReport();
+
                     break;
                 // Exports report for date
                 case 4:
                     System.out.print("Enter start time:");
                     LocalDate startExport = askForDate();
+
                     System.out.print("Enter end time:");
                     LocalDate endExport = askForDate();
+
                     staff.getAnalytics().setTimePeriod(startExport, endExport);
                     staff.getAnalytics().exportReport();
+
                     break;
                 case 5:
                     if (staff instanceof TicketStaff) {
@@ -914,6 +939,7 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
+
                     break;
                 case 6:
                     if (staff instanceof TicketStaff) {
@@ -921,6 +947,7 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
+
                     break;
                 case 7:
                     if (staff instanceof TicketStaff) {
@@ -928,6 +955,7 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
+
                     break;
                 case 8:
                     if (staff instanceof FoodStaff) {
@@ -935,6 +963,7 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
+
                     break;
                 case 9:
                     if (staff instanceof FoodStaff) {
@@ -942,6 +971,7 @@ public class MainMenu {
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
+
                     break;
                 case 10:
                     addOrRemoveStaff();
@@ -950,9 +980,12 @@ public class MainMenu {
                 default:
                     stillContinue = false;
                     System.out.println("Exiting the program...");
+
+
                     break;
             }
 
+            PrettyPrinter.printDashLine(menuWidth);
         } while(stillContinue);
 
     }

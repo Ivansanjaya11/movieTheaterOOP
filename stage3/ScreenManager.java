@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class ScreenManager {
 
     // Initializes list for movie screens
-    private static final ArrayList<Screen> screens = new ArrayList<>();
+    private static ArrayList<Screen> screens = new ArrayList<>();
 
     /**
      * Constructs ScreenManager clss

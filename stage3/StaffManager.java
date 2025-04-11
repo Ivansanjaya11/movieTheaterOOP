@@ -58,7 +58,7 @@ public class StaffManager {
      */
 
     public static void removeStaff(byte index) {
-
+        staffs.remove(index);
     }
 
 }
