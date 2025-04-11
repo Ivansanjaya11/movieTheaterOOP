@@ -1,4 +1,4 @@
-/** This class represents the seating availiable within a movie theater
+/** This class represents the seating available within a movie theater
  * @author Logan Cordova
  */
 

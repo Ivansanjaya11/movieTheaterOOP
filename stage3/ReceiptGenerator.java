@@ -1,11 +1,12 @@
 import util.DateAndPaymentTracker;
+import util.PrettyPrinter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.TreeMap;
-import java.util.stream.IntStream;
 
 public class ReceiptGenerator {
+    private static final byte width = 50;
 
     private ReceiptGenerator() {}
 
@@ -26,10 +27,8 @@ public class ReceiptGenerator {
             zeroes += "0";
         }
 
-        // set the payment ID
-        String paymentId = date + "-" + zeroes + customerCount;
-
-        return paymentId;
+        // set and return the payment ID
+        return date + "-" + zeroes + customerCount;
     }
 
     /**
@@ -73,25 +72,20 @@ public class ReceiptGenerator {
         String paymentId = createPaymentID(date, DateAndPaymentTracker.foodCustomerNumOfTheDay);
 
         // updates the inventory (reduce the number of certain ingredients used for the ordered food)
-        InventoryManager.updateInventory(orderedFood);
+        Inventory.updateInventory(orderedFood);
 
-        byte width = 40;
-
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // prints out the detail of the transaction on screen
         System.out.println("Order #" + paymentId);
         System.out.println("This order is for " + customerName);
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // prints out the header of the table
         System.out.println("Food\t\tQty\t\tprice per qty");
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // display all the food ordered
         for (Food aFood : orderedFood.keySet()) {
@@ -100,8 +94,7 @@ public class ReceiptGenerator {
             System.out.println("$" + aFood.getPrice());
         }
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // prints out the price and payment type
         System.out.print("Total price is $" + paymentAmount);
@@ -140,30 +133,24 @@ public class ReceiptGenerator {
         // sets the payment ID
         String paymentId = createPaymentID(date, DateAndPaymentTracker.ticketCustomerNumOfTheDay);
 
-        byte width = 40;
-
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         //Print the receipt
         System.out.println("Order #" + paymentId);
         System.out.println("Order Name: " + customerName);
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // prints the detail of the showtime
         System.out.println("Movie: '" + detail.getShowtime().getMovie().getTitle() + "'");
         System.out.println("Start time: " + detail.getShowtime().getStartTime().toString());
         System.out.println("Screen room #" + detail.getShowtime().getScreen().getScreenID());
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         System.out.println("Ticket type\t\tQty\tTotal price");
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // print the ticket bought
 
@@ -175,8 +162,7 @@ public class ReceiptGenerator {
             System.out.println("IMAX ticket\t\t" + imaxNum + "\t$" + (imaxNum * imaxPrice));
         }
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // prints the seats ordered
         System.out.println("Seats ordered:");
@@ -185,8 +171,7 @@ public class ReceiptGenerator {
             System.out.println("\t- Seat at (" + (aSeat[0]+1) + ", " + (aSeat[1]) + ")");
         }
 
-        IntStream.range(0, width).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine(width);
 
         // prints the total price and payment type
         System.out.print("Total price is $" + paymentAmount);

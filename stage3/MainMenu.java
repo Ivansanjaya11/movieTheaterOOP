@@ -1,9 +1,7 @@
 import util.PrettyPrinter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -543,15 +541,15 @@ public class MainMenu {
 
         do {
             try {
-                System.out.print("Enter the day:");
+                System.out.print("\tEnter the day:");
                 int day = input.nextInt();
                 input.nextLine();
 
-                System.out.print("Enter the month:");
+                System.out.print("\tEnter the month:");
                 int month = input.nextInt();
                 input.nextLine();
 
-                System.out.print("Enter the year:");
+                System.out.print("\tEnter the year:");
                 int year = input.nextInt();
                 input.nextLine();
 
@@ -597,9 +595,6 @@ public class MainMenu {
      */
 
     public static void removeItemMenu() {
-
-        InventoryManager.getInventory();
-
         // Checks if list has the input item
         if (!Inventory.hasItems()) {
             System.out.println("No item available!");

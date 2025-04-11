@@ -1,5 +1,11 @@
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 import util.Path;
 
@@ -12,12 +18,12 @@ public class Inventory {
 	public static final String RESET = "\033[0m";
 	public static final String RED = "\033[0;31m";
 
-	/**
-	 * Constructs an Inventory object and initializes the item list by reading
-	 * inventory data from the file if it is not empty.
-	 */
+	private Inventory() {}
 
-	public Inventory() {
+	/**
+	 * populate the inventory data from the file if it is not empty.
+	 */
+	static {
 
 		/*
 		 * whenever the program starts and the inventory object is initialized,
@@ -92,13 +98,14 @@ public class Inventory {
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
 
-	public Item getItem(byte itemId) {
+	public static Item getItem(byte itemId) {
 
 		for (Item item : itemList) {
 			if (item.hasItemId() && item.getItemId() == itemId) {
 				return item;
 			}
 		}
+
 		System.out.println(RED + "There is no item with id #"+ itemId + " in the inventory" + RESET);
 		return null;
 	}
@@ -147,7 +154,7 @@ public class Inventory {
 	 * @param foodOrder The list of food orders containing food and quantity.
 	 */
 
-	public void updateInventory(TreeMap<Food, Byte> foodOrder) {
+	public static void updateInventory(TreeMap<Food, Byte> foodOrder) {
 
 		TreeMap<Item, Short> itemsToBeUpdated = new TreeMap<>();
 
@@ -178,7 +185,7 @@ public class Inventory {
 		}
 
 		// call a method that will alert for low stock if the item is low in quantity
-		this.alertLowStock();
+		alertLowStock();
 
 		FilesUpdateManager.updateInventoryFile(itemList); // update the state of the inventory file
 	}
@@ -190,7 +197,7 @@ public class Inventory {
 	 * If the quantity is low, the system will automatically order more items.
 	 */
 
-	private void alertLowStock() {
+	private static void alertLowStock() {
 
 		byte minimum = 15; // sets the limit of low stock in a certain unit quantity
 
@@ -200,12 +207,12 @@ public class Inventory {
 				if (item.getQuantity() <= minimum) {
 					// if quantity gets lower than the limit, order more item
 					System.out.println("Item quantity of " + item.getItemName() + " in the inventory is low!");
-					this.orderMoreItems(item);
+					orderMoreItems(item);
 				}
 			} else {
 				// if item in the inventory is empty, print a different message and order the items
 				System.out.println("Item in the inventory is empty!");
-				this.orderMoreItems(item);
+				orderMoreItems(item);
 			}
 
 		}
@@ -219,7 +226,7 @@ public class Inventory {
 	 * @param item The item that needs to be ordered.
 	 */
 
-	private void orderMoreItems(Item item) {
+	private static void orderMoreItems(Item item) {
 
 		short buyingQuantity = 250; // sets the quantity bought everytime the item quantity gets low
 		short totalPrice = (short) (buyingQuantity * item.getBuyingCost()); // calculate the total price
