@@ -234,6 +234,8 @@ public class MainMenu {
      */
 
     private static void removeScreenMenu() {
+
+        // Checks if screen exists in theater
         if (!ScreenManager.hasScreens()) {
             System.out.println("No screen available!");
             return ;
@@ -262,6 +264,8 @@ public class MainMenu {
      */
 
     private static void addScreenMenu() {
+
+        // Prompts user for screen information to be added to menu
         System.out.print("Enter screen id: ");
         byte id = input.nextByte();
         input.nextLine();
@@ -311,6 +315,7 @@ public class MainMenu {
 
     private static void removeMovieMenu() {
 
+        // Checks if movie exists in theater
         if (!MovieManager.hasMovies()) {
             System.out.println("No movie available!");
             return ;
@@ -340,6 +345,7 @@ public class MainMenu {
 
     private static void addMovieMenu() {
 
+        // Prompts user to enter movie information to be added to menu
         System.out.print("Enter movie id: ");
 
         byte id = input.nextByte();
@@ -371,6 +377,7 @@ public class MainMenu {
         System.out.println("Which movie do you want: ");
         byte index;
 
+        // Provides movie selection options to user
         for (int i=1; i<=MovieManager.getMovies().size(); i++) {
             System.out.println(i + ". " + MovieManager.getMovies().get(i-1).getTitle());
         }
@@ -397,6 +404,7 @@ public class MainMenu {
         System.out.print("Which screen do you want: ");
         byte index;
 
+        // Provides screen selection options to user
         for (int i=1; i<=ScreenManager.getScreens().size(); i++) {
             System.out.println(i + ". " + ScreenManager.getScreens().get(i-1).getScreenID());
         }
@@ -465,6 +473,7 @@ public class MainMenu {
 
     private static void removeShowtimeMenu() {
 
+        // Ensures menu has provided showtime
         if (!ShowtimeManager.hasShowtimes()) {
             System.out.println("No showtime available!");
             return ;
@@ -473,6 +482,7 @@ public class MainMenu {
         System.out.print("Which showtime do you want to remove: ");
         byte index;
 
+        // Removes input showtime from menu
         for (int i=1; i<=ShowtimeManager.getShowtimes().size(); i++) {
             Showtime showtime = ShowtimeManager.getShowtimes().get(i-1);
             Movie movie = showtime.getMovie();
@@ -558,6 +568,7 @@ public class MainMenu {
 
     public static void addItemMenu() {
 
+        // Prompts user to enter item information to be added to menu
         System.out.print("Enter item id: ");
 
         byte id = input.nextByte();
@@ -589,6 +600,7 @@ public class MainMenu {
 
         InventoryManager.getInventory();
 
+        // Checks if list has the input item
         if (!Inventory.hasItems()) {
             System.out.println("No item available!");
             return ;
@@ -657,6 +669,7 @@ public class MainMenu {
         boolean stillContinue = true;
 
         do {
+            //Provides the user with options to add or remove food items from menu or return
             System.out.println("Choose:");
             PrettyPrinter.printDashLine(menuWidth);
             System.out.println("1. Add food");
@@ -684,6 +697,7 @@ public class MainMenu {
 
     private static void removeFoodMenu() {
 
+        // Food staff duties for removing food items from the menu
         if (!MenuManager.hasMenu()) {
             System.out.println("No Food available!");
             return ;
@@ -714,6 +728,7 @@ public class MainMenu {
 
     private static void addFoodMenu() {
 
+        // Food staff duties when adding food items to the menu
         System.out.print("Enter food id: ");
         byte id = input.nextByte();
         input.nextLine();
@@ -746,6 +761,7 @@ public class MainMenu {
         byte option = input.nextByte();
         input.nextLine();
 
+        // Type of staff member
         if (option > 0 && option < 3) {
             if (option == 1) {
                 return "ticket";
@@ -762,6 +778,7 @@ public class MainMenu {
 
     private static void addStaffMenu() {
 
+        // Prompts user to enter staff information:
         System.out.print("Enter staff id: ");
         byte id = input.nextByte();
         input.nextLine();
@@ -778,6 +795,7 @@ public class MainMenu {
 
         String role = askStaffRole();
 
+        // Checks if staff has given staff ID
         if (!StaffManager.contains(id)) {
             if (role.equals("ticket")) {
                 StaffManager.addStaff(new TicketStaff(name, id, rate, schedule));
@@ -797,6 +815,7 @@ public class MainMenu {
 
     private static void removeStaffMenu() {
 
+        //Ensures the staff list has staff members
         if (!StaffManager.hasStaffs()) {
             System.out.println("No staff available!");
             return ;
@@ -828,6 +847,7 @@ public class MainMenu {
 
         boolean stillContinue = true;
 
+        // Provides options to the user while they are still selecting
         do {
             System.out.println("Choose:");
             PrettyPrinter.printDashLine(menuWidth);
@@ -933,6 +953,7 @@ public class MainMenu {
                     staff.getAnalytics().exportReport();
 
                     break;
+                // Ensure food stand staff are working where assigned
                 case 5:
                     if (staff instanceof TicketStaff) {
                         addOrRemoveMovie();
@@ -941,6 +962,7 @@ public class MainMenu {
                     }
 
                     break;
+                // Ensure food stand staff are working where assigned
                 case 6:
                     if (staff instanceof TicketStaff) {
                         addOrRemoveScreen();
@@ -949,6 +971,7 @@ public class MainMenu {
                     }
 
                     break;
+                // Ensure food stand staff are working where assigned
                 case 7:
                     if (staff instanceof TicketStaff) {
                         addOrRemoveShowtime();
@@ -957,6 +980,7 @@ public class MainMenu {
                     }
 
                     break;
+                // Ensure food stand staff are working where assigned
                 case 8:
                     if (staff instanceof FoodStaff) {
                         addOrRemoveFood();
@@ -965,6 +989,7 @@ public class MainMenu {
                     }
 
                     break;
+                // Ensure food stand staff are working where assigned
                 case 9:
                     if (staff instanceof FoodStaff) {
                         addOrRemoveItem();
@@ -973,6 +998,7 @@ public class MainMenu {
                     }
 
                     break;
+                // Adds / Removes staff
                 case 10:
                     addOrRemoveStaff();
                     break;
@@ -980,7 +1006,6 @@ public class MainMenu {
                 default:
                     stillContinue = false;
                     System.out.println("Exiting the program...");
-
 
                     break;
             }
