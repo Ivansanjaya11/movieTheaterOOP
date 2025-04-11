@@ -716,7 +716,9 @@ public class Analytics {
 
 			writer.write("Below is the content of the inventory as of " + LocalDateTime.now() + ":");
 			writer.newLine();
-			writer.write("Item Name\t\t|Quantity");
+
+			writer.write(PrettyPrinter.addWhitespace("Item Name", shortStrWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Quantity", numericWidth));
 			writer.newLine();
 
 			PrettyPrinter.writeDashLine(writer, reportWidth);
@@ -727,7 +729,9 @@ public class Analytics {
 			while ((line = reader.readLine()) != null) {
 				String itemName = line.split(",")[1];
 				short quantity = Short.parseShort(line.split(",")[2]);
-				writer.write(itemName + "\t\t\t|" + quantity);
+
+				writer.write(PrettyPrinter.addWhitespace(itemName, shortStrWidth) + "|");
+				writer.write(String.valueOf(quantity));
 				writer.newLine();
 			}
 		} catch (IOException e) {
@@ -754,8 +758,13 @@ public class Analytics {
 
 			writer.write("Below is the inventory item order history: ");
 			writer.newLine();
-			writer.write("Date & Time\t\t\t\t\t\t|Name\t\t|Qty\t\t|TotalPrice");
-			writer.newLine();
+
+			writer.write(PrettyPrinter.addWhitespace("Date & Time", timeWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Name", shortStrWidth) + "|");
+			writer.write(PrettyPrinter.addWhitespace("Qty", numericWidth) + "|");
+			writer.write("Total Price\n");
+
+
 			PrettyPrinter.writeDashLine(writer, reportWidth);
 
 			String line;
@@ -766,7 +775,10 @@ public class Analytics {
 				short quantity = Short.parseShort(line.split(",")[2]);
 				short totalPrice = Short.parseShort(line.split(",")[3]);
 				if (this.hasTimePeriod() && time.isAfter(this.timePeriodStart) && time.isBefore(this.timePeriodEnd)) {
-					writer.write(time + "\t|" + itemName + "\t\t|" + quantity + "\t\t|" + totalPrice);
+					writer.write(PrettyPrinter.addWhitespace(time.toString(), timeWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(itemName, shortStrWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(String.valueOf(quantity), numericWidth) + "|");
+					writer.write(PrettyPrinter.addWhitespace(String.valueOf(totalPrice), (byte)(numericWidth - 1)) + "\n");
 					writer.newLine();
 				}
 			}
