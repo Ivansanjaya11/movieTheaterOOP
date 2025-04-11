@@ -6,12 +6,9 @@ public class DetailTicketBought extends Detail{
     private ArrayList<byte[]> chosenSeats;
     private byte normalNum;
     private byte imaxNum;
-    private Customer customer;
-    private short paymentAmount;
     private byte normalPrice;
     private byte imaxPrice;
     private Showtime showtime;
-    private String paymentType;
 
     /**
      * Constructs DetailTicketBought method
