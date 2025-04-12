@@ -268,7 +268,7 @@ public class SubMenu {
                     SubSubMenuStaff.displayStaff();
                     break;
                 case 4:
-                    SubSubMenuStaff.updateStaff();
+                    SubSubMenuStaff.updateStaffMenu();
                 default:
                     stillContinue = false;
                     break;

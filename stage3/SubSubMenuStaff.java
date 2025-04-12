@@ -72,7 +72,7 @@ public class SubSubMenuStaff {
         }
     }
 
-    public static void updateStaff() {
+    public static void updateStaffMenu() {
         //Ensures the staff list has staff members
         if (!StaffManager.hasStaffs()) {
             System.out.println("No staff available!");
@@ -89,8 +89,6 @@ public class SubSubMenuStaff {
         index = input.nextByte();
         input.nextLine();
         index -=1;
-
-        Staff staff = StaffManager.getStaffs().get(index);
 
         System.out.print("Enter staff name: ");
         String employeeName = input.nextLine();
