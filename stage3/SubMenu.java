@@ -55,7 +55,7 @@ public class SubMenu {
      * Allows for movies to be added or removed from menu list
      */
 
-    public static void addOrRemoveOrDisplayMovie() {
+    public static void addOrRemoveOrDisplayOrUpdateMovie() {
 
         boolean stillContinue = true;
 
@@ -65,7 +65,8 @@ public class SubMenu {
             System.out.println("1. Add movie");
             System.out.println("2. Remove movie");
             System.out.println("3. Display movie");
-            System.out.println("4. Return");
+            System.out.println("4. Update movie");
+            System.out.println("5. Return");
             byte option = input.nextByte();
             input.nextLine();
             switch (option) {
@@ -78,6 +79,8 @@ public class SubMenu {
                 case 3:
                     SubSubMenuTicket.displayMovie();
                     break;
+                case 4:
+                    SubSubMenuTicket.updateMovieMenu();
                 default:
                     stillContinue = false;
                     break;

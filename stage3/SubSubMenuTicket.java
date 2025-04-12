@@ -109,7 +109,7 @@ public class SubSubMenuTicket {
             return ;
         }
 
-        System.out.print("Which movie do you want to remove: ");
+        System.out.println("Which movie do you want to remove: ");
         byte index;
 
         for (int i=1; i<=MovieManager.getMovies().size(); i++) {
@@ -122,6 +122,46 @@ public class SubSubMenuTicket {
 
         if (index >=0 && index < MovieManager.getMovies().size()) {
             MovieManager.removeMovie(index);
+        } else {
+            System.out.println("Movie does not exist!");
+        }
+    }
+
+    public static void updateMovieMenu() {
+
+        // Checks if movie exists in theater
+        if (!MovieManager.hasMovies()) {
+            System.out.println("No movie available!");
+            return ;
+        }
+
+        System.out.println("Which movie do you want to update: ");
+        byte index;
+
+        for (int i=1; i<=MovieManager.getMovies().size(); i++) {
+            System.out.println(i + ". " + MovieManager.getMovies().get(i-1).getTitle());
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        System.out.print("Enter movie ID: ");
+        byte movieID = input.nextByte();
+        input.nextLine();
+
+        System.out.print("Enter movie title: ");
+        String title = input.nextLine();
+
+        System.out.print("Enter movie genre: ");
+        String genre = input.nextLine();
+
+        System.out.print("Enter movie duration (in minutes): ");
+        short durationMinutes = input.nextShort();
+        input.nextLine();
+
+        if (index >=0 && index < MovieManager.getMovies().size()) {
+            MovieManager.updateMovie(index, new Movie(movieID, title, genre, durationMinutes));
         } else {
             System.out.println("Movie does not exist!");
         }

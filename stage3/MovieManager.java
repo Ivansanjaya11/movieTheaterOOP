@@ -134,4 +134,8 @@ public class MovieManager {
 
         return false;
     }
+
+    public static void updateMovie(byte index, Movie movie) {
+        movies.set(index, movie);
+    }
 }
