@@ -211,7 +211,7 @@ public class SubMenu {
      * Removes selected food item
      */
 
-    public static void addOrRemoveOrDisplayFood() {
+    public static void addOrRemoveOrDisplayOrUpdateFood() {
 
         boolean stillContinue = true;
 
@@ -222,7 +222,8 @@ public class SubMenu {
             System.out.println("1. Add food");
             System.out.println("2. Remove food");
             System.out.println("3. Display food");
-            System.out.println("4. Return");
+            System.out.println("4. Update food");
+            System.out.println("5. Return");
             byte option = input.nextByte();
             input.nextLine();
             switch (option) {
@@ -235,6 +236,8 @@ public class SubMenu {
                 case 3:
                     SubSubMenuFood.displayFood();
                     break;
+                case 4:
+                    SubSubMenuFood.updateFoodMenu();
                 default:
                     stillContinue = false;
                     break;

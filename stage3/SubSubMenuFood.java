@@ -63,6 +63,46 @@ public class SubSubMenuFood {
         }
     }
 
+    public static void updateFoodMenu() {
+        if (!MenuManager.hasMenu()) {
+            System.out.println("No Food available!");
+            return ;
+        }
+
+        System.out.println("Which food do you want to update: ");
+        byte index;
+
+        for (int i=1; i<=MenuManager.getMenuList().size(); i++) {
+            System.out.println(i + ". " + MenuManager.getMenuList().get(i-1).getMenuName());
+        }
+
+        index = input.nextByte();
+        input.nextLine();
+        index -=1;
+
+        System.out.print("Enter menu ID: ");
+        byte menuId = input.nextByte();
+        input.nextLine();
+
+        System.out.print("Enter menu name: ");
+        String menuName = input.nextLine();
+
+        System.out.print("Enter price: ");
+        byte price = input.nextByte();
+        input.nextLine();
+
+
+        if (index >=0 && index < MenuManager.getMenuList().size()) {
+            TreeMap<Item, Byte> recipe = MenuManager.getMenuList().get(index).getRecipe();
+            Food food = new Food(menuId, menuName, price);
+            food.setRecipe(recipe);
+            MenuManager.updateMenu(index, food);
+
+        } else {
+            System.out.println("Movie does not exist!");
+        }
+    }
+
     /**
      * Displays food menu list
      */

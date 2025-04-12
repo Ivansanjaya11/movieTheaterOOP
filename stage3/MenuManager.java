@@ -85,4 +85,8 @@ public class MenuManager {
 
     }
 
+    public static void updateMenu(byte index, Food food) {
+        menuList.set(index, food);
+    }
+
 }

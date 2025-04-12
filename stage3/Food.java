@@ -136,6 +136,10 @@ public class Food implements Comparable<Food>{
 		}
 	}
 
+	public void setRecipe(TreeMap<Item, Byte> newRecipe) {
+		this.recipe = newRecipe;
+	}
+
 	/**
 	 * Checks if the menu ID is set.
 	 * @return True if the menu ID is not zero, otherwise false.
