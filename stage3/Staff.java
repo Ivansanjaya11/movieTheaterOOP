@@ -195,4 +195,9 @@ public class Staff {
     public void setAnalytics(Analytics analytics) {
         this.analytics = analytics;
     }
+
+    @Override
+    public String toString() {
+        return this.getRole() + " staff: " + this.getEmployeeName();
+    }
 }

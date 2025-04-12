@@ -143,4 +143,16 @@ public class Showtime {
 
         return false;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        str = str + "Showtime ID: #" + this.showtimeID;
+        str = str + "\n\t" + "Movie: " + this.movie.getTitle();
+        str = str + "\n\t" + "Displayed on " + this.screen;
+        str = str + "\n\t" + "Show starts at " + this.startTime;
+
+        return str;
+    }
 }

@@ -67,4 +67,14 @@ public class Screen {
         this.screenType = screenType;
     }
 
+    @Override
+    public String toString() {
+        String str = "";
+
+        str = str + "screen: #" + this.screenID;
+        str = str + "; screen type: " + this.screenType;
+
+        return str;
+    }
+
 }

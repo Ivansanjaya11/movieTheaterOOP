@@ -1,6 +1,5 @@
 import util.PrettyPrinter;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Scanner;
 
@@ -154,7 +153,7 @@ public class MainMenu {
 
     public static void showMenu() {
 
-        createObjects();
+        createObjects(); // create dummy information (because no data persistence yet)
 
         boolean stillContinue = true;
 
@@ -170,13 +169,13 @@ public class MainMenu {
             System.out.println("2.  Order food/drink");
             System.out.println("3.  Show report");
             System.out.println("4.  export report");
-            System.out.println("5.  Add/remove movie");
-            System.out.println("6.  Add/remove screen");
-            System.out.println("7.  Add/remove showtime");
-            System.out.println("8.  Add/remove food");
-            System.out.println("9.  Add/remove item");
-            System.out.println("10. Add/remove staff");
-            System.out.println("11. Add/remove recipe");
+            System.out.println("5.  Add/remove/display movie");
+            System.out.println("6.  Add/remove/display screen");
+            System.out.println("7.  Add/remove/display showtime");
+            System.out.println("8.  Add/remove/display food");
+            System.out.println("9.  Add/remove/display item");
+            System.out.println("10. Add/remove/display staff");
+            System.out.println("11. Add/remove/display recipe");
             System.out.println("12. Exit the program");
 
             byte option = input.nextByte();
@@ -218,7 +217,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 5:
                     if (staff instanceof TicketStaff) {
-                        SubMenu.addOrRemoveMovie();
+                        SubMenu.addOrRemoveOrDisplayMovie();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -227,7 +226,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 6:
                     if (staff instanceof TicketStaff) {
-                        SubMenu.addOrRemoveScreen();
+                        SubMenu.addOrRemoveOrRemoveScreen();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -236,7 +235,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 7:
                     if (staff instanceof TicketStaff) {
-                        SubMenu.addOrRemoveShowtime();
+                        SubMenu.addOrRemoveOrDisplayShowtime();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -245,7 +244,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 8:
                     if (staff instanceof FoodStaff) {
-                        SubMenu.addOrRemoveFood();
+                        SubMenu.addOrRemoveOrDisplayFood();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -254,7 +253,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 9:
                     if (staff instanceof FoodStaff) {
-                        SubMenu.addOrRemoveItem();
+                        SubMenu.addOrRemoveOrDisplayItem();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
@@ -262,10 +261,10 @@ public class MainMenu {
                     break;
                 // Adds / Removes staff
                 case 10:
-                    SubMenu.addOrRemoveStaff();
+                    SubMenu.addOrRemoveOrDisplayStaff();
                     break;
                 case 11:
-                    SubMenu.addOrRemoveRecipe();
+                    SubMenu.addOrRemoveOrDisplayRecipe();
                     break;
                 // If the user chooses to no longer continue
                 default:

@@ -178,4 +178,13 @@ public class Item implements Comparable<Item> {
 	public int compareTo(Item otherItem) {
 		return Integer.compare(this.itemId, otherItem.getItemId());
 	}
+
+	@Override
+	public String toString() {
+		String str = "";
+		str = str + "item name: " + this.itemName;
+		str = str + "\n\tcurrent quantity in inventory: " + this.quantity + " unit(s)";
+		str = str + "\n\tcost per unit to buy from supplier: $" + this.buyingCost;
+		return str;
+	}
 }

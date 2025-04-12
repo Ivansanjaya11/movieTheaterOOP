@@ -70,4 +70,10 @@ public class SubSubMenuStaff {
         }
     }
 
+    public static void displayStaff() {
+        for (Staff staff : StaffManager.getStaffs()) {
+            System.out.println(staff);
+        }
+    }
+
 }

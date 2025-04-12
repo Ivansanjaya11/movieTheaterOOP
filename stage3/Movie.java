@@ -88,4 +88,13 @@ public class Movie {
     public void setDurationMinutes(short durationMinutes) {
         this.durationMinutes = durationMinutes;
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+        str = str + "Movie title: " + this.title;
+        str = str + "\n\tgenre: " + this.genre;
+        str = str + "\n\tduration: " + this.durationMinutes;
+        return str;
+    }
 }

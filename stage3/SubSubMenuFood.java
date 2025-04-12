@@ -1,4 +1,6 @@
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class SubSubMenuFood {
     private static final Scanner input = new Scanner(System.in);
@@ -56,6 +58,12 @@ public class SubSubMenuFood {
             MenuManager.removeMenu(id);
         } else {
             System.out.println("Movie does not exist!");
+        }
+    }
+
+    public static void displayFood() {
+        for (Food food : MenuManager.getMenuList()) {
+            System.out.println(food);
         }
     }
 
@@ -119,6 +127,12 @@ public class SubSubMenuFood {
         }
     }
 
+    public static void displayItem() {
+        for (Item item : Inventory.getItemList()) {
+            System.out.println(item);
+        }
+    }
+
     public static void addRecipeMenu() {
         Food food = Prompt.askForFood();
         Item item = Prompt.askForItemRecipe();
@@ -139,5 +153,19 @@ public class SubSubMenuFood {
         Food food = Prompt.askForFood();
         Item item = Prompt.askForItemRecipe(food);
         food.removeRecipe(item.getItemId());
+    }
+
+    public static void displayRecipe() {
+        Food food = Prompt.askForFood();
+
+        TreeMap<Item, Byte> recipe = food.getRecipe();
+
+        System.out.println("The following is the recipe for " + food.getMenuName() + ":");
+
+        for (Map.Entry<Item, Byte> entry : recipe.entrySet()) {
+            Item item = entry.getKey();
+            byte qty = entry.getValue();
+            System.out.println("- " + qty + " unit(s) of " + item.getItemName() + " required");
+        }
     }
 }

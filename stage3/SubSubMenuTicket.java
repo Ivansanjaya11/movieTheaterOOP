@@ -54,7 +54,11 @@ public class SubSubMenuTicket {
         }
     }
 
-
+    public static void displayScreen() {
+        for (Screen screen : ScreenManager.getScreens()) {
+            System.out.println(screen);
+        }
+    }
 
 
     /**
@@ -116,6 +120,12 @@ public class SubSubMenuTicket {
         }
     }
 
+    public static void displayMovie() {
+        for (Movie movie : MovieManager.getMovies()) {
+            System.out.println(movie);
+        }
+    }
+
     /**
      * Provides showtime menu for movie, screen, and time
      */
@@ -172,6 +182,12 @@ public class SubSubMenuTicket {
             ShowtimeManager.removeShowtime(index);
         } else {
             System.out.println("Movie does not exist!");
+        }
+    }
+
+    public static void displayShowtime() {
+        for (Showtime showtime : ShowtimeManager.getShowtimes()) {
+            System.out.println(showtime);
         }
     }
 

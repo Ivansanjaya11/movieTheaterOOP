@@ -167,11 +167,13 @@ public class Food implements Comparable<Food>{
 	 * Displays information about the menu item.
 	 */
 
-	public void aboutMenu() {
-
-		System.out.println("This is menu number " + this.menuId);
-		System.out.println("The name is " + this.menuName);
-		System.out.println("The price for 1 portion is " + this.price);
+	@Override
+	public String toString() {
+		String str = "";
+		str = str + "This is menu number " + this.menuId;
+		str = str + "\n\tThe name is " + this.menuName;
+		str = str + "\n\tThe price for 1 portion is " + this.price;
+		return str;
 	}
 
 	/**

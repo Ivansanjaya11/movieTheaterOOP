@@ -14,7 +14,7 @@ public class SubMenu {
      * Allows for the addition or removal of a movie screen
      */
 
-    public static void addOrRemoveScreen() {
+    public static void addOrRemoveOrRemoveScreen() {
 
         boolean stillContinue = true;
 
@@ -25,7 +25,8 @@ public class SubMenu {
 
             System.out.println("1. Add screen");
             System.out.println("2. Remove screen");
-            System.out.println("3. Return");
+            System.out.println("3. Display screen");
+            System.out.println("4. Return");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -36,6 +37,9 @@ public class SubMenu {
                     break;
                 case 2:
                     SubSubMenuTicket.removeScreenMenu();
+                    break;
+                case 3:
+                    SubSubMenuTicket.displayScreen();
                     break;
                 default:
                     stillContinue = false;
@@ -50,7 +54,7 @@ public class SubMenu {
      * Allows for movies to be added or removed from menu list
      */
 
-    public static void addOrRemoveMovie() {
+    public static void addOrRemoveOrDisplayMovie() {
 
         boolean stillContinue = true;
 
@@ -59,7 +63,8 @@ public class SubMenu {
             PrettyPrinter.printDashLine(menuWidth);
             System.out.println("1. Add movie");
             System.out.println("2. Remove movie");
-            System.out.println("3. Return");
+            System.out.println("3. Display movie");
+            System.out.println("4. Return");
             byte option = input.nextByte();
             input.nextLine();
             switch (option) {
@@ -68,6 +73,9 @@ public class SubMenu {
                     break;
                 case 2:
                     SubSubMenuTicket.removeMovieMenu();
+                    break;
+                case 3:
+                    SubSubMenuTicket.displayMovie();
                     break;
                 default:
                     stillContinue = false;
@@ -83,7 +91,7 @@ public class SubMenu {
      * Allows for the addition or removal of a movie showtime
      */
 
-    public static void addOrRemoveShowtime() {
+    public static void addOrRemoveOrDisplayShowtime() {
 
         boolean stillContinue = true;
 
@@ -92,7 +100,8 @@ public class SubMenu {
             PrettyPrinter.printDashLine(menuWidth);
             System.out.println("1. Add showtime");
             System.out.println("2. Remove showtime");
-            System.out.println("3. Return");
+            System.out.println("3. Display showtime");
+            System.out.println("4. Return");
             byte option = input.nextByte();
             input.nextLine();
             switch (option) {
@@ -102,6 +111,9 @@ public class SubMenu {
                 case 2:
                     SubSubMenuTicket.removeShowtimeMenu();
                     break;
+                case 3:
+                    SubSubMenuTicket.displayShowtime();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -109,7 +121,7 @@ public class SubMenu {
         } while (stillContinue);
     }
 
-    public static void addOrRemoveRecipe() {
+    public static void addOrRemoveOrDisplayRecipe() {
         boolean stillContinue = true;
 
         do {
@@ -119,7 +131,8 @@ public class SubMenu {
 
             System.out.println("1. Add recipe");
             System.out.println("2. Remove recipe");
-            System.out.println("3. Return");
+            System.out.println("3. Display recipe");
+            System.out.println("4. Return");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -131,6 +144,8 @@ public class SubMenu {
                 case 2:
                     SubSubMenuFood.removeRecipeMenu();
                     break;
+                case 3:
+                    SubSubMenuFood.displayRecipe();
                 default:
                     stillContinue = false;
                     break;
@@ -142,7 +157,7 @@ public class SubMenu {
      * Allows for the addition or removal of movie theater items
      */
 
-    public static void addOrRemoveItem() {
+    public static void addOrRemoveOrDisplayItem() {
 
         boolean stillContinue = true;
 
@@ -153,7 +168,8 @@ public class SubMenu {
 
             System.out.println("1. Add item");
             System.out.println("2. Remove item");
-            System.out.println("3. Return");
+            System.out.println("3. Display item");
+            System.out.println("4. Return");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -164,6 +180,9 @@ public class SubMenu {
                     break;
                 case 2:
                     SubSubMenuFood.removeItemMenu();
+                    break;
+                case 3:
+                    SubSubMenuFood.displayItem();
                     break;
                 default:
                     stillContinue = false;
@@ -177,7 +196,7 @@ public class SubMenu {
      * Removes selected food item
      */
 
-    public static void addOrRemoveFood() {
+    public static void addOrRemoveOrDisplayFood() {
 
         boolean stillContinue = true;
 
@@ -187,7 +206,8 @@ public class SubMenu {
             PrettyPrinter.printDashLine(menuWidth);
             System.out.println("1. Add food");
             System.out.println("2. Remove food");
-            System.out.println("3. Return");
+            System.out.println("3. Display food");
+            System.out.println("4. Return");
             byte option = input.nextByte();
             input.nextLine();
             switch (option) {
@@ -196,6 +216,9 @@ public class SubMenu {
                     break;
                 case 2:
                     SubSubMenuFood.removeFoodMenu();
+                    break;
+                case 3:
+                    SubSubMenuFood.displayFood();
                     break;
                 default:
                     stillContinue = false;
@@ -208,7 +231,7 @@ public class SubMenu {
      * Allows for the addition or removal of staff member from staff manu list
      */
 
-    public static void addOrRemoveStaff() {
+    public static void addOrRemoveOrDisplayStaff() {
 
         boolean stillContinue = true;
 
@@ -219,7 +242,8 @@ public class SubMenu {
 
             System.out.println("1. Add staff");
             System.out.println("2. Remove staff");
-            System.out.println("3. Return");
+            System.out.println("3. Display staff");
+            System.out.println("4. Return");
             byte option = input.nextByte();
             input.nextLine();
 
@@ -229,6 +253,9 @@ public class SubMenu {
                     break;
                 case 2:
                     SubSubMenuStaff.removeStaffMenu();
+                    break;
+                case 3:
+                    SubSubMenuStaff.displayStaff();
                     break;
                 default:
                     stillContinue = false;
