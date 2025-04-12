@@ -46,10 +46,6 @@ public class AnalyticsExporter extends Analytics{
             writer.write(PrettyPrinter.addWhitespace("Start", numericWidth) + "|");
             writer.write("Seats\n");
 
-
-            //writer.write("Payment ID\t\t\t|Timestamp\t\t\t|Total\t|Qty\t|Type\t|Scr ID\t|Movie\t\t\t\t|Start\t\t|Seats\t\t");
-            //writer.newLine();
-
             PrettyPrinter.writeDashLine(writer, reportWidth);
 
             String line;
@@ -80,7 +76,6 @@ public class AnalyticsExporter extends Analytics{
                     writer.write(PrettyPrinter.addWhitespace(movieTitle, longStrWidth) + "|");
                     writer.write(PrettyPrinter.addWhitespace(startTime, numericWidth) + "|");
 
-                    //	writer.write(paymentId + "\t\t|" + timestamp + "\t|$" + paymentAmount + "\t|" + quantity + "\t\t|" + screenType + "\t|" + screenId + "\t\t|" + movieTitle + "\t\t\t|" + startTime + "\t\t|");
                     for (int i=0; i<seatsPosition.length; i+=2) {
                         String row = seatsPosition[i].trim();
                         String col = seatsPosition[i+1].trim();
