@@ -64,7 +64,7 @@ public class Prompt {
 
     public static Staff askForStaff() {
 
-        System.out.print("LOG IN");
+        System.out.println("LOG IN");
 
         PrettyPrinter.printDashLine((short) 50);
 

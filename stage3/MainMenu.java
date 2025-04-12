@@ -98,7 +98,7 @@ public class MainMenu {
         ShowtimeManager.addShowtime(showtime10);
 
         // create items
-        Item buns = new Item((byte) 1, "buns", (short) 18, (byte) 1);
+        Item buns = new Item((byte) 1, "buns", (short) 17, (byte) 1);
         Item tomato = new Item((byte) 2, "tomato", (short) 34, (byte) 1);
         Item cheese = new Item((byte) 3, "cheese", (short) 23, (byte) 2);
         Item meat = new Item((byte) 4, "meat", (short) 46, (byte) 4);
@@ -246,7 +246,7 @@ public class MainMenu {
                     if (staff instanceof FoodStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateFood();
                     } else {
-                        System.out.println("Invalid! You are working at the food stand!");
+                        System.out.println("Invalid! You are working at the ticket stand!");
                     }
 
                     break;
@@ -255,7 +255,7 @@ public class MainMenu {
                     if (staff instanceof FoodStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateItem();
                     } else {
-                        System.out.println("Invalid! You are working at the food stand!");
+                        System.out.println("Invalid! You are working at the ticket stand!");
                     }
 
                     break;
