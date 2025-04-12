@@ -206,26 +206,12 @@ public class MainMenu {
                     break;
                 // Generates report for date
                 case 3:
-                    System.out.println("Enter start time:");
-                    LocalDate startReport = Prompt.askForDate();
-
-                    System.out.println("Enter end time:");
-                    LocalDate endReport = Prompt.askForDate();
-
-                    staff.getAnalytics().setTimePeriod(startReport, endReport);
-                    staff.getAnalytics().generateReport();
+                    SubMenuAnalytics.generateReport(staff);
 
                     break;
                 // Exports report for date
                 case 4:
-                    System.out.println("Enter start time:");
-                    LocalDate startExport = Prompt.askForDate();
-
-                    System.out.println("Enter end time:");
-                    LocalDate endExport = Prompt.askForDate();
-
-                    staff.getAnalytics().setTimePeriod(startExport, endExport);
-                    staff.getAnalytics().exportReport();
+                    SubMenuAnalytics.exportReport(staff);
 
                     break;
                 // Ensure food stand staff are working where assigned

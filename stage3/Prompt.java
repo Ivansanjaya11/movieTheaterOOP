@@ -9,6 +9,35 @@ public class Prompt {
 
     private Prompt() {}
 
+    public static AnalyticsReporter askForAnalyticsReportTime(Staff staff) {
+        System.out.println("Enter start time:");
+        LocalDate startReport = Prompt.askForDate();
+
+        System.out.println("Enter end time:");
+        LocalDate endReport = Prompt.askForDate();
+
+        staff.setAnalytics(new AnalyticsReporter(startReport, endReport));
+
+        AnalyticsReporter analytics = (AnalyticsReporter) staff.getAnalytics();
+        analytics.setTimePeriod(startReport, endReport);
+        return analytics;
+    }
+
+
+    public static AnalyticsExporter askForAnalyticsExportTime(Staff staff) {
+        System.out.println("Enter start time:");
+        LocalDate startReport = Prompt.askForDate();
+
+        System.out.println("Enter end time:");
+        LocalDate endReport = Prompt.askForDate();
+
+        staff.setAnalytics(new AnalyticsExporter(startReport, endReport));
+
+        AnalyticsExporter analytics = (AnalyticsExporter) staff.getAnalytics();
+        analytics.setTimePeriod(startReport, endReport);
+        return analytics;
+    }
+
     /**
      * Prompts user to sign in for Food Staff duties
      * @return staff information and duties
