@@ -2,22 +2,18 @@ import java.util.ArrayList;
 
 public class ScreenManager {
 
-    // Initializes list for movie screens
     private static final ArrayList<Screen> screens = new ArrayList<>();
 
     /**
-     * Constructs ScreenManager clss
+     * Constructs ScreenManager class
      */
-
-    public ScreenManager() {}
+    private ScreenManager() {}
 
     /**
      * Ensures the movie screen list has screens
      * @return true / false
      */
-
     public static boolean hasScreens() {
-
         return !screens.isEmpty();
     }
 
@@ -26,7 +22,6 @@ public class ScreenManager {
      * @param id of movie screen
      * @return ture / false
      */
-
     public static boolean contains(byte id) {
 
         for (Screen screen : screens) {
@@ -41,9 +36,7 @@ public class ScreenManager {
      * Gets screens from screen list
      * @return screens
      */
-
     public static ArrayList<Screen> getScreens() {
-
         return new ArrayList<>(screens);
     }
 
@@ -51,9 +44,7 @@ public class ScreenManager {
      * Adds movie screen to list
      * @param screen to be added
      */
-
     public static void addScreen(Screen screen) {
-
         screens.add(screen);
     }
 
@@ -61,14 +52,18 @@ public class ScreenManager {
      * Removes screen from list
      * @param idx to be removed
      */
-
     public static void removeScreen(byte idx) {
-
         screens.remove(idx);
         System.out.println("Screen has been removed successfully.");
     }
 
+    /**
+     * updates the screen in the list of screen
+     * @param index the position of the screen in the list
+     * @param screen the new screen to replace the old one
+     */
     public static void updateScreen(byte index, Screen screen) {
         screens.set(index, screen);
     }
+
 }

@@ -1,6 +1,5 @@
 public abstract class Detail {
 
-    // Initializes Detail variables for Customer, Payment Type, and Payment Amount
     private Customer customer;
     private String paymentType;
     private short paymentAmount;
@@ -12,7 +11,6 @@ public abstract class Detail {
      *
      * @return the name of the customer
      */
-
     public Customer getCustomer() {
         return customer;
     }
@@ -22,7 +20,6 @@ public abstract class Detail {
      *
      * @param customer the name of the customer to set
      */
-
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
@@ -31,7 +28,6 @@ public abstract class Detail {
      * Gets payment type from customer
      * @return payment type
      */
-
     public String getPaymentType() {
 
         return this.paymentType;
@@ -41,7 +37,6 @@ public abstract class Detail {
      * Sets payment type
      * @param paymentType cash / card
      */
-
     public void setPaymentType(String paymentType) {
 
         this.paymentType = paymentType;
@@ -52,7 +47,6 @@ public abstract class Detail {
      *
      * @return the payment amount
      */
-
     public short getPaymentAmount() {
         return this.paymentAmount;
     }
@@ -62,7 +56,6 @@ public abstract class Detail {
      *
      * @param paymentAmount the payment amount to set
      */
-
     public void setPaymentAmount(short paymentAmount) {
         this.paymentAmount = paymentAmount;
     }
@@ -71,7 +64,6 @@ public abstract class Detail {
      * Checks if payment type has been selected
      * @return true / false
      */
-
     public boolean hasPaymentType() {
 
         return this.paymentType != null;
@@ -82,7 +74,6 @@ public abstract class Detail {
      *
      * @return true if customerName is not null or empty; false otherwise
      */
-
     public boolean hasCustomer() {
         return this.customer != null;
     }
@@ -92,7 +83,6 @@ public abstract class Detail {
      *
      * @return true if paymentAmount is greater than 0; false otherwise
      */
-
     public boolean hasPaymentAmount() {
         return this.paymentAmount > 0;
     }

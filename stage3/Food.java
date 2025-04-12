@@ -3,7 +3,6 @@ import java.util.TreeMap;
 
 public class Food implements Comparable<Food>{
 
-	// Initializes variables for food class
 	private byte menuId;
 	private String menuName;
 	private byte price;
@@ -15,7 +14,6 @@ public class Food implements Comparable<Food>{
 	 * @param menuName The name of the menu item.
 	 * @param price The price of the menu item.
 	 */
-
 	public Food(byte menuId, String menuName, byte price) {
 
 		this.menuId = menuId;
@@ -28,12 +26,12 @@ public class Food implements Comparable<Food>{
 	 * Gets the menu ID.
 	 * @return The menu ID.
 	 */
-
 	public byte getMenuId() {
 
 		if (this.hasMenuId()) {
 			return this.menuId;
 		}
+
 		return -1;
 	}
 
@@ -41,12 +39,12 @@ public class Food implements Comparable<Food>{
 	 * Gets the menu name.
 	 * @return The menu name.
 	 */
-
 	public String getMenuName() {
 
 		if (this.hasMenuName()) {
 			return this.menuName;
 		}
+
 		return "Menu name not assigned!";
 	}
 
@@ -54,12 +52,12 @@ public class Food implements Comparable<Food>{
 	 * Gets the price of the menu item.
 	 * @return The price.
 	 */
-
 	public byte getPrice() {
 
 		if (this.hasPrice()) {
 			return this.price;
 		}
+
 		return -1;
 	}
 
@@ -67,7 +65,6 @@ public class Food implements Comparable<Food>{
 	 * Gets the recipe as a TreeMap of items and their quantities.
 	 * @return The recipe TreeMap.
 	 */
-
 	public TreeMap<Item, Byte> getRecipe() {
 		return this.recipe;
 	}
@@ -76,7 +73,6 @@ public class Food implements Comparable<Food>{
 	 * Sets the menu ID.
 	 * @param menuId The new menu ID.
 	 */
-
 	public void setMenuId(byte menuId) {
 		this.menuId = menuId;
 	}
@@ -85,7 +81,6 @@ public class Food implements Comparable<Food>{
 	 * Sets the menu name.
 	 * @param menuName The new menu name.
 	 */
-
 	public void setMenuName(String menuName) {
 		this.menuName = menuName;
 	}
@@ -94,7 +89,6 @@ public class Food implements Comparable<Food>{
 	 * Sets the price of the menu item.
 	 * @param price The new price.
 	 */
-
 	public void setPrice(byte price) {
 		this.price = price;
 	}
@@ -104,7 +98,6 @@ public class Food implements Comparable<Food>{
 	 * @param item The item to be added.
 	 * @param quantityUsed The quantity of the item used.
 	 */
-
 	public void addRecipe(Item item, byte quantityUsed) {
 
 		// if item is not available in the inventory, then add the item to the inventory first
@@ -123,7 +116,6 @@ public class Food implements Comparable<Food>{
 	 * Removes an item from the recipe based on its ID.
 	 * @param itemId The ID of the item to be removed.
 	 */
-
 	public void removeRecipe(byte itemId) {
 
 		// iterates through the recipe treemap until the item is found and remove it
@@ -135,6 +127,10 @@ public class Food implements Comparable<Food>{
 		}
 	}
 
+	/**
+	 * sets the recipe of this food
+	 * @param newRecipe the new recipe of the food to be set
+	 */
 	public void setRecipe(TreeMap<Item, Byte> newRecipe) {
 		this.recipe = newRecipe;
 	}
@@ -143,7 +139,6 @@ public class Food implements Comparable<Food>{
 	 * Checks if the menu ID is set.
 	 * @return True if the menu ID is not zero, otherwise false.
 	 */
-
 	public boolean hasMenuId() {
 		return !(this.menuId == 0);
 	}
@@ -152,7 +147,6 @@ public class Food implements Comparable<Food>{
 	 * Checks if the menu name is set.
 	 * @return True if the menu name is not empty, otherwise false.
 	 */
-
 	public boolean hasMenuName() {
 		return !(this.menuName.isEmpty());
 	}
@@ -161,7 +155,6 @@ public class Food implements Comparable<Food>{
 	 * Checks if the price is set.
 	 * @return True if the price is not zero, otherwise false.
 	 */
-
 	public boolean hasPrice() {
 		return !(this.price == 0);
 	}
@@ -169,7 +162,6 @@ public class Food implements Comparable<Food>{
 	/**
 	 * Displays information about the menu item.
 	 */
-
 	@Override
 	public String toString() {
 		String str = "";
@@ -183,7 +175,6 @@ public class Food implements Comparable<Food>{
 	 * Compares 2 Food objects using the menu id
 	 * @param otherFood the object to be compared.
      */
-
 	@Override
 	public int compareTo(Food otherFood) {
 		return Integer.compare(this.menuId, otherFood.getMenuId());

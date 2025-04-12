@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 
-
 /**
  * Handles movie staff members including adding and removing staff
  */
@@ -14,7 +13,6 @@ public class StaffManager {
      * Constructs staff list
      * @return list of staff members
      */
-
     public static ArrayList<Staff> getStaffs() {
         return new ArrayList<>(staffs);
     }
@@ -24,7 +22,6 @@ public class StaffManager {
      * @param id staff ID
      * @return true / false
      */
-
     public static boolean contains(byte id) {
         for (Staff staff : staffs) {
             if (staff.getEmployeeId() == id) {
@@ -38,7 +35,6 @@ public class StaffManager {
      * Ensures the staff member list has staff members
      * @return if the list is empty or not
      */
-
     public static boolean hasStaffs() {
         return !staffs.isEmpty();
     }
@@ -47,7 +43,6 @@ public class StaffManager {
      * Method to add staff members to list
      * @param staff members to add
      */
-
     public static void addStaff(Staff staff) {
         staffs.add(staff);
     }
@@ -56,16 +51,17 @@ public class StaffManager {
      * Method to remove staff members from list
      * @param index of staff members
      */
-
     public static void removeStaff(byte index) {
         staffs.remove(index);
     }
 
-    public static void updateStaff(byte index, TicketStaff staff) {
+    /**
+     * updates the staff in the staff list
+     * @param index the position of the staff in the list
+     * @param staff the new staff to replace the old one
+     */
+    public static void updateStaff(byte index, Staff staff) {
         staffs.set(index, staff);
     }
 
-    public static void updateStaff(byte index, FoodStaff staff) {
-        staffs.set(index, staff);
-    }
 }

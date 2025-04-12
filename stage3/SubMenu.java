@@ -4,17 +4,14 @@ import java.util.Scanner;
 
 public class SubMenu {
 
-    // Initializes scanner for user input and menu width
     private static final Scanner input = new Scanner(System.in);
     private static final short menuWidth = 100;
 
     private SubMenu() {}
 
-
     /**
      * Allows for the addition or removal of a movie screen
      */
-
     public static void addOrRemoveOrDisplayOrUpdateScreen() {
 
         boolean stillContinue = true;
@@ -58,21 +55,24 @@ public class SubMenu {
     /**
      * Allows for movies to be added or removed from menu list
      */
-
     public static void addOrRemoveOrDisplayOrUpdateMovie() {
 
         boolean stillContinue = true;
 
         do {
             System.out.println("Choose:");
+
             PrettyPrinter.printDashLine(menuWidth);
+
             System.out.println("1. Add movie");
             System.out.println("2. Remove movie");
             System.out.println("3. Display movie");
             System.out.println("4. Update movie");
             System.out.println("5. Return");
+
             byte option = input.nextByte();
             input.nextLine();
+
             switch (option) {
                 case 1:
                     SubSubMenuTicket.addMovieMenu();
@@ -106,14 +106,18 @@ public class SubMenu {
 
         do {
             System.out.println("Choose:");
+
             PrettyPrinter.printDashLine(menuWidth);
+
             System.out.println("1. Add showtime");
             System.out.println("2. Remove showtime");
             System.out.println("3. Display showtime");
             System.out.println("4. Update showtime");
             System.out.println("5. Return");
+
             byte option = input.nextByte();
             input.nextLine();
+
             switch (option) {
                 case 1:
                     SubSubMenuTicket.addShowtimeMenu();
@@ -233,14 +237,18 @@ public class SubMenu {
         do {
             //Provides the user with options to add or remove food items from menu or return
             System.out.println("Choose:");
+
             PrettyPrinter.printDashLine(menuWidth);
+
             System.out.println("1. Add food");
             System.out.println("2. Remove food");
             System.out.println("3. Display food");
             System.out.println("4. Update food");
             System.out.println("5. Return");
+
             byte option = input.nextByte();
             input.nextLine();
+
             switch (option) {
                 case 1:
                     SubSubMenuFood.addFoodMenu();
@@ -279,6 +287,7 @@ public class SubMenu {
             System.out.println("3. Display staff");
             System.out.println("4. Update staff");
             System.out.println("5. Return");
+
             byte option = input.nextByte();
             input.nextLine();
 
@@ -301,4 +310,5 @@ public class SubMenu {
             }
         } while (stillContinue);
     }
+
 }

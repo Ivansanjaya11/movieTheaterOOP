@@ -9,7 +9,6 @@ import java.util.TreeMap;
 
 public class Prompt {
 
-    // Initializes Scanner for user input
     private static Scanner input = new Scanner(System.in);
 
     private Prompt() {}
@@ -19,7 +18,6 @@ public class Prompt {
      * @param staff
      * @return analytics for report
      */
-
     public static AnalyticsReporter askForAnalyticsReportTime(Staff staff) {
 
         System.out.println("Enter start time:");
@@ -35,13 +33,11 @@ public class Prompt {
         return analytics;
     }
 
-
     /**
      * Prompts user (staff) to enter the date: start time and end time
      * @param staff
      * @return analytics for exportation
      */
-
     public static AnalyticsExporter askForAnalyticsExportTime(Staff staff) {
 
         System.out.println("Enter start time:");
@@ -61,7 +57,6 @@ public class Prompt {
      * Prompts user to sign in for Food Staff duties
      * @return staff information and duties
      */
-
     public static Staff askForStaff() {
 
         System.out.println("LOG IN");
@@ -96,7 +91,6 @@ public class Prompt {
      */
 
     public static Customer askForCustomer() {
-
         System.out.print("Enter customer's name: ");
         String name = input.nextLine();
 
@@ -107,7 +101,6 @@ public class Prompt {
      * Prompts users to select a movie to watch
      * @return movies to be selected from
      */
-
     public static Movie askForMovie() {
 
         System.out.println("Which movie do you want: ");
@@ -134,9 +127,7 @@ public class Prompt {
      * Prompts users to select a screen to view the selected movie
      * @return screens to be selected from
      */
-
     public static Screen askForScreen() {
-
         System.out.println("Which screen do you want: ");
         byte index;
 
@@ -161,7 +152,6 @@ public class Prompt {
      * Prompts user to enter current local time
      * @return hour and minute
      */
-
     public static LocalTime askForTime() {
 
         try {
@@ -185,7 +175,6 @@ public class Prompt {
      * Prompts user to enter the date
      * @return current local date
      */
-
     public static LocalDate askForDate() {
 
         do {
@@ -213,9 +202,7 @@ public class Prompt {
      * Prompts user to enter staff role
      * @return if staff is ticket staff or food staff
      */
-
     public static String askStaffRole(){
-
         System.out.println("Choose staff role:");
         System.out.println("1. Ticket staff");
         System.out.println("2. Food staff");
@@ -239,7 +226,6 @@ public class Prompt {
      * Prompts user to select food item from menu
      * @return food, if food exists within menu list
      */
-
     public static Food askForFood() {
 
         System.out.println("Choose which food:");
@@ -270,7 +256,6 @@ public class Prompt {
      * @param food
      * @return message if item exists in item list or not
      */
-
     public static Item askForItemRecipe(Food food) {
 
         TreeMap<Item, Byte> recipeItemList = food.getRecipe();
@@ -310,7 +295,6 @@ public class Prompt {
      * Checks if item exists in item list
      * @return message if item exists or not
      */
-
     public static Item askForItemRecipe() {
 
         byte index;
@@ -334,4 +318,5 @@ public class Prompt {
         System.out.println("Item does not exist!");
         return null;
     }
+
 }

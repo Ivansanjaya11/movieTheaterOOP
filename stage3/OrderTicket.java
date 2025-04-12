@@ -3,13 +3,16 @@ import java.util.stream.IntStream;
 
 public class OrderTicket extends Order {
 
+    private OrderTicket() {
+        super();
+    }
+
     /**
      *
      * @param detail of movie ticket
      * @param movieList of movies
      * @return movieID, movieTitle, movie duration, movie genre
      */
-
     private static DetailTicketBought showTicketOptionToAdd(DetailTicketBought detail, ArrayList<Movie> movieList) {
 
         System.out.println("Select movie: ");
@@ -79,7 +82,6 @@ public class OrderTicket extends Order {
      * @param detail of showtime, screen, and seating
      * @return details of purchased ticket: showtime, screen, and seating
      */
-
     private static DetailTicketBought askTicketQuantityToAdd(DetailTicketBought detail) {
 
         Showtime showtime = detail.getShowtime();
@@ -130,7 +132,6 @@ public class OrderTicket extends Order {
      * @param detail of customer selcted movie
      * @return removed movie ticket details
      */
-
     private static DetailTicketBought removeTicketOrder(DetailTicketBought detail) {
 
         detail.setImaxNum((byte) 0);
@@ -143,7 +144,6 @@ public class OrderTicket extends Order {
      * @param detail of purchased ticket
      * @return showtime, seating, price, and quantity
      */
-
     private static boolean reviewTicketOrder(DetailTicketBought detail) {
 
         Showtime showtime = detail.getShowtime();
@@ -184,6 +184,7 @@ public class OrderTicket extends Order {
         if (String.valueOf(option).equalsIgnoreCase("y")) {
             return true;
         }
+
         return false;
     }
 
@@ -192,7 +193,6 @@ public class OrderTicket extends Order {
      * @param detail of ticket and ticket quantity
      * @return ticket order and quantity
      */
-
     public static DetailTicketBought takeTicketOrder(DetailTicketBought detail) {
 
         do {
@@ -235,7 +235,6 @@ public class OrderTicket extends Order {
      * @param detail of selected seat, showtime of movie, and screen where seat is
      * @return details regarding user seating choice
      */
-
     private static DetailTicketBought resetTicketSeats(DetailTicketBought detail) {
 
         ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
@@ -249,4 +248,6 @@ public class OrderTicket extends Order {
         }
 
         return detail;
-    }}
+    }
+
+}

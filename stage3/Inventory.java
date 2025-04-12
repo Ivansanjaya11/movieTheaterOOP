@@ -22,22 +22,15 @@ public class Inventory {
 
 	private Inventory() {}
 
-	/**
-	 * populate the inventory data from the file if it is not empty.
-	 */
-
 	static {
-
 		/*
-		 * whenever the program starts and the inventory object is initialized,
+		 * whenever the program starts and the inventory is loaded,
 		 * access the inventory path to get the latest inventory state.
 		 * Then, load every information (item id, item name, item quantity, and buying cost)
-		 * automatically into the item list array list.
-		 * This means that Item objects are automatically created
-		 * every time the Inventory object is initialized,
-		 * except if the inventory state is empty in the file
+		 * automatically into the item list array list (data persistence)
 		 */
 		if (inventoryFile.length() != 0) {
+
 			try (BufferedReader reader = new BufferedReader(new FileReader(Path.INVENTORY_REPORT_PATH))) {
 				String line;
 
@@ -54,6 +47,7 @@ public class Inventory {
 			} catch (IOException e) {
 				System.err.println(e.getMessage());
 			}
+
 		}
 
 	}
@@ -62,9 +56,7 @@ public class Inventory {
 	 * Ensures item list has items
 	 * @return true / false
 	 */
-
 	public static boolean hasItems() {
-
 		return !itemList.isEmpty();
 	}
 
@@ -73,7 +65,6 @@ public class Inventory {
 	 * @param id of item in item list
 	 * @return true / false
 	 */
-
 	public static boolean contains(byte id) {
 
 		for (Item item : itemList) {
@@ -81,6 +72,7 @@ public class Inventory {
 				return true;
 			}
 		}
+
 		return false;
 	}
 
@@ -88,7 +80,6 @@ public class Inventory {
 	 * Returns item list
 	 * @return item list
 	 */
-
 	public static ArrayList<Item> getItemList() {
 		return new ArrayList<>(itemList);
 	}
@@ -100,7 +91,6 @@ public class Inventory {
 	 * @return The item with the specified ID, or null if not found.
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
-
 	public static Item getItem(byte itemId) {
 
 		for (Item item : itemList) {
@@ -115,42 +105,43 @@ public class Inventory {
 
 	/**
 	 * Adds a new item to the inventory.
-	 *
 	 * @param item The item to be added to the inventory.
 	 */
-
 	public static void addItem(Item item) {
 		itemList.add(item);
 	}
 
 	/**
 	 * Removes an item from the inventory based on the provided item ID.
-	 *
 	 * @param itemId The ID of the item to be removed.
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
-
 	public static void removeItem(byte itemId) {
 
-		try {
-			byte i = 0;
-			boolean found = false;
-			for (Item item : itemList) {
-				if (item.hasItemId() && item.getItemId() == itemId) {
-					found = true;
-					itemList.remove(i);
-					break;
-				}
-				i++;
+		byte i = 0;
+		boolean found = false;
+
+		for (Item item : itemList) {
+			if (item.hasItemId() && item.getItemId() == itemId) {
+				found = true;
+				itemList.remove(i);
+				break;
 			}
-			if (!found) {
-				throw new NoSuchElementException("There is no such item in the inventory");
-			}
-		} catch (NoSuchElementException e) {
-			System.err.println(e.getMessage());
+
+			i++;
 		}
+
+		if (!found) {
+			System.out.println("There is no such item in the inventory");
+		}
+
 	}
 
+	/**
+	 * method to update a certain item in the inventory
+	 * @param index the position of the item in the list
+	 * @param item the new item object to replace the old one
+	 */
 	public static void updateItem(byte index, Item item) {
 		itemList.set(index, item);
 	}
@@ -160,7 +151,6 @@ public class Inventory {
 	 * Reduces the quantity of items based on their usage in food recipes.
 	 * @param foodOrder The list of food orders containing food and quantity.
 	 */
-
 	public static void updateInventory(TreeMap<Food, Byte> foodOrder) {
 
 		TreeMap<Item, Short> itemsToBeUpdated = new TreeMap<>();
@@ -181,10 +171,13 @@ public class Inventory {
 			}
 		}
 
+		// set the new quantity in the list of item
 		for (Item item : itemsToBeUpdated.keySet()) {
 			ListIterator<Item> iter = itemList.listIterator();
+
 			while (iter.hasNext()) {
 				Item anItem = iter.next();
+
 				if (item.getItemId() == anItem.getItemId()) {
 					anItem.setQuantity(itemsToBeUpdated.get(item));
 				}
@@ -203,7 +196,6 @@ public class Inventory {
 	 * Checks for items with low stock and alerts if their quantity is below the threshold.
 	 * If the quantity is low, the system will automatically order more items.
 	 */
-
 	private static void alertLowStock() {
 
 		byte minimum = 15; // sets the limit of low stock in a certain unit quantity
@@ -229,10 +221,8 @@ public class Inventory {
 	 * Orders more items for the inventory based on the specified item.
 	 * A fixed quantity of 250 units will be ordered, and the total price is calculated
 	 * based on the buying cost of the item.
-	 *
 	 * @param item The item that needs to be ordered.
 	 */
-
 	private static void orderMoreItems(Item item) {
 
 		short buyingQuantity = 250; // sets the quantity bought everytime the item quantity gets low
@@ -248,6 +238,5 @@ public class Inventory {
 
 		System.out.println("Order completed");
 	}
-
 
 }

@@ -4,13 +4,11 @@ import java.util.TreeMap;
 
 public class SubSubMenuFood {
 
-    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
      * Adds food item to food menu
      */
-
     public static void addFoodMenu() {
 
         // Food staff duties when adding food items to the menu
@@ -35,7 +33,6 @@ public class SubSubMenuFood {
     /**
      * Removes food item from food menu
      */
-
     public static void removeFoodMenu() {
 
         // Food staff duties for removing food items from the menu
@@ -63,6 +60,9 @@ public class SubSubMenuFood {
         }
     }
 
+    /**
+     * updates food from food menu
+     */
     public static void updateFoodMenu() {
         if (!MenuManager.hasMenu()) {
             System.out.println("No Food available!");
@@ -106,9 +106,7 @@ public class SubSubMenuFood {
     /**
      * Displays food menu list
      */
-
     public static void displayFood() {
-
         for (Food food : MenuManager.getMenuList()) {
             System.out.println(food);
         }
@@ -117,9 +115,7 @@ public class SubSubMenuFood {
     /**
      * Allows for items used within the theater to be purchased in a chosen quantity
      */
-
     public static void addItemMenu() {
-
         // Prompts user to enter item information to be added to menu
         System.out.print("Enter item id: ");
 
@@ -147,7 +143,6 @@ public class SubSubMenuFood {
     /**
      * Allows for the removal of items within the theater
      */
-
     public static void removeItemMenu() {
 
         // Checks if list has the input item
@@ -175,6 +170,9 @@ public class SubSubMenuFood {
         }
     }
 
+    /**
+     * updates item from item menu
+     */
     public static void updateItemMenu() {
         // Checks if list has the input item
         if (!Inventory.hasItems()) {
@@ -208,7 +206,6 @@ public class SubSubMenuFood {
         short buyingCost = input.nextShort();
         input.nextLine();
 
-
         if (index >=0 && index < Inventory.getItemList().size()) {
 
             Inventory.updateItem(index, new Item(itemId, itemName, quantity, buyingCost));
@@ -220,9 +217,7 @@ public class SubSubMenuFood {
     /**
      * Displays inventory items list
      */
-
     public static void displayItem() {
-
         for (Item item : Inventory.getItemList()) {
             System.out.println(item);
         }
@@ -231,7 +226,6 @@ public class SubSubMenuFood {
     /**
      * Prompts user for food and food item recipe to be added to menu list
      */
-
     public static void addRecipeMenu() {
 
         Food food = Prompt.askForFood();
@@ -252,14 +246,15 @@ public class SubSubMenuFood {
     /**
      * Prompts user to enter food and food item recipe to be removed from menu list
      */
-
     public static void removeRecipeMenu() {
-
         Food food = Prompt.askForFood();
         Item item = Prompt.askForItemRecipe(food);
         food.removeRecipe(item.getItemId());
     }
 
+    /**
+     * updates recipe from recipe menu
+     */
     public static void updateRecipeMenu() {
         Food food = Prompt.askForFood();
         Item item = Prompt.askForItemRecipe(food);
@@ -275,9 +270,7 @@ public class SubSubMenuFood {
     /**
      * Displays food item recipes found within the menu
      */
-
     public static void displayRecipe() {
-
         Food food = Prompt.askForFood();
 
         TreeMap<Item, Byte> recipe = food.getRecipe();
@@ -290,4 +283,5 @@ public class SubSubMenuFood {
             System.out.println("- " + qty + " unit(s) of " + item.getItemName() + " required");
         }
     }
+
 }

@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Analytics {
 
-	// Initializes variables used for movie theater analytics
+	// variables used for movie theater analytics
 	protected LocalDateTime timePeriodStart;
 	protected LocalDateTime timePeriodEnd;
 	protected static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
@@ -22,11 +22,8 @@ public class Analytics {
 	/**
 	 * Constructs an Analytics object with a specified start time for the reporting period.
 	 * The end time is set to the current time.
-	 *
 	 */
-
 	public Analytics() {
-
 		this.timePeriodStart = null;
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 	}
@@ -34,12 +31,9 @@ public class Analytics {
 	/**
 	 * Constructs an Analytics object with a specified start time for the reporting period.
 	 * The end time is set to the current time.
-	 *
 	 * @param timePeriodStart The start time for the report period.
 	 */
-
 	public Analytics(LocalDateTime timePeriodStart) {
-
 		this.timePeriodStart = timePeriodStart;
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 	}
@@ -50,9 +44,7 @@ public class Analytics {
 	 * @param timePeriodStart The start time for the report period.
 	 * @param timePeriodEnd The end time for the report period.
 	 */
-
 	public Analytics(LocalDateTime timePeriodStart, LocalDateTime timePeriodEnd) {
-
 		this.timePeriodStart = timePeriodStart;
 		this.timePeriodEnd = timePeriodEnd;
 	}
@@ -62,9 +54,7 @@ public class Analytics {
 	 *
 	 * @return A Pair containing the start and end times of the report.
 	 */
-
 	public LocalDateTime[] getTimePeriod() {
-
         return new LocalDateTime[]{this.timePeriodStart, this.timePeriodEnd};
 	}
 
@@ -73,9 +63,7 @@ public class Analytics {
 	 *
 	 * @param timePeriodStart The new start time for the report period.
 	 */
-
 	public void setTimePeriod(LocalDate timePeriodStart){
-
 		this.timePeriodStart = timePeriodStart.atStartOfDay();
 		this.timePeriodEnd = LocalDateTime.now(ZoneId.of("US/Mountain"));
 	}
@@ -86,9 +74,7 @@ public class Analytics {
 	 * @param timePeriodStart The new start time for the report period.
 	 * @param timePeriodEnd The new end time for the report period.
 	 */
-
 	public void setTimePeriod(LocalDate timePeriodStart, LocalDate timePeriodEnd){
-
 		this.timePeriodStart = timePeriodStart.atStartOfDay();
 		this.timePeriodEnd = timePeriodEnd.atStartOfDay();
 	}
@@ -98,7 +84,6 @@ public class Analytics {
 	 *
 	 * @return True if both start and end times are set; false otherwise.
 	 */
-
 	public boolean hasTimePeriod() {
 		return !(timePeriodStart==null || timePeriodEnd==null);
 	}

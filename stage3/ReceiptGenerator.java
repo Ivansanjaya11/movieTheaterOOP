@@ -7,7 +7,6 @@ import java.util.TreeMap;
 
 public class ReceiptGenerator {
 
-    // Initializes width with size 50
     private static final byte width = 50;
 
     private ReceiptGenerator() {}
@@ -18,7 +17,6 @@ public class ReceiptGenerator {
      * @param customerCount customer count
      * @return payment ID
      */
-
     private static String createPaymentID(LocalDate date, short customerCount) {
 
         // uses four digits to display the customer count in the payment ID
@@ -37,7 +35,6 @@ public class ReceiptGenerator {
      * checks the date and update the customer counter if needed
      * @return current date
      */
-
     private static LocalDate checkDate() {
 
         // check the date (and update if needed)
@@ -55,7 +52,6 @@ public class ReceiptGenerator {
     /**
      * Generates the receipt for the customer's order, displaying the ordered food and total price.
      */
-
     public static String generateFoodReceipt(DetailFoodBought detail) {
 
         // get all the necessary data to create the receipt
@@ -111,7 +107,6 @@ public class ReceiptGenerator {
      * Generates and prints a ticket order receipt for a given customer
      * @return unique payment ID for this transaction
      */
-
     public static String generateTicketReceipt(DetailTicketBought detail) {
 
         // get all the necessary data to create the receipt
@@ -183,4 +178,5 @@ public class ReceiptGenerator {
         // after receipt is printed on the screen, the method returns the payment ID
         return paymentId;
     }
+
 }

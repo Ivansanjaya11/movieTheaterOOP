@@ -1,6 +1,5 @@
 public class Item implements Comparable<Item> {
 
-	// Initializes variables for items within the movie theater
 	private byte itemId;
 	private String itemName;
 	private short quantity;
@@ -11,9 +10,7 @@ public class Item implements Comparable<Item> {
 	 * @param itemId The unique ID of the item.
 	 * @param itemName The name of the item.
 	 */
-
 	public Item(byte itemId, String itemName) {
-
 		this.itemId = itemId;
 		this.itemName = itemName;
 	}
@@ -25,7 +22,6 @@ public class Item implements Comparable<Item> {
 	 * @param quantity The quantity of the item in stock.
 	 * @param buyingCost The cost of buying a single unit of the item.
 	 */
-
 	public Item(byte itemId, String itemName, short quantity, short buyingCost) {
 
 		this.itemId = itemId;
@@ -38,7 +34,6 @@ public class Item implements Comparable<Item> {
 	 * Gets the item ID.
 	 * @return The item ID.
 	 */
-
 	public byte getItemId() {
 
 		if (this.hasItemId()) {
@@ -51,7 +46,6 @@ public class Item implements Comparable<Item> {
 	 * Gets the item name.
 	 * @return The item name.
 	 */
-
 	public String getItemName() {
 
 		if (this.hasItemName()) {
@@ -64,7 +58,6 @@ public class Item implements Comparable<Item> {
 	 * Gets the quantity of the item in stock.
 	 * @return The quantity of the item.
 	 */
-
 	public short getQuantity() {
 
 		if (this.hasQuantity()) {
@@ -77,12 +70,11 @@ public class Item implements Comparable<Item> {
 	 * Gets the buying cost of a single unit of the item.
 	 * @return The buying cost.
 	 */
-
 	public short getBuyingCost() {
-
 		if (this.hasBuyingCost()) {
 			return this.buyingCost;
 		}
+
 		return -1;
 	}
 
@@ -90,7 +82,6 @@ public class Item implements Comparable<Item> {
 	 * Sets the item ID.
 	 * @param itemId The new item ID.
 	 */
-
 	public void setItemId(byte itemId) {
 		this.itemId = itemId;
 	}
@@ -99,7 +90,6 @@ public class Item implements Comparable<Item> {
 	 * Sets the item name.
 	 * @param itemName The new item name.
 	 */
-
 	public void setItemName(String itemName) {
 		this.itemName = itemName;
 	}
@@ -108,7 +98,6 @@ public class Item implements Comparable<Item> {
 	 * Sets the quantity of the item in stock.
 	 * @param quantity The new quantity.
 	 */
-
 	public void setQuantity(short quantity) {
 		this.quantity = quantity;
 	}
@@ -117,7 +106,6 @@ public class Item implements Comparable<Item> {
 	 * Sets the buying cost of a single unit of the item.
 	 * @param buyingCost The new buying cost.
 	 */
-
 	public void setBuyingCost(short buyingCost) {
 		this.buyingCost = buyingCost;
 	}
@@ -126,7 +114,6 @@ public class Item implements Comparable<Item> {
 	 * Checks if the item ID is set.
 	 * @return True if the item ID is not zero, otherwise false.
 	 */
-
 	public boolean hasItemId() {
 		return !(this.itemId == 0);
 	}
@@ -135,7 +122,6 @@ public class Item implements Comparable<Item> {
 	 * Checks if the item name is set.
 	 * @return True if the item name is not empty, otherwise false.
 	 */
-
 	public boolean hasItemName() {
 		return !(this.itemName.isEmpty());
 	}
@@ -144,7 +130,6 @@ public class Item implements Comparable<Item> {
 	 * Checks if the item has a quantity greater than zero.
 	 * @return True if the quantity is greater than zero, otherwise false.
 	 */
-
 	public boolean hasQuantity() {
 		return (this.quantity > 0);
 	}
@@ -153,7 +138,6 @@ public class Item implements Comparable<Item> {
 	 * Checks if the buying cost is greater than zero.
 	 * @return True if the buying cost is greater than zero, otherwise false.
 	 */
-
 	public boolean hasBuyingCost() {
 		return (this.buyingCost > 0);
 	}
@@ -161,7 +145,6 @@ public class Item implements Comparable<Item> {
 	/**
 	 * Displays information about the item.
 	 */
-
 	public void aboutItem() {
 
 		System.out.println("Item name is " + this.itemName + " with id no " + this.itemId);
@@ -173,7 +156,6 @@ public class Item implements Comparable<Item> {
 	 * method to compare 2 Item objects using the menu id
 	 * @param otherItem the object to be compared.
 	 */
-
 	@Override
 	public int compareTo(Item otherItem) {
 		return Integer.compare(this.itemId, otherItem.getItemId());
@@ -183,7 +165,6 @@ public class Item implements Comparable<Item> {
 	 * Returns string representation of item with the name, quantity, and cost per unit from supplier
 	 * @return item string
 	 */
-
 	@Override
 	public String toString() {
 		String str = "";
@@ -192,4 +173,5 @@ public class Item implements Comparable<Item> {
 		str = str + "\n\tcost per unit to buy from supplier: $" + this.buyingCost;
 		return str;
 	}
+
 }

@@ -3,13 +3,12 @@ import java.util.TreeMap;
 
 public class DetailFoodBought extends Detail{
 
-    // Initializes variables for food bought by the customer
+    // list of ordered food
     private TreeMap<Food, Byte> orderedFood;
 
     /**
      * Constructs DetailFoodBought method
      */
-
     public DetailFoodBought() {
         super();
         this.orderedFood = new TreeMap<>();
@@ -20,7 +19,6 @@ public class DetailFoodBought extends Detail{
      * @param aFood item input
      * @return true / false
      */
-
     public boolean isExist(Food aFood) {
 
         for (Map.Entry<Food, Byte> anOrder : orderedFood.entrySet()) {
@@ -37,7 +35,6 @@ public class DetailFoodBought extends Detail{
      */
     @Override
     public boolean isEmpty() {
-
         return orderedFood.isEmpty();
     }
 
@@ -46,9 +43,7 @@ public class DetailFoodBought extends Detail{
      * @param aFood a selected food item
      * @param quantity of the selected food item
      */
-
     public void addFood(Food aFood, byte quantity) {
-
         orderedFood.put(aFood, quantity);
     }
 
@@ -56,9 +51,7 @@ public class DetailFoodBought extends Detail{
      * Removes selected food from order
      * @param aFood from order
      */
-
     public void removeFood(Food aFood) {
-
         orderedFood.remove(aFood);
     }
 
@@ -67,7 +60,6 @@ public class DetailFoodBought extends Detail{
      *
      * @return a TreeMap of Food items to quantities ordered
      */
-
     public TreeMap<Food, Byte> getOrderedFood() {
         return orderedFood;
     }
@@ -77,7 +69,6 @@ public class DetailFoodBought extends Detail{
      *
      * @param orderedFood a TreeMap of Food items to quantities
      */
-
     public void setOrderedFood(TreeMap<Food, Byte> orderedFood) {
         this.orderedFood = orderedFood;
     }
@@ -87,7 +78,6 @@ public class DetailFoodBought extends Detail{
      *
      * @return true if orderedFood is not null and not empty; false otherwise
      */
-
     public boolean hasOrderedFood() {
         return orderedFood != null && !orderedFood.isEmpty();
     }

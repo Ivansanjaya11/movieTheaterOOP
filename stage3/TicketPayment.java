@@ -12,18 +12,17 @@ import java.util.Scanner;
 
 public class TicketPayment extends Payment {
 
-    // Initializes normal and IMAX tickets and their price
+    // Initializes normal and IMAX tickets quantity
     private byte normalTicket;
     private byte imaxTicket;
     private static byte normalPrice = 10;
     private static byte imaxPrice = 15;
-    private Scanner input;
+    private final Scanner input;
 
     /**
      * Constructs a TicketPayment object for a specified customer
      * @param customer the customer making the ticket purchase
      */
-
     public TicketPayment(Customer customer) {
 
         super(customer);
@@ -35,7 +34,6 @@ public class TicketPayment extends Payment {
      * Interacts with the customer to choose ticket type, payment method,
      * and generates a receipt
      */
-
     public boolean chooseTicket() {
 
         DetailTicketBought detail = new DetailTicketBought(normalPrice, imaxPrice);
@@ -91,7 +89,6 @@ public class TicketPayment extends Payment {
      * Calculates and sets the total ticket payment amount
      * Only computes if all ticket types and prices are valid
      */
-
     @Override
     protected void setPaymentAmount() {
 
@@ -105,7 +102,6 @@ public class TicketPayment extends Payment {
      *
      * @return Number of normal tickets purchased
      */
-
     public byte getNormalTicket() {
         return this.normalTicket;
     }
@@ -115,7 +111,6 @@ public class TicketPayment extends Payment {
      *
      * @return number of IMAX tickets purchased
      */
-
     public byte getImaxTicket() {
         return this.imaxTicket;
     }
@@ -125,7 +120,6 @@ public class TicketPayment extends Payment {
      *
      * @return the current price of a normal ticket
      */
-
     public byte getNormalPrice() {
         return normalPrice;
     }
@@ -135,7 +129,6 @@ public class TicketPayment extends Payment {
      *
      * @return the current price of a IMAX ticket
      */
-
     public byte getImaxPrice() {
         return imaxPrice;
     }
@@ -144,7 +137,6 @@ public class TicketPayment extends Payment {
      * Sets the number of normal tickets and updates payment amount
      * @param normalTicket number of normal tickets
      */
-
     public void setNormalTicket(byte normalTicket) {
         this.normalTicket = normalTicket;
     }
@@ -153,7 +145,6 @@ public class TicketPayment extends Payment {
      * Sets the number of IMAX tickets and updates the payment amount
      * @param imaxTicket number of IMAX tikets
      */
-
     public void setImaxTicket(byte imaxTicket) {
         this.imaxTicket = imaxTicket;
     }
@@ -162,7 +153,6 @@ public class TicketPayment extends Payment {
      * Stes the new price for a normal ticket
      * @param newPrice new price to be set
      */
-
     public void setNormalPrice(byte newPrice) {
         normalPrice = newPrice;
     }
@@ -171,7 +161,6 @@ public class TicketPayment extends Payment {
      * Sets the new price for an IMAX ticket
      * @param newPrice new price to be set
      */
-
     public void setImaxPrice(byte newPrice) {
         imaxPrice = newPrice;
     }
@@ -181,7 +170,6 @@ public class TicketPayment extends Payment {
      *
      * @return true if normal ticket price is valid
      */
-
     public boolean hasNormalPrice() {
         return normalPrice > 0;
     }
@@ -191,7 +179,6 @@ public class TicketPayment extends Payment {
      *
      * @return true if IMAX ticket price is valid
      */
-
     public boolean hasImaxPrice() {
         return imaxPrice > 0;
     }
@@ -201,7 +188,6 @@ public class TicketPayment extends Payment {
      *
      * @return true if any normal tickets were selected
      */
-
     public boolean hasNormalTicket() {
         return this.normalTicket > 0;
     }
@@ -211,8 +197,8 @@ public class TicketPayment extends Payment {
      *
      * @return true if any IMAX tickets were selected
      */
-
     public boolean hasImaxTicket() {
         return this.imaxTicket > 0;
     }
+
 }

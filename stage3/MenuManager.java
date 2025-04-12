@@ -2,20 +2,17 @@ import java.util.ArrayList;
 
 public class MenuManager {
 
-    // Initializes menu list
     private static final ArrayList<Food> menuList = new ArrayList<>();
 
     /**
      * Constructs MenuManager class
      */
-
-    public MenuManager() {}
+    private MenuManager() {}
 
     /**
      * Gets the menu list of available food items.
      * @return the list of available food items
      */
-
     public static ArrayList<Food> getMenuList() {
         return new ArrayList<>(menuList);
     }
@@ -25,7 +22,6 @@ public class MenuManager {
      * @param id of menu item in list
      * @return true / false
      */
-
     public static boolean contains(byte id) {
 
         for (Food food : menuList) {
@@ -40,7 +36,6 @@ public class MenuManager {
      * Checks if there are any food items in the menu.
      * @return true if there are items in the menu, false otherwise
      */
-
     public static boolean hasMenu() {
         return !(menuList.isEmpty());
     }
@@ -49,7 +44,6 @@ public class MenuManager {
      * Adds a food item to the menu list.
      * @param menuItem the food item to be added to the menu
      */
-
     public static void addMenu(Food menuItem) {
         menuList.add(menuItem);
     }
@@ -58,7 +52,6 @@ public class MenuManager {
      * Removes a food item from the menu list based on its menu ID.
      * @param menuId the menu ID of the item to be removed
      */
-
     public static void removeMenu(byte menuId) {
 
         if (hasMenu()) {
@@ -86,7 +79,7 @@ public class MenuManager {
     }
 
     /**
-     * method to update the food in the list of food
+     * updates the food in the list of food
      * @param index the position of the food in the list
      * @param food the new food object to replace the old one
      */

@@ -2,18 +2,22 @@ import java.util.*;
 
 public class OrderFood extends Order {
 
+    private OrderFood() {
+        super();
+    }
+
     /**
      * Method that prompts and records user food order
      * @param detail of user food order
      * @return details about user food order
      */
-
     public static DetailFoodBought takeFoodOrder(DetailFoodBought detail) {
 
         do {
             System.out.println("Choose:");
             System.out.println("1. Add order");
             System.out.println("2. Remove order");
+
             byte addOrRemove = input.nextByte();
 
             // add order
@@ -57,7 +61,6 @@ public class OrderFood extends Order {
      *
      * @return true if the order is correct, false otherwise
      */
-
     private static boolean reviewFoodOrder(DetailFoodBought detail) {
 
         TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
@@ -79,6 +82,7 @@ public class OrderFood extends Order {
         if (String.valueOf(option).equalsIgnoreCase("y")) {
             return true;
         }
+
         return false;
     }
 
@@ -87,7 +91,6 @@ public class OrderFood extends Order {
      * @param detail of food being purchased
      * @return menu idem ID, Name, and Price
      */
-
     private static DetailFoodBought showFoodOptionToAdd(DetailFoodBought detail) {
 
         ArrayList<Food> menuList = MenuManager.getMenuList();
@@ -130,7 +133,6 @@ public class OrderFood extends Order {
      * @param detail of current food order
      * @return removed food item(s)
      */
-
     private static DetailFoodBought showFoodOptionToRemove(DetailFoodBought detail) {
 
         TreeMap<Food, Byte> orderedFood = detail.getOrderedFood();
@@ -145,6 +147,7 @@ public class OrderFood extends Order {
                 System.out.print(j + ". ");
                 System.out.print(aFood.getMenuName() + ": ");
                 System.out.println(orderedFood.get(aFood));
+
                 j++;
             }
 
@@ -177,14 +180,15 @@ public class OrderFood extends Order {
      * Asks user the quantity of the food item they would like to purchase
      * @return quantity of selected food item
      */
-
     private static byte askQuantityToAdd() {
 
         System.out.print("How many do you want? ");
         byte quantity = input.nextByte();
+
         if (quantity > 0) {
             return quantity;
         }
+
         return -1;
     }
 

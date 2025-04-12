@@ -18,7 +18,6 @@ public class FoodStaff extends Staff {
      * @param hourlyRate the hourly rate of the employee
      * @param schedule the work schedule in HH:mm-HH:mm format
      */
-
     public FoodStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
 
         super(employeeName, employeeId, hourlyRate, schedule);
@@ -30,7 +29,6 @@ public class FoodStaff extends Staff {
      * Auto invokes food selection
      * @param customer the customer placing the food order
      */
-
     public void addNewFoodPayment(Customer customer) {
 
         FoodPayment foodPayment = new FoodPayment(customer);
@@ -42,4 +40,5 @@ public class FoodStaff extends Staff {
 
         PrettyPrinter.printDashLine((short) 40);
     }
+
 }

@@ -4,31 +4,31 @@ import java.util.Scanner;
 
 public class SubMenuAnalytics {
 
-    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
      * Constructs SubMenuAnalytics class
      */
-
     private SubMenuAnalytics() {}
 
     /**
      * Prompts the user to select and generate a report based on the available options.
      */
-
     public static void generateReport(Staff staff) {
 
         byte option;
 
         do {
             PrettyPrinter.printDashLine((short) 100);
+
             System.out.println("Which report would you like to generate?");
             System.out.println("1. Ticket sales report");
             System.out.println("2. Food sales report");
             System.out.println("3. Inventory report");
             System.out.println("4. Item order history report");
+
             option = input.nextByte();
+
             if (option<0 || option>4) {
                 System.out.println("Invalid option!");
             }
@@ -57,6 +57,7 @@ public class SubMenuAnalytics {
                 break;
             default:
                 System.out.println("No report to be generated!");
+                break;
         }
     }
 
@@ -69,12 +70,16 @@ public class SubMenuAnalytics {
         byte option;
 
         do {
+            PrettyPrinter.printDashLine((short) 100);
+
             System.out.println("Which report would you like to export?");
             System.out.println("1. Ticket sales report");
             System.out.println("2. Food sales report");
             System.out.println("3. Inventory report");
             System.out.println("4. Item order history report");
+
             option = input.nextByte();
+
             if (option<0 || option>4) {
                 System.out.println("Invalid option!");
             }
@@ -103,6 +108,7 @@ public class SubMenuAnalytics {
                 break;
             default:
                 System.out.println("No report to be exported!");
+                break;
         }
     }
 

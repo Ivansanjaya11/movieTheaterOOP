@@ -5,20 +5,17 @@ import java.util.Scanner;
 
 public class MainMenu {
 
-    // Initializes scanner and menu width
     private static final Scanner input = new Scanner(System.in);
     private static final short menuWidth = 100;
 
     /**
      * Constructs main menu class
      */
-
     private MainMenu() {}
 
     /**
      * Method creating dummy information (because there's no data persistence in the system yet)
      */
-
     private static void createObjects() {
 
         // Creating food staffs
@@ -150,7 +147,6 @@ public class MainMenu {
     /**
      * Prints menu for user to select from
      */
-
     public static void showMenu() {
 
         createObjects(); // create dummy information (because no data persistence yet)

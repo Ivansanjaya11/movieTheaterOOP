@@ -20,7 +20,6 @@ public class AnalyticsExporter extends Analytics{
     /**
      * Exports the ticket sales report. (Implementation to be added later.)
      */
-
     public void exportTicketSalesReport() {
 
         // format is the same as generateTicketSalesReport
@@ -100,7 +99,6 @@ public class AnalyticsExporter extends Analytics{
     /**
      * Exports the food sales report for the specified time period to a file.
      */
-
     public void exportFoodSalesReport() {
 
         // format is the same as generateFoodSalesReport
@@ -176,7 +174,6 @@ public class AnalyticsExporter extends Analytics{
     /**
      * Exports the inventory report to a file for the current time.
      */
-
     public void exportInventoryReport() {
 
         // format is the same as generateInventoryReport
@@ -217,7 +214,6 @@ public class AnalyticsExporter extends Analytics{
     /**
      * Exports the item order history report to a file for the specified time period.
      */
-
     public void exportItemOrderReport() {
 
         // format is the same as generateItemOrderReport
@@ -260,4 +256,6 @@ public class AnalyticsExporter extends Analytics{
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-    }}
+    }
+
+}

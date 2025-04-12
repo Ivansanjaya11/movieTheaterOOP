@@ -17,7 +17,6 @@ public class FilesUpdateManager {
     /**
      * Updates the ticket sales file with the current order's details.
      */
-
     public static void updateTicketSalesFile(String paymentId, DetailTicketBought detail) {
 
         String movieTitle = detail.getShowtime().getMovie().getTitle();
@@ -74,7 +73,6 @@ public class FilesUpdateManager {
     /**
      * Updates the food sales file with the current order's details.
      */
-
     public static void updateFoodSalesFile(String paymentId, DetailFoodBought detail) {
 
         short paymentAmount = detail.getPaymentAmount();
@@ -118,7 +116,6 @@ public class FilesUpdateManager {
      * Updates the inventory file with the current inventory state.
      * Writes the item name and its remaining quantity to the file.
      */
-
     public static void updateInventoryFile(ArrayList<Item> itemList) {
 
         // store all the data in an array of Strings
@@ -145,12 +142,10 @@ public class FilesUpdateManager {
     /**
      * Updates the item order file with the details of the ordered item, including the
      * item name, quantity ordered, and total price.
-     *
      * @param item The item being ordered.
      * @param buyingQuantity The quantity of the item being ordered.
      * @param totalPrice The total price for the ordered quantity.
      */
-
     public static void updateItemOrderFile(Item item, short buyingQuantity, short totalPrice) {
 
         LocalDateTime dateTime = LocalDateTime.now(ZoneId.of("US/Mountain")).truncatedTo(ChronoUnit.MINUTES);

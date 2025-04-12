@@ -4,7 +4,6 @@
 
 public class Screen {
 
-    // Initializes variables for screen ID, screen type, and seating
     private byte screenID;
     private String screenType;
     private final SeatingArrangement seating;
@@ -14,7 +13,6 @@ public class Screen {
      * @param screenID - unique screen ID
      * @param screenType - type of screen
      */
-
     public Screen(byte screenID, String screenType) {
 
         this.screenID = screenID;
@@ -23,10 +21,9 @@ public class Screen {
     }
 
     /**
-     * Returns screen iD
+     * Returns screen ID
      * @return screen's ID
      */
-
     public byte getScreenID() {
         return screenID;
     }
@@ -35,7 +32,6 @@ public class Screen {
      * Returns screen type
      * @return screen's type
      */
-
     public String getScreenType() {
         return screenType;
     }
@@ -44,7 +40,6 @@ public class Screen {
      * Returns seating arrangement of screen
      * @return seating arrangement object
      */
-
     public SeatingArrangement getSeating() {
         return seating;
     }
@@ -53,7 +48,6 @@ public class Screen {
      * Sets screen ID
      * @param screenID screen's ID
      */
-
     public void setScreenID(byte screenID) {
         this.screenID = screenID;
     }
@@ -62,7 +56,6 @@ public class Screen {
      * Sets screen type
      * @param screenType screen's type
      */
-
     public void setScreenType(String screenType) {
         this.screenType = screenType;
     }
@@ -71,7 +64,6 @@ public class Screen {
      * Returns a string representation of a screen within the movie theater with the Screen ID and Screen Type
      * @return screen string
      */
-
     @Override
     public String toString() {
 

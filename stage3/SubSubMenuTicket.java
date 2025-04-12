@@ -3,13 +3,11 @@ import java.util.Scanner;
 
 public class SubSubMenuTicket {
 
-    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
      * Allows for movie screen to be added to menu list
      */
-
     public static void addScreenMenu() {
 
         // Prompts user for screen information to be added to menu
@@ -29,7 +27,6 @@ public class SubSubMenuTicket {
     /**
      * Allows for the selection of and removal of an input movie screen from menu list
      */
-
     public static void removeScreenMenu() {
 
         // Checks if screen exists in theater
@@ -56,6 +53,9 @@ public class SubSubMenuTicket {
         }
     }
 
+    /**
+     * updates screen in screen menu
+     */
     public static void updateScreenMenu() {
         // Checks if screen exists in theater
         if (!ScreenManager.hasScreens()) {
@@ -92,9 +92,7 @@ public class SubSubMenuTicket {
     /**
      * Displays screens found within the movie theater
      */
-
     public static void displayScreen() {
-
         for (Screen screen : ScreenManager.getScreens()) {
             System.out.println(screen);
         }
@@ -104,7 +102,6 @@ public class SubSubMenuTicket {
     /**
      * Allows for movie to be added to movie menu list
      */
-
     public static void addMovieMenu() {
 
         // Prompts user to enter movie information to be added to menu
@@ -133,7 +130,6 @@ public class SubSubMenuTicket {
     /**
      * Removes movie from movie menu list
      */
-
     public static void removeMovieMenu() {
 
         // Checks if movie exists in theater
@@ -160,6 +156,9 @@ public class SubSubMenuTicket {
         }
     }
 
+    /**
+     * updates movie from movie menu
+     */
     public static void updateMovieMenu() {
 
         // Checks if movie exists in theater
@@ -203,9 +202,7 @@ public class SubSubMenuTicket {
     /**
      * Displays the movies available at the movie theater
      */
-
     public static void displayMovie() {
-
         for (Movie movie : MovieManager.getMovies()) {
             System.out.println(movie);
         }
@@ -214,7 +211,6 @@ public class SubSubMenuTicket {
     /**
      * Provides showtime menu for movie, screen, and time
      */
-
     public static void addShowtimeMenu() {
 
         System.out.print("Enter showtime id: ");
@@ -236,7 +232,6 @@ public class SubSubMenuTicket {
     /**
      * Removes showtime from menu
      */
-
     public static void removeShowtimeMenu() {
 
         // Ensures menu has provided showtime
@@ -270,6 +265,9 @@ public class SubSubMenuTicket {
         }
     }
 
+    /**
+     * updates showtime from showtime menu
+     */
     public static void updateShowtimeMenu() {
         // Ensures menu has provided showtime
         if (!ShowtimeManager.hasShowtimes()) {
@@ -312,9 +310,7 @@ public class SubSubMenuTicket {
     /**
      * Displays the showtimes currently available within the movie theater
      */
-
     public static void displayShowtime() {
-
         for (Showtime showtime : ShowtimeManager.getShowtimes()) {
             System.out.println(showtime);
         }

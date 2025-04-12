@@ -18,7 +18,6 @@ class TicketStaff extends Staff {
      * @param hourlyRate the hourly pay rate
      * @param schedule the work schedule in HH:mm-HH:mm format
      */
-
     public TicketStaff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
 
         super(employeeName, employeeId, hourlyRate, schedule);
@@ -30,7 +29,6 @@ class TicketStaff extends Staff {
      * Clears previous order history if it's the first customer of the day
      * @param customer the customer purchasing tickets
      */
-
     public void addNewTicketPayment(Customer customer) {
 
         TicketPayment payment = new TicketPayment(customer);

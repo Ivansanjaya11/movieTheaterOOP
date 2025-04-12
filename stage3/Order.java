@@ -10,7 +10,6 @@ public class Order {
      * asks the user if they still want to continue ordering
      * @return true if yes, otherwise false
      */
-
     protected static boolean askStillContinue() {
 
         // Prompts user if they have purchased enough

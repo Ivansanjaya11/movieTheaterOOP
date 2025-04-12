@@ -2,13 +2,11 @@ import java.util.Scanner;
 
 public class SubSubMenuStaff {
 
-    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
      * Adds staff to staff menu list
      */
-
      public static void addStaffMenu() {
 
         // Prompts user to enter staff information:
@@ -45,7 +43,6 @@ public class SubSubMenuStaff {
     /**
      * Removes staff from staff menu list
      */
-
     public static void removeStaffMenu() {
 
         //Ensures the staff list has staff members
@@ -72,6 +69,9 @@ public class SubSubMenuStaff {
         }
     }
 
+    /**
+     * updates staff from staff menu
+     */
     public static void updateStaffMenu() {
         //Ensures the staff list has staff members
         if (!StaffManager.hasStaffs()) {
@@ -106,6 +106,7 @@ public class SubSubMenuStaff {
 
         System.out.print("Enter staff role (ticket/food): ");
         String staffRole = input.nextLine();
+
         if (staffRole.equals("ticket")) {
             StaffManager.updateStaff(index, new TicketStaff(employeeName, employeeId, hourlyRate, schedule));
         } else {
@@ -118,7 +119,6 @@ public class SubSubMenuStaff {
      */
 
     public static void displayStaff() {
-
         for (Staff staff : StaffManager.getStaffs()) {
             System.out.println(staff);
         }

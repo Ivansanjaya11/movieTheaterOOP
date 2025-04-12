@@ -29,7 +29,6 @@ public class Staff {
      * @param hourlyRate the hourly pay rate for the staff member
      * @param schedule the weekly schedule in HH:mm-HH:mm format
      */
-
     public Staff(String employeeName, byte employeeId, byte hourlyRate, String schedule) {
 
         this.employeeName = employeeName;
@@ -48,7 +47,6 @@ public class Staff {
      * @param scheduleStr the schedule string in HH:mm-HH:mm format
      * @return total weekly hours worked, assuming 5 work days
      */
-
     private byte calculateWeeklyHours(String scheduleStr) {
 
         try {
@@ -74,7 +72,6 @@ public class Staff {
      * gets the name of the staff
      * @return the employees name
      */
-
     public String getEmployeeName() {
         return this.employeeName;
     }
@@ -83,7 +80,6 @@ public class Staff {
      * gets the ID of the staff
      * @return the employees ID
      */
-
     public short getEmployeeId() {
         return this.employeeId;
     }
@@ -92,7 +88,6 @@ public class Staff {
      * gets the hourly rate of the staff
      * @return the hourly rate
      */
-
     public byte getHourlyRate() {
         return this.hourlyRate;
     }
@@ -101,7 +96,6 @@ public class Staff {
      * 
      * @return total hours worked per week
      */
-
     public byte getHoursWorked() {
         return this.hoursWorked;
     }
@@ -110,7 +104,6 @@ public class Staff {
      * Calculates and returns weekly salary
      * @return the calculated weekly salary
      */
-
     public short getWeeklySalary() {
         return (short)(this.hourlyRate * this.hoursWorked); 
     }
@@ -119,7 +112,6 @@ public class Staff {
      * 
      * @return the schedule string
      */
-
     public String getSchedule() {
         return this.schedule;
     }
@@ -128,7 +120,6 @@ public class Staff {
      * 
      * @return the role assigned to a staff member
      */
-
     public String getRole() {
         return this.role;
     }
@@ -137,7 +128,6 @@ public class Staff {
      * 
      * @return the analytics object linked to a staff member
      */
-
     public Analytics getAnalytics() {
         return this.analytics;
     }
@@ -146,7 +136,6 @@ public class Staff {
      * Sets the employee name
      * @param employeeName the new name
      */
-
     public void setEmployeeName(String employeeName) {
         this.employeeName = employeeName;
     }
@@ -155,7 +144,6 @@ public class Staff {
      * Sets the employee ID
      * @param employeeId the new ID
      */
-
     public void setEmployeeId(byte employeeId) {
         this.employeeId = employeeId;
     }
@@ -164,7 +152,6 @@ public class Staff {
      * Sets the hourly rate
      * @param hourlyRate the new hourly rate
      */
-
     public void setHourlyRate(byte hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
@@ -173,7 +160,6 @@ public class Staff {
      * Updates the employees schedule and recalculates hours worked
      * @param schedule the new schedule in HH:mm-HH:mm format
      */
-
     public void setSchedule(String schedule) {
 
         this.schedule = schedule;
@@ -184,7 +170,6 @@ public class Staff {
      * Sets the employee role
      * @param role the new role
      */
-
     public void setRole(String role) {
         this.role = role;
     }
@@ -193,7 +178,6 @@ public class Staff {
      * Sets a new analytics object
      * @param analytics the analytics object to assign
      */
-
     public void setAnalytics(Analytics analytics) {
         this.analytics = analytics;
     }
@@ -202,10 +186,9 @@ public class Staff {
      * Returns a string representation of the staff members roles within the movie theater
      * @return staff role and name string
      */
-
     @Override
     public String toString() {
-
         return this.getRole() + " staff: " + this.getEmployeeName();
     }
+
 }
