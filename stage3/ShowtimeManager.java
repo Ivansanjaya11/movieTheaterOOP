@@ -7,6 +7,7 @@ import java.util.Iterator;
 
 public class ShowtimeManager {
 
+    // Initializes Array List of Movie Showtimes
     private static final ArrayList<Showtime> showtimes = new ArrayList<>();
 
     /**

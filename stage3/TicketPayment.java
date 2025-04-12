@@ -101,7 +101,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Returns the number of normal tickets
+     *
      * @return Number of normal tickets purchased
      */
 
@@ -110,7 +111,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Returns the number of IMAX tickets
+     *
      * @return number of IMAX tickets purchased
      */
 
@@ -119,7 +121,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Returns the price of normal tickets
+     *
      * @return the current price of a normal ticket
      */
 
@@ -128,7 +131,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Returns the price of IMAX tickets
+     *
      * @return the current price of a IMAX ticket
      */
 
@@ -173,7 +177,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Checks if the normal screen tickets have a price
+     *
      * @return true if normal ticket price is valid
      */
 
@@ -182,7 +187,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Checks if the IMAX tickets have a price
+     *
      * @return true if IMAX ticket price is valid
      */
 
@@ -191,7 +197,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Checks if the normal screen tickets were selected
+     *
      * @return true if any normal tickets were selected
      */
 
@@ -200,7 +207,8 @@ public class TicketPayment extends Payment {
     }
 
     /**
-     * 
+     * Checks if the IMAX screen tickets were selected
+     *
      * @return true if any IMAX tickets were selected
      */
 

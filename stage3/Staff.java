@@ -10,8 +10,10 @@ import java.time.temporal.ChronoUnit;
  * Represents a staff member in a movie theater
  * Stores employee details, work schedule, and analytics
  */
+
 public class Staff {
 
+    // Initializes staff information, schedule, and role within the movie theater; storing information in Analytics
     private String employeeName;
     private byte employeeId;
     private byte hourlyRate;
@@ -196,8 +198,14 @@ public class Staff {
         this.analytics = analytics;
     }
 
+    /**
+     * Returns a string representation of the staff members roles within the movie theater
+     * @return staff role and name string
+     */
+
     @Override
     public String toString() {
+
         return this.getRole() + " staff: " + this.getEmployeeName();
     }
 }

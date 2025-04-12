@@ -9,8 +9,12 @@ import java.time.LocalDateTime;
 
 public class AnalyticsReporter extends Analytics {
 
+    /**
+     * Constructs AnalyticsReporter class
+     */
     public AnalyticsReporter() {}
 
+    // Initializes AnalyticsReporter with LocalDate startReport and LocalDate endReport
     public AnalyticsReporter(LocalDate startReport, LocalDate endReport) {
         super(startReport.atStartOfDay(), endReport.atStartOfDay());
     }

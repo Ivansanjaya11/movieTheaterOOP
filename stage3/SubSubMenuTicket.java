@@ -2,6 +2,8 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 public class SubSubMenuTicket {
+
+    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
@@ -54,7 +56,12 @@ public class SubSubMenuTicket {
         }
     }
 
+    /**
+     * Displays screens found within the movie theater
+     */
+
     public static void displayScreen() {
+
         for (Screen screen : ScreenManager.getScreens()) {
             System.out.println(screen);
         }
@@ -120,7 +127,12 @@ public class SubSubMenuTicket {
         }
     }
 
+    /**
+     * Displays the movies available at the movie theater
+     */
+
     public static void displayMovie() {
+
         for (Movie movie : MovieManager.getMovies()) {
             System.out.println(movie);
         }
@@ -185,7 +197,12 @@ public class SubSubMenuTicket {
         }
     }
 
+    /**
+     * Displays the showtimes currently available within the movie theater
+     */
+
     public static void displayShowtime() {
+
         for (Showtime showtime : ShowtimeManager.getShowtimes()) {
             System.out.println(showtime);
         }

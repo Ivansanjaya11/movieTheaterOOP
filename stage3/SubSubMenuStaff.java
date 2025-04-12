@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class SubSubMenuStaff {
+
+    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
@@ -70,7 +72,12 @@ public class SubSubMenuStaff {
         }
     }
 
+    /**
+     * Displays staff members currently working within the movie theater
+     */
+
     public static void displayStaff() {
+
         for (Staff staff : StaffManager.getStaffs()) {
             System.out.println(staff);
         }

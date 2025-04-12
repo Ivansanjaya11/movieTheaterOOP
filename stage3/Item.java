@@ -179,6 +179,11 @@ public class Item implements Comparable<Item> {
 		return Integer.compare(this.itemId, otherItem.getItemId());
 	}
 
+	/**
+	 * Returns string representation of item with the name, quantity, and cost per unit from supplier
+	 * @return item string
+	 */
+
 	@Override
 	public String toString() {
 		String str = "";

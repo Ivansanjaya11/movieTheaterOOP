@@ -67,8 +67,14 @@ public class Screen {
         this.screenType = screenType;
     }
 
+    /**
+     * Returns a string representation of a screen within the movie theater with the Screen ID and Screen Type
+     * @return screen string
+     */
+
     @Override
     public String toString() {
+
         String str = "";
 
         str = str + "screen: #" + this.screenID;

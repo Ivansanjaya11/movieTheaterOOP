@@ -89,8 +89,14 @@ public class Movie {
         this.durationMinutes = durationMinutes;
     }
 
+    /**
+     * Returns a string representation of a movie with the title, genre, and duration of the movie
+     * @return movie string
+     */
+
     @Override
     public String toString() {
+
         String str = "";
         str = str + "Movie title: " + this.title;
         str = str + "\n\tgenre: " + this.genre;

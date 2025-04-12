@@ -3,6 +3,8 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class SubSubMenuFood {
+
+    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
 
     /**
@@ -61,7 +63,12 @@ public class SubSubMenuFood {
         }
     }
 
+    /**
+     * Displays food menu list
+     */
+
     public static void displayFood() {
+
         for (Food food : MenuManager.getMenuList()) {
             System.out.println(food);
         }
@@ -102,6 +109,7 @@ public class SubSubMenuFood {
      */
 
     public static void removeItemMenu() {
+
         // Checks if list has the input item
         if (!Inventory.hasItems()) {
             System.out.println("No item available!");
@@ -127,18 +135,28 @@ public class SubSubMenuFood {
         }
     }
 
+    /**
+     * Displays inventory items list
+     */
+
     public static void displayItem() {
+
         for (Item item : Inventory.getItemList()) {
             System.out.println(item);
         }
     }
 
+    /**
+     * Prompts user for food and food item recipe to be added to menu list
+     */
+
     public static void addRecipeMenu() {
+
         Food food = Prompt.askForFood();
         Item item = Prompt.askForItemRecipe();
 
         if (food.getRecipe().containsKey(item)) {
-            System.out.println("item already existed as part of the recipe!");
+            System.out.println("Item already existed as part of the recipe!");
             return ;
         }
 
@@ -149,13 +167,23 @@ public class SubSubMenuFood {
         food.addRecipe(item, qty);
     }
 
+    /**
+     * Prompts user to enter food and food item recipe to be removed from menu list
+     */
+
     public static void removeRecipeMenu() {
+
         Food food = Prompt.askForFood();
         Item item = Prompt.askForItemRecipe(food);
         food.removeRecipe(item.getItemId());
     }
 
+    /**
+     * Displays food item recipes found within the menu
+     */
+
     public static void displayRecipe() {
+
         Food food = Prompt.askForFood();
 
         TreeMap<Item, Byte> recipe = food.getRecipe();

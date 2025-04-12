@@ -23,6 +23,7 @@ public class Inventory {
 	/**
 	 * populate the inventory data from the file if it is not empty.
 	 */
+
 	static {
 
 		/*

@@ -3,7 +3,8 @@ import util.PrettyPrinter;
 import java.util.Scanner;
 
 public class SubMenu {
-    // Initializes scanner and menu width
+
+    // Initializes scanner for user input and menu width
     private static final Scanner input = new Scanner(System.in);
     private static final short menuWidth = 100;
 
@@ -121,7 +122,12 @@ public class SubMenu {
         } while (stillContinue);
     }
 
+    /**
+     * Adds, Removes, or Displays recipe based on user selection
+     */
+
     public static void addOrRemoveOrDisplayRecipe() {
+
         boolean stillContinue = true;
 
         do {
@@ -138,12 +144,15 @@ public class SubMenu {
             input.nextLine();
 
             switch (option) {
+                // Adds recipe to menu
                 case 1:
                     SubSubMenuFood.addRecipeMenu();
                     break;
+                // Removes recipe from menu
                 case 2:
                     SubSubMenuFood.removeRecipeMenu();
                     break;
+                // Displays menu recipes
                 case 3:
                     SubSubMenuFood.displayRecipe();
                 default:

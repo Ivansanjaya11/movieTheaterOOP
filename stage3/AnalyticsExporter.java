@@ -7,8 +7,12 @@ import java.time.LocalDateTime;
 
 public class AnalyticsExporter extends Analytics{
 
+    /**
+     * Constructs AnalyticsExporter class
+     */
     public AnalyticsExporter() {}
 
+    // Initializes AnalyticsExporter with LocalDate startReport and LocalDate endReport
     public AnalyticsExporter(LocalDate startReport, LocalDate endReport) {
         super(startReport.atStartOfDay(), endReport.atStartOfDay());
     }

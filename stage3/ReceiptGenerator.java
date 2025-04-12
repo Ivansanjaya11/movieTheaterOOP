@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 public class ReceiptGenerator {
+
+    // Initializes width with size 50
     private static final byte width = 50;
 
     private ReceiptGenerator() {}

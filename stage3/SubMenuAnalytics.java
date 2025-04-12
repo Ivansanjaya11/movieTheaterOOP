@@ -3,7 +3,13 @@ import util.PrettyPrinter;
 import java.util.Scanner;
 
 public class SubMenuAnalytics {
+
+    // Initializes scanner for user input
     private static final Scanner input = new Scanner(System.in);
+
+    /**
+     * Constructs SubMenuAnalytics class
+     */
 
     private SubMenuAnalytics() {}
 
@@ -29,18 +35,22 @@ public class SubMenuAnalytics {
         } while (option<0 || option>4);
 
         switch (option) {
+            // Prompts ticket staff user to enter report time
             case 1:
                 AnalyticsReporter analyticsTicket = Prompt.askForAnalyticsReportTime(staff);
                 analyticsTicket.generateTicketSalesReport();
                 break;
+            // Prompts food staff user to enter report time
             case 2:
                 AnalyticsReporter analyticsFood = Prompt.askForAnalyticsReportTime(staff);
                 analyticsFood.generateFoodSalesReport();
                 break;
+            // Creates new analytics report for inventory
             case 3:
                 AnalyticsReporter analyticsInventory = new AnalyticsReporter();
                 analyticsInventory.generateInventoryReport();
                 break;
+            // Prompts staff user to enter report for item orders
             case 4:
                 AnalyticsReporter analyticsItem = Prompt.askForAnalyticsReportTime(staff);
                 analyticsItem.generateItemOrderReport();
@@ -71,18 +81,22 @@ public class SubMenuAnalytics {
         } while (option<0 || option>4);
 
         switch (option) {
+            // Prompts ticket staff user to export ticket sales report
             case 1:
                 AnalyticsExporter analyticsTicket = Prompt.askForAnalyticsExportTime(staff);
                 analyticsTicket.exportTicketSalesReport();
                 break;
+            // Prompts food staff user to export food sales report
             case 2:
                 AnalyticsExporter analyticsFood = Prompt.askForAnalyticsExportTime(staff);
                 analyticsFood.exportFoodSalesReport();
                 break;
+            // Creates new analytics exporter to export inventory report
             case 3:
                 AnalyticsExporter analyticsInventory = new AnalyticsExporter();
                 analyticsInventory.exportInventoryReport();
                 break;
+            // Prompts staff to export item order report
             case 4:
                 AnalyticsExporter analyticsItem = Prompt.askForAnalyticsExportTime(staff);
                 analyticsItem.exportItemOrderReport();

@@ -29,6 +29,7 @@ public class DetailTicketBought extends Detail{
      * Checks if screen room exists
      * @return true / false
      */
+
     @Override
     public boolean isEmpty() {
 

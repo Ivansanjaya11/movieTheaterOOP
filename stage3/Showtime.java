@@ -144,8 +144,14 @@ public class Showtime {
         return false;
     }
 
+    /**
+     * Returns a string representation of a movie's showtime with the Showtime ID, Movie Title, Screen, and Start time
+     * @return showtime string
+     */
+
     @Override
     public String toString() {
+
         String str = "";
 
         str = str + "Showtime ID: #" + this.showtimeID;

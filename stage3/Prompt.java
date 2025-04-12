@@ -8,11 +8,20 @@ import java.util.Scanner;
 import java.util.TreeMap;
 
 public class Prompt {
+
+    // Initializes Scanner for user input
     private static Scanner input = new Scanner(System.in);
 
     private Prompt() {}
 
+    /**
+     * Prompts user (staff) to enter the date: start time and end time
+     * @param staff
+     * @return analytics for report
+     */
+
     public static AnalyticsReporter askForAnalyticsReportTime(Staff staff) {
+
         System.out.println("Enter start time:");
         LocalDate startReport = Prompt.askForDate();
 
@@ -27,7 +36,14 @@ public class Prompt {
     }
 
 
+    /**
+     * Prompts user (staff) to enter the date: start time and end time
+     * @param staff
+     * @return analytics for exportation
+     */
+
     public static AnalyticsExporter askForAnalyticsExportTime(Staff staff) {
+
         System.out.println("Enter start time:");
         LocalDate startReport = Prompt.askForDate();
 
@@ -219,7 +235,13 @@ public class Prompt {
     }
 
 
+    /**
+     * Prompts user to select food item from menu
+     * @return food, if food exists within menu list
+     */
+
     public static Food askForFood() {
+
         System.out.println("Choose which food:");
 
         byte index;
@@ -243,7 +265,14 @@ public class Prompt {
         return null;
     }
 
+    /**
+     * Determines if item needed for recipe, required to make food, exists in item list
+     * @param food
+     * @return message if item exists in item list or not
+     */
+
     public static Item askForItemRecipe(Food food) {
+
         TreeMap<Item, Byte> recipeItemList = food.getRecipe();
 
         byte index;
@@ -275,7 +304,13 @@ public class Prompt {
         return null;
     }
 
+    /**
+     * Checks if item exists in item list
+     * @return message if item exists or not
+     */
+
     public static Item askForItemRecipe() {
+
         byte index;
 
         ArrayList<Item> itemList = Inventory.getItemList();

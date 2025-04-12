@@ -275,6 +275,7 @@ public class MainMenu {
             }
 
             PrettyPrinter.printDashLine(menuWidth);
+
         } while(stillContinue);
 
     }

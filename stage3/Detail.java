@@ -1,4 +1,6 @@
 public abstract class Detail {
+
+    // Initializes Detail variables for Customer, Payment Type, and Payment Amount
     private Customer customer;
     private String paymentType;
     private short paymentAmount;
@@ -65,7 +67,13 @@ public abstract class Detail {
         this.paymentAmount = paymentAmount;
     }
 
+    /**
+     * Checks if payment type has been selected
+     * @return true / false
+     */
+
     public boolean hasPaymentType() {
+
         return this.paymentType != null;
     }
 
@@ -89,6 +97,11 @@ public abstract class Detail {
         return this.paymentAmount > 0;
     }
 
+    /**
+     * Checks if customer order is empty
+     *
+     * @return true / false
+     */
     public abstract boolean isEmpty();
 
 }
