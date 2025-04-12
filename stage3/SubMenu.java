@@ -15,7 +15,7 @@ public class SubMenu {
      * Allows for the addition or removal of a movie screen
      */
 
-    public static void addOrRemoveOrRemoveScreen() {
+    public static void addOrRemoveOrDisplayOrUpdateScreen() {
 
         boolean stillContinue = true;
 
@@ -27,7 +27,8 @@ public class SubMenu {
             System.out.println("1. Add screen");
             System.out.println("2. Remove screen");
             System.out.println("3. Display screen");
-            System.out.println("4. Return");
+            System.out.println("4. Update screen");
+            System.out.println("5. Return");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -42,6 +43,8 @@ public class SubMenu {
                 case 3:
                     SubSubMenuTicket.displayScreen();
                     break;
+                case 4:
+                    SubSubMenuTicket.updateScreenMenu();
                 default:
                     stillContinue = false;
                     break;

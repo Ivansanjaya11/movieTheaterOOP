@@ -67,4 +67,8 @@ public class ScreenManager {
         screens.remove(idx);
         System.out.println("Screen has been removed successfully.");
     }
+
+    public static void updateScreen(byte index, Screen screen) {
+        screens.set(index, screen);
+    }
 }

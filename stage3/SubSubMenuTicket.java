@@ -56,6 +56,39 @@ public class SubSubMenuTicket {
         }
     }
 
+    public static void updateScreenMenu() {
+        // Checks if screen exists in theater
+        if (!ScreenManager.hasScreens()) {
+            System.out.println("No screen available!");
+            return ;
+        }
+
+        System.out.println("Which screen do you want to update: ");
+        byte index;
+
+        for (int i=1; i<=ScreenManager.getScreens().size(); i++) {
+            System.out.println(i + ". " + ScreenManager.getScreens().get(i-1).getScreenID());
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        System.out.print("Enter screen ID: ");
+        byte screenID = input.nextByte();
+        input.nextLine(); // Consume the newline
+
+        System.out.print("Enter screen type: ");
+        String screenType = input.nextLine();
+
+
+        if (index >= 0 && index < ScreenManager.getScreens().size()) {
+            ScreenManager.updateScreen(index, new Screen(screenID, screenType));
+        } else {
+            System.out.println("Screen does not exist!");
+        }
+    }
+
     /**
      * Displays screens found within the movie theater
      */
