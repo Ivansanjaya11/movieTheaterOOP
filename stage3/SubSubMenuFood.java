@@ -175,6 +175,48 @@ public class SubSubMenuFood {
         }
     }
 
+    public static void updateItemMenu() {
+        // Checks if list has the input item
+        if (!Inventory.hasItems()) {
+            System.out.println("No item available!");
+            return ;
+        }
+
+        System.out.println("Which item do you want to update: ");
+        byte index;
+
+        for (int i=1; i<=Inventory.getItemList().size(); i++) {
+            System.out.println(i + ". " + Inventory.getItemList().get(i-1).getItemName());
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        System.out.print("Enter item ID: ");
+        byte itemId = input.nextByte();
+        input.nextLine();
+
+        System.out.print("Enter item name: ");
+        String itemName = input.nextLine();
+
+        System.out.print("Enter quantity: ");
+        short quantity = input.nextShort();
+        input.nextLine();
+
+        System.out.print("Enter buying cost: ");
+        short buyingCost = input.nextShort();
+        input.nextLine();
+
+
+        if (index >=0 && index < Inventory.getItemList().size()) {
+
+            Inventory.updateItem(index, new Item(itemId, itemName, quantity, buyingCost));
+        } else {
+            System.out.println("Movie does not exist!");
+        }
+    }
+
     /**
      * Displays inventory items list
      */

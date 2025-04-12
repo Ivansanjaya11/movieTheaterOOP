@@ -150,6 +150,10 @@ public class Inventory {
 		}
 	}
 
+	public static void updateItem(byte index, Item item) {
+		itemList.set(index, item);
+	}
+
 	/**
 	 * Updates the inventory based on the food orders provided.
 	 * Reduces the quantity of items based on their usage in food recipes.

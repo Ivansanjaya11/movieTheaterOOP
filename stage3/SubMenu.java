@@ -175,7 +175,7 @@ public class SubMenu {
      * Allows for the addition or removal of movie theater items
      */
 
-    public static void addOrRemoveOrDisplayItem() {
+    public static void addOrRemoveOrDisplayOrUpdateItem() {
 
         boolean stillContinue = true;
 
@@ -187,7 +187,8 @@ public class SubMenu {
             System.out.println("1. Add item");
             System.out.println("2. Remove item");
             System.out.println("3. Display item");
-            System.out.println("4. Return");
+            System.out.println("4. Update item");
+            System.out.println("5. Return");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -202,6 +203,8 @@ public class SubMenu {
                 case 3:
                     SubSubMenuFood.displayItem();
                     break;
+                case 4:
+                    SubSubMenuFood.updateItemMenu();
                 default:
                     stillContinue = false;
                     break;

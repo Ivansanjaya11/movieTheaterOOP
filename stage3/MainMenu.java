@@ -173,7 +173,7 @@ public class MainMenu {
             System.out.println("6.  Add/remove/display/update screen");
             System.out.println("7.  Add/remove/display/update showtime");
             System.out.println("8.  Add/remove/display/update food");
-            System.out.println("9.  Add/remove/display item");
+            System.out.println("9.  Add/remove/display/update item");
             System.out.println("10. Add/remove/display/update staff");
             System.out.println("11. Add/remove/display recipe");
             System.out.println("12. Exit the program");
@@ -253,7 +253,7 @@ public class MainMenu {
                 // Ensure food stand staff are working where assigned
                 case 9:
                     if (staff instanceof FoodStaff) {
-                        SubMenu.addOrRemoveOrDisplayItem();
+                        SubMenu.addOrRemoveOrDisplayOrUpdateItem();
                     } else {
                         System.out.println("Invalid! You are working at the food stand!");
                     }
