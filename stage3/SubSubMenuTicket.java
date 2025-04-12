@@ -270,6 +270,45 @@ public class SubSubMenuTicket {
         }
     }
 
+    public static void updateShowtimeMenu() {
+        // Ensures menu has provided showtime
+        if (!ShowtimeManager.hasShowtimes()) {
+            System.out.println("No showtime available!");
+            return ;
+        }
+
+        System.out.print("Which showtime do you want to update: ");
+        byte index;
+
+        for (int i=1; i<=ShowtimeManager.getShowtimes().size(); i++) {
+            Showtime showtime = ShowtimeManager.getShowtimes().get(i-1);
+            Movie movie = showtime.getMovie();
+            Screen screen = showtime.getScreen();
+
+            System.out.println(i + ". " + movie.getTitle());
+            System.out.println("\t" + screen.getScreenType() + " screen");
+            System.out.println("\tStarts at " + showtime.getStartTime());
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        System.out.println("Enter the new id for the showtime:");
+        byte id = input.nextByte();
+        input.nextLine();
+
+        Movie movie = Prompt.askForMovie();
+        Screen screen = Prompt.askForScreen();
+        LocalTime time = Prompt.askForTime();
+
+        if (index >=0 && index < ShowtimeManager.getShowtimes().size()) {
+            ShowtimeManager.updateShowtime(index, new Showtime(id, movie, screen, time));
+        } else {
+            System.out.println("Movie does not exist!");
+        }
+    }
+
     /**
      * Displays the showtimes currently available within the movie theater
      */

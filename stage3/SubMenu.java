@@ -98,7 +98,7 @@ public class SubMenu {
      * Allows for the addition or removal of a movie showtime
      */
 
-    public static void addOrRemoveOrDisplayShowtime() {
+    public static void addOrRemoveOrDisplayOrUpdateShowtime() {
 
         boolean stillContinue = true;
 
@@ -108,7 +108,8 @@ public class SubMenu {
             System.out.println("1. Add showtime");
             System.out.println("2. Remove showtime");
             System.out.println("3. Display showtime");
-            System.out.println("4. Return");
+            System.out.println("4. Update showtime");
+            System.out.println("5. Return");
             byte option = input.nextByte();
             input.nextLine();
             switch (option) {
@@ -121,6 +122,8 @@ public class SubMenu {
                 case 3:
                     SubSubMenuTicket.displayShowtime();
                     break;
+                case 4:
+                    SubSubMenuTicket.updateShowtimeMenu();
                 default:
                     stillContinue = false;
                     break;

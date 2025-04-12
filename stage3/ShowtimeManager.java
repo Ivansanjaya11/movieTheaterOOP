@@ -87,6 +87,10 @@ public class ShowtimeManager {
         return false;
     }
 
+    public static void updateShowtime(byte index, Showtime showtime) {
+        showtimes.set(index, showtime);
+    }
+
     /**
      * Displays all scheduled showtimes
      */
