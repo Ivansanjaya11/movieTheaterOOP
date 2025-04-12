@@ -118,4 +118,26 @@ public class SubSubMenuFood {
             System.out.println("Movie does not exist!");
         }
     }
+
+    public static void addRecipeMenu() {
+        Food food = Prompt.askForFood();
+        Item item = Prompt.askForItemRecipe();
+
+        if (food.getRecipe().containsKey(item)) {
+            System.out.println("item already existed as part of the recipe!");
+            return ;
+        }
+
+        System.out.print("How many unit of this item is used to make the food " + food.getMenuName() + "? ");
+
+        byte qty = input.nextByte();
+
+        food.addRecipe(item, qty);
+    }
+
+    public static void removeRecipeMenu() {
+        Food food = Prompt.askForFood();
+        Item item = Prompt.askForItemRecipe(food);
+        food.removeRecipe(item.getItemId());
+    }
 }

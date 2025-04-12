@@ -2,7 +2,10 @@ import util.PrettyPrinter;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Prompt {
     private static Scanner input = new Scanner(System.in);
@@ -215,4 +218,81 @@ public class Prompt {
         return "Invalid";
     }
 
+
+    public static Food askForFood() {
+        System.out.println("Choose which food:");
+
+        byte index;
+
+        ArrayList<Food> menuList = MenuManager.getMenuList();
+
+        for (int i=1; i<=menuList.size(); i++) {
+            Food food = menuList.get(i-1);
+            System.out.println(i + ". " + food.getMenuName());
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        if (index >= 0 && index < menuList.size()) {
+            return menuList.get(index);
+        }
+
+        System.out.println("Food does not exist!");
+        return null;
+    }
+
+    public static Item askForItemRecipe(Food food) {
+        TreeMap<Item, Byte> recipeItemList = food.getRecipe();
+
+        byte index;
+        byte idx = 1;
+
+        for (Map.Entry<Item, Byte> entry : recipeItemList.entrySet()) {
+            Item item = entry.getKey();
+            byte qty = entry.getValue();
+            System.out.println(idx + ". " + item.getItemName() + "; requiring " + qty + " unit to make a single " + food.getMenuName());
+            idx++;
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        idx = 0;
+
+        if (index >= 0 && index < recipeItemList.size()) {
+            for (Map.Entry<Item, Byte> entry : recipeItemList.entrySet()) {
+                if (index == idx) {
+                    return entry.getKey();
+                }
+                idx++;
+            }
+        }
+
+        System.out.println("Item does not exist in the recipe!");
+        return null;
+    }
+
+    public static Item askForItemRecipe() {
+        byte index;
+
+        ArrayList<Item> itemList = Inventory.getItemList();
+
+        for (int i=1; i<=itemList.size(); i++) {
+            System.out.println(i + ". " + itemList.get(i-1).getItemName());
+        }
+
+        index = input.nextByte();
+        index -=1;
+        input.nextLine();
+
+        if (index >= 0 && index < itemList.size()) {
+            return itemList.get(index);
+        }
+
+        System.out.println("Item does not exist!");
+        return null;
+    }
 }

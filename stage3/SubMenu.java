@@ -109,6 +109,35 @@ public class SubMenu {
         } while (stillContinue);
     }
 
+    public static void addOrRemoveRecipe() {
+        boolean stillContinue = true;
+
+        do {
+            System.out.println("Choose:");
+
+            PrettyPrinter.printDashLine(menuWidth);
+
+            System.out.println("1. Add recipe");
+            System.out.println("2. Remove recipe");
+            System.out.println("3. Return");
+
+            byte option = input.nextByte();
+            input.nextLine();
+
+            switch (option) {
+                case 1:
+                    SubSubMenuFood.addRecipeMenu();
+                    break;
+                case 2:
+                    SubSubMenuFood.removeRecipeMenu();
+                    break;
+                default:
+                    stillContinue = false;
+                    break;
+            }
+        } while (stillContinue);
+    }
+
     /**
      * Allows for the addition or removal of movie theater items
      */

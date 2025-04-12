@@ -176,7 +176,8 @@ public class MainMenu {
             System.out.println("8.  Add/remove food");
             System.out.println("9.  Add/remove item");
             System.out.println("10. Add/remove staff");
-            System.out.println("11. Exit the program");
+            System.out.println("11. Add/remove recipe");
+            System.out.println("12. Exit the program");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -262,6 +263,9 @@ public class MainMenu {
                 // Adds / Removes staff
                 case 10:
                     SubMenu.addOrRemoveStaff();
+                    break;
+                case 11:
+                    SubMenu.addOrRemoveRecipe();
                     break;
                 // If the user chooses to no longer continue
                 default:
