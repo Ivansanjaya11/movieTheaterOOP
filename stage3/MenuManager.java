@@ -17,7 +17,7 @@ public class MenuManager {
      */
 
     public static ArrayList<Food> getMenuList() {
-        return menuList;
+        return new ArrayList<>(menuList);
     }
 
     /**

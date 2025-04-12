@@ -16,7 +16,7 @@ public class StaffManager {
      */
 
     public static ArrayList<Staff> getStaffs() {
-        return staffs;
+        return new ArrayList<>(staffs);
     }
 
     /**

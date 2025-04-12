@@ -48,7 +48,7 @@ public class ShowtimeManager {
      */
 
     public static ArrayList<Showtime> getShowtimes() {
-        return showtimes;
+        return new ArrayList<>(showtimes);
     }
 
     /**

@@ -278,6 +278,8 @@ public class Prompt {
         byte index;
         byte idx = 1;
 
+        System.out.println("Choose which item:");
+
         for (Map.Entry<Item, Byte> entry : recipeItemList.entrySet()) {
             Item item = entry.getKey();
             byte qty = entry.getValue();
@@ -314,6 +316,8 @@ public class Prompt {
         byte index;
 
         ArrayList<Item> itemList = Inventory.getItemList();
+
+        System.out.println("Choose which item:");
 
         for (int i=1; i<=itemList.size(); i++) {
             System.out.println(i + ". " + itemList.get(i-1).getItemName());

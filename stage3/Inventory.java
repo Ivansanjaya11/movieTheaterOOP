@@ -89,7 +89,7 @@ public class Inventory {
 	 */
 
 	public static ArrayList<Item> getItemList() {
-		return itemList;
+		return new ArrayList<>(itemList);
 	}
 
 	/**

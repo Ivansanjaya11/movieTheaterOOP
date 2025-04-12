@@ -33,7 +33,7 @@ public class MovieManager {
      */
 
     public static ArrayList<Movie> getMovies() {
-        return movies;
+        return new ArrayList<>(movies);
     }
 
     /**

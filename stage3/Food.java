@@ -116,7 +116,7 @@ public class Food implements Comparable<Food>{
 			FilesUpdateManager.updateInventoryFile(itemList);
 		}
 
-		System.out.println("Creating the item in the inventory and add to the recipe...");
+		System.out.println("add item to the recipe...");
 		this.recipe.put(item, quantityUsed); // add to recipe tree map
 	}
 
@@ -172,7 +172,7 @@ public class Food implements Comparable<Food>{
 		String str = "";
 		str = str + "This is menu number " + this.menuId;
 		str = str + "\n\tThe name is " + this.menuName;
-		str = str + "\n\tThe price for 1 portion is " + this.price;
+		str = str + "\n\tThe price for 1 portion is $" + this.price;
 		return str;
 	}
 

@@ -44,7 +44,7 @@ public class ScreenManager {
 
     public static ArrayList<Screen> getScreens() {
 
-        return screens;
+        return new ArrayList<>(screens);
     }
 
     /**
