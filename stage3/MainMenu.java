@@ -259,10 +259,11 @@ public class MainMenu {
                     }
 
                     break;
-                // Adds / Removes staff
+                // Allows for the addition, removal, display, and update of staff members
                 case 10:
                     SubMenu.addOrRemoveOrDisplayOrUpdateStaff();
                     break;
+                // Allows for the addition, removal, or display of item recipes
                 case 11:
                     SubMenu.addOrRemoveOrDisplayRecipe();
                     break;
