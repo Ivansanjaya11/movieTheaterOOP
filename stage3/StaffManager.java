@@ -61,4 +61,11 @@ public class StaffManager {
         staffs.remove(index);
     }
 
+    public static void updateStaff(byte index, TicketStaff staff) {
+        staffs.set(index, staff);
+    }
+
+    public static void updateStaff(byte index, FoodStaff staff) {
+        staffs.set(index, staff);
+    }
 }

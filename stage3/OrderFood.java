@@ -49,10 +49,6 @@ public class OrderFood extends Order {
             }
         } while (true);
 
-        if (detail.isEmpty()) {
-            return null;
-        }
-
         return detail;
     }
 

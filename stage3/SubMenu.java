@@ -240,7 +240,7 @@ public class SubMenu {
      * Allows for the addition or removal of staff member from staff manu list
      */
 
-    public static void addOrRemoveOrDisplayStaff() {
+    public static void addOrRemoveOrDisplayOrUpdateStaff() {
 
         boolean stillContinue = true;
 
@@ -252,7 +252,8 @@ public class SubMenu {
             System.out.println("1. Add staff");
             System.out.println("2. Remove staff");
             System.out.println("3. Display staff");
-            System.out.println("4. Return");
+            System.out.println("4. Update staff");
+            System.out.println("5. Return");
             byte option = input.nextByte();
             input.nextLine();
 
@@ -266,6 +267,8 @@ public class SubMenu {
                 case 3:
                     SubSubMenuStaff.displayStaff();
                     break;
+                case 4:
+                    SubSubMenuStaff.updateStaff();
                 default:
                     stillContinue = false;
                     break;

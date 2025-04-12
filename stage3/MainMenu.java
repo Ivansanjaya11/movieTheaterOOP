@@ -174,7 +174,7 @@ public class MainMenu {
             System.out.println("7.  Add/remove/display showtime");
             System.out.println("8.  Add/remove/display food");
             System.out.println("9.  Add/remove/display item");
-            System.out.println("10. Add/remove/display staff");
+            System.out.println("10. Add/remove/display/update staff");
             System.out.println("11. Add/remove/display recipe");
             System.out.println("12. Exit the program");
 
@@ -261,7 +261,7 @@ public class MainMenu {
                     break;
                 // Adds / Removes staff
                 case 10:
-                    SubMenu.addOrRemoveOrDisplayStaff();
+                    SubMenu.addOrRemoveOrDisplayOrUpdateStaff();
                     break;
                 case 11:
                     SubMenu.addOrRemoveOrDisplayRecipe();

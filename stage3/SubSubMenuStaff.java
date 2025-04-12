@@ -72,6 +72,49 @@ public class SubSubMenuStaff {
         }
     }
 
+    public static void updateStaff() {
+        //Ensures the staff list has staff members
+        if (!StaffManager.hasStaffs()) {
+            System.out.println("No staff available!");
+            return ;
+        }
+
+        System.out.println("Which staff do you want to update: ");
+        byte index;
+
+        for (int i=1; i<=StaffManager.getStaffs().size(); i++) {
+            System.out.println(i + ". " + StaffManager.getStaffs().get(i-1).getEmployeeName());
+        }
+
+        index = input.nextByte();
+        input.nextLine();
+        index -=1;
+
+        Staff staff = StaffManager.getStaffs().get(index);
+
+        System.out.print("Enter staff name: ");
+        String employeeName = input.nextLine();
+
+        System.out.print("Enter new employee ID (0–127): ");
+        byte employeeId = input.nextByte();
+        input.nextLine();
+
+        System.out.print("Enter new hourly rate (0–127): ");
+        byte hourlyRate = input.nextByte();
+        input.nextLine();
+
+        System.out.print("Enter new work schedule (HH:mm-HH:mm): ");
+        String schedule = input.nextLine();
+
+        System.out.print("Enter staff role (ticket/food): ");
+        String staffRole = input.nextLine();
+        if (staffRole.equals("ticket")) {
+            StaffManager.updateStaff(index, new TicketStaff(employeeName, employeeId, hourlyRate, schedule));
+        } else {
+            StaffManager.updateStaff(index, new FoodStaff(employeeName, employeeId, hourlyRate, schedule));
+        }
+    }
+
     /**
      * Displays staff members currently working within the movie theater
      */
