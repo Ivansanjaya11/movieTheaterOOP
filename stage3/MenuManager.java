@@ -85,6 +85,11 @@ public class MenuManager {
 
     }
 
+    /**
+     * method to update the food in the list of food
+     * @param index the position of the food in the list
+     * @param food the new food object to replace the old one
+     */
     public static void updateMenu(byte index, Food food) {
         menuList.set(index, food);
     }
