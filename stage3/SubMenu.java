@@ -45,6 +45,7 @@ public class SubMenu {
                     break;
                 case 4:
                     SubSubMenuTicket.updateScreenMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -84,6 +85,7 @@ public class SubMenu {
                     break;
                 case 4:
                     SubSubMenuTicket.updateMovieMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -124,6 +126,7 @@ public class SubMenu {
                     break;
                 case 4:
                     SubSubMenuTicket.updateShowtimeMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -135,7 +138,7 @@ public class SubMenu {
      * Adds, Removes, or Displays recipe based on user selection
      */
 
-    public static void addOrRemoveOrDisplayRecipe() {
+    public static void addOrRemoveOrDisplayOrUpdateRecipe() {
 
         boolean stillContinue = true;
 
@@ -147,7 +150,8 @@ public class SubMenu {
             System.out.println("1. Add recipe");
             System.out.println("2. Remove recipe");
             System.out.println("3. Display recipe");
-            System.out.println("4. Return");
+            System.out.println("4. Update recipe quantity");
+            System.out.println("5. Return");
 
             byte option = input.nextByte();
             input.nextLine();
@@ -164,6 +168,10 @@ public class SubMenu {
                 // Displays menu recipes
                 case 3:
                     SubSubMenuFood.displayRecipe();
+                    break;
+                case 4:
+                    SubSubMenuFood.updateRecipeMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -205,6 +213,7 @@ public class SubMenu {
                     break;
                 case 4:
                     SubSubMenuFood.updateItemMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -244,6 +253,7 @@ public class SubMenu {
                     break;
                 case 4:
                     SubSubMenuFood.updateFoodMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;
@@ -284,6 +294,7 @@ public class SubMenu {
                     break;
                 case 4:
                     SubSubMenuStaff.updateStaffMenu();
+                    break;
                 default:
                     stillContinue = false;
                     break;

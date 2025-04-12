@@ -48,7 +48,7 @@ public class Inventory {
 
 					Inventory.addItem(new Item(itemId, itemName, itemQuantity, buyingCost));
 
-					System.out.println("Item already exist in inventory. Quantity in stock is pulled");
+					System.out.println("Item " + itemName + " already exist in inventory. Quantity in stock is pulled");
 				}
 			} catch (IOException e) {
 				System.err.println(e.getMessage());

@@ -175,7 +175,7 @@ public class MainMenu {
             System.out.println("8.  Add/remove/display/update food");
             System.out.println("9.  Add/remove/display/update item");
             System.out.println("10. Add/remove/display/update staff");
-            System.out.println("11. Add/remove/display recipe");
+            System.out.println("11. Add/remove/display/update recipe");
             System.out.println("12. Exit the program");
 
             byte option = input.nextByte();
@@ -265,7 +265,7 @@ public class MainMenu {
                     break;
                 // Allows for the addition, removal, or display of item recipes
                 case 11:
-                    SubMenu.addOrRemoveOrDisplayRecipe();
+                    SubMenu.addOrRemoveOrDisplayOrUpdateRecipe();
                     break;
                 // If the user chooses to no longer continue
                 default:

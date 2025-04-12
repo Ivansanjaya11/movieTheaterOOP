@@ -260,6 +260,18 @@ public class SubSubMenuFood {
         food.removeRecipe(item.getItemId());
     }
 
+    public static void updateRecipeMenu() {
+        Food food = Prompt.askForFood();
+        Item item = Prompt.askForItemRecipe(food);
+
+        System.out.print("How many unit(s) is the required amount to make this food? ");
+        byte newQuantity = input.nextByte();
+        input.nextLine();
+
+        food.removeRecipe(item.getItemId());
+        food.addRecipe(item, newQuantity);
+    }
+
     /**
      * Displays food item recipes found within the menu
      */

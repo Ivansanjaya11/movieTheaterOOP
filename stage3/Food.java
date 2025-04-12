@@ -116,7 +116,6 @@ public class Food implements Comparable<Food>{
 			FilesUpdateManager.updateInventoryFile(itemList);
 		}
 
-		System.out.println("add item to the recipe...");
 		this.recipe.put(item, quantityUsed); // add to recipe tree map
 	}
 
