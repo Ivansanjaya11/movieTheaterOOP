@@ -77,7 +77,7 @@ public class ShowtimeManager {
      * @return True if screen ID exists, else: false
      */
 
-    public boolean hasScreenID(byte screenID) {
+    public static boolean hasScreenID(byte screenID) {
 
         for (Showtime showtime : showtimes) {
             if (showtime.getScreen().getScreenID() == screenID) {
@@ -91,7 +91,7 @@ public class ShowtimeManager {
      * Displays all scheduled showtimes
      */
 
-    public void showAllShowtimeSchedule() {
+    public static void showAllShowtimeSchedule() {
 
         for (Showtime showtime : showtimes) {
             System.out.println("Showtime ID: " + showtime.getShowtimeID() + ", Movie: " +

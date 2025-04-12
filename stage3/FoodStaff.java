@@ -2,16 +2,14 @@
  * @author Heather Santos
  */
 
-import java.util.stream.IntStream;
+
+import util.PrettyPrinter;
 
 /**
  * Represents a concession stand staff member 
  */
 
 public class FoodStaff extends Staff {
-
-    // Initializes menu manager
-    private static MenuManager menuManager = new MenuManager();
 
      /**
      * Constructs a new FoodStaff object with the given employee details
@@ -25,24 +23,6 @@ public class FoodStaff extends Staff {
 
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Concession Stand";
-    }
-
-    /**
-     * Gets the shared MenuManager instance
-     * @return the MenuManager
-     */
-
-    public MenuManager getMenuManager() {
-        return FoodStaff.menuManager;
-    }
-
-    /**
-     * Sets a MenuManager instance
-     * @param menuManager the new Menu Manager to assign
-     */
-
-    public void setMenuManager(MenuManager menuManager) {
-        FoodStaff.menuManager = menuManager;
     }
 
     /**
@@ -60,7 +40,6 @@ public class FoodStaff extends Staff {
            System.out.println("Transaction completed!");
         }
 
-        IntStream.range(0, 40).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine((short) 40);
     }
 }

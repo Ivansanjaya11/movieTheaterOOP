@@ -2,18 +2,14 @@
  * @author Heather Santos
  */
 
-import java.util.stream.IntStream;
+import util.PrettyPrinter;
 
 /**
  * Represents a staff member responsible for ticket sales operations
- * Manages ticket payment and iteracts with showtime and movie data
+ * Manages ticket payment and interacts with showtime and movie data
  */
 
 class TicketStaff extends Staff {
-
-    // Initializes ShowtimeManager and MovieManager to be used by ticket staff
-    private static ShowtimeManager showtimeManager = new ShowtimeManager();
-    private static MovieManager movieManager = new MovieManager();
 
     /**
      * Constructs a TicketStaff member with provided employee details
@@ -27,42 +23,6 @@ class TicketStaff extends Staff {
 
         super(employeeName, employeeId, hourlyRate, schedule);
         this.role = "Ticket Sales";
-    }
-
-    /**
-     * Gets the static Showtime Manager instance
-     * @return the ShowtimeManager
-     */
-
-    public ShowtimeManager getShowtimeManager() {
-        return showtimeManager;
-    }
-
-    /**
-     * Gets the static MovieManager instance
-     * @return the MovieManager
-     */
-
-    public MovieManager getMovieManager() {
-        return movieManager;
-    }
-
-    /**
-     * Sets the static ShowtimeManager
-     * @param newShowtimeManager the new ShowtimeManager to set
-     */
-
-    public void setShowtimeManager(ShowtimeManager newShowtimeManager) {
-        showtimeManager = newShowtimeManager;
-    }
-
-    /**
-     * Sets the MovieManager
-     * @param newMovieManager the new MovieManager to set
-     */
-
-    public void setMovieManager(MovieManager newMovieManager) {
-        movieManager = newMovieManager;
     }
 
     /**
@@ -81,7 +41,6 @@ class TicketStaff extends Staff {
             System.out.println("Transaction completed!");
         }
 
-        IntStream.range(0, 40).forEach(i -> System.out.print("-"));
-        System.out.println();
+        PrettyPrinter.printDashLine((short) 50);
     }
 }

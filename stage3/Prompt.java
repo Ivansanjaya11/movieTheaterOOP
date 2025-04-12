@@ -137,7 +137,7 @@ public class Prompt {
 
     public static Screen askForScreen() {
 
-        System.out.print("Which screen do you want: ");
+        System.out.println("Which screen do you want: ");
         byte index;
 
         // Provides screen selection options to user

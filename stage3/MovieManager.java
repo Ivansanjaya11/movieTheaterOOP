@@ -9,13 +9,13 @@ import java.util.ArrayList;
 public class MovieManager {
 
     //List to store movies
-    private static ArrayList<Movie> movies = new ArrayList<>();
+    private static final ArrayList<Movie> movies = new ArrayList<>();
 
     /**
      * Constructor initializes movie list
      */
 
-    public MovieManager() {}
+    private MovieManager() {}
 
     /**
      * Ensures movie list has movies
@@ -76,7 +76,7 @@ public class MovieManager {
      * Displays all movies in movie list
      */
 
-    public void displayAllMovies() {
+    public static void displayAllMovies() {
 
         for (Movie movie : movies) {
             System.out.println("ID: " + movie.getMovieID() + ", Title; " + movie.getTitle() +
@@ -89,7 +89,7 @@ public class MovieManager {
      * @param movieID id of the movie being searched
      */
 
-    public byte searchMovie(byte movieID) {
+    public static byte searchMovie(byte movieID) {
 
         for (Movie movie : movies) {
             if (movie.getMovieID() == movieID) {
@@ -107,7 +107,7 @@ public class MovieManager {
      * @return true if the movie exists, otherwise false
      */
 
-    public boolean hasMovieID(byte movieID) {
+    public static boolean hasMovieID(byte movieID) {
 
         for (Movie movie : movies) {
             if (movie.getMovieID() == movieID) {
@@ -124,7 +124,7 @@ public class MovieManager {
      * @return true if the movie exists
      */
 
-    public boolean hasTitle(String title) {
+    public static boolean hasTitle(String title) {
 
         for (Movie movie : movies) {
             if (movie.getTitle().equals(title)) {

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class MenuManager {
 
     // Initializes menu list
-    private static ArrayList<Food> menuList = new ArrayList<>();
+    private static final ArrayList<Food> menuList = new ArrayList<>();
 
     /**
      * Constructs MenuManager class
@@ -18,15 +18,6 @@ public class MenuManager {
 
     public static ArrayList<Food> getMenuList() {
         return menuList;
-    }
-
-    /**
-     * Sets the menu list of available food items.
-     * @param newMenuList the new list of available food items
-     */
-
-    public static void setMenuList(ArrayList<Food> newMenuList) {
-        menuList = newMenuList;
     }
 
     /**
