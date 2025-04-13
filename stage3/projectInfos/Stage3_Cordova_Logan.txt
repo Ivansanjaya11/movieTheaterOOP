@@ -1,0 +1,12 @@
+Stage 3:
+Logan Cordova
+
+For stage 3 I expanded my original 3 classes: 
+* Movie 
+* Showtime 
+* Screen class
+ to include a SeatingArrangement class, MovieManager class, ShowtimeManager class, and Customer class; providing the original code for each of these classes.
+I was tasked with commenting and editing the format of each class file within the repository and finished a majority of the user guide. 
+(I survived! Whoo!!)
+
+
