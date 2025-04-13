@@ -1,0 +1,4 @@
+Stage 3
+Heather Santos
+
+For stage 3 I created the code for Payment, TicketPayment, Staff, FoodStaff, TicketStaff, I updated the entire UML diagram with all of the connections, and helped create the first part of the user guide for the ticket sales and concession stand instructions and formatted the document to be easier to read and less lengthy. ( I survived, whew.)
