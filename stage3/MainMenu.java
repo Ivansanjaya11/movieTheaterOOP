@@ -258,10 +258,16 @@ public class MainMenu {
                 // Allows for the addition, removal, display, and update of staff members
                 case 10:
                     SubMenu.addOrRemoveOrDisplayOrUpdateStaff();
+
                     break;
                 // Allows for the addition, removal, or display of item recipes
                 case 11:
-                    SubMenu.addOrRemoveOrDisplayOrUpdateRecipe();
+                    if (staff instanceof  FoodStaff) {
+                        SubMenu.addOrRemoveOrDisplayOrUpdateRecipe();
+                    } else {
+                        System.out.println("Invalid! You are working at the ticket stand!");
+                    }
+
                     break;
                 // If the user chooses to no longer continue
                 default:
