@@ -26,7 +26,7 @@ public class SubSubMenuFood {
         if (!MenuManager.contains(id)) {
             MenuManager.addMenu(new Food(id, name, price));
         } else {
-            System.out.println("Showtime with id " + id + " already exists");
+            System.out.println("Food with id " + id + " already exists");
         }
     }
 
@@ -56,7 +56,7 @@ public class SubSubMenuFood {
             byte id = MenuManager.getMenuList().get(index).getMenuId();
             MenuManager.removeMenu(id);
         } else {
-            System.out.println("Movie does not exist!");
+            System.out.println("Food does not exist!");
         }
     }
 
@@ -99,7 +99,7 @@ public class SubSubMenuFood {
             MenuManager.updateMenu(index, food);
 
         } else {
-            System.out.println("Movie does not exist!");
+            System.out.println("Food does not exist!");
         }
     }
 
