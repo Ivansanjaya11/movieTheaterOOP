@@ -261,7 +261,7 @@ public class SubSubMenuTicket {
         if (index >=0 && index < ShowtimeManager.getShowtimes().size()) {
             ShowtimeManager.removeShowtime(index);
         } else {
-            System.out.println("Movie does not exist!");
+            System.out.println("Showtime does not exist!");
         }
     }
 
@@ -303,7 +303,7 @@ public class SubSubMenuTicket {
         if (index >=0 && index < ShowtimeManager.getShowtimes().size()) {
             ShowtimeManager.updateShowtime(index, new Showtime(id, movie, screen, time));
         } else {
-            System.out.println("Movie does not exist!");
+            System.out.println("Showtime does not exist!");
         }
     }
 
