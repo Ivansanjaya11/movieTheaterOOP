@@ -1,0 +1,5 @@
+Stage 3
+Ivan Sanjaya
+
+I wrote most of the code (basically, the classes that Heather & Logan didn't create)
+and half of the commenting. I didn't do any of the user guide and the UML diagram.
