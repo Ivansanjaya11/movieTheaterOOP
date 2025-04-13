@@ -36,7 +36,7 @@ public class SubSubMenuStaff {
                 System.out.println("Invalid role");
             }
         } else {
-            System.out.println("Item with id " + id + " already exists");
+            System.out.println("Staff with id " + id + " already exists");
         }
     }
 
