@@ -1,0 +1,6 @@
+John,1,16,09:00-16:00,food
+Logan,2,16,09:00-16:00,food
+Tim,3,16,11:00-18:00,food
+Edward,4,16,08:00-18:00,ticket
+Michelle,5,16,11:00-17:00,ticket
+Jack,6,15,10:00-19:00,ticket

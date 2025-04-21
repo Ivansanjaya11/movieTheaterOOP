@@ -1,0 +1,6 @@
+1,Star Wars,Science Fiction,124
+2,Back To The Future,Science Fiction,116
+3,Jaws,Thriller,130
+4,Lord Of The Rings,Fantasy,201
+5,28 Days Later,Thriller,113
+6,The Mummy,Action,124

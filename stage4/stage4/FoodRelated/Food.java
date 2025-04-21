@@ -1,0 +1,191 @@
+package stage4.FoodRelated;
+
+import stage4.AnalyticsAndFiles.FilesUpdateManager;
+
+import java.util.ArrayList;
+import java.util.TreeMap;
+
+public class Food implements Comparable<Food>{
+
+	private byte menuId;
+	private String menuName;
+	private byte price;
+	private TreeMap<Item, Byte> recipe;
+
+	/**
+	 * Constructs a stage4.TicketRelated.stage4.FoodRelated.Food object with the specified menu ID, name, and price.
+	 * @param menuId - The unique ID of the menu.
+	 * @param menuName The name of the menu item.
+	 * @param price The price of the menu item.
+	 */
+	public Food(byte menuId, String menuName, byte price) {
+
+		this.menuId = menuId;
+		this.menuName = menuName;
+		this.price = price;
+		this.recipe = new TreeMap<>();
+	}
+
+	/**
+	 * Gets the menu ID.
+	 * @return The menu ID.
+	 */
+	public byte getMenuId() {
+
+		if (this.hasMenuId()) {
+			return this.menuId;
+		}
+
+		return -1;
+	}
+
+	/**
+	 * Gets the menu name.
+	 * @return The menu name.
+	 */
+	public String getMenuName() {
+
+		if (this.hasMenuName()) {
+			return this.menuName;
+		}
+
+		return "Menu name not assigned!";
+	}
+
+	/**
+	 * Gets the price of the menu item.
+	 * @return The price.
+	 */
+	public byte getPrice() {
+
+		if (this.hasPrice()) {
+			return this.price;
+		}
+
+		return -1;
+	}
+
+	/**
+	 * Gets the recipe as a TreeMap of items and their quantities.
+	 * @return The recipe TreeMap.
+	 */
+	public TreeMap<Item, Byte> getRecipe() {
+		return this.recipe;
+	}
+
+	/**
+	 * Sets the menu ID.
+	 * @param menuId The new menu ID.
+	 */
+	public void setMenuId(byte menuId) {
+		this.menuId = menuId;
+	}
+
+	/**
+	 * Sets the menu name.
+	 * @param menuName The new menu name.
+	 */
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	/**
+	 * Sets the price of the menu item.
+	 * @param price The new price.
+	 */
+	public void setPrice(byte price) {
+		this.price = price;
+	}
+
+	/**
+	 * Adds an item and its quantity to the recipe.
+	 * @param item The item to be added.
+	 * @param quantityUsed The quantity of the item used.
+	 */
+	public void addRecipe(Item item, byte quantityUsed) {
+
+		// if item is not available in the inventory, then add the item to the inventory first
+		if (Inventory.getItem(item.getItemId())==null) {
+			Inventory.addItem(item);
+
+			// update the inventory file with the new item added
+            ArrayList<Item> itemList = Inventory.getItemList();
+			FilesUpdateManager.updateInventoryFile(itemList);
+		}
+
+		this.recipe.put(item, quantityUsed); // add to recipe tree map
+
+		ArrayList<Food> menuList = MenuManager.getMenuList();
+
+		FilesUpdateManager.updateFoodDataFile(menuList);
+	}
+
+	/**
+	 * Removes an item from the recipe based on its ID.
+	 * @param itemId The ID of the item to be removed.
+	 */
+	public void removeRecipe(byte itemId) {
+
+		// iterates through the recipe treemap until the item is found and remove it
+		for (Item item : this.recipe.keySet()) {
+			if (item.getItemId() == itemId) {
+				this.recipe.remove(item);
+				FilesUpdateManager.updateFoodDataFile(MenuManager.getMenuList());
+				break;
+			}
+		}
+	}
+
+	/**
+	 * sets the recipe of this food
+	 * @param newRecipe the new recipe of the food to be set
+	 */
+	public void setRecipe(TreeMap<Item, Byte> newRecipe) {
+		this.recipe = newRecipe;
+	}
+
+	/**
+	 * Checks if the menu ID is set.
+	 * @return True if the menu ID is not zero, otherwise false.
+	 */
+	public boolean hasMenuId() {
+		return !(this.menuId == 0);
+	}
+
+	/**
+	 * Checks if the menu name is set.
+	 * @return True if the menu name is not empty, otherwise false.
+	 */
+	public boolean hasMenuName() {
+		return !(this.menuName.isEmpty());
+	}
+
+	/**
+	 * Checks if the price is set.
+	 * @return True if the price is not zero, otherwise false.
+	 */
+	public boolean hasPrice() {
+		return !(this.price == 0);
+	}
+
+	/**
+	 * Displays information about the menu item.
+	 */
+	@Override
+	public String toString() {
+		String str = "";
+		str = str + "This is menu number " + this.menuId;
+		str = str + "\n\tThe name is " + this.menuName;
+		str = str + "\n\tThe price for 1 portion is $" + this.price;
+		return str;
+	}
+
+	/**
+	 * Compares 2 stage4.TicketRelated.stage4.FoodRelated.Food objects using the menu id
+	 * @param otherFood the object to be compared.
+     */
+	@Override
+	public int compareTo(Food otherFood) {
+		return Integer.compare(this.menuId, otherFood.getMenuId());
+	}
+}

@@ -1,0 +1,6 @@
+1,imax
+2,imax
+3,normal
+4,normal
+5,normal
+6,normal
