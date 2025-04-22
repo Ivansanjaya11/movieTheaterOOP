@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class LogPrinter {
-    private static final byte logWidth = 20;
+    private static final byte logWidth = 25;
 
     private LogPrinter() {}
 
