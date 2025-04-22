@@ -1,6 +1,9 @@
 package stage4.TicketRelated;
 
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 import stage4.util.Path;
 
 import java.io.BufferedReader;
@@ -44,7 +47,7 @@ public class ShowtimeManager {
                     Movie movie = MovieManager.searchMovie(movieId);
                     Screen screen = ScreenManager.searchScreen(screenId);
 
-                    SeatingArrangement seatings = new SeatingArrangement();
+                    SeatingArrangement seatings = new SeatingArrangement(screenId);
 
                     int rows = seatings.getRowCapacity();
                     int cols = seatings.getColCapacity();
@@ -63,13 +66,16 @@ public class ShowtimeManager {
                     if (movie != null && screen != null) {
                         Showtime showtime = new Showtime(showtimeId, movie, screen, LocalTime.of(hour, minute));
                         showtimes.add(showtime);
-                        System.out.println("showtime #" + showtime.getShowtimeID() + " added from the database!");
-                    } else {
-                        System.out.println("movie or screen not properly set up!");
+
+                        LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_SHOWTIME,
+                                "showtime #" + showtime.getShowtimeID() + " added from the database!");
+                        //System.out.println("showtime #" + showtime.getShowtimeID() + " added from the database!");
                     }
                 }
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+
+                LogPrinter.println(Color.RED, Color.RED, LogType.ERROR, e.getMessage());
+                //System.err.println(e.getMessage());
             }
 
         }
@@ -114,10 +120,13 @@ public class ShowtimeManager {
     public static void addShowtime(Showtime showtime) {
         if (!contains(showtime.getShowtimeID())) {
             showtimes.add(showtime);
-            System.out.println("showtime #" + showtime.getShowtimeID() + " has been added!");
+
+            LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_SHOWTIME, "showtime #" + showtime.getShowtimeID() + " has been added!");
+            //System.out.println("showtime #" + showtime.getShowtimeID() + " has been added!");
             FilesUpdateManager.updateShowtimeDataFile(new ArrayList<>(showtimes));
         } else {
-            System.out.println("showtime #" + showtime.getShowtimeID() + " already exists!");
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_SHOWTIME, "showtime #" + showtime.getShowtimeID() + " already exists!");
+            //System.out.println("showtime #" + showtime.getShowtimeID() + " already exists!");
         }
     }
 
@@ -127,10 +136,19 @@ public class ShowtimeManager {
      */
 
     public static void removeShowtime(int index) {
-        Showtime showtimeToBeRemoved = showtimes.get(index);
-        showtimes.remove(index);
-        FilesUpdateManager.updateShowtimeDataFile(new ArrayList<>(showtimes));
-        System.out.println("stage4.TicketRelated.Showtime " + showtimeToBeRemoved.getShowtimeID() + " has been removed!");
+        if (hasShowtimes()) {
+            Showtime showtimeToBeRemoved = showtimes.get(index);
+            showtimes.remove(index);
+            FilesUpdateManager.updateShowtimeDataFile(new ArrayList<>(showtimes));
+
+            LogPrinter.println(Color.CYAN, Color.CYAN, LogType.REMOVE_SHOWTIME,
+                    "Showtime #" + showtimeToBeRemoved.getShowtimeID() + " has been removed!");
+
+            //System.out.println("Showtime " + showtimeToBeRemoved.getShowtimeID() + " has been removed!");
+        } else {
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_SHOWTIME, "showtime list is empty!");
+
+        }
     }
 
     /**
@@ -151,6 +169,7 @@ public class ShowtimeManager {
 
     public static void updateShowtime(byte index, Showtime showtime) {
         showtimes.set(index, showtime);
+        LogPrinter.println(Color.MAGENTA, Color.MAGENTA, LogType.UPDATE_SHOWTIME, "Showtime #" + showtime.getShowtimeID() + " updated!");
     }
 
     /**
@@ -158,7 +177,7 @@ public class ShowtimeManager {
      */
     public static void showAllShowtimeSchedule() {
         for (Showtime showtime : showtimes) {
-            System.out.println("stage4.TicketRelated.stage4.TicketRelated.stage4.TicketRelated.Showtime ID: " + showtime.getShowtimeID() + ", stage4.TicketRelated.Movie: " +
+            System.out.println("Showtime ID: " + showtime.getShowtimeID() + ", Movie: " +
                     showtime.getMovie().getTitle() + "Start time: " + showtime.getStartTime() +
                     "End time: " + showtime.getEndTime());
         }
@@ -167,11 +186,13 @@ public class ShowtimeManager {
     public static Showtime searchShowtime(byte showtimeId) {
         for (Showtime showtime : showtimes) {
             if (showtime.getShowtimeID() == showtimeId) {
+                LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_SHOWTIME, "Showtime #" + showtimeId + " found!");
                 return showtime;
             }
         }
 
-        System.out.println("showtime not found!");
+        LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_SHOWTIME, "showtime not found!");
+        //System.out.println("showtime not found!");
         return null;
     }
 

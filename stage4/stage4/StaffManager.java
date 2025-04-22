@@ -1,6 +1,9 @@
 package stage4;
 
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 import stage4.util.Path;
 
 import java.io.BufferedReader;
@@ -37,16 +40,22 @@ public class StaffManager {
 
                    if (staffInfo[4].trim().equals("ticket")) {
                        staffs.add(new TicketStaff(staffName, staffId, staffHourlyRate, staffSchedule));
-                       System.out.println("ticket staff '" + staffName + "' added from database!");
+                       LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_STAFF,
+                               "ticket staff '" + staffName + "' added from database!");
+
+                       //System.out.println("ticket staff '" + staffName + "' added from database!");
                    } else {
                        staffs.add(new FoodStaff(staffName, staffId, staffHourlyRate, staffSchedule));
-                       System.out.println("food staff '" + staffName + "' added from database!");
+                       LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_STAFF,
+                               "food staff '" + staffName + "' added from database!");
+                       //System.out.println("food staff '" + staffName + "' added from database!");
                    }
 
                }
 
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                LogPrinter.println(Color.RED, Color.RED, LogType.ERROR, e.getMessage());
+                //System.err.println(e.getMessage());
             }
 
         }
@@ -90,10 +99,16 @@ public class StaffManager {
 
         if (!contains(staff.getEmployeeId())) {
             staffs.add(staff);
-            System.out.println("staff '" + staff.getEmployeeName() + "' has been added!");
+
+            LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_STAFF,
+                    "staff '" + staff.getEmployeeName() + "' has been added!");
+            //System.out.println("staff '" + staff.getEmployeeName() + "' has been added!");
             FilesUpdateManager.updateStaffDataFile(new ArrayList<>(staffs));
         } else {
-            System.out.println("staff '" + staff.getEmployeeName() + "' already exists!");
+
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_STAFF,
+                    "staff '" + staff.getEmployeeName() + "' already exists!");
+            //System.out.println("staff '" + staff.getEmployeeName() + "' already exists!");
         }
 
     }
@@ -103,10 +118,17 @@ public class StaffManager {
      * @param index of staff members
      */
     public static void removeStaff(byte index) {
-        Staff staffToBeRemoved = staffs.get(index);
-        staffs.remove(index);
-        FilesUpdateManager.updateStaffDataFile(new ArrayList<>(staffs));
-        System.out.println("staff '" + staffToBeRemoved.getEmployeeName() + "' removed!");
+        if (hasStaffs()) {
+            Staff staffToBeRemoved = staffs.get(index);
+            staffs.remove(index);
+            FilesUpdateManager.updateStaffDataFile(new ArrayList<>(staffs));
+
+            LogPrinter.println(Color.CYAN, Color.CYAN, LogType.REMOVE_STAFF,
+                    "staff '" + staffToBeRemoved.getEmployeeName() + "' removed!");
+            //System.out.println("staff '" + staffToBeRemoved.getEmployeeName() + "' removed!");
+        } else {
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_STAFF, "staff list is empty!");
+        }
     }
 
     /**
@@ -116,16 +138,21 @@ public class StaffManager {
      */
     public static void updateStaff(byte index, Staff staff) {
         staffs.set(index, staff);
+
+        LogPrinter.println(Color.MAGENTA, Color.MAGENTA, LogType.UPDATE_STAFF,
+                "staff '" + staff.getEmployeeName() + "' removed!");
     }
 
 
     public static Staff searchStaff(byte staffId) {
         for (Staff staff : staffs) {
             if (staff.getEmployeeId() == staffId) {
+                LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_STAFF, staff.getEmployeeName() + " found!");
                 return staff;
             }
         }
 
+        LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_STAFF, "staff not found!");
         System.out.println("staff not found!");
         return null;
     }

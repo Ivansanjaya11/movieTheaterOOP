@@ -1,6 +1,9 @@
 package stage4.FoodRelated;
 
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 import stage4.util.Path;
 
 import java.io.BufferedReader;
@@ -17,7 +20,7 @@ public class MenuManager {
     private static final File foodFile = new File(Path.FOOD_DATA_PATH);
 
     /**
-     * Constructs stage4.TicketRelated.stage4.FoodRelated.MenuManager class
+     * Constructs MenuManager class
      */
     private MenuManager() {}
 
@@ -54,11 +57,12 @@ public class MenuManager {
 
                     menuList.add(food);
 
-                    System.out.println(food.getMenuName() + " has been added from the database!");
+                    LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_FOOD, food.getMenuName() + " added from the database!");
+                    //System.out.println(food.getMenuName() + " has been added from the database!");
                 }
 
             } catch (IOException e) {
-                System.err.println(e.getMessage());
+                LogPrinter.println(Color.RED, Color.RED, LogType.ERROR, e.getMessage());
             }
 
         }
@@ -103,10 +107,12 @@ public class MenuManager {
     public static void addMenu(Food menuItem) {
         if (!contains(menuItem.getMenuId())) {
             menuList.add(menuItem);
-            System.out.println(menuItem.getMenuName() + " has been added!");
+            LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_FOOD, menuItem.getMenuName() + " added!");
+            //System.out.println(menuItem.getMenuName() + " has been added!");
             FilesUpdateManager.updateFoodDataFile(new ArrayList<>(menuList));
         } else {
-            System.out.println("stage4.TicketRelated.stage4.FoodRelated.Food " + menuItem.getMenuName() + " already exists!");
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_FOOD, menuItem.getMenuName() + " already exists!");
+            //System.out.println("Food " + menuItem.getMenuName() + " already exists!");
         }
     }
 
@@ -124,6 +130,7 @@ public class MenuManager {
             // if yes, remove from menu list
             for(int i=0; i<menuList.size(); i++) {
                 if (menuList.get(i).getMenuId()==menuId) {
+                    LogPrinter.println(Color.CYAN, Color.CYAN, LogType.REMOVE_FOOD, menuList.get(i) + " removed!");
                     menuList.remove(i);
                     FilesUpdateManager.updateFoodDataFile(new ArrayList<>(menuList));
                     found = true;
@@ -132,11 +139,13 @@ public class MenuManager {
             }
 
             if (!found) {
-                System.out.println("The item is not found in the menu!");
+                LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_FOOD, "menu not found!");
+                //System.out.println("The item is not found in the menu!");
             }
 
         } else {
-            System.out.println("There is no item in the menu!");
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_FOOD, "menu list is empty!");
+            //System.out.println("There is no item in the menu!");
         }
 
     }
@@ -148,16 +157,20 @@ public class MenuManager {
      */
     public static void updateMenu(byte index, Food food) {
         menuList.set(index, food);
+        LogPrinter.println(Color.MAGENTA, Color.MAGENTA, LogType.UPDATE_FOOD, food.getMenuName() + " updated!");
     }
 
     public static Food searchMenu(byte foodId) {
         for (Food food : menuList) {
             if (food.getMenuId() == foodId) {
+                LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_FOOD, food.getMenuName() + " found!");
                 return food;
             }
         }
 
-        System.out.println("food/drink not found");
+
+        LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_FOOD, "menu not found!");
+        //System.out.println("food/drink not found");
         return null;
     }
 

@@ -22,7 +22,7 @@ public class Analytics {
 
 
 	/**
-	 * Constructs an stage4.TicketRelated.stage4.Analytics.Analytics object with a specified start time for the reporting period.
+	 * Constructs an Analytics object with a specified start time for the reporting period.
 	 * The end time is set to the current time.
 	 */
 	public Analytics() {
@@ -31,7 +31,7 @@ public class Analytics {
 	}
 
 	/**
-	 * Constructs an stage4.TicketRelated.stage4.Analytics.Analytics object with a specified start time for the reporting period.
+	 * Constructs an Analytics object with a specified start time for the reporting period.
 	 * The end time is set to the current time.
 	 * @param timePeriodStart The start time for the report period.
 	 */
@@ -41,7 +41,7 @@ public class Analytics {
 	}
 
 	/**
-	 * Constructs an stage4.TicketRelated.stage4.Analytics.Analytics object with specified start and end times for the reporting period.
+	 * Constructs an Analytics object with specified start and end times for the reporting period.
 	 *
 	 * @param timePeriodStart The start time for the report period.
 	 * @param timePeriodEnd The end time for the report period.

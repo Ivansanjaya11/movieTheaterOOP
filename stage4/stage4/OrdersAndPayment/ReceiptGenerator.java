@@ -2,8 +2,7 @@ package stage4.OrdersAndPayment;
 
 import stage4.FoodRelated.Food;
 import stage4.FoodRelated.Inventory;
-import stage4.util.DateAndPaymentTracker;
-import stage4.util.PrettyPrinter;
+import stage4.util.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -79,13 +78,13 @@ public class ReceiptGenerator {
         PrettyPrinter.printDashLine(width);
 
         // prints out the detail of the transaction on screen
-        System.out.println("stage4.TicketRelated.stage4.Orders.Order #" + paymentId);
+        System.out.println("Order #" + paymentId);
         System.out.println("This order is for " + customerName);
 
         PrettyPrinter.printDashLine(width);
 
         // prints out the header of the table
-        System.out.println("stage4.TicketRelated.stage4.FoodRelated.Food\t\tQty\t\tprice per qty");
+        System.out.println("Food\t\tQty\t\tprice per qty");
 
         PrettyPrinter.printDashLine(width);
 
@@ -102,6 +101,8 @@ public class ReceiptGenerator {
         System.out.print("Total price is $" + paymentAmount);
         System.out.print(", paid with " + paymentType);
         System.out.println("\nThank you for eating with us!");
+
+        LogPrinter.println(Color.PURPLE, Color.PURPLE, LogType.FOOD_RECEIPT, "Food receipt has been generated for id #" + paymentId);
 
         // after receipt is printed on the screen, the method returns the payment ID
         return paymentId;
@@ -137,15 +138,15 @@ public class ReceiptGenerator {
         PrettyPrinter.printDashLine(width);
 
         //Print the receipt
-        System.out.println("stage4.TicketRelated.stage4.Orders.Order #" + paymentId);
-        System.out.println("stage4.TicketRelated.stage4.Orders.Order Name: " + customerName);
+        System.out.println("Order #" + paymentId);
+        System.out.println("This order is for: " + customerName);
 
         PrettyPrinter.printDashLine(width);
 
         // prints the detail of the showtime
-        System.out.println("stage4.TicketRelated.Movie: '" + detail.getShowtime().getMovie().getTitle() + "'");
+        System.out.println("Movie: '" + detail.getShowtime().getMovie().getTitle() + "'");
         System.out.println("Start time: " + detail.getShowtime().getStartTime().toString());
-        System.out.println("stage4.TicketRelated.stage4.TicketRelated.stage4.TicketRelated.Screen room #" + detail.getShowtime().getScreen().getScreenID());
+        System.out.println("Screen room #" + detail.getShowtime().getScreen().getScreenID());
 
         PrettyPrinter.printDashLine(width);
 
@@ -178,6 +179,8 @@ public class ReceiptGenerator {
         System.out.print("Total price is $" + paymentAmount);
         System.out.println(", paid with " + paymentType);
         System.out.println("Thank you for watching with us!");
+
+        LogPrinter.println(Color.PURPLE, Color.PURPLE, LogType.TICKET_RECEIPT, "Ticket receipt has been generated for id #" + paymentId);
 
         // after receipt is printed on the screen, the method returns the payment ID
         return paymentId;

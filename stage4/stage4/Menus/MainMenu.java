@@ -10,6 +10,9 @@ import stage4.TicketRelated.Screen;
 import stage4.TicketRelated.ScreenManager;
 import stage4.TicketRelated.Showtime;
 import stage4.TicketRelated.ShowtimeManager;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 import stage4.util.PrettyPrinter;
 
 import java.time.LocalTime;
@@ -125,7 +128,7 @@ public class MainMenu {
         Food pepsi = new Food((byte) 6, "Pepsi", (byte) 3);
         Food coke = new Food((byte) 7, "Coke", (byte) 3);
 
-        // register all recipe and items to stage4.TicketRelated.stage4.FoodRelated.Food and inventory (to inventory is automatic)
+        // register all recipe and items to Food and inventory (to inventory is automatic)
         burger.addRecipe(buns, (byte) 2);
         burger.addRecipe(tomato, (byte) 1);
         burger.addRecipe(cheese, (byte) 1);
@@ -167,6 +170,8 @@ public class MainMenu {
 
         Staff staff = Prompt.askForStaff();
 
+        LogPrinter.println(Color.YELLOW, Color.YELLOW, LogType.SYSTEM, "Starting the system...");
+
         System.out.println("MAIN MENU");
 
         do {
@@ -197,7 +202,8 @@ public class MainMenu {
                         Customer ticketCustomer = Prompt.askForCustomer();
                         ticketStaff.addNewTicketPayment(ticketCustomer);
                     } else {
-                        System.out.println("Invalid! You are working at the food stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the ticket stand!");
+                        //System.out.println("Invalid! You are working at the food stand!");
                     }
 
                     break;
@@ -208,7 +214,8 @@ public class MainMenu {
                         Customer foodCustomer = Prompt.askForCustomer();
                         foodStaff.addNewFoodPayment(foodCustomer);
                     } else {
-                        System.out.println("Invalid! You are working at the ticket booth!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the food stand!");
+                        //System.out.println("Invalid! You are working at the ticket booth!");
                     }
 
                     break;
@@ -227,7 +234,8 @@ public class MainMenu {
                     if (staff instanceof TicketStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateOrSearchMovie();
                     } else {
-                        System.out.println("Invalid! You are working at the food stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the ticket stand!");
+                        //System.out.println("Invalid! You are working at the food stand!");
                     }
 
                     break;
@@ -236,7 +244,8 @@ public class MainMenu {
                     if (staff instanceof TicketStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateOrSearchScreen();
                     } else {
-                        System.out.println("Invalid! You are working at the food stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the ticket stand!");
+                        //System.out.println("Invalid! You are working at the food stand!");
                     }
 
                     break;
@@ -245,7 +254,8 @@ public class MainMenu {
                     if (staff instanceof TicketStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateOrSearchShowtime();
                     } else {
-                        System.out.println("Invalid! You are working at the food stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the ticket stand!");
+                        //System.out.println("Invalid! You are working at the food stand!");
                     }
 
                     break;
@@ -254,7 +264,8 @@ public class MainMenu {
                     if (staff instanceof FoodStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateOrSearchFood();
                     } else {
-                        System.out.println("Invalid! You are working at the ticket stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the food stand!");
+                        //System.out.println("Invalid! You are working at the ticket stand!");
                     }
 
                     break;
@@ -263,7 +274,8 @@ public class MainMenu {
                     if (staff instanceof FoodStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateOrSearchItem();
                     } else {
-                        System.out.println("Invalid! You are working at the ticket stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the food stand!");
+                        //System.out.println("Invalid! You are working at the ticket stand!");
                     }
 
                     break;
@@ -277,15 +289,18 @@ public class MainMenu {
                     if (staff instanceof  FoodStaff) {
                         SubMenu.addOrRemoveOrDisplayOrUpdateRecipe();
                     } else {
-                        System.out.println("Invalid! You are working at the ticket stand!");
+                        LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "You are not working at the food stand!");
+                        //System.out.println("Invalid! You are working at the ticket stand!");
                     }
 
                     break;
                 // If the user chooses to no longer continue
-                default:
+                case 12:
                     stillContinue = false;
-                    System.out.println("Exiting the program...");
-
+                    LogPrinter.println(Color.YELLOW, Color.YELLOW, LogType.SYSTEM, "Exiting the program...");
+                    break;
+                default:
+                    LogPrinter.println(Color.RED, Color.RED, LogType.INVALID, "Invalid choice!");
                     break;
             }
 

@@ -1,6 +1,9 @@
 package stage4.TicketRelated;
 
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 import stage4.util.Path;
 
 import java.io.BufferedReader;
@@ -41,11 +44,14 @@ public class MovieManager {
                        short movieDuration = Short.parseShort(movieInfo[3].trim());
 
                        movies.add(new Movie(movieId, movieName, movieGenre, movieDuration));
-                       System.out.println("movie '" + movieName + "' added from database!");
+
+                       LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_MOVIE, movieName + " added from the database!");
+                       //System.out.println("movie '" + movieName + "' added from database!");
                    }
 
                } catch (Exception e) {
-                   System.err.println(e.getMessage());
+                   LogPrinter.println(Color.RED, Color.RED, LogType.ERROR, e.getMessage());
+                   //System.err.println(e.getMessage());
                }
 
            }
@@ -91,10 +97,12 @@ public class MovieManager {
 
         if (!contains(movie.getMovieID())) {
             movies.add(movie);
-            System.out.println("movie '" + movie.getTitle() + "' has been added!");
+            LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_MOVIE, movie.getTitle() + " added!");
+            //System.out.println("movie '" + movie.getTitle() + "' has been added!");
             FilesUpdateManager.updateMovieDataFile(new ArrayList<>(movies));
         } else {
-            System.out.println("movie '" + movie.getTitle() + "' already exists!");
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_MOVIE, movie.getTitle() + " already exists!");
+            //System.out.println("movie '" + movie.getTitle() + "' already exists!");
         }
     }
 
@@ -103,10 +111,17 @@ public class MovieManager {
      * @param idx index of the movie
      */
     public static void removeMovie(byte idx) {
-        Movie movieToBeRemoved = movies.get(idx);
-        movies.remove(idx);
-        FilesUpdateManager.updateMovieDataFile(new ArrayList<>(movies));
-        System.out.println("stage4.TicketRelated.Movie '" + movieToBeRemoved.getTitle() + "' has been removed successfully.");
+        if (hasMovies()) {
+            Movie movieToBeRemoved = movies.get(idx);
+            movies.remove(idx);
+
+            LogPrinter.println(Color.CYAN, Color.CYAN, LogType.REMOVE_MOVIE, movieToBeRemoved.getTitle() + " removed!");
+
+            FilesUpdateManager.updateMovieDataFile(new ArrayList<>(movies));
+            //System.out.println("Movie '" + movieToBeRemoved.getTitle() + "' has been removed successfully.");
+        } else {
+            LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_FOOD, "movie list is empty!");
+        }
     }
 
     /**
@@ -129,11 +144,14 @@ public class MovieManager {
 
         for (Movie movie : movies) {
             if (movie.getMovieID() == movieID) {
+                LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_MOVIE, movie.getTitle() + " found!");
                 return movie;
             }
         }
 
-        System.out.println("stage4.TicketRelated.stage4.TicketRelated.stage4.TicketRelated.Movie not found");
+
+        LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_MOVIE, "movie not found!");
+        //System.out.println("Movie not found");
         return null;
     }
 
@@ -176,5 +194,7 @@ public class MovieManager {
      */
     public static void updateMovie(byte index, Movie movie) {
         movies.set(index, movie);
+
+        LogPrinter.println(Color.MAGENTA, Color.MAGENTA, LogType.UPDATE_MOVIE, movie.getTitle() + " updated!");
     }
 }

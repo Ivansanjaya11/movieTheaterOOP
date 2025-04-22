@@ -78,6 +78,12 @@ public class Prompt {
 
         PrettyPrinter.printDashLine((short) 50);
 
+        if (!StaffManager.hasStaffs()) {
+            System.out.println("No staff available! Logged in as a dummy staff...");
+            System.out.println("Recommended to assign new staff as soon as possible!");
+            return new Staff("Dummy Staff", (byte) 0, (byte) 0, "00:00-00:00");
+        }
+
         // Asks for staff ID
         do {
             System.out.print("Enter staff ID: ");

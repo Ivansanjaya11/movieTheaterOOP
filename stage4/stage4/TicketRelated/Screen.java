@@ -19,7 +19,7 @@ public class Screen {
 
         this.screenID = screenID;
         this.screenType = screenType;
-        this.seating = new SeatingArrangement();
+        this.seating = new SeatingArrangement(screenID);
     }
 
     /**
@@ -51,7 +51,7 @@ public class Screen {
     }
 
     public void resetSeating() {
-        this.seating = new SeatingArrangement();
+        this.seating = new SeatingArrangement(this.screenID);
     }
 
     /**

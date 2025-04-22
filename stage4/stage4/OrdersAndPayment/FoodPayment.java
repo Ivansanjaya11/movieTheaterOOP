@@ -3,6 +3,9 @@ package stage4.OrdersAndPayment;
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
 import stage4.Customer;
 import stage4.FoodRelated.Food;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 
 import java.util.Scanner;
 import java.util.TreeMap;
@@ -20,6 +23,8 @@ public class FoodPayment extends Payment {
 	public FoodPayment(Customer customer) {
 		super(customer);
 		this.orderedFood = new TreeMap<>();
+		LogPrinter.println(Color.GREEN, Color.GREEN, LogType.FOOD_PAYMENT,
+				"A new food payment session has been created!");
 	}
 
 	/**

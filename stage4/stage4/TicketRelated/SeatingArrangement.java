@@ -1,5 +1,9 @@
 package stage4.TicketRelated;
 
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
+
 import java.util.Arrays;
 
 /** This class represents the seating available within a movie theater
@@ -20,7 +24,9 @@ public class SeatingArrangement {
     /**
      * Constructs a seating arrangement with a set capacity
      */
-    public SeatingArrangement() {
+    public SeatingArrangement(byte screenId) {
+
+        LogPrinter.println(Color.GREEN, Color.GREEN, LogType.SEATING_CREATE, "Seating for screen #" + screenId + " created!");
 
         this.seatStatus = new boolean[ROWS][COLS];
 

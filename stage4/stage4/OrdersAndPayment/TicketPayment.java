@@ -4,6 +4,9 @@ package stage4.OrdersAndPayment; /**
 
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
 import stage4.Customer;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -23,13 +26,15 @@ public class TicketPayment extends Payment {
     private final Scanner input;
 
     /**
-     * Constructs a stage4.TicketRelated.stage4.Orders.TicketPayment object for a specified customer
+     * Constructs a TicketPayment object for a specified customer
      * @param customer the customer making the ticket purchase
      */
     public TicketPayment(Customer customer) {
-
         super(customer);
         this.input = new Scanner(System.in);
+
+        LogPrinter.println(Color.GREEN, Color.GREEN, LogType.TICKET_PAYMENT,
+                "A new ticket payment session has been created!");
     }
 
     /**

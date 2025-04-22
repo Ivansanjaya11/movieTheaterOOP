@@ -10,6 +10,9 @@ import java.util.NoSuchElementException;
 import java.util.TreeMap;
 
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
+import stage4.util.Color;
+import stage4.util.LogPrinter;
+import stage4.util.LogType;
 import stage4.util.Path;
 
 public class Inventory {
@@ -45,10 +48,13 @@ public class Inventory {
 
 					Inventory.addItem(new Item(itemId, itemName, itemQuantity, buyingCost));
 
-					System.out.println(YELLOW + "stage4.TicketRelated.stage4.FoodRelated.Item " + itemName + " already exist in inventory. Quantity in stock is pulled" + RESET);
+					LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_ITEM, itemName + " pulled from inventory!");
+
+					//System.out.println(YELLOW + "Item " + itemName + " already exist in inventory. Quantity in stock is pulled" + RESET);
 				}
 			} catch (IOException e) {
-				System.err.println(e.getMessage());
+				LogPrinter.println(Color.RED, Color.RED, LogType.ERROR, e.getMessage());
+				// System.err.println(e.getMessage());
 			}
 
 		}
@@ -111,8 +117,13 @@ public class Inventory {
 	 * @param item The item to be added to the inventory.
 	 */
 	public static void addItem(Item item) {
-		itemList.add(item);
-		FilesUpdateManager.updateInventoryFile(new ArrayList<>(itemList));
+		if (!contains(item.getItemId())) {
+			itemList.add(item);
+			LogPrinter.println(Color.GREEN, Color.GREEN, LogType.NEW_ITEM, item.getItemName() + " added!");
+			FilesUpdateManager.updateInventoryFile(new ArrayList<>(itemList));
+		} else {
+			LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_ITEM, item.getItemName() + " already exists!");
+		}
 	}
 
 	/**
@@ -121,25 +132,29 @@ public class Inventory {
 	 * @throws NoSuchElementException if no item with the given ID exists.
 	 */
 	public static void removeItem(byte itemId) {
+		if (hasItems()) {
+			byte i = 0;
+			boolean found = false;
 
-		byte i = 0;
-		boolean found = false;
+			for (Item item : itemList) {
+				if (item.hasItemId() && item.getItemId() == itemId) {
+					LogPrinter.println(Color.CYAN, Color.CYAN, LogType.REMOVE_ITEM, itemList.get(i) + " removed!");
+					itemList.remove(i);
+					FilesUpdateManager.updateInventoryFile(new ArrayList<>(itemList));
+					found = true;
+					break;
+				}
 
-		for (Item item : itemList) {
-			if (item.hasItemId() && item.getItemId() == itemId) {
-				itemList.remove(i);
-				FilesUpdateManager.updateInventoryFile(new ArrayList<>(itemList));
-				found = true;
-				break;
+				i++;
 			}
 
-			i++;
+			if (!found) {
+				LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_ITEM, "item not found!");
+				//System.out.println("There is no such item in the inventory");
+			}
+		} else {
+			LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_ITEM, "inventory is empty!");
 		}
-
-		if (!found) {
-			System.out.println("There is no such item in the inventory");
-		}
-
 	}
 
 	/**
@@ -149,16 +164,19 @@ public class Inventory {
 	 */
 	public static void updateItem(byte index, Item item) {
 		itemList.set(index, item);
+		LogPrinter.println(Color.MAGENTA, Color.MAGENTA, LogType.UPDATE_ITEM, item.getItemName() + " updated!");
 	}
 
 	public static Item searchItem(byte itemId) {
 		for (Item item : itemList) {
 			if (item.getItemId() == itemId) {
+				LogPrinter.println(Color.WHITE, Color.WHITE, LogType.EXIST_FOOD, item.getItemName() + " found!");
 				return item;
 			}
 		}
 
-		System.out.println("item not found!");
+		LogPrinter.println(Color.WHITE, Color.WHITE, LogType.NOT_EXIST_ITEM, "item not found!");
+		//System.out.println("item not found!");
 		return null;
 	}
 
@@ -221,12 +239,12 @@ public class Inventory {
 			if (item.hasQuantity()) {
 				if (item.getQuantity() <= minimum) {
 					// if quantity gets lower than the limit, order more item
-					System.out.println("stage4.TicketRelated.stage4.FoodRelated.Item quantity of " + item.getItemName() + " in the inventory is low!");
+					//System.out.println("Item quantity of " + item.getItemName() + " in the inventory is low!");
 					orderMoreItems(item);
 				}
 			} else {
 				// if item in the inventory is empty, print a different message and order the items
-				System.out.println("stage4.TicketRelated.stage4.FoodRelated.Item in the inventory is empty!");
+				//System.out.println("Item in the inventory is empty!");
 				orderMoreItems(item);
 			}
 
@@ -244,7 +262,8 @@ public class Inventory {
 		short buyingQuantity = 250; // sets the quantity bought everytime the item quantity gets low
 		short totalPrice = (short) (buyingQuantity * item.getBuyingCost()); // calculate the total price
 
-		System.out.println("Ordering item " + item.getItemName() + " by " + buyingQuantity + " quantity unit at $" + totalPrice);
+		//System.out.println("Ordering item " + item.getItemName() + " by " + buyingQuantity + " quantity unit at $" + totalPrice);
+
 
 		// update the transaction record of item order
 		FilesUpdateManager.updateItemOrderFile(item, buyingQuantity, totalPrice);
@@ -252,7 +271,9 @@ public class Inventory {
 		// sets the new quantity after ordering new items
 		item.setQuantity((short) (item.getQuantity() + buyingQuantity));
 
-		System.out.println("stage4.TicketRelated.stage4.Orders.Order completed");
+		LogPrinter.println(Color.WHITE, Color.WHITE, LogType.ORDER_ITEM,
+				"Ordered " + item.getItemName() + " by " +buyingQuantity + " unit(s) at $" + totalPrice
+				);
 	}
 
 }
