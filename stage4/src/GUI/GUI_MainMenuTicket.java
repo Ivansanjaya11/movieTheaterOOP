@@ -26,21 +26,85 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblTicketStaffFrame = new javax.swing.JLabel();
+        btnOrderMovieTicket = new javax.swing.JButton();
+        lblOrderTicket = new javax.swing.JLabel();
+        lblChangeMovieElements = new javax.swing.JLabel();
+        btnChangeMovieElements = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        lblTicketStaffFrame.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTicketStaffFrame.setText("Ticket Staff");
+
+        btnOrderMovieTicket.setText("Enter");
+        btnOrderMovieTicket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderMovieTicketActionPerformed(evt);
+            }
+        });
+
+        lblOrderTicket.setText("Order Movie Ticket");
+
+        lblChangeMovieElements.setText("Change Movie Elements");
+
+        btnChangeMovieElements.setText("Enter");
+        btnChangeMovieElements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeMovieElementsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(lblTicketStaffFrame)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblChangeMovieElements)
+                    .addComponent(lblOrderTicket))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnOrderMovieTicket)
+                    .addComponent(btnChangeMovieElements))
+                .addGap(66, 66, 66))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(lblTicketStaffFrame)
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOrderMovieTicket)
+                    .addComponent(lblOrderTicket))
+                .addGap(65, 65, 65)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblChangeMovieElements)
+                    .addComponent(btnChangeMovieElements))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(414, 308));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOrderMovieTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderMovieTicketActionPerformed
+        
+        new GUI_OrderMovieTicket().setVisible(true);
+        
+    }//GEN-LAST:event_btnOrderMovieTicketActionPerformed
+
+    private void btnChangeMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeMovieElementsActionPerformed
+
+        new GUI_MovieElements().setVisible(true);
+        
+    }//GEN-LAST:event_btnChangeMovieElementsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -74,9 +138,14 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
             public void run() {
                 new GUI_MainMenuTicket().setVisible(true);
             }
-        });
+        }); 
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnChangeMovieElements;
+    private javax.swing.JButton btnOrderMovieTicket;
+    private javax.swing.JLabel lblChangeMovieElements;
+    private javax.swing.JLabel lblOrderTicket;
+    private javax.swing.JLabel lblTicketStaffFrame;
     // End of variables declaration//GEN-END:variables
 }

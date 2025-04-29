@@ -111,7 +111,7 @@ public class GUI_LogIn extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffIDActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code h ere:
         
     }//GEN-LAST:event_StaffIDActionPerformed
 

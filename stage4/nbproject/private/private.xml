@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/ivans/movieTheaterOOP/stage4/src/GUI/GUI_DummyMenu.java</file>
-            <file>file:/C:/Users/ivans/movieTheaterOOP/stage4/src/GUI/GUI_LogIn.java</file>
+            <file>file:/C:/Users/lccra/movieTheaterOOP/stage4/src/GUI/GUI_LogIn.java</file>
+            <file>file:/C:/Users/lccra/movieTheaterOOP/stage4/src/GUI/GUI_MainMenuTicket.java</file>
+            <file>file:/C:/Users/lccra/movieTheaterOOP/stage4/src/GUI/GUI_OrderMovieTicket.java</file>
+            <file>file:/C:/Users/lccra/movieTheaterOOP/stage4/src/GUI/GUI_DummyMenu.java</file>
         </group>
     </open-files>
 </project-private>

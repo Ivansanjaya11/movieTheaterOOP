@@ -126,7 +126,7 @@ public class GUI_DummyMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
 
     }//GEN-LAST:event_StaffIDActionPerformed
-
+ 
     private void StaffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StaffNameActionPerformed
