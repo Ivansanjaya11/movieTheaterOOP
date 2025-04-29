@@ -26,21 +26,74 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        FoodStandlbl = new javax.swing.JLabel();
+        OrderFoodBtn = new javax.swing.JButton();
+        FoodElementsBtn = new javax.swing.JButton();
+        OrderFoodLbl = new javax.swing.JLabel();
+        FoodElementsLbl = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        FoodStandlbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        FoodStandlbl.setText("Concession Stand");
+
+        OrderFoodBtn.setText("Enter");
+        OrderFoodBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OrderFoodBtnActionPerformed(evt);
+            }
+        });
+
+        FoodElementsBtn.setText("Enter");
+
+        OrderFoodLbl.setText("Order Food/Drink");
+
+        FoodElementsLbl.setText("Concession Elements");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(FoodStandlbl))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(FoodElementsLbl)
+                            .addComponent(OrderFoodLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(OrderFoodBtn)
+                            .addComponent(FoodElementsBtn))))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(FoodStandlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(OrderFoodBtn)
+                    .addComponent(OrderFoodLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FoodElementsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(FoodElementsBtn))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void OrderFoodBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderFoodBtnActionPerformed
+ 
+//ODO add your handling code here:
+    }//GEN-LAST:event_OrderFoodBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -53,7 +106,7 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -79,5 +132,10 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton FoodElementsBtn;
+    private javax.swing.JLabel FoodElementsLbl;
+    private javax.swing.JLabel FoodStandlbl;
+    private javax.swing.JButton OrderFoodBtn;
+    private javax.swing.JLabel OrderFoodLbl;
     // End of variables declaration//GEN-END:variables
 }
