@@ -137,6 +137,8 @@ public class GUI_DummyMenu extends javax.swing.JFrame {
 
     private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
         // TODO add your handling code here:
+        this.dispose();
+        this.gui_login.setVisible(true);
     }//GEN-LAST:event_returnButtonActionPerformed
 
     private void addStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffButtonActionPerformed
