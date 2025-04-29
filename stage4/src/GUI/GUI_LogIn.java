@@ -11,8 +11,10 @@ public class GUI_LogIn extends javax.swing.JFrame {
      * Creates new form GUI_LogIn
      */
     public GUI_LogIn() {
+        
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -26,8 +28,9 @@ public class GUI_LogIn extends javax.swing.JFrame {
         StaffID = new javax.swing.JTextField();
         StaffName = new javax.swing.JTextField();
         LogIn = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblStaffID = new javax.swing.JLabel();
+        lblStaffName = new javax.swing.JLabel();
+        btbLoginEnter = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -37,51 +40,93 @@ public class GUI_LogIn extends javax.swing.JFrame {
             }
         });
 
+        StaffName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StaffNameActionPerformed(evt);
+            }
+        });
+
+        LogIn.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LogIn.setText("Staff LogIn: ");
 
-        jLabel1.setText("Staff ID:");
+        lblStaffID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblStaffID.setText("Staff ID:");
 
-        jLabel2.setText("Name:");
+        lblStaffName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblStaffName.setText("Name:");
+
+        btbLoginEnter.setText("Enter");
+        btbLoginEnter.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                btbLoginEnterStateChanged(evt);
+            }
+        });
+        btbLoginEnter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btbLoginEnterActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(156, Short.MAX_VALUE)
+                .addComponent(LogIn)
+                .addGap(151, 151, 151))
             .addGroup(layout.createSequentialGroup()
                 .addGap(98, 98, 98)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lblStaffID)
+                    .addComponent(lblStaffName))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LogIn)
+                    .addComponent(btbLoginEnter)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(StaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(170, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
+                .addGap(51, 51, 51)
                 .addComponent(LogIn)
-                .addGap(44, 44, 44)
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lblStaffID))
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(StaffName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addContainerGap(108, Short.MAX_VALUE))
+                    .addComponent(lblStaffName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addComponent(btbLoginEnter)
+                .addGap(31, 31, 31))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(414, 308));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffIDActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_StaffIDActionPerformed
+
+    private void StaffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StaffNameActionPerformed
+
+    private void btbLoginEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLoginEnterActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btbLoginEnterActionPerformed
+
+    private void btbLoginEnterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btbLoginEnterStateChanged
+
+        
+        
+    }//GEN-LAST:event_btbLoginEnterStateChanged
 
     /**
      * @param args the command line arguments
@@ -114,7 +159,7 @@ public class GUI_LogIn extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GUI_LogIn().setVisible(true);
-            }
+            } 
         });
     }
 
@@ -122,7 +167,9 @@ public class GUI_LogIn extends javax.swing.JFrame {
     private javax.swing.JLabel LogIn;
     private javax.swing.JTextField StaffID;
     private javax.swing.JTextField StaffName;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btbLoginEnter;
+    private javax.swing.JLabel lblStaffID;
+    private javax.swing.JLabel lblStaffName;
     // End of variables declaration//GEN-END:variables
+
 }
