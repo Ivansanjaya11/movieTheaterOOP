@@ -6,13 +6,13 @@ package GUI;
  * @author lccra
  */
 public class GUI_LogIn extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form GUI_LogIn
      */
     public GUI_LogIn() {
-        
         initComponents();
+        
     }
     
 
@@ -112,6 +112,7 @@ public class GUI_LogIn extends javax.swing.JFrame {
 
     private void StaffIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffIDActionPerformed
         // TODO add your handling code here:
+        
     }//GEN-LAST:event_StaffIDActionPerformed
 
     private void StaffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffNameActionPerformed
@@ -120,11 +121,17 @@ public class GUI_LogIn extends javax.swing.JFrame {
 
     private void btbLoginEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLoginEnterActionPerformed
         // TODO add your handling code here:
+        byte id = Byte.parseByte(this.StaffID.getText());
+        String name = this.StaffName.getText();
+        
+        if (id > 0 && !name.isBlank()) {
+            System.out.println("id: " + id);
+            System.out.println("name: " + name);
+        }
+        
     }//GEN-LAST:event_btbLoginEnterActionPerformed
 
     private void btbLoginEnterStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_btbLoginEnterStateChanged
-
-        
         
     }//GEN-LAST:event_btbLoginEnterStateChanged
 
@@ -158,7 +165,17 @@ public class GUI_LogIn extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GUI_LogIn().setVisible(true);
+                GUI_LogIn gui_login = new GUI_LogIn();
+
+                if (!stage4.StaffManager.hasStaffs()) {
+                    GUI_DummyMenu gui_dummy = new GUI_DummyMenu(gui_login);
+                    gui_dummy.setVisible(true);
+                } else {
+                    gui_login.setVisible(true);
+                }
+                
+                
+                
             } 
         });
     }
