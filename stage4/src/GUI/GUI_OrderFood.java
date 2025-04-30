@@ -26,6 +26,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnGPayment = new javax.swing.ButtonGroup();
         OrderFoodLbl = new javax.swing.JLabel();
         OrderFortxt = new javax.swing.JTextField();
         CustomerNametxt = new javax.swing.JTextField();
@@ -87,11 +88,19 @@ public class GUI_OrderFood extends javax.swing.JFrame {
 
         PaymentTypeLbl.setText("Payment Type:");
 
+        btnGPayment.add(CashBtn);
+        CashBtn.setSelected(true);
         CashBtn.setText("Cash");
 
+        btnGPayment.add(CardBtn);
         CardBtn.setText("Card");
 
         OrderBtn.setText("Order");
+        OrderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OrderBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -205,6 +214,11 @@ public class GUI_OrderFood extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void OrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBtnActionPerformed
+
+        new GUI_OrderConfirmation().setVisible(true);
+    }//GEN-LAST:event_OrderBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +271,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     private javax.swing.JTextField PepsiTxt;
     private javax.swing.JTextField PizzaTxt;
     private javax.swing.JTextField PopcornTxt;
+    private javax.swing.ButtonGroup btnGPayment;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JSpinner jSpinner2;
     private javax.swing.JSpinner jSpinner3;

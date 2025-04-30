@@ -45,6 +45,11 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
         });
 
         FoodElementsBtn.setText("Enter");
+        FoodElementsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FoodElementsBtnActionPerformed(evt);
+            }
+        });
 
         OrderFoodLbl.setText("Order Food/Drink");
 
@@ -91,9 +96,14 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void OrderFoodBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderFoodBtnActionPerformed
- 
-//ODO add your handling code here:
+
+        new GUI_OrderFood().setVisible(true);
     }//GEN-LAST:event_OrderFoodBtnActionPerformed
+
+    private void FoodElementsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoodElementsBtnActionPerformed
+
+        new GUI_ConcessionElements().setVisible(true);
+    }//GEN-LAST:event_FoodElementsBtnActionPerformed
 
     /**
      * @param args the command line arguments
