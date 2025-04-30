@@ -1,6 +1,8 @@
 package GUI;
 
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
 import stage4.TicketRelated.*;
 
 /*
@@ -13,14 +15,27 @@ import stage4.TicketRelated.*;
  * @author lccra
  */
 public class GUI_OrderMovieTicket extends javax.swing.JFrame {
+    
     private ArrayList<Movie> movieList;
             
     /**
      * Creates new form GUI_OrderMovieTicket
      */
     public GUI_OrderMovieTicket() {
+        
         initComponents();
         this.movieList = MovieManager.getMovies();
+        DefaultTableModel movieModel = (DefaultTableModel) this.tblMovies.getModel();
+        
+        Object[][] movieRows = new Object[movieList.size()][3];
+        for (int i = 0; i < movieList.size(); i++) {
+            movieRows[i][0] = movieList.get(i).getTitle();
+            movieRows[i][1] = movieList.get(i).getGenre();
+            movieRows[i][2] = movieList.get(i).getDurationMinutes();
+            
+            movieModel.addRow(movieRows[i]);
+    }
+        
     }
     
     public GUI_OrderMovieTicket(GUI_LogIn guiLogin) {
@@ -80,13 +95,10 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
 
         tblMovies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Title ", "Genre", "Duration"
+                "Title ", "Genre", "Duration (Min)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -103,11 +115,20 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
             }
         });
         jScrollPane2.setViewportView(tblMovies);
+        if (tblMovies.getColumnModel().getColumnCount() > 0) {
+            tblMovies.getColumnModel().getColumn(1).setHeaderValue("Genre");
+            tblMovies.getColumnModel().getColumn(2).setHeaderValue("Duration");
+        }
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 300, 380));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 310, 200));
 
         btnSelectMovie.setText("Select");
-        getContentPane().add(btnSelectMovie, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, -1, -1));
+        btnSelectMovie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectMovieActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSelectMovie, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
 
         setSize(new java.awt.Dimension(414, 489));
         setLocationRelativeTo(null);
@@ -123,12 +144,18 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
 
     private void tblMoviesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMoviesMouseClicked
 
-        DefaultTableModel model = (DefaultTableModel)tblMovies.getModel();
-        int selectedRowIndex = tblMovies.getSelectedRow();
-        
-        //jTextFieldTitle.setText(model.getValueAt(selectedRowIndex, 0).toString());
-
+//        DefaultTableModel model = (DefaultTableModel)tblMovies.getModel();
+//        int selectedRowIndex = tblMovies.getSelectedRow();
+     
+//        jTextFieldTitle.setText(model.getValueAt(selectedRowIndex, 0).toString());
+ 
     }//GEN-LAST:event_tblMoviesMouseClicked
+
+    private void btnSelectMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectMovieActionPerformed
+
+        new GUI_OrderShowtime().setVisible(true);
+        
+    }//GEN-LAST:event_btnSelectMovieActionPerformed
 
     /**
      * @param args the command line arguments
