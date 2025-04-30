@@ -1,5 +1,8 @@
 package GUI;
 
+import java.util.ArrayList;
+import stage4.TicketRelated.*;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -10,12 +13,19 @@ package GUI;
  * @author lccra
  */
 public class GUI_OrderMovieTicket extends javax.swing.JFrame {
-
+    private ArrayList<Movie> movieList;
+            
     /**
      * Creates new form GUI_OrderMovieTicket
      */
     public GUI_OrderMovieTicket() {
         initComponents();
+        this.movieList = MovieManager.getMovies();
+    }
+    
+    public GUI_OrderMovieTicket(GUI_LogIn guiLogin) {
+        this.movieList = MovieManager.getMovies();
+        
     }
 
     /**
@@ -34,7 +44,8 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
         RbtnCash = new javax.swing.JRadioButton();
         RbtnCredit = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMovies = new javax.swing.JTable();
+        btnSelectMovie = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Order Movie Ticket");
@@ -51,7 +62,7 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
                 txtCustomerNameTicketActionPerformed(evt);
             }
         });
-        getContentPane().add(txtCustomerNameTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, 71, -1));
+        getContentPane().add(txtCustomerNameTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 20, 120, -1));
 
         btnGPayment.add(RbtnCash);
         RbtnCash.setSelected(true);
@@ -67,7 +78,7 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
         RbtnCredit.setText("Credit Card");
         getContentPane().add(RbtnCredit, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, -1, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMovies.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -77,10 +88,26 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
             new String [] {
                 "Title ", "Genre", "Duration"
             }
-        ));
-        jScrollPane2.setViewportView(jTable1);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMovies.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMoviesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblMovies);
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 300, 380));
+
+        btnSelectMovie.setText("Select");
+        getContentPane().add(btnSelectMovie, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 450, -1, -1));
 
         setSize(new java.awt.Dimension(414, 489));
         setLocationRelativeTo(null);
@@ -93,6 +120,15 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
     private void RbtnCashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RbtnCashActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_RbtnCashActionPerformed
+
+    private void tblMoviesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMoviesMouseClicked
+
+        DefaultTableModel model = (DefaultTableModel)tblMovies.getModel();
+        int selectedRowIndex = tblMovies.getSelectedRow();
+        
+        //jTextFieldTitle.setText(model.getValueAt(selectedRowIndex, 0).toString());
+
+    }//GEN-LAST:event_tblMoviesMouseClicked
 
     /**
      * @param args the command line arguments
@@ -133,10 +169,11 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
     private javax.swing.JRadioButton RbtnCash;
     private javax.swing.JRadioButton RbtnCredit;
     private javax.swing.ButtonGroup btnGPayment;
+    private javax.swing.JButton btnSelectMovie;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblCustomerNameTicket;
     private javax.swing.JLabel lblPaymentTypeTicket;
+    private javax.swing.JTable tblMovies;
     private javax.swing.JTextField txtCustomerNameTicket;
     // End of variables declaration//GEN-END:variables
 }

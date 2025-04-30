@@ -3,7 +3,7 @@ import util.PrettyPrinter;
 import java.time.LocalTime;
 import java.util.Scanner;
 
-public class sMainMenu {
+public class MainMenu {
 
     private static final Scanner input = new Scanner(System.in);
     private static final short menuWidth = 100;
