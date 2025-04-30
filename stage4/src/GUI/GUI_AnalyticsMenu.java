@@ -1,6 +1,12 @@
 package GUI;
 
 import stage4.*;
+import java.util.Date;
+import stage4.AnalyticsAndFiles.*;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.LocalDate;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -15,21 +21,33 @@ public class GUI_AnalyticsMenu extends javax.swing.JFrame {
     private GUI_MainMenuFood guiMainMenuFood;
     private GUI_MainMenuTicket guiMainMenuTicket;
     
+    private GUI_AnalyticsMenu guiAnalyticsMenu;
+    
     /**
      * Creates new form GUI_AnalyticsMenu
      */
     public GUI_AnalyticsMenu() {
         initComponents();
+        //this.guiAnalyticsMenu = new GUI_AnalyticsMenu();
+        //this.guiAnalyticsMenu.setVisible(true);
+
     }
     
     public GUI_AnalyticsMenu(GUI_MainMenuFood guiMainMenuFood) {
         initComponents();
         this.guiMainMenuFood = guiMainMenuFood;
+        this.guiAnalyticsMenu = new GUI_AnalyticsMenu();
+        this.guiAnalyticsMenu.setVisible(true);
+
+
     }
 
     public GUI_AnalyticsMenu(GUI_MainMenuTicket guiMainMenuTicket) {
         initComponents();
         this.guiMainMenuTicket   = guiMainMenuTicket;
+        this.guiAnalyticsMenu = new GUI_AnalyticsMenu();
+        this.guiAnalyticsMenu.setVisible(true);
+
     }
     
     /**
@@ -351,16 +369,37 @@ public class GUI_AnalyticsMenu extends javax.swing.JFrame {
 
     private void generateReportButtonTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportButtonTicketActionPerformed
         // TODO add your handling code here:
-        System.out.println(this.spinnerTimeTicketStart.getValue().getClass());
+        ZoneId theZone = ZoneId.systemDefault();
+
+        LocalDate ticketTimeStart = LocalDate.ofInstant(((Date) this.spinnerTimeTicketStart.getValue()).toInstant(), theZone);
+        LocalDate ticketTimeEnd = LocalDate.ofInstant(((Date) this.spinnerTimeTicketEnd.getValue()).toInstant(), theZone);
+        
+        GUI_ReportTicketSales guiReportTicketSales = new GUI_ReportTicketSales(guiAnalyticsMenu, ticketTimeStart, ticketTimeEnd);
+        
+        guiReportTicketSales.setVisible(true);
         
     }//GEN-LAST:event_generateReportButtonTicketActionPerformed
 
     private void generateReportButtonItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportButtonItemActionPerformed
         // TODO add your handling code here:
+        
+        ZoneId theZone = ZoneId.systemDefault();
+
+        LocalDate itemTimeStart = LocalDate.ofInstant(((Date) this.spinnerTimeItemStart.getValue()).toInstant(), theZone);
+        LocalDate itemTimeEnd = LocalDate.ofInstant(((Date) this.spinnerTimeItemEnd.getValue()).toInstant(), theZone);
+        
+        GUI_ReportItemOrder guiReportItem = new GUI_ReportItemOrder(guiAnalyticsMenu, itemTimeStart, itemTimeEnd);
+        
+        guiReportItem.setVisible(true); 
     }//GEN-LAST:event_generateReportButtonItemActionPerformed
 
     private void generateReportButtonInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportButtonInventoryActionPerformed
         // TODO add your handling code here:
+        
+        GUI_ReportInventory guiReportInventory = new GUI_ReportInventory(guiAnalyticsMenu);
+        
+        guiReportInventory.setVisible(true);
+        
     }//GEN-LAST:event_generateReportButtonInventoryActionPerformed
 
     /**
