@@ -26,11 +26,6 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
-              <Component id="lblTicketStaffFrame" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblChangeMovieElements" min="-2" max="-2" attributes="0"/>
@@ -43,6 +38,19 @@
               </Group>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="lblTicketStaffFrame" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -50,7 +58,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="lblTicketStaffFrame" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
+              <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnOrderMovieTicket" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblOrderTicket" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -98,6 +108,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeMovieElementsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="logOutButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Log out"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logOutButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

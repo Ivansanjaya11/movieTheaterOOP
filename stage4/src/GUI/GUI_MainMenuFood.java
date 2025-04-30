@@ -9,12 +9,18 @@ package GUI;
  * @author lccra
  */
 public class GUI_MainMenuFood extends javax.swing.JFrame {
-
+    private GUI_LogIn guiLogin;
+    
     /**
      * Creates new form GUI_MainMenu
      */
     public GUI_MainMenuFood() {
         initComponents();
+    }
+    
+    public GUI_MainMenuFood(GUI_LogIn guiLogin) {
+        initComponents();
+        this.guiLogin = guiLogin;
     }
 
     /**
@@ -31,6 +37,7 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
         FoodElementsBtn = new javax.swing.JButton();
         OrderFoodLbl = new javax.swing.JLabel();
         FoodElementsLbl = new javax.swing.JLabel();
+        logOutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,6 +62,13 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
 
         FoodElementsLbl.setText("Concession Elements");
 
+        logOutButton.setText("Log out");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,7 +86,10 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(OrderFoodBtn)
-                            .addComponent(FoodElementsBtn))))
+                            .addComponent(FoodElementsBtn)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logOutButton)))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -80,7 +97,9 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(FoodStandlbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(3, 3, 3)
+                .addComponent(logOutButton)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(OrderFoodBtn)
                     .addComponent(OrderFoodLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -104,6 +123,12 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
 
         new GUI_ConcessionElements().setVisible(true);
     }//GEN-LAST:event_FoodElementsBtnActionPerformed
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiLogin.setVisible(true);
+    }//GEN-LAST:event_logOutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,5 +172,6 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
     private javax.swing.JLabel FoodStandlbl;
     private javax.swing.JButton OrderFoodBtn;
     private javax.swing.JLabel OrderFoodLbl;
+    private javax.swing.JButton logOutButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,7 +9,8 @@ package GUI;
  * @author lccra
  */
 public class GUI_MainMenuTicket extends javax.swing.JFrame {
-
+    private GUI_LogIn guiLogin;
+    
     /**
      * Creates new form GUI_MainMenuTicket
      */
@@ -17,6 +18,11 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         initComponents();
     }
 
+    public GUI_MainMenuTicket(GUI_LogIn guiLogin) {
+        initComponents();
+        this.guiLogin = guiLogin;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +37,7 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         lblOrderTicket = new javax.swing.JLabel();
         lblChangeMovieElements = new javax.swing.JLabel();
         btnChangeMovieElements = new javax.swing.JButton();
+        logOutButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,14 +62,17 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
             }
         });
 
+        logOutButton.setText("Log out");
+        logOutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logOutButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(160, 160, 160)
-                .addComponent(lblTicketStaffFrame)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,13 +83,24 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
                     .addComponent(btnOrderMovieTicket)
                     .addComponent(btnChangeMovieElements))
                 .addGap(66, 66, 66))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(lblTicketStaffFrame))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(logOutButton)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(lblTicketStaffFrame)
-                .addGap(55, 55, 55)
+                .addGap(4, 4, 4)
+                .addComponent(logOutButton)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrderMovieTicket)
                     .addComponent(lblOrderTicket))
@@ -105,6 +126,12 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         new GUI_MovieElements().setVisible(true);
         
     }//GEN-LAST:event_btnChangeMovieElementsActionPerformed
+
+    private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiLogin.setVisible(true);
+    }//GEN-LAST:event_logOutButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,5 +174,6 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
     private javax.swing.JLabel lblChangeMovieElements;
     private javax.swing.JLabel lblOrderTicket;
     private javax.swing.JLabel lblTicketStaffFrame;
+    private javax.swing.JButton logOutButton;
     // End of variables declaration//GEN-END:variables
 }

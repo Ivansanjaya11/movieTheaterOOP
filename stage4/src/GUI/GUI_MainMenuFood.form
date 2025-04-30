@@ -41,6 +41,10 @@
                           <Component id="FoodElementsBtn" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace pref="130" max="32767" attributes="0"/>
           </Group>
@@ -51,7 +55,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="FoodStandlbl" min="-2" pref="26" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+              <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="OrderFoodBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="OrderFoodLbl" alignment="3" max="32767" attributes="0"/>
@@ -100,6 +106,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Concession Elements"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="logOutButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Log out"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logOutButtonActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

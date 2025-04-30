@@ -4,6 +4,8 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ivans
@@ -32,6 +34,7 @@ public class GUI_DummyMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        warningSchedule = new javax.swing.JPopupMenu();
         StaffID = new javax.swing.JTextField();
         StaffName = new javax.swing.JTextField();
         lblStaffID = new javax.swing.JLabel();
@@ -63,16 +66,16 @@ public class GUI_DummyMenu extends javax.swing.JFrame {
         getContentPane().add(StaffName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 200, -1));
 
         lblStaffID.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblStaffID.setText("Staff ID:");
+        lblStaffID.setText("Staff ID");
         getContentPane().add(lblStaffID, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 46, -1, -1));
 
         lblStaffName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblStaffName.setText("Staff Name:");
+        lblStaffName.setText("Staff Name");
         getContentPane().add(lblStaffName, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, -1));
 
         lblStaffID1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        lblStaffID1.setText("Hourly rate");
-        getContentPane().add(lblStaffID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, -1));
+        lblStaffID1.setText("Hourly rate ($)");
+        getContentPane().add(lblStaffID1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         lblStaffName1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblStaffName1.setText("Schedule");
@@ -143,12 +146,18 @@ public class GUI_DummyMenu extends javax.swing.JFrame {
 
     private void addStaffButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffButtonActionPerformed
         // TODO add your handling code here:
-        byte id = Byte.parseByte(this.StaffID.getText());
+        byte id = 0;
+        
+        try {
+            id = Byte.parseByte(this.StaffID.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Staff Id should be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
         String name = this.StaffName.getText();
         byte rate = Byte.parseByte(this.hourlyRateSpinner.getValue().toString());
         String schedule = this.scheduleComboBox.getSelectedItem().toString();
         String position = this.positionComboBox1.getSelectedItem().toString();
-        
         String timeSchedule = "";
         
         if (schedule.equals("Afternoon shift (12:00-18:00)")) {
@@ -225,5 +234,6 @@ public class GUI_DummyMenu extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> positionComboBox1;
     private javax.swing.JButton returnButton;
     private javax.swing.JComboBox<String> scheduleComboBox;
+    private javax.swing.JPopupMenu warningSchedule;
     // End of variables declaration//GEN-END:variables
 }

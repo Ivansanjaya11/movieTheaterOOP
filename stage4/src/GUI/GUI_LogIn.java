@@ -1,11 +1,16 @@
 
 package GUI;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author lccra
  */
 public class GUI_LogIn extends javax.swing.JFrame {
+    
+    private static GUI_LogIn guiLogin;
+    
     
     /**
      * Creates new form GUI_LogIn
@@ -72,7 +77,7 @@ public class GUI_LogIn extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(156, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogIn)
                 .addGap(151, 151, 151))
             .addGroup(layout.createSequentialGroup()
@@ -83,10 +88,10 @@ public class GUI_LogIn extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btbLoginEnter)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(StaffName, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(StaffID, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(StaffName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(StaffID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +111,7 @@ public class GUI_LogIn extends javax.swing.JFrame {
                 .addGap(31, 31, 31))
         );
 
-        setSize(new java.awt.Dimension(414, 308));
+        setSize(new java.awt.Dimension(415, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -121,12 +126,40 @@ public class GUI_LogIn extends javax.swing.JFrame {
 
     private void btbLoginEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btbLoginEnterActionPerformed
         // TODO add your handling code here:
-        byte id = Byte.parseByte(this.StaffID.getText());
+        byte id = 0;
+        
+        try {
+            id = Byte.parseByte(this.StaffID.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Staff Id should be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
         String name = this.StaffName.getText();
         
         if (id > 0 && !name.isBlank()) {
-            System.out.println("id: " + id);
-            System.out.println("name: " + name);
+            boolean found = false;
+            for (stage4.Staff staff : stage4.StaffManager.getStaffs()) {
+                if (staff.getEmployeeId() == id && staff.getEmployeeName().equals(name)) {
+                    found = true;
+                     if (staff instanceof stage4.TicketStaff) {
+                         GUI_MainMenuTicket guiMainMenu = new GUI_MainMenuTicket(guiLogin);
+                         guiMainMenu.setVisible(true);
+                         this.StaffID.setText("");
+                         this.StaffName.setText("");
+                         this.dispose();
+                     } else if (staff instanceof stage4.FoodStaff) {
+                         GUI_MainMenuFood guiMainMenu = new GUI_MainMenuFood(guiLogin);
+                         guiMainMenu.setVisible(true);
+                         this.StaffID.setText("");
+                         this.StaffName.setText("");
+                         this.dispose();
+                     }
+                }
+            }
+            if (!found) {
+                // pop up warning no staff
+                JOptionPane.showMessageDialog(null, "Staff not found!", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
         }
         
     }//GEN-LAST:event_btbLoginEnterActionPerformed
@@ -165,13 +198,13 @@ public class GUI_LogIn extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                GUI_LogIn gui_login = new GUI_LogIn();
+                guiLogin = new GUI_LogIn();
 
                 if (!stage4.StaffManager.hasStaffs()) {
-                    GUI_DummyMenu gui_dummy = new GUI_DummyMenu(gui_login);
+                    GUI_DummyMenu gui_dummy = new GUI_DummyMenu(guiLogin);
                     gui_dummy.setVisible(true);
                 } else {
-                    gui_login.setVisible(true);
+                    guiLogin.setVisible(true);
                 }
                 
                 
