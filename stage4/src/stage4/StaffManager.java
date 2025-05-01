@@ -140,7 +140,7 @@ public class StaffManager {
         staffs.set(index, staff);
 
         LogPrinter.println(Color.MAGENTA, Color.MAGENTA, LogType.UPDATE_STAFF,
-                "staff '" + staff.getEmployeeName() + "' removed!");
+                "staff '" + staff.getEmployeeName() + "' updated!");
     }
 
 
