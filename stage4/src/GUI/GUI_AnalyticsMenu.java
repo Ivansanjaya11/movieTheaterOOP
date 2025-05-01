@@ -365,6 +365,15 @@ public class GUI_AnalyticsMenu extends javax.swing.JFrame {
 
     private void generateReportButtonFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportButtonFoodActionPerformed
         // TODO add your handling code here:
+        ZoneId theZone = ZoneId.systemDefault();
+
+        LocalDate foodTimeStart = LocalDate.ofInstant(((Date) this.spinnerTimeFoodStart.getValue()).toInstant(), theZone);
+        LocalDate foodTimeEnd = LocalDate.ofInstant(((Date) this.spinnerTimeFoodEnd.getValue()).toInstant(), theZone);
+        
+        GUI_ReportFoodSales guiReportFoodSales = new GUI_ReportFoodSales(guiAnalyticsMenu, foodTimeStart, foodTimeEnd);
+        
+        guiReportFoodSales.setVisible(true);
+        
     }//GEN-LAST:event_generateReportButtonFoodActionPerformed
 
     private void generateReportButtonTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportButtonTicketActionPerformed
