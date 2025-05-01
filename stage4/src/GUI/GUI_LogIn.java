@@ -146,13 +146,13 @@ public class GUI_LogIn extends javax.swing.JFrame {
                          guiMainMenu.setVisible(true);
                          this.StaffID.setText("");
                          this.StaffName.setText("");
-                         this.dispose();
+                         this.setVisible(false);
                      } else if (staff instanceof stage4.FoodStaff) {
                          GUI_MainMenuFood guiMainMenu = new GUI_MainMenuFood(guiLogin);
                          guiMainMenu.setVisible(true);
                          this.StaffID.setText("");
                          this.StaffName.setText("");
-                         this.dispose();
+                         this.setVisible(false);
                      }
                 }
             }

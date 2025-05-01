@@ -25,30 +25,41 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="AnalyticsButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
                               <Component id="FoodStandlbl" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="FoodElementsLbl" min="-2" max="-2" attributes="0"/>
-                                  <Component id="OrderFoodLbl" min="-2" pref="109" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="OrderFoodBtn" min="-2" max="-2" attributes="0"/>
-                                  <Component id="FoodElementsBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="81" pref="81" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="lblChangeStaffElements" min="-2" pref="135" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="btnChangeStaffElements" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="FoodElementsLbl" min="-2" max="-2" attributes="0"/>
+                                          <Component id="OrderFoodLbl" min="-2" pref="109" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="FoodElementsBtn" min="-2" max="-2" attributes="0"/>
+                                          <Component id="OrderFoodBtn" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="0" pref="124" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="79" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -70,8 +81,16 @@
                   <Component id="FoodElementsLbl" alignment="3" max="32767" attributes="0"/>
                   <Component id="FoodElementsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="94" max="32767" attributes="0"/>
-              <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="36" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblChangeStaffElements" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnChangeStaffElements" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="logOutButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="AnalyticsButton" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -118,6 +137,27 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logOutButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnChangeStaffElements">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeStaffElementsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblChangeStaffElements">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Change Staff Elements"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="AnalyticsButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Analytics"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnalyticsButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

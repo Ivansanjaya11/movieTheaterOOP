@@ -55,7 +55,7 @@ public class GUI_StaffUpdate extends javax.swing.JFrame {
         StaffID = new javax.swing.JTextField();
         positionComboBox1 = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         StaffName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

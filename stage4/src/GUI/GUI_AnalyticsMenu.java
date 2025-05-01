@@ -36,8 +36,7 @@ public class GUI_AnalyticsMenu extends javax.swing.JFrame {
     public GUI_AnalyticsMenu(GUI_MainMenuFood guiMainMenuFood) {
         initComponents();
         this.guiMainMenuFood = guiMainMenuFood;
-        this.guiAnalyticsMenu = new GUI_AnalyticsMenu();
-        this.guiAnalyticsMenu.setVisible(true);
+        this.setVisible(true);
 
 
     }
@@ -45,8 +44,7 @@ public class GUI_AnalyticsMenu extends javax.swing.JFrame {
     public GUI_AnalyticsMenu(GUI_MainMenuTicket guiMainMenuTicket) {
         initComponents();
         this.guiMainMenuTicket   = guiMainMenuTicket;
-        this.guiAnalyticsMenu = new GUI_AnalyticsMenu();
-        this.guiAnalyticsMenu.setVisible(true);
+        this.setVisible(true);
 
     }
     
@@ -349,18 +347,47 @@ public class GUI_AnalyticsMenu extends javax.swing.JFrame {
 
     private void returnInventoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnInventoryActionPerformed
         // TODO add your handling code here:
+        if (this.guiMainMenuFood != null) {
+            this.dispose();
+            this.guiMainMenuFood.setVisible(true);
+        } else if (this.guiMainMenuTicket != null) {
+            this.dispose();
+            this.guiMainMenuTicket.setVisible(true);
+        }
     }//GEN-LAST:event_returnInventoryActionPerformed
 
     private void returnItemOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnItemOrderActionPerformed
         // TODO add your handling code here:
+        if (this.guiMainMenuFood != null) {
+            this.dispose();
+            this.guiMainMenuFood.setVisible(true);
+        } else if (this.guiMainMenuTicket != null) {
+            this.dispose();
+            this.guiMainMenuTicket.setVisible(true);
+        }
     }//GEN-LAST:event_returnItemOrderActionPerformed
 
     private void returnTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnTicketActionPerformed
         // TODO add your handling code here:
+        
+        if (this.guiMainMenuFood != null) {
+            this.dispose();
+            this.guiMainMenuFood.setVisible(true);
+        } else if (this.guiMainMenuTicket != null) {
+            this.dispose();
+            this.guiMainMenuTicket.setVisible(true);
+        }
     }//GEN-LAST:event_returnTicketActionPerformed
 
     private void returnFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnFoodActionPerformed
         // TODO add your handling code here:
+        if (this.guiMainMenuFood != null) {
+            this.dispose();
+            this.guiMainMenuFood.setVisible(true);
+        } else if (this.guiMainMenuTicket != null) {
+            this.dispose();
+            this.guiMainMenuTicket.setVisible(true);
+        }
     }//GEN-LAST:event_returnFoodActionPerformed
 
     private void generateReportButtonFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generateReportButtonFoodActionPerformed

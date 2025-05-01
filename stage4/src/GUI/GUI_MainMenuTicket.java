@@ -38,6 +38,9 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         lblChangeMovieElements = new javax.swing.JLabel();
         btnChangeMovieElements = new javax.swing.JButton();
         logOutButton = new javax.swing.JButton();
+        lblChangeStaffElements = new javax.swing.JLabel();
+        btnChangeStaffElements = new javax.swing.JButton();
+        AnalyticsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,6 +72,22 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
             }
         });
 
+        lblChangeStaffElements.setText("Change Staff Elements");
+
+        btnChangeStaffElements.setText("Enter");
+        btnChangeStaffElements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeStaffElementsActionPerformed(evt);
+            }
+        });
+
+        AnalyticsButton.setText("Analytics");
+        AnalyticsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnalyticsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,11 +96,13 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
                 .addGap(93, 93, 93)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblChangeMovieElements)
-                    .addComponent(lblOrderTicket))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                    .addComponent(lblOrderTicket)
+                    .addComponent(lblChangeStaffElements, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnOrderMovieTicket)
-                    .addComponent(btnChangeMovieElements))
+                    .addComponent(btnChangeMovieElements)
+                    .addComponent(btnChangeStaffElements))
                 .addGap(66, 66, 66))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +111,10 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
                         .addComponent(lblTicketStaffFrame))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(logOutButton)))
+                        .addComponent(logOutButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(AnalyticsButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -104,11 +128,17 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnOrderMovieTicket)
                     .addComponent(lblOrderTicket))
-                .addGap(65, 65, 65)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblChangeMovieElements)
                     .addComponent(btnChangeMovieElements))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblChangeStaffElements)
+                    .addComponent(btnChangeStaffElements))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addComponent(AnalyticsButton)
+                .addContainerGap())
         );
 
         setSize(new java.awt.Dimension(414, 308));
@@ -132,6 +162,24 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         this.dispose();
         this.guiLogin.setVisible(true);
     }//GEN-LAST:event_logOutButtonActionPerformed
+
+    private void btnChangeStaffElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeStaffElementsActionPerformed
+        // TODO add your handling code here:
+        GUI_StaffElements guiStaffElements = new GUI_StaffElements(this);
+        
+        this.setVisible(false);
+        
+        guiStaffElements.setVisible(true);
+        
+    }//GEN-LAST:event_btnChangeStaffElementsActionPerformed
+
+    private void AnalyticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyticsButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+
+        GUI_AnalyticsMenu guiAnalyticsMenu = new GUI_AnalyticsMenu(this);
+        
+    }//GEN-LAST:event_AnalyticsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -169,9 +217,12 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnalyticsButton;
     private javax.swing.JButton btnChangeMovieElements;
+    private javax.swing.JButton btnChangeStaffElements;
     private javax.swing.JButton btnOrderMovieTicket;
     private javax.swing.JLabel lblChangeMovieElements;
+    private javax.swing.JLabel lblChangeStaffElements;
     private javax.swing.JLabel lblOrderTicket;
     private javax.swing.JLabel lblTicketStaffFrame;
     private javax.swing.JButton logOutButton;

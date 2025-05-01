@@ -38,6 +38,9 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
         OrderFoodLbl = new javax.swing.JLabel();
         FoodElementsLbl = new javax.swing.JLabel();
         logOutButton = new javax.swing.JButton();
+        btnChangeStaffElements = new javax.swing.JButton();
+        lblChangeStaffElements = new javax.swing.JLabel();
+        AnalyticsButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -69,12 +72,33 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
             }
         });
 
+        btnChangeStaffElements.setText("Enter");
+        btnChangeStaffElements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeStaffElementsActionPerformed(evt);
+            }
+        });
+
+        lblChangeStaffElements.setText("Change Staff Elements");
+
+        AnalyticsButton.setText("Analytics");
+        AnalyticsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AnalyticsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(AnalyticsButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(logOutButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -82,17 +106,20 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
                                 .addComponent(FoodStandlbl))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(81, 81, 81)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(FoodElementsLbl)
-                                    .addComponent(OrderFoodLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(OrderFoodBtn)
-                                    .addComponent(FoodElementsBtn))))
-                        .addGap(0, 124, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(logOutButton)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(lblChangeStaffElements, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btnChangeStaffElements))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(FoodElementsLbl)
+                                            .addComponent(OrderFoodLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(52, 52, 52)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(FoodElementsBtn)
+                                            .addComponent(OrderFoodBtn))))))
+                        .addGap(0, 79, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -108,8 +135,14 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FoodElementsLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(FoodElementsBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 94, Short.MAX_VALUE)
-                .addComponent(logOutButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblChangeStaffElements)
+                    .addComponent(btnChangeStaffElements))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logOutButton)
+                    .addComponent(AnalyticsButton))
                 .addContainerGap())
         );
 
@@ -132,6 +165,25 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
         this.dispose();
         this.guiLogin.setVisible(true);
     }//GEN-LAST:event_logOutButtonActionPerformed
+
+    private void btnChangeStaffElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeStaffElementsActionPerformed
+        // TODO add your handling code here:
+        GUI_StaffElements guiStaffElements = new GUI_StaffElements(this);
+        
+        this.setVisible(false);
+        
+        guiStaffElements.setVisible(true);
+    }//GEN-LAST:event_btnChangeStaffElementsActionPerformed
+
+    private void AnalyticsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AnalyticsButtonActionPerformed
+        // TODO add your handling code here:
+        
+        this.setVisible(false);
+
+        GUI_AnalyticsMenu guiAnalyticsMenu = new GUI_AnalyticsMenu(this);
+        
+        
+    }//GEN-LAST:event_AnalyticsButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,11 +222,14 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AnalyticsButton;
     private javax.swing.JButton FoodElementsBtn;
     private javax.swing.JLabel FoodElementsLbl;
     private javax.swing.JLabel FoodStandlbl;
     private javax.swing.JButton OrderFoodBtn;
     private javax.swing.JLabel OrderFoodLbl;
+    private javax.swing.JButton btnChangeStaffElements;
+    private javax.swing.JLabel lblChangeStaffElements;
     private javax.swing.JButton logOutButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -94,8 +94,9 @@ public class GUI_StaffElements extends javax.swing.JFrame {
         addStaffButton = new javax.swing.JButton();
         removeStaffButton = new javax.swing.JButton();
         updateStaffButton = new javax.swing.JButton();
+        returnButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         tableStaff.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,6 +129,13 @@ public class GUI_StaffElements extends javax.swing.JFrame {
             }
         });
 
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,11 +148,17 @@ public class GUI_StaffElements extends javax.swing.JFrame {
                     .addComponent(removeStaffButton, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(updateStaffButton, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(returnButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(64, Short.MAX_VALUE)
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(returnButton)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
@@ -175,6 +189,9 @@ public class GUI_StaffElements extends javax.swing.JFrame {
         
         if (selectedRow != -1) {
             StaffManager.removeStaff((byte) selectedRow);
+            
+            resetRows();
+            populateTable();
         }
     }//GEN-LAST:event_removeStaffButtonActionPerformed
 
@@ -188,6 +205,18 @@ public class GUI_StaffElements extends javax.swing.JFrame {
             guiStaffUpdate.setVisible(true);
         }
     }//GEN-LAST:event_updateStaffButtonActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+
+        if (this.guiMainMenuFood != null) {
+            this.guiMainMenuFood.setVisible(true);
+        } else if (this.guiMainMenuTicket != null) {
+            this.guiMainMenuTicket.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_returnButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,6 +257,7 @@ public class GUI_StaffElements extends javax.swing.JFrame {
     private javax.swing.JButton addStaffButton;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton removeStaffButton;
+    private javax.swing.JButton returnButton;
     private javax.swing.JTable tableStaff;
     private javax.swing.JButton updateStaffButton;
     // End of variables declaration//GEN-END:variables

@@ -30,11 +30,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblChangeMovieElements" min="-2" max="-2" attributes="0"/>
                   <Component id="lblOrderTicket" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblChangeStaffElements" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnOrderMovieTicket" min="-2" max="-2" attributes="0"/>
                   <Component id="btnChangeMovieElements" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnChangeStaffElements" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
           </Group>
@@ -47,6 +49,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="logOutButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="AnalyticsButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -65,12 +71,19 @@
                   <Component id="btnOrderMovieTicket" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblOrderTicket" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblChangeMovieElements" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnChangeMovieElements" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="88" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblChangeStaffElements" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnChangeStaffElements" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
+              <Component id="AnalyticsButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -116,6 +129,27 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logOutButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblChangeStaffElements">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Change Staff Elements"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnChangeStaffElements">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Enter"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnChangeStaffElementsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="AnalyticsButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Analytics"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AnalyticsButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
