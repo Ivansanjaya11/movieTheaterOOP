@@ -68,9 +68,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ConcessionTab = new javax.swing.JTabbedPane();
-        FoodTab = new javax.swing.JPanel();
-        CombosTab = new javax.swing.JTabbedPane();
+        IngredientsTab = new javax.swing.JTabbedPane();
         CombosPnl = new javax.swing.JPanel();
         Addbtn = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -78,6 +76,13 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         RemoveBtn = new javax.swing.JButton();
         UpdateBtn = new javax.swing.JButton();
         DisplayBtn = new javax.swing.JButton();
+        ReturnBtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        AddItemBtn = new javax.swing.JButton();
+        RemoveItemBtn = new javax.swing.JButton();
+        UpdateItemBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -119,6 +124,13 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             }
         });
 
+        ReturnBtn.setText("Return to Concession Menu");
+        ReturnBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout CombosPnlLayout = new javax.swing.GroupLayout(CombosPnl);
         CombosPnl.setLayout(CombosPnlLayout);
         CombosPnlLayout.setHorizontalGroup(
@@ -130,8 +142,9 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
                     .addComponent(RemoveBtn)
                     .addComponent(Addbtn)
                     .addComponent(UpdateBtn)
-                    .addComponent(DisplayBtn))
-                .addGap(0, 80, Short.MAX_VALUE))
+                    .addComponent(DisplayBtn)
+                    .addComponent(ReturnBtn))
+                .addGap(0, 17, Short.MAX_VALUE))
         );
         CombosPnlLayout.setVerticalGroup(
             CombosPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,41 +157,88 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
                 .addComponent(UpdateBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DisplayBtn)
+                .addGap(51, 51, 51)
+                .addComponent(ReturnBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CombosPnlLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
-        CombosTab.addTab("Combos", CombosPnl);
+        IngredientsTab.addTab("Combos", CombosPnl);
 
-        javax.swing.GroupLayout FoodTabLayout = new javax.swing.GroupLayout(FoodTab);
-        FoodTab.setLayout(FoodTabLayout);
-        FoodTabLayout.setHorizontalGroup(
-            FoodTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FoodTabLayout.createSequentialGroup()
-                .addComponent(CombosTab, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Ingredients", "Quantity"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
+        AddItemBtn.setText("Add");
+        AddItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddItemBtnActionPerformed(evt);
+            }
+        });
+
+        RemoveItemBtn.setText("Remove");
+
+        UpdateItemBtn.setText("Update");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(AddItemBtn)
+                    .addComponent(RemoveItemBtn)
+                    .addComponent(UpdateItemBtn))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
-        FoodTabLayout.setVerticalGroup(
-            FoodTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CombosTab)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(AddItemBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(RemoveItemBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(UpdateItemBtn)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        ConcessionTab.addTab("Concession Stand", FoodTab);
+        IngredientsTab.addTab("Ingredients", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ConcessionTab)
-                .addContainerGap())
+                .addComponent(IngredientsTab, javax.swing.GroupLayout.PREFERRED_SIZE, 651, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(ConcessionTab)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(IngredientsTab, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -204,6 +264,9 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         if (selectedRow != -1) {
             byte id = (byte) (this.ComboTbl.getModel().getValueAt(selectedRow, 0));
             MenuManager.removeMenu(id);
+            
+            resetRows();
+            populateTable();
         }
     }//GEN-LAST:event_RemoveBtnActionPerformed
 
@@ -217,6 +280,15 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     }
         
     }//GEN-LAST:event_UpdateBtnActionPerformed
+
+    private void ReturnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnBtnActionPerformed
+        new GUI_MainMenuFood().setVisible(true);
+    }//GEN-LAST:event_ReturnBtnActionPerformed
+
+    private void AddItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemBtnActionPerformed
+
+        
+    }//GEN-LAST:event_AddItemBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -254,15 +326,20 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddItemBtn;
     private javax.swing.JButton Addbtn;
     private javax.swing.JTable ComboTbl;
     private javax.swing.JPanel CombosPnl;
-    private javax.swing.JTabbedPane CombosTab;
-    private javax.swing.JTabbedPane ConcessionTab;
     private javax.swing.JButton DisplayBtn;
-    private javax.swing.JPanel FoodTab;
+    private javax.swing.JTabbedPane IngredientsTab;
     private javax.swing.JButton RemoveBtn;
+    private javax.swing.JButton RemoveItemBtn;
+    private javax.swing.JButton ReturnBtn;
     private javax.swing.JButton UpdateBtn;
+    private javax.swing.JButton UpdateItemBtn;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

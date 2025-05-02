@@ -5,13 +5,14 @@
 package GUI;
 
 import javax.swing.JOptionPane;
+import stage4.FoodRelated.*;
 
 /**
  *
  * @author hmreg
  */
 public class GUI_UpdateMenu extends javax.swing.JFrame {
-
+    private int selectedRow;
     private GUI_ConcessionElements guiConcessionElements;
     
     
@@ -23,6 +24,8 @@ public class GUI_UpdateMenu extends javax.swing.JFrame {
     }
 
     public GUI_UpdateMenu(GUI_ConcessionElements guiConcessionElements, int selectedRow) {
+       initComponents();
+       this.selectedRow = selectedRow;
        this.guiConcessionElements = guiConcessionElements;
     }
     /**
@@ -43,7 +46,7 @@ public class GUI_UpdateMenu extends javax.swing.JFrame {
         UpdateBtn = new javax.swing.JButton();
         ReturnBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         UpdateIDLbl.setText("Update Menu ID:");
 
@@ -110,6 +113,7 @@ public class GUI_UpdateMenu extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -118,12 +122,34 @@ public class GUI_UpdateMenu extends javax.swing.JFrame {
         byte id = 0;
         
         try {
-           id = Byte.parseByte(this.UpdateBtn.getText());
+           id = Byte.parseByte(this.UpdateIDTxt.getText());
+           
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Menu ID should be a number.", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         
-        String name = this.UpdateBtn.getText();
+        String name = this.UpdateIDTxt.getText();
+        
+        byte cost = 0;
+        
+        try {
+            cost = Byte.parseByte(this.UpdateCostTxt.getText());
+            
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Menu Price should be a number.", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        MenuManager.updateMenu((byte) this.selectedRow, new Food(id, name, cost));
+        
+        this.dispose();
+        
+        this.guiConcessionElements.resetRows();
+        
+        this.guiConcessionElements.populateTable();
+        
+        this.guiConcessionElements.setVisible(true);
+        
+        
        
         
         
