@@ -5,7 +5,7 @@
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
   <SyntheticProperties>
-    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,52,0,0,1,-98"/>
+    <SyntheticProperty name="formSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,76,0,0,1,-76"/>
     <SyntheticProperty name="formSizePolicy" type="int" value="0"/>
     <SyntheticProperty name="generateSize" type="boolean" value="true"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
@@ -25,13 +25,109 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="400" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="btnReturnMovieElements" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblUpdateShowtimeID" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateMovieTitle" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateStartTime" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateEndTime" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="83" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="txtUpdateEndTime" pref="139" max="32767" attributes="0"/>
+                  <Component id="txtUpdateStartTime" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtUpdateMovieTitle" alignment="0" max="32767" attributes="0"/>
+                  <Component id="txtUpdateShowtimeID" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="158" max="-2" attributes="0"/>
+              <Component id="btnUpdateShowtime" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <EmptySpace min="0" pref="300" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="btnReturnMovieElements" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtUpdateShowtimeID" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateShowtimeID" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtUpdateMovieTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateMovieTitle" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtUpdateStartTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateStartTime" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="txtUpdateEndTime" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblUpdateEndTime" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <Component id="btnUpdateShowtime" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="80" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
   </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JButton" name="btnReturnMovieElements">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Return"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReturnMovieElementsActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUpdateShowtimeID">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUpdateMovieTitle">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUpdateMovieTitleActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUpdateStartTime">
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUpdateEndTime">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUpdateShowtimeID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Showtime ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUpdateMovieTitle">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Movie Title:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUpdateStartTime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Start Time:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUpdateEndTime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="End Time:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnUpdateShowtime">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Update"/>
+      </Properties>
+    </Component>
+  </SubComponents>
 </Form>

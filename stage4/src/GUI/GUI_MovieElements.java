@@ -19,25 +19,34 @@ import stage4.TicketRelated.Showtime;
  */
 public class GUI_MovieElements extends javax.swing.JFrame {
 
-    private final ArrayList<Movie> movieList;
-    private final ArrayList<Screen> screenList;
-    private final ArrayList<Showtime> showtimeList;
+    private GUI_MovieElements guiMovieElements;
+    
+    private ArrayList<Movie> movieList;
+    private ArrayList<Screen> screenList;
+    private ArrayList<Showtime> showtimeList;
 
     /**
      * Creates new form GUI_MovieElements
      */
     public GUI_MovieElements() {
         initComponents();
+        this.guiMovieElements = this;
+        populateTable();
+
+    }
+    
+    public void populateTable() {
         
         this.movieList = MovieManager.getMovies();
         DefaultTableModel movieModel = (DefaultTableModel) this.tblEditMovie.getModel();
 
         
-        Object[][] movieRows = new Object[movieList.size()][3];
+        Object[][] movieRows = new Object[movieList.size()][4];
         for (int i = 0; i < movieList.size(); i++) {
-            movieRows[i][0] = movieList.get(i).getTitle();
-            movieRows[i][1] = movieList.get(i).getGenre();
-            movieRows[i][2] = movieList.get(i).getDurationMinutes();
+            movieRows[i][0] = movieList.get(i).getMovieID();
+            movieRows[i][1] = movieList.get(i).getTitle();
+            movieRows[i][2] = movieList.get(i).getGenre();
+            movieRows[i][3] = movieList.get(i).getDurationMinutes();
             
             movieModel.addRow(movieRows[i]);
     }
@@ -64,6 +73,19 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             
             showtimeModel.addRow(showtimeRows[i]);
         }
+        
+    }
+    
+    public void resetRows() {
+        DefaultTableModel movieModel = (DefaultTableModel) this.tblEditMovie.getModel();
+        movieModel.setRowCount(0);
+        
+        DefaultTableModel screenModel = (DefaultTableModel) this.tblEditScreen.getModel();
+        screenModel.setRowCount(0);
+        
+        DefaultTableModel showtimeModel = (DefaultTableModel) this.tblEditShowtime.getModel();
+        showtimeModel.setRowCount(0);
+
     }
 
     /**
@@ -112,11 +134,11 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title", "Genre", "Duration (Min)"
+                "Movie ID:", "Title", "Genre", "Duration (Min)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -354,7 +376,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
     private void btnAddMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMovieActionPerformed
 
-        new GUI_MovieAdd().setVisible(true);
+        new GUI_MovieAdd(this).setVisible(true);
 
     }//GEN-LAST:event_btnAddMovieActionPerformed
 

@@ -27,22 +27,106 @@ public class GUI_ShowtimeUpdate extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnReturnMovieElements = new javax.swing.JButton();
+        txtUpdateShowtimeID = new javax.swing.JTextField();
+        txtUpdateMovieTitle = new javax.swing.JTextField();
+        txtUpdateStartTime = new javax.swing.JTextField();
+        txtUpdateEndTime = new javax.swing.JTextField();
+        lblUpdateShowtimeID = new javax.swing.JLabel();
+        lblUpdateMovieTitle = new javax.swing.JLabel();
+        lblUpdateStartTime = new javax.swing.JLabel();
+        lblUpdateEndTime = new javax.swing.JLabel();
+        btnUpdateShowtime = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        btnReturnMovieElements.setText("Return");
+        btnReturnMovieElements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnMovieElementsActionPerformed(evt);
+            }
+        });
+
+        txtUpdateMovieTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtUpdateMovieTitleActionPerformed(evt);
+            }
+        });
+
+        lblUpdateShowtimeID.setText("Showtime ID:");
+
+        lblUpdateMovieTitle.setText("Movie Title:");
+
+        lblUpdateStartTime.setText("Start Time:");
+
+        lblUpdateEndTime.setText("End Time:");
+
+        btnUpdateShowtime.setText("Update");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnReturnMovieElements)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblUpdateShowtimeID)
+                    .addComponent(lblUpdateMovieTitle)
+                    .addComponent(lblUpdateStartTime)
+                    .addComponent(lblUpdateEndTime))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(txtUpdateEndTime, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(txtUpdateStartTime, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUpdateMovieTitle, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUpdateShowtimeID, javax.swing.GroupLayout.Alignment.LEADING))
+                .addGap(80, 80, 80))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(158, 158, 158)
+                .addComponent(btnUpdateShowtime)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnReturnMovieElements)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateShowtimeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateShowtimeID))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateMovieTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateMovieTitle))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateStartTime))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUpdateEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblUpdateEndTime))
+                .addGap(26, 26, 26)
+                .addComponent(btnUpdateShowtime)
+                .addGap(0, 80, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(414, 308));
+        setSize(new java.awt.Dimension(436, 332));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtUpdateMovieTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUpdateMovieTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtUpdateMovieTitleActionPerformed
+
+    private void btnReturnMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnMovieElementsActionPerformed
+
+        new GUI_MovieElements().setVisible(true);
+
+    }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +164,15 @@ public class GUI_ShowtimeUpdate extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReturnMovieElements;
+    private javax.swing.JButton btnUpdateShowtime;
+    private javax.swing.JLabel lblUpdateEndTime;
+    private javax.swing.JLabel lblUpdateMovieTitle;
+    private javax.swing.JLabel lblUpdateShowtimeID;
+    private javax.swing.JLabel lblUpdateStartTime;
+    private javax.swing.JTextField txtUpdateEndTime;
+    private javax.swing.JTextField txtUpdateMovieTitle;
+    private javax.swing.JTextField txtUpdateShowtimeID;
+    private javax.swing.JTextField txtUpdateStartTime;
     // End of variables declaration//GEN-END:variables
 }
