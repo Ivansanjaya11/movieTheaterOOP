@@ -4,19 +4,58 @@
  */
 package GUI;
 
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+
+
+import stage4.FoodRelated.*;
+
 /**
  *
  * @author hmreg
  */
 public class GUI_ConcessionElements extends javax.swing.JFrame {
 
+    private ArrayList<Food> menuList;
+    
     /**
      * Creates new form GUI_ConcessionElements
      */
     public GUI_ConcessionElements() {
         initComponents();
+        
+        populateTable();
+        
     }
 
+    public void populateTable() {
+        DefaultTableModel foodTableModel = (DefaultTableModel) this.ComboTbl.getModel();
+        
+        this.menuList = MenuManager.getMenuList();
+        
+        for (Food food : this.menuList) {
+            Object[] aRow = new Object[7];
+            
+            
+            byte id = food.getMenuId();
+            String name = food.getMenuName();
+            byte cost = food.getPrice();
+            
+            aRow[0] = id;
+            aRow[1] = name;
+            aRow[2] = cost;
+            
+            foodTableModel.addRow(aRow);
+
+        }
+    }
+    
+    public void resetRows() {
+        DefaultTableModel foodTableModel = (DefaultTableModel) this.ComboTbl.getModel();
+        
+        foodTableModel.setRowCount(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -48,13 +87,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
 
         ComboTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"1", "Burger", "11"},
-                {"2", "Fanta", "3"},
-                {"3", "Hotdog", "3"},
-                {"4", "Pizza", "10"},
-                {"5", "Popcorn", "4"},
-                {"6", "Pepsi", "3"},
-                {"7", "Coke", "3"}
+
             },
             new String [] {
                 "ID", "Name", "Price"
@@ -63,6 +96,11 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         jScrollPane3.setViewportView(ComboTbl);
 
         RemoveBtn.setText("Remove");
+        RemoveBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveBtnActionPerformed(evt);
+            }
+        });
 
         UpdateBtn.setText("Update");
 
@@ -140,13 +178,26 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void AddbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddbtnActionPerformed
-        // TODO add your handling code here:
+
+        GUI_AddMenu guiAddMenu = new GUI_AddMenu(this);
+        guiAddMenu.setVisible(true);
+        
     }//GEN-LAST:event_AddbtnActionPerformed
 
     private void DisplayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayBtnActionPerformed
 
         new GUI_Receipe().setVisible(true);
     }//GEN-LAST:event_DisplayBtnActionPerformed
+
+    private void RemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBtnActionPerformed
+
+        int selectedRow = this.ComboTbl.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            byte id = (byte) (this.ComboTbl.getModel().getValueAt(selectedRow, 0));
+            MenuManager.removeMenu(id);
+        }
+    }//GEN-LAST:event_RemoveBtnActionPerformed
 
     /**
      * @param args the command line arguments

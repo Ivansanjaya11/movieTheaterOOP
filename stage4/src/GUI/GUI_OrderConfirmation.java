@@ -41,6 +41,11 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
         OrderLbl.setText("Order:");
 
         YesBtn.setText("Yes");
+        YesBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                YesBtnActionPerformed(evt);
+            }
+        });
 
         NoBtn.setText("No");
 
@@ -100,6 +105,10 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void YesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_YesBtnActionPerformed
 
     /**
      * @param args the command line arguments
