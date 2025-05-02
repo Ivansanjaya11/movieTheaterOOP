@@ -27,21 +27,98 @@ public class GUI_MovieAdd extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel4 = new javax.swing.JLabel();
+        txtAddMovieTitle = new javax.swing.JTextField();
+        txtAddMovieGenre = new javax.swing.JTextField();
+        txtAddMovieDuration = new javax.swing.JTextField();
+        lblAddMovieTitle = new javax.swing.JLabel();
+        lblAddMovieGenre = new javax.swing.JLabel();
+        lblAddMovieDuration = new javax.swing.JLabel();
+        btnAddMovie = new javax.swing.JButton();
+        btnReturnMovieElements = new javax.swing.JButton();
+
+        jLabel4.setText("jLabel4");
+
+        txtAddMovieTitle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddMovieTitleActionPerformed(evt);
+            }
+        });
+
+        lblAddMovieTitle.setText("Movie Title:");
+
+        lblAddMovieGenre.setText("Movie Genre:");
+
+        lblAddMovieDuration.setText("Movie Duration:");
+
+        btnAddMovie.setText("Add");
+
+        btnReturnMovieElements.setText("Return");
+        btnReturnMovieElements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnMovieElementsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblAddMovieDuration)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(lblAddMovieTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblAddMovieGenre)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAddMovieTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(txtAddMovieGenre)
+                    .addComponent(txtAddMovieDuration))
+                .addGap(92, 92, 92))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(160, 160, 160)
+                .addComponent(btnAddMovie)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnReturnMovieElements)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnReturnMovieElements)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAddMovieTitle)
+                    .addComponent(txtAddMovieTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAddMovieGenre)
+                    .addComponent(txtAddMovieGenre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblAddMovieDuration)
+                    .addComponent(txtAddMovieDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btnAddMovie)
+                .addGap(31, 31, 31))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(414, 308));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtAddMovieTitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddMovieTitleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddMovieTitleActionPerformed
+
+    private void btnReturnMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnMovieElementsActionPerformed
+
+        new GUI_MovieElements().setVisible(true);
+
+    }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +157,14 @@ public class GUI_MovieAdd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddMovie;
+    private javax.swing.JButton btnReturnMovieElements;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblAddMovieDuration;
+    private javax.swing.JLabel lblAddMovieGenre;
+    private javax.swing.JLabel lblAddMovieTitle;
+    private javax.swing.JTextField txtAddMovieDuration;
+    private javax.swing.JTextField txtAddMovieGenre;
+    private javax.swing.JTextField txtAddMovieTitle;
     // End of variables declaration//GEN-END:variables
 }

@@ -140,6 +140,11 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         });
 
         btnUpdateMovie.setText("Update");
+        btnUpdateMovie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateMovieActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sTabEditMovieLayout = new javax.swing.GroupLayout(sTabEditMovie);
         sTabEditMovie.setLayout(sTabEditMovieLayout);
@@ -214,6 +219,11 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         btnRemoveScreen.setText("Remove");
 
         btnUpdateScreen.setText("Update");
+        btnUpdateScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateScreenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sTabEditScreenLayout = new javax.swing.GroupLayout(sTabEditScreen);
         sTabEditScreen.setLayout(sTabEditScreenLayout);
@@ -278,6 +288,11 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         btnRemoveShowtime.setText("Remove");
 
         btnUpdateShowtime.setText("Update");
+        btnUpdateShowtime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateShowtimeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout sTabEditShowtimeLayout = new javax.swing.GroupLayout(sTabEditShowtime);
         sTabEditShowtime.setLayout(sTabEditShowtimeLayout);
@@ -339,7 +354,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
     private void btnAddMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMovieActionPerformed
 
-        
+        new GUI_MovieAdd().setVisible(true);
 
     }//GEN-LAST:event_btnAddMovieActionPerformed
 
@@ -348,12 +363,34 @@ public class GUI_MovieElements extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoveMovieActionPerformed
 
     private void btnAddScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddScreenActionPerformed
-        // TODO add your handling code here:
+
+        new GUI_ScreenAdd().setVisible(true);
+        
     }//GEN-LAST:event_btnAddScreenActionPerformed
 
     private void btnAddShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShowtimeActionPerformed
-        // TODO add your handling code here:
+
+        new GUI_ShowtimeAdd().setVisible(true);
+
     }//GEN-LAST:event_btnAddShowtimeActionPerformed
+
+    private void btnUpdateShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateShowtimeActionPerformed
+
+        new GUI_ShowtimeUpdate().setVisible(true);
+       
+    }//GEN-LAST:event_btnUpdateShowtimeActionPerformed
+
+    private void btnUpdateScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateScreenActionPerformed
+
+        new GUI_ScreenUpdate().setVisible(true);
+
+    }//GEN-LAST:event_btnUpdateScreenActionPerformed
+
+    private void btnUpdateMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMovieActionPerformed
+
+            new GUI_MovieUpdate().setVisible(true);
+
+    }//GEN-LAST:event_btnUpdateMovieActionPerformed
 
     /**
      * @param args the command line arguments

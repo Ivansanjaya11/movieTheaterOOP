@@ -27,21 +27,86 @@ public class GUI_ScreenAdd extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtAddScreenID = new javax.swing.JTextField();
+        txtAddScreenType = new javax.swing.JTextField();
+        lblScreenID = new javax.swing.JLabel();
+        lblScreenType = new javax.swing.JLabel();
+        btnAddScreen = new javax.swing.JButton();
+        btnReturnMovieElements = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        txtAddScreenType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtAddScreenTypeActionPerformed(evt);
+            }
+        });
+
+        lblScreenID.setText("Screen ID:");
+
+        lblScreenType.setText("Screen Type: ");
+
+        btnAddScreen.setText("Add");
+
+        btnReturnMovieElements.setText("Return");
+        btnReturnMovieElements.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnMovieElementsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblScreenID)
+                    .addComponent(lblScreenType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtAddScreenID, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                    .addComponent(txtAddScreenType))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(152, 152, 152)
+                        .addComponent(btnAddScreen))
+                    .addComponent(btnReturnMovieElements))
+                .addGap(0, 176, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(btnReturnMovieElements)
+                .addGap(53, 53, 53)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAddScreenID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblScreenID))
+                .addGap(63, 63, 63)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtAddScreenType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblScreenType))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addComponent(btnAddScreen)
+                .addGap(32, 32, 32))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(414, 308));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtAddScreenTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddScreenTypeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAddScreenTypeActionPerformed
+
+    private void btnReturnMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnMovieElementsActionPerformed
+
+        new GUI_MovieElements().setVisible(true);
+        
+    }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +144,11 @@ public class GUI_ScreenAdd extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddScreen;
+    private javax.swing.JButton btnReturnMovieElements;
+    private javax.swing.JLabel lblScreenID;
+    private javax.swing.JLabel lblScreenType;
+    private javax.swing.JTextField txtAddScreenID;
+    private javax.swing.JTextField txtAddScreenType;
     // End of variables declaration//GEN-END:variables
 }
