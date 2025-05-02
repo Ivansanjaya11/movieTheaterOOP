@@ -8,6 +8,10 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import stage4.TicketRelated.Movie;
 import stage4.TicketRelated.MovieManager;
+import stage4.TicketRelated.ScreenManager;
+import stage4.TicketRelated.Screen;
+import stage4.TicketRelated.ShowtimeManager;
+import stage4.TicketRelated.Showtime;
 
 /**
  *
@@ -16,6 +20,8 @@ import stage4.TicketRelated.MovieManager;
 public class GUI_MovieElements extends javax.swing.JFrame {
 
     private final ArrayList<Movie> movieList;
+    private final ArrayList<Screen> screenList;
+    private final ArrayList<Showtime> showtimeList;
 
     /**
      * Creates new form GUI_MovieElements
@@ -35,7 +41,29 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             
             movieModel.addRow(movieRows[i]);
     }
-        //screenManager.getScreen()
+        this.screenList = ScreenManager.getScreens();
+        DefaultTableModel screenModel = (DefaultTableModel) this.tblEditScreen.getModel();
+        
+        Object[][] screenRows = new Object[screenList.size()][2];
+        for (int i = 0; i < screenList.size(); i++) {
+            screenRows[i][0] = screenList.get(i).getScreenID();
+            screenRows[i][1] = screenList.get(i).getScreenType();
+            
+            screenModel.addRow(screenRows[i]);
+        }
+        
+        this.showtimeList = ShowtimeManager.getShowtimes();
+        DefaultTableModel showtimeModel = (DefaultTableModel) this.tblEditShowtime.getModel();
+        
+        Object[][] showtimeRows = new Object[showtimeList.size()][4];
+        for (int i = 0; i < showtimeList.size(); i++) {
+            showtimeRows[i][0] = showtimeList.get(i).getShowtimeID();
+            showtimeRows[i][1] = showtimeList.get(i).getMovie().getTitle();
+            showtimeRows[i][2] = showtimeList.get(i).getStartTime();
+            showtimeRows[i][3] = showtimeList.get(i).getEndTime();
+            
+            showtimeModel.addRow(showtimeRows[i]);
+        }
     }
 
     /**
@@ -57,17 +85,22 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         btnAddMovie = new javax.swing.JButton();
         btnRemoveMovie = new javax.swing.JButton();
         btnUpdateMovie = new javax.swing.JButton();
-        btnDisplayMovie = new javax.swing.JButton();
         tabScreen = new javax.swing.JPanel();
         sTabScreen = new javax.swing.JTabbedPane();
         sTabEditScreen = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblEditScreen = new javax.swing.JTable();
+        btnAddScreen = new javax.swing.JButton();
+        btnRemoveScreen = new javax.swing.JButton();
+        btnUpdateScreen = new javax.swing.JButton();
         tabShowtime = new javax.swing.JPanel();
         sTabShowtime = new javax.swing.JTabbedPane();
         sTabEditShowtime = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblEditShowtime = new javax.swing.JTable();
+        btnAddShowtime = new javax.swing.JButton();
+        btnRemoveShowtime = new javax.swing.JButton();
+        btnUpdateShowtime = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
 
@@ -108,8 +141,6 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
         btnUpdateMovie.setText("Update");
 
-        btnDisplayMovie.setText("Display");
-
         javax.swing.GroupLayout sTabEditMovieLayout = new javax.swing.GroupLayout(sTabEditMovie);
         sTabEditMovie.setLayout(sTabEditMovieLayout);
         sTabEditMovieLayout.setHorizontalGroup(
@@ -120,8 +151,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
                 .addGroup(sTabEditMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddMovie)
                     .addComponent(btnRemoveMovie)
-                    .addComponent(btnUpdateMovie)
-                    .addComponent(btnDisplayMovie))
+                    .addComponent(btnUpdateMovie))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         sTabEditMovieLayout.setVerticalGroup(
@@ -136,8 +166,6 @@ public class GUI_MovieElements extends javax.swing.JFrame {
                 .addComponent(btnRemoveMovie)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdateMovie)
-                .addGap(18, 18, 18)
-                .addComponent(btnDisplayMovie)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -163,10 +191,29 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Screen ID", "Screen Type"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(tblEditScreen);
+
+        btnAddScreen.setText("Add");
+        btnAddScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddScreenActionPerformed(evt);
+            }
+        });
+
+        btnRemoveScreen.setText("Remove");
+
+        btnUpdateScreen.setText("Update");
 
         javax.swing.GroupLayout sTabEditScreenLayout = new javax.swing.GroupLayout(sTabEditScreen);
         sTabEditScreen.setLayout(sTabEditScreenLayout);
@@ -174,13 +221,26 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             sTabEditScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditScreenLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 131, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(sTabEditScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRemoveScreen)
+                    .addComponent(btnAddScreen)
+                    .addComponent(btnUpdateScreen))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         sTabEditScreenLayout.setVerticalGroup(
             sTabEditScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditScreenLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 3, Short.MAX_VALUE))
+            .addGroup(sTabEditScreenLayout.createSequentialGroup()
+                .addGap(82, 82, 82)
+                .addComponent(btnAddScreen)
+                .addGap(18, 18, 18)
+                .addComponent(btnRemoveScreen)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateScreen)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sTabScreen.addTab("Edit Screen", sTabEditScreen);
@@ -203,24 +263,48 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Showtime ID", "Movie Title", "Start Time", "End Time"
             }
         ));
         jScrollPane3.setViewportView(tblEditShowtime);
+
+        btnAddShowtime.setText("Add");
+        btnAddShowtime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddShowtimeActionPerformed(evt);
+            }
+        });
+
+        btnRemoveShowtime.setText("Remove");
+
+        btnUpdateShowtime.setText("Update");
 
         javax.swing.GroupLayout sTabEditShowtimeLayout = new javax.swing.GroupLayout(sTabEditShowtime);
         sTabEditShowtime.setLayout(sTabEditShowtimeLayout);
         sTabEditShowtimeLayout.setHorizontalGroup(
             sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditShowtimeLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 131, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAddShowtime)
+                    .addComponent(btnRemoveShowtime)
+                    .addComponent(btnUpdateShowtime))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         sTabEditShowtimeLayout.setVerticalGroup(
             sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditShowtimeLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 6, Short.MAX_VALUE))
+            .addGroup(sTabEditShowtimeLayout.createSequentialGroup()
+                .addGap(105, 105, 105)
+                .addComponent(btnAddShowtime)
+                .addGap(18, 18, 18)
+                .addComponent(btnRemoveShowtime)
+                .addGap(18, 18, 18)
+                .addComponent(btnUpdateShowtime)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         sTabShowtime.addTab("Edit Showtime", sTabEditShowtime);
@@ -229,7 +313,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         tabShowtime.setLayout(tabShowtimeLayout);
         tabShowtimeLayout.setHorizontalGroup(
             tabShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sTabShowtime)
+            .addComponent(sTabShowtime, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
         tabShowtimeLayout.setVerticalGroup(
             tabShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,12 +338,22 @@ public class GUI_MovieElements extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddMovieActionPerformed
-        // TODO add your handling code here:
+
+        
+
     }//GEN-LAST:event_btnAddMovieActionPerformed
 
     private void btnRemoveMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveMovieActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnRemoveMovieActionPerformed
+
+    private void btnAddScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddScreenActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddScreenActionPerformed
+
+    private void btnAddShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShowtimeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddShowtimeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,9 +392,14 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddMovie;
-    private javax.swing.JButton btnDisplayMovie;
+    private javax.swing.JButton btnAddScreen;
+    private javax.swing.JButton btnAddShowtime;
     private javax.swing.JButton btnRemoveMovie;
+    private javax.swing.JButton btnRemoveScreen;
+    private javax.swing.JButton btnRemoveShowtime;
     private javax.swing.JButton btnUpdateMovie;
+    private javax.swing.JButton btnUpdateScreen;
+    private javax.swing.JButton btnUpdateShowtime;
     private javax.swing.JButton jButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
