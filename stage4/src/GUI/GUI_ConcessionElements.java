@@ -7,6 +7,8 @@ package GUI;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 
 import stage4.FoodRelated.*;
 
@@ -33,8 +35,9 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         
         this.menuList = MenuManager.getMenuList();
         
+        
         for (Food food : this.menuList) {
-            Object[] aRow = new Object[7];
+            Object[] aRow = new Object[3];
             
             
             byte id = food.getMenuId();
@@ -103,6 +106,11 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         });
 
         UpdateBtn.setText("Update");
+        UpdateBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateBtnActionPerformed(evt);
+            }
+        });
 
         DisplayBtn.setText("Display Receipe");
         DisplayBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -198,6 +206,17 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             MenuManager.removeMenu(id);
         }
     }//GEN-LAST:event_RemoveBtnActionPerformed
+
+    private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
+
+    int selectedRow = this.ComboTbl.getSelectedRow();
+    
+    if (selectedRow != -1) {
+        GUI_UpdateMenu guiUpdateMenu = new GUI_UpdateMenu(this, selectedRow);
+        guiUpdateMenu.setVisible(true);
+    }
+        
+    }//GEN-LAST:event_UpdateBtnActionPerformed
 
     /**
      * @param args the command line arguments
