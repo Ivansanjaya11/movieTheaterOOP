@@ -1,5 +1,10 @@
 package GUI;
 
+import javax.swing.JOptionPane;
+import stage4.TicketRelated.ScreenManager;
+import stage4.TicketRelated.*;
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,11 +16,19 @@ package GUI;
  */
 public class GUI_ScreenAdd extends javax.swing.JFrame {
 
+    private GUI_MovieElements guiMovieElements;
+
     /**
      * Creates new form GUI_ScreenAdd
      */
     public GUI_ScreenAdd() {
         initComponents();
+    }
+    
+    public GUI_ScreenAdd(GUI_MovieElements guiMovieElements) {
+        initComponents();
+        this.guiMovieElements = guiMovieElements;
+
     }
 
     /**
@@ -47,6 +60,11 @@ public class GUI_ScreenAdd extends javax.swing.JFrame {
         lblScreenType.setText("Screen Type: ");
 
         btnAddScreen.setText("Add");
+        btnAddScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddScreenActionPerformed(evt);
+            }
+        });
 
         btnReturnMovieElements.setText("Return");
         btnReturnMovieElements.addActionListener(new java.awt.event.ActionListener() {
@@ -107,6 +125,31 @@ public class GUI_ScreenAdd extends javax.swing.JFrame {
         new GUI_MovieElements().setVisible(true);
         
     }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
+
+    private void btnAddScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddScreenActionPerformed
+
+        byte id = 0;
+        
+        try {
+            id = Byte.parseByte(this.txtAddScreenID.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        String screenType = this.txtAddScreenType.getText();
+        
+        if(!ScreenManager.contains(id)) {
+            ScreenManager.addScreen(new Screen(id, screenType));
+        }
+
+        this.dispose();
+        
+        this.guiMovieElements.resetRows();
+        
+        this.guiMovieElements.populateTable();
+        
+        this.guiMovieElements.setVisible(true);
+    }//GEN-LAST:event_btnAddScreenActionPerformed
 
     /**
      * @param args the command line arguments

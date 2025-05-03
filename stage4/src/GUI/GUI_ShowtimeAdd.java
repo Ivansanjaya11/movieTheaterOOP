@@ -1,5 +1,10 @@
 package GUI;
 
+import javax.swing.JOptionPane;
+import stage4.TicketRelated.ShowtimeManager;
+import stage4.TicketRelated.*;
+import java.time.LocalTime;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -11,11 +16,25 @@ package GUI;
  */
 public class GUI_ShowtimeAdd extends javax.swing.JFrame {
 
+    private GUI_MovieElements guiMovieElements;
+    
+    private LocalTime startTime;
+    
+    private LocalTime endTime;
+
+    
     /**
      * Creates new form GUI_ShowtimeAdd
      */
     public GUI_ShowtimeAdd() {
         initComponents();
+    }
+    
+    public GUI_ShowtimeAdd(GUI_MovieElements guiMovieElements) {
+        initComponents();
+        this.guiMovieElements = guiMovieElements;
+
+
     }
 
     /**
@@ -56,6 +75,11 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
         lblEndTime.setText("End Time:");
 
         btnAddShowtime.setText("Add");
+        btnAddShowtime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddShowtimeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,6 +142,34 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
         new GUI_MovieElements().setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnAddShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShowtimeActionPerformed
+
+        byte id = 0;
+        
+        try {
+            id = Byte.parseByte(this.txtAddShowtimeID.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        String title = this.txtAddShowtimeTitle.getText();
+        LocalTime startTime = this.txtAddShowtimeStartTime.getText();
+        LocalTime endTime = this.txtAddShowtimeEndTime.getText();
+        
+        if(!ShowtimeManager.contains(id)) {
+            ShowtimeManager.addShowtime(new Showtime(id, title, startTime, endTime));
+        }
+
+        this.dispose();
+        
+        this.guiMovieElements.resetRows();
+        
+        this.guiMovieElements.populateTable();
+        
+        this.guiMovieElements.setVisible(true);
+
+    }//GEN-LAST:event_btnAddShowtimeActionPerformed
 
     /**
      * @param args the command line arguments

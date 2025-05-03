@@ -1,5 +1,8 @@
 package GUI;
 
+import javax.swing.JOptionPane;
+import stage4.TicketRelated.ScreenManager;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -48,6 +51,11 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
         lblScreenType.setText("Screen Type:");
 
         btnUpdateScreen.setText("Update");
+        btnUpdateScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateScreenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,6 +105,30 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
         new GUI_MovieElements().setVisible(true);
 
     }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
+
+    private void btnUpdateScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateScreenActionPerformed
+
+        byte id = 0;
+        
+        try {
+            id = Byte.parseByte(this.txtAddScreenID.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        String screenType = this.txtAddScreenType.getText();
+        
+        ScreenManager.updateScreen(new Screen(id, screenType));
+
+        this.dispose();
+        
+        this.guiMovieElements.resetRows();
+        
+        this.guiMovieElements.populateTable();
+        
+        this.guiMovieElements.setVisible(true);
+
+    }//GEN-LAST:event_btnUpdateScreenActionPerformed
 
     /**
      * @param args the command line arguments
