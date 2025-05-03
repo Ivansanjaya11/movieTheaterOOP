@@ -19,11 +19,23 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     private ArrayList<Food> menuList;
     private ArrayList<Item> itemList;
     
+    private GUI_MainMenuFood guiMainMenuFood;
+    
     /**
      * Creates new form GUI_ConcessionElements
      */
     public GUI_ConcessionElements() {
         initComponents();
+        
+        populateTableFood();
+        populateTableItem();
+        
+    }
+    
+    public GUI_ConcessionElements(GUI_MainMenuFood guiMainMenuFood) {
+        initComponents();
+        
+        this.guiMainMenuFood = guiMainMenuFood;
         
         populateTableFood();
         populateTableItem();
@@ -289,7 +301,15 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
 
     private void DisplayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DisplayBtnActionPerformed
 
-        new GUI_Receipe().setVisible(true);
+        int selectedRow = this.ComboTbl.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            byte id = (byte) this.ComboTbl.getModel().getValueAt(selectedRow, 0);
+            Food selectedFood = MenuManager.searchMenu(id);
+            
+            GUI_Recipe guiRecipe = new GUI_Recipe(this, selectedFood);
+            guiRecipe.setVisible(true);
+        }
     }//GEN-LAST:event_DisplayBtnActionPerformed
 
     private void RemoveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveBtnActionPerformed
@@ -317,7 +337,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
     private void ReturnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnBtnActionPerformed
-        new GUI_MainMenuFood().setVisible(true);
+        this.dispose();
+        this.guiMainMenuFood.setVisible(true);
     }//GEN-LAST:event_ReturnBtnActionPerformed
 
     private void AddItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemBtnActionPerformed

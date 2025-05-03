@@ -70,7 +70,7 @@ public class Food implements Comparable<Food>{
 	 * @return The recipe TreeMap.
 	 */
 	public TreeMap<Item, Byte> getRecipe() {
-		return this.recipe;
+            return new TreeMap<>(this.recipe);
 	}
 
 	/**
@@ -141,7 +141,8 @@ public class Food implements Comparable<Food>{
 	 * @param newRecipe the new recipe of the food to be set
 	 */
 	public void setRecipe(TreeMap<Item, Byte> newRecipe) {
-		this.recipe = newRecipe;
+            this.recipe = newRecipe;
+
 	}
 
 	/**

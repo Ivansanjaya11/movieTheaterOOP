@@ -51,7 +51,7 @@ public class GUI_ItemUpdate extends javax.swing.JFrame {
         updateBtn = new javax.swing.JButton();
         qtyField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         returnBtn.setText("Return");
         returnBtn.addActionListener(new java.awt.event.ActionListener() {

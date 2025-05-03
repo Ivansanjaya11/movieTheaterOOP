@@ -53,6 +53,7 @@ public class MenuManager {
                             recipe.put(anItem, qty);
                         }
                     }
+                                        
                     food.setRecipe(recipe);
 
                     menuList.add(food);

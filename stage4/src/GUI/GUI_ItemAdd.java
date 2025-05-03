@@ -48,7 +48,7 @@ public class GUI_ItemAdd extends javax.swing.JFrame {
         itemIdLabel = new javax.swing.JLabel();
         buyingCostLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         itemNameLabel.setText("Item name");
 

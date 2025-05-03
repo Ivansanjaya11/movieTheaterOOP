@@ -157,7 +157,8 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
 
     private void FoodElementsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoodElementsBtnActionPerformed
 
-        new GUI_ConcessionElements().setVisible(true);
+        this.setVisible(false);
+        new GUI_ConcessionElements(this).setVisible(true);
     }//GEN-LAST:event_FoodElementsBtnActionPerformed
 
     private void logOutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutButtonActionPerformed
