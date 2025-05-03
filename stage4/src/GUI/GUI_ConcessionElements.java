@@ -79,7 +79,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         ReturnBtn = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        ItemTbl = new javax.swing.JTable();
         AddItemBtn = new javax.swing.JButton();
         RemoveItemBtn = new javax.swing.JButton();
         UpdateItemBtn = new javax.swing.JButton();
@@ -167,7 +167,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
 
         IngredientsTab.addTab("Combos", CombosPnl);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        ItemTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -179,7 +179,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
                 "Ingredients", "Quantity"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(ItemTbl);
 
         AddItemBtn.setText("Add");
         AddItemBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -189,8 +189,18 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         });
 
         RemoveItemBtn.setText("Remove");
+        RemoveItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveItemBtnActionPerformed(evt);
+            }
+        });
 
         UpdateItemBtn.setText("Update");
+        UpdateItemBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateItemBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -237,7 +247,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(IngredientsTab, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(IngredientsTab)
                 .addContainerGap())
         );
 
@@ -287,8 +297,33 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
 
     private void AddItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemBtnActionPerformed
 
+        GUI_Ingredients guiIngredients = new GUI_Ingredients(this);
+        guiIngredients.setVisible(true);
         
     }//GEN-LAST:event_AddItemBtnActionPerformed
+
+    private void RemoveItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveItemBtnActionPerformed
+
+        int selectedRow = this.ItemTbl.getSelectedRow();
+        
+        if(selectedRow != -1) {
+            byte id = (byte) (this.ItemTbl.getModel().getValueAt(selectedRow, 0));
+            Inventory.removeItem(id);
+            
+            resetRows();
+            populateTable();
+        }
+    }//GEN-LAST:event_RemoveItemBtnActionPerformed
+
+    private void UpdateItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateItemBtnActionPerformed
+
+        int selectedRow = this.ItemTbl.getSelectedRow();
+        
+        if(selectedRow != -1) {
+            GUI_Ingredients guiIngredients = new GUI_Ingredients(this, selectedRow);
+            guiIngredients.setVisible(true);
+        }
+    }//GEN-LAST:event_UpdateItemBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -332,6 +367,7 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     private javax.swing.JPanel CombosPnl;
     private javax.swing.JButton DisplayBtn;
     private javax.swing.JTabbedPane IngredientsTab;
+    private javax.swing.JTable ItemTbl;
     private javax.swing.JButton RemoveBtn;
     private javax.swing.JButton RemoveItemBtn;
     private javax.swing.JButton ReturnBtn;
@@ -340,6 +376,5 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
