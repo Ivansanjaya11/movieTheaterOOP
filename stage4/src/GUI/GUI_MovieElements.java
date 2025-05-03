@@ -19,7 +19,7 @@ import stage4.TicketRelated.Showtime;
  */
 public class GUI_MovieElements extends javax.swing.JFrame {
 
-    private GUI_MovieElements guiMovieElements;
+    private GUI_MainMenuTicket guiMainMenuTicket;
     
     private ArrayList<Movie> movieList;
     private ArrayList<Screen> screenList;
@@ -30,13 +30,24 @@ public class GUI_MovieElements extends javax.swing.JFrame {
      */
     public GUI_MovieElements() {
         initComponents();
-        this.guiMovieElements = this;
-        populateTable();
+        populateTableMovies();
+        populateTableScreen();
+        //populateTableShowtime();
 
     }
     
-    public void populateTable() {
+    public GUI_MovieElements(GUI_MainMenuTicket guiMainMenuTicket) {
+        initComponents();
         
+        this.guiMainMenuTicket = guiMainMenuTicket;
+        
+        populateTableMovies();
+        populateTableScreen();
+        //populateTableShowtime();
+
+    }
+    
+    public void populateTableMovies() {
         this.movieList = MovieManager.getMovies();
         DefaultTableModel movieModel = (DefaultTableModel) this.tblEditMovie.getModel();
 
@@ -50,6 +61,9 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             
             movieModel.addRow(movieRows[i]);
     }
+    }
+    
+    public void populateTableScreen() {
         this.screenList = ScreenManager.getScreens();
         DefaultTableModel screenModel = (DefaultTableModel) this.tblEditScreen.getModel();
         
@@ -60,7 +74,9 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             
             screenModel.addRow(screenRows[i]);
         }
-        
+    }
+    
+    public void populateTableShowtime() {
         this.showtimeList = ShowtimeManager.getShowtimes();
         DefaultTableModel showtimeModel = (DefaultTableModel) this.tblEditShowtime.getModel();
         
@@ -73,19 +89,21 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             
             showtimeModel.addRow(showtimeRows[i]);
         }
-        
     }
     
-    public void resetRows() {
+    public void resetRowsMovies() {
         DefaultTableModel movieModel = (DefaultTableModel) this.tblEditMovie.getModel();
         movieModel.setRowCount(0);
-        
+    }
+    
+    public void resetRowsScreen() {
         DefaultTableModel screenModel = (DefaultTableModel) this.tblEditScreen.getModel();
         screenModel.setRowCount(0);
-        
+    }
+    
+    public void resetRowsShowtime() {
         DefaultTableModel showtimeModel = (DefaultTableModel) this.tblEditShowtime.getModel();
         showtimeModel.setRowCount(0);
-
     }
 
     /**
@@ -107,6 +125,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         btnAddMovie = new javax.swing.JButton();
         btnRemoveMovie = new javax.swing.JButton();
         btnUpdateMovie = new javax.swing.JButton();
+        returnButtonMovie = new javax.swing.JButton();
         tabScreen = new javax.swing.JPanel();
         sTabScreen = new javax.swing.JTabbedPane();
         sTabEditScreen = new javax.swing.JPanel();
@@ -115,6 +134,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         btnAddScreen = new javax.swing.JButton();
         btnRemoveScreen = new javax.swing.JButton();
         btnUpdateScreen = new javax.swing.JButton();
+        returnButtonScreen = new javax.swing.JButton();
         tabShowtime = new javax.swing.JPanel();
         sTabShowtime = new javax.swing.JTabbedPane();
         sTabEditShowtime = new javax.swing.JPanel();
@@ -123,6 +143,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         btnAddShowtime = new javax.swing.JButton();
         btnRemoveShowtime = new javax.swing.JButton();
         btnUpdateShowtime = new javax.swing.JButton();
+        returnButtonShowtime = new javax.swing.JButton();
 
         jButton3.setText("jButton3");
 
@@ -168,31 +189,43 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             }
         });
 
+        returnButtonMovie.setText("Return");
+        returnButtonMovie.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonMovieActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sTabEditMovieLayout = new javax.swing.GroupLayout(sTabEditMovie);
         sTabEditMovie.setLayout(sTabEditMovieLayout);
         sTabEditMovieLayout.setHorizontalGroup(
             sTabEditMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditMovieLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sTabEditMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnAddMovie)
                     .addComponent(btnRemoveMovie)
-                    .addComponent(btnUpdateMovie))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(btnUpdateMovie)
+                    .addComponent(returnButtonMovie, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
         sTabEditMovieLayout.setVerticalGroup(
             sTabEditMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditMovieLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(sTabEditMovieLayout.createSequentialGroup()
-                .addGap(83, 83, 83)
-                .addComponent(btnAddMovie)
-                .addGap(18, 18, 18)
-                .addComponent(btnRemoveMovie)
-                .addGap(18, 18, 18)
-                .addComponent(btnUpdateMovie)
+                .addGroup(sTabEditMovieLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(sTabEditMovieLayout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addComponent(btnAddMovie)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRemoveMovie)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdateMovie)
+                        .addGap(60, 60, 60)
+                        .addComponent(returnButtonMovie, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(sTabEditMovieLayout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -252,6 +285,13 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             }
         });
 
+        returnButtonScreen.setText("Return");
+        returnButtonScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonScreenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sTabEditScreenLayout = new javax.swing.GroupLayout(sTabEditScreen);
         sTabEditScreen.setLayout(sTabEditScreenLayout);
         sTabEditScreenLayout.setHorizontalGroup(
@@ -262,8 +302,9 @@ public class GUI_MovieElements extends javax.swing.JFrame {
                 .addGroup(sTabEditScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnRemoveScreen)
                     .addComponent(btnAddScreen)
-                    .addComponent(btnUpdateScreen))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addComponent(btnUpdateScreen)
+                    .addComponent(returnButtonScreen))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         sTabEditScreenLayout.setVerticalGroup(
             sTabEditScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -277,6 +318,8 @@ public class GUI_MovieElements extends javax.swing.JFrame {
                 .addComponent(btnRemoveScreen)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdateScreen)
+                .addGap(63, 63, 63)
+                .addComponent(returnButtonScreen)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -326,18 +369,31 @@ public class GUI_MovieElements extends javax.swing.JFrame {
             }
         });
 
+        returnButtonShowtime.setText("Return");
+        returnButtonShowtime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonShowtimeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout sTabEditShowtimeLayout = new javax.swing.GroupLayout(sTabEditShowtime);
         sTabEditShowtime.setLayout(sTabEditShowtimeLayout);
         sTabEditShowtimeLayout.setHorizontalGroup(
             sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(sTabEditShowtimeLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAddShowtime)
-                    .addComponent(btnRemoveShowtime)
-                    .addComponent(btnUpdateShowtime))
-                .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(sTabEditShowtimeLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAddShowtime)
+                            .addComponent(btnRemoveShowtime)
+                            .addComponent(btnUpdateShowtime))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, sTabEditShowtimeLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(returnButtonShowtime)
+                        .addContainerGap())))
         );
         sTabEditShowtimeLayout.setVerticalGroup(
             sTabEditShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,6 +407,8 @@ public class GUI_MovieElements extends javax.swing.JFrame {
                 .addComponent(btnRemoveShowtime)
                 .addGap(18, 18, 18)
                 .addComponent(btnUpdateShowtime)
+                .addGap(52, 52, 52)
+                .addComponent(returnButtonShowtime)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -360,7 +418,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         tabShowtime.setLayout(tabShowtimeLayout);
         tabShowtimeLayout.setHorizontalGroup(
             tabShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(sTabShowtime, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addComponent(sTabShowtime)
         );
         tabShowtimeLayout.setVerticalGroup(
             tabShowtimeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -397,15 +455,15 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         if (selectedRow != -1) {
             MovieManager.removeMovie((byte) selectedRow);
             
-            resetRows();
-            populateTable();
+            resetRowsMovies();
+            populateTableMovies();
         }
         
     }//GEN-LAST:event_btnRemoveMovieActionPerformed
 
     private void btnAddScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddScreenActionPerformed
 
-        new GUI_ScreenAdd().setVisible(true);
+        new GUI_ScreenAdd(this).setVisible(true);
         
     }//GEN-LAST:event_btnAddScreenActionPerformed
 
@@ -422,15 +480,18 @@ public class GUI_MovieElements extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUpdateShowtimeActionPerformed
 
     private void btnUpdateScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateScreenActionPerformed
-
-        new GUI_ScreenUpdate().setVisible(true);
+        int selectedRow = this.tblEditScreen.getSelectedRow();
+        
+        new GUI_ScreenUpdate(this, selectedRow).setVisible(true);
 
     }//GEN-LAST:event_btnUpdateScreenActionPerformed
 
     private void btnUpdateMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMovieActionPerformed
+        int selectedRow = this.tblEditMovie.getSelectedRow();
 
-        new GUI_MovieUpdate().setVisible(true);
-
+        if (selectedRow != -1) {
+            new GUI_MovieUpdate(this, selectedRow).setVisible(true);
+        }
     }//GEN-LAST:event_btnUpdateMovieActionPerformed
 
     private void btnRemoveScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveScreenActionPerformed
@@ -440,8 +501,8 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         if (selectedRow != -1) {
             ScreenManager.removeScreen((byte) selectedRow);
             
-            resetRows();
-            populateTable();
+            resetRowsScreen();
+            populateTableScreen();
         }   
 
     }//GEN-LAST:event_btnRemoveScreenActionPerformed
@@ -453,11 +514,29 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         if (selectedRow != -1) {
             ShowtimeManager.removeShowtime((byte) selectedRow);
             
-            resetRows();
-            populateTable();
+            resetRowsShowtime();
+            populateTableShowtime();
         }
 
     }//GEN-LAST:event_btnRemoveShowtimeActionPerformed
+
+    private void returnButtonScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonScreenActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiMainMenuTicket.setVisible(true);
+    }//GEN-LAST:event_returnButtonScreenActionPerformed
+
+    private void returnButtonShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonShowtimeActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiMainMenuTicket.setVisible(true);
+    }//GEN-LAST:event_returnButtonShowtimeActionPerformed
+
+    private void returnButtonMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonMovieActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiMainMenuTicket.setVisible(true);
+    }//GEN-LAST:event_returnButtonMovieActionPerformed
 
     /**
      * @param args the command line arguments
@@ -510,6 +589,9 @@ public class GUI_MovieElements extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JButton returnButtonMovie;
+    private javax.swing.JButton returnButtonScreen;
+    private javax.swing.JButton returnButtonShowtime;
     private javax.swing.JPanel sTabEditMovie;
     private javax.swing.JPanel sTabEditScreen;
     private javax.swing.JPanel sTabEditShowtime;

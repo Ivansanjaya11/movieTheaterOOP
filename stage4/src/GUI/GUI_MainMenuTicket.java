@@ -153,7 +153,8 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
 
     private void btnChangeMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeMovieElementsActionPerformed
 
-        new GUI_MovieElements().setVisible(true);
+        this.setVisible(false);
+        new GUI_MovieElements(this).setVisible(true);
         
     }//GEN-LAST:event_btnChangeMovieElementsActionPerformed
 

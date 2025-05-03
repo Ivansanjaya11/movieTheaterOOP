@@ -147,8 +147,8 @@ public class GUI_MovieUpdate extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUpdateMovieTitleActionPerformed
 
     private void btnReturnMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnMovieElementsActionPerformed
-
-        new GUI_MovieElements().setVisible(true);
+        this.dispose();
+        this.guiMovieElements.setVisible(true);
 
     }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
 
@@ -171,9 +171,9 @@ public class GUI_MovieUpdate extends javax.swing.JFrame {
 
         this.dispose();
         
-        this.guiMovieElements.resetRows();
+        this.guiMovieElements.resetRowsMovies();
         
-        this.guiMovieElements.populateTable();
+        this.guiMovieElements.populateTableMovies();
         
         this.guiMovieElements.setVisible(true);
 

@@ -45,10 +45,10 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
 
         btnReturnMovieElements = new javax.swing.JButton();
         txtUpdateScreenID = new javax.swing.JTextField();
-        txtUpdateScreenType = new javax.swing.JTextField();
         lblScreenID = new javax.swing.JLabel();
         lblScreenType = new javax.swing.JLabel();
         btnUpdateScreen = new javax.swing.JButton();
+        screenTypeBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,6 +70,13 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
             }
         });
 
+        screenTypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "normal", "imax" }));
+        screenTypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                screenTypeBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,10 +90,10 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
                     .addComponent(lblScreenType)
                     .addComponent(lblScreenID))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtUpdateScreenID, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                    .addComponent(txtUpdateScreenType))
-                .addGap(84, 84, 84))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtUpdateScreenID, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(screenTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81))
             .addGroup(layout.createSequentialGroup()
                 .addGap(154, 154, 154)
                 .addComponent(btnUpdateScreen)
@@ -102,8 +109,8 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
                     .addComponent(lblScreenID))
                 .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtUpdateScreenType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblScreenType))
+                    .addComponent(lblScreenType)
+                    .addComponent(screenTypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(btnUpdateScreen)
                 .addGap(30, 30, 30))
@@ -115,7 +122,7 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
 
     private void btnReturnMovieElementsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnMovieElementsActionPerformed
 
-        new GUI_MovieElements().setVisible(true);
+        this.guiMovieElements.setVisible(true);
 
     }//GEN-LAST:event_btnReturnMovieElementsActionPerformed
 
@@ -129,19 +136,23 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         
-        String screenType = this.txtUpdateScreenType.getText();
+        String screenType = this.screenTypeBox.getSelectedItem().toString();
         
         ScreenManager.updateScreen((byte) this.selectedRow, new Screen(id, screenType));
 
         this.dispose();
         
-        this.guiMovieElements.resetRows();
+        this.guiMovieElements.resetRowsScreen();
         
-        this.guiMovieElements.populateTable();
+        this.guiMovieElements.populateTableScreen();
         
         this.guiMovieElements.setVisible(true);
 
     }//GEN-LAST:event_btnUpdateScreenActionPerformed
+
+    private void screenTypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_screenTypeBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_screenTypeBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,7 +194,7 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdateScreen;
     private javax.swing.JLabel lblScreenID;
     private javax.swing.JLabel lblScreenType;
+    private javax.swing.JComboBox<String> screenTypeBox;
     private javax.swing.JTextField txtUpdateScreenID;
-    private javax.swing.JTextField txtUpdateScreenType;
     // End of variables declaration//GEN-END:variables
 }
