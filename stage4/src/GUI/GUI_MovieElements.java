@@ -239,6 +239,11 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         });
 
         btnRemoveScreen.setText("Remove");
+        btnRemoveScreen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveScreenActionPerformed(evt);
+            }
+        });
 
         btnUpdateScreen.setText("Update");
         btnUpdateScreen.addActionListener(new java.awt.event.ActionListener() {
@@ -308,6 +313,11 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         });
 
         btnRemoveShowtime.setText("Remove");
+        btnRemoveShowtime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveShowtimeActionPerformed(evt);
+            }
+        });
 
         btnUpdateShowtime.setText("Update");
         btnUpdateShowtime.addActionListener(new java.awt.event.ActionListener() {
@@ -381,7 +391,16 @@ public class GUI_MovieElements extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAddMovieActionPerformed
 
     private void btnRemoveMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveMovieActionPerformed
-        // TODO add your handling code here:
+
+        int selectedRow = this.tblEditMovie.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            MovieManager.removeMovie((byte) selectedRow);
+            
+            resetRows();
+            populateTable();
+        }
+        
     }//GEN-LAST:event_btnRemoveMovieActionPerformed
 
     private void btnAddScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddScreenActionPerformed
@@ -410,9 +429,35 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
     private void btnUpdateMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateMovieActionPerformed
 
-            new GUI_MovieUpdate().setVisible(true);
+        new GUI_MovieUpdate().setVisible(true);
 
     }//GEN-LAST:event_btnUpdateMovieActionPerformed
+
+    private void btnRemoveScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveScreenActionPerformed
+
+        int selectedRow = this.tblEditScreen.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            ScreenManager.removeScreen((byte) selectedRow);
+            
+            resetRows();
+            populateTable();
+        }   
+
+    }//GEN-LAST:event_btnRemoveScreenActionPerformed
+
+    private void btnRemoveShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveShowtimeActionPerformed
+
+        int selectedRow = this.tblEditShowtime.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            ShowtimeManager.removeShowtime((byte) selectedRow);
+            
+            resetRows();
+            populateTable();
+        }
+
+    }//GEN-LAST:event_btnRemoveShowtimeActionPerformed
 
     /**
      * @param args the command line arguments

@@ -31,12 +31,14 @@
                           <Component id="lblUpdateMovieTitle" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblUpdateMovieGenre" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblUpdateMovieDuration" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblUpdateMovieID" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtUpdateMovieDuration" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="txtUpdateMovieGenre" min="-2" pref="139" max="-2" attributes="0"/>
-                          <Component id="txtUpdateMovieTitle" min="-2" pref="139" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtUpdateMovieDuration" max="32767" attributes="0"/>
+                          <Component id="txtUpdateMovieGenre" max="32767" attributes="0"/>
+                          <Component id="txtUpdateMovieTitle" max="32767" attributes="0"/>
+                          <Component id="txtUpdateMovieID" alignment="0" pref="139" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -53,26 +55,31 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="btnReturnMovieElements" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="lblUpdateMovieTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblUpdateMovieGenre" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtUpdateMovieGenre" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lblUpdateMovieDuration" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtUpdateMovieDuration" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Component id="txtUpdateMovieTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblUpdateMovieID" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUpdateMovieID" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblUpdateMovieTitle" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtUpdateMovieTitle" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="lblUpdateMovieGenre" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="txtUpdateMovieGenre" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="lblUpdateMovieDuration" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUpdateMovieDuration" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="btnUpdateMovie" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -114,6 +121,19 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Update"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateMovieActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblUpdateMovieID">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Movie ID:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtUpdateMovieID">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtUpdateMovieIDActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

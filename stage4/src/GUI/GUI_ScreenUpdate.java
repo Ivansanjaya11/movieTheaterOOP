@@ -2,6 +2,8 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import stage4.TicketRelated.ScreenManager;
+import stage4.TicketRelated.*;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,11 +16,22 @@ import stage4.TicketRelated.ScreenManager;
  */
 public class GUI_ScreenUpdate extends javax.swing.JFrame {
 
+    private GUI_MovieElements guiMovieElements;
+    private int selectedRow;
+    
     /**
      * Creates new form GUI_ScreenUpdate
      */
     public GUI_ScreenUpdate() {
         initComponents();
+    }
+    
+    public GUI_ScreenUpdate(GUI_MovieElements guiMovieElements, int selectedRow) {
+        
+    initComponents();
+    this.selectedRow = selectedRow;
+    this.guiMovieElements = guiMovieElements;
+
     }
 
     /**
@@ -111,14 +124,14 @@ public class GUI_ScreenUpdate extends javax.swing.JFrame {
         byte id = 0;
         
         try {
-            id = Byte.parseByte(this.txtAddScreenID.getText());
+            id = Byte.parseByte(this.txtUpdateScreenID.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
         }
         
-        String screenType = this.txtAddScreenType.getText();
+        String screenType = this.txtUpdateScreenType.getText();
         
-        ScreenManager.updateScreen(new Screen(id, screenType));
+        ScreenManager.updateScreen((byte) this.selectedRow, new Screen(id, screenType));
 
         this.dispose();
         

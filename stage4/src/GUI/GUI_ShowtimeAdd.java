@@ -1,9 +1,9 @@
 package GUI;
 
-import javax.swing.JOptionPane;
-import stage4.TicketRelated.ShowtimeManager;
-import stage4.TicketRelated.*;
-import java.time.LocalTime;
+//import javax.swing.JOptionPane;
+//import stage4.TicketRelated.ShowtimeManager;
+//import stage4.TicketRelated.*;
+//import java.time.LocalTime;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -18,9 +18,9 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
 
     private GUI_MovieElements guiMovieElements;
     
-    private LocalTime startTime;
-    
-    private LocalTime endTime;
+//    private LocalTime startTime;
+//    
+//    private LocalTime endTime;
 
     
     /**
@@ -145,29 +145,29 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
 
     private void btnAddShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShowtimeActionPerformed
 
-        byte id = 0;
-        
-        try {
-            id = Byte.parseByte(this.txtAddShowtimeID.getText());
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
-        }
-        
-        String title = this.txtAddShowtimeTitle.getText();
-        LocalTime startTime = this.txtAddShowtimeStartTime.getText();
-        LocalTime endTime = this.txtAddShowtimeEndTime.getText();
-        
-        if(!ShowtimeManager.contains(id)) {
-            ShowtimeManager.addShowtime(new Showtime(id, title, startTime, endTime));
-        }
-
-        this.dispose();
-        
-        this.guiMovieElements.resetRows();
-        
-        this.guiMovieElements.populateTable();
-        
-        this.guiMovieElements.setVisible(true);
+//        byte id = 0;
+//        
+//        try {
+//            id = Byte.parseByte(this.txtAddShowtimeID.getText());
+//        } catch (NumberFormatException e) {
+//            JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+//        }
+//        
+//        String title = this.txtAddShowtimeTitle.getText();
+//        LocalTime startTime = this.txtAddShowtimeStartTime.getText();
+//        LocalTime endTime = this.txtAddShowtimeEndTime.getText();
+//        
+//        if(!ShowtimeManager.contains(id)) {
+//            ShowtimeManager.addShowtime(new Showtime(id, title, startTime, endTime));
+//        }
+//
+//        this.dispose();
+//        
+//        this.guiMovieElements.resetRows();
+//        
+//        this.guiMovieElements.populateTable();
+//        
+//        this.guiMovieElements.setVisible(true);
 
     }//GEN-LAST:event_btnAddShowtimeActionPerformed
 
