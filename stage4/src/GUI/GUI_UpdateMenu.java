@@ -143,9 +143,9 @@ public class GUI_UpdateMenu extends javax.swing.JFrame {
         
         this.dispose();
         
-        this.guiConcessionElements.resetRows();
+        this.guiConcessionElements.resetRowsFood();
         
-        this.guiConcessionElements.populateTable();
+        this.guiConcessionElements.populateTableFood();
         
         this.guiConcessionElements.setVisible(true);
         

@@ -175,8 +175,8 @@ public class GUI_AddMenu extends javax.swing.JFrame {
         
         this.dispose();
         
-        this.guiConcessionElements.resetRows();
-        this.guiConcessionElements.populateTable();
+        this.guiConcessionElements.resetRowsFood();
+        this.guiConcessionElements.populateTableFood();
        
         this.guiConcessionElements.setVisible(true);
     }//GEN-LAST:event_AddBtnActionPerformed

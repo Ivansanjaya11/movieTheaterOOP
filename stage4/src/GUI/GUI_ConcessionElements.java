@@ -7,8 +7,6 @@ package GUI;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 
 import stage4.FoodRelated.*;
 
@@ -19,6 +17,7 @@ import stage4.FoodRelated.*;
 public class GUI_ConcessionElements extends javax.swing.JFrame {
 
     private ArrayList<Food> menuList;
+    private ArrayList<Item> itemList;
     
     /**
      * Creates new form GUI_ConcessionElements
@@ -26,11 +25,12 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     public GUI_ConcessionElements() {
         initComponents();
         
-        populateTable();
+        populateTableFood();
+        populateTableItem();
         
     }
 
-    public void populateTable() {
+    public void populateTableFood() {
         DefaultTableModel foodTableModel = (DefaultTableModel) this.ComboTbl.getModel();
         
         this.menuList = MenuManager.getMenuList();
@@ -53,10 +53,39 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         }
     }
     
-    public void resetRows() {
+    public void resetRowsFood() {
         DefaultTableModel foodTableModel = (DefaultTableModel) this.ComboTbl.getModel();
         
         foodTableModel.setRowCount(0);
+    }
+    
+    public void populateTableItem() {
+        DefaultTableModel itemTableModel = (DefaultTableModel) this.ItemTbl.getModel();
+        
+        this.itemList = Inventory.getItemList();
+        
+        for (Item item : this.itemList) {
+            Object[] aRow = new Object[4];
+            
+            byte id = item.getItemId();
+            String name = item.getItemName();
+            short quantity = item.getQuantity();
+            short buyingCost = item.getBuyingCost();
+            
+            aRow[0] = id;
+            aRow[1] = name;
+            aRow[2] = quantity;
+            aRow[3] = buyingCost;
+            
+            itemTableModel.addRow(aRow);
+            
+        }
+    }
+    
+    public void resetRowsItem() {
+        DefaultTableModel itemTableModel = (DefaultTableModel) this.ItemTbl.getModel();
+        
+        itemTableModel.setRowCount(0);
     }
     
     /**
@@ -169,14 +198,10 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
 
         ItemTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
-                "Ingredients", "Quantity"
+                "ID", "Ingredients", "Quantity", "Buying cost"
             }
         ));
         jScrollPane1.setViewportView(ItemTbl);
@@ -275,8 +300,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             byte id = (byte) (this.ComboTbl.getModel().getValueAt(selectedRow, 0));
             MenuManager.removeMenu(id);
             
-            resetRows();
-            populateTable();
+            resetRowsFood();
+            populateTableFood();
         }
     }//GEN-LAST:event_RemoveBtnActionPerformed
 
@@ -297,8 +322,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
 
     private void AddItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemBtnActionPerformed
 
-        GUI_Ingredients guiIngredients = new GUI_Ingredients(this);
-        guiIngredients.setVisible(true);
+        GUI_ItemAdd guiItemAdd = new GUI_ItemAdd(this);
+        guiItemAdd.setVisible(true);
         
     }//GEN-LAST:event_AddItemBtnActionPerformed
 
@@ -310,8 +335,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             byte id = (byte) (this.ItemTbl.getModel().getValueAt(selectedRow, 0));
             Inventory.removeItem(id);
             
-            resetRows();
-            populateTable();
+            resetRowsItem();
+            populateTableItem();
         }
     }//GEN-LAST:event_RemoveItemBtnActionPerformed
 
@@ -320,8 +345,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         int selectedRow = this.ItemTbl.getSelectedRow();
         
         if(selectedRow != -1) {
-            GUI_Ingredients guiIngredients = new GUI_Ingredients(this, selectedRow);
-            guiIngredients.setVisible(true);
+            GUI_ItemUpdate guiItemUpdate = new GUI_ItemUpdate(this, selectedRow);
+            guiItemUpdate.setVisible(true);
         }
     }//GEN-LAST:event_UpdateItemBtnActionPerformed
 
