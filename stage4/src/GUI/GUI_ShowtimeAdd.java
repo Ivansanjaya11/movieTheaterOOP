@@ -1,9 +1,11 @@
 package GUI;
 
-//import javax.swing.JOptionPane;
-//import stage4.TicketRelated.ShowtimeManager;
-//import stage4.TicketRelated.*;
-//import java.time.LocalTime;
+import javax.swing.JOptionPane;
+import stage4.TicketRelated.ShowtimeManager;
+import stage4.TicketRelated.*;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,6 +19,8 @@ package GUI;
 public class GUI_ShowtimeAdd extends javax.swing.JFrame {
 
     private GUI_MovieElements guiMovieElements;
+    private ArrayList<Movie> movieList;
+    private ArrayList<Screen> screenList;
     
 //    private LocalTime startTime;
 //    
@@ -28,14 +32,46 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
      */
     public GUI_ShowtimeAdd() {
         initComponents();
+        populateTableMovies();
+        populateTableScreen();
     }
     
     public GUI_ShowtimeAdd(GUI_MovieElements guiMovieElements) {
         initComponents();
         this.guiMovieElements = guiMovieElements;
-
-
+        populateTableMovies();
+        populateTableScreen();
+        
     }
+    
+    public void populateTableMovies() {
+    this.movieList = MovieManager.getMovies();
+    DefaultTableModel movieModel = (DefaultTableModel) this.tblAddShowtimeMovieObjects.getModel();
+
+        
+    Object[][] movieRows = new Object[movieList.size()][4];
+    for (int i = 0; i < movieList.size(); i++) {
+        movieRows[i][0] = movieList.get(i).getMovieID();
+        movieRows[i][1] = movieList.get(i).getTitle();
+            
+        movieModel.addRow(movieRows[i]);
+    }
+    }
+    
+    public void populateTableScreen() {
+    this.screenList = ScreenManager.getScreens();
+    DefaultTableModel screenModel = (DefaultTableModel) this.tblAddShowtimeScreenObjects.getModel();
+        
+    Object[][] screenRows = new Object[screenList.size()][2];
+    for (int i = 0; i < screenList.size(); i++) {
+        screenRows[i][0] = screenList.get(i).getScreenID();
+        screenRows[i][1] = screenList.get(i).getScreenType();
+            
+        screenModel.addRow(screenRows[i]);
+        
+    }
+    }
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,16 +84,21 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         txtAddShowtimeID = new javax.swing.JTextField();
-        txtAddShowtimeTitle = new javax.swing.JTextField();
-        txtAddShowtimeStartTime = new javax.swing.JTextField();
-        txtAddShowtimeEndTime = new javax.swing.JTextField();
         lblShowtimeID = new javax.swing.JLabel();
-        lblMovieTitle = new javax.swing.JLabel();
         lblStartTime = new javax.swing.JLabel();
-        lblEndTime = new javax.swing.JLabel();
         btnAddShowtime = new javax.swing.JButton();
+        spnAddStartTimeHour = new javax.swing.JSpinner();
+        spnAddStartTimeMin = new javax.swing.JSpinner();
+        lblAddShowtimeHour = new javax.swing.JLabel();
+        lblAddShowtimeMin = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAddShowtimeScreenObjects = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAddShowtimeMovieObjects = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Add Showtime");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("Return");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -65,14 +106,14 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(txtAddShowtimeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, 139, -1));
 
         lblShowtimeID.setText("Showtime ID:");
-
-        lblMovieTitle.setText("Movie Title:");
+        getContentPane().add(lblShowtimeID, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
         lblStartTime.setText("Start Time: ");
-
-        lblEndTime.setText("End Time:");
+        getContentPane().add(lblStartTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 390, -1, -1));
 
         btnAddShowtime.setText("Add");
         btnAddShowtime.addActionListener(new java.awt.event.ActionListener() {
@@ -80,60 +121,61 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
                 btnAddShowtimeActionPerformed(evt);
             }
         });
+        getContentPane().add(btnAddShowtime, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 450, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblShowtimeID)
-                            .addComponent(lblMovieTitle)
-                            .addComponent(lblStartTime)
-                            .addComponent(lblEndTime))
-                        .addGap(71, 71, 71)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtAddShowtimeID, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
-                            .addComponent(txtAddShowtimeStartTime)
-                            .addComponent(txtAddShowtimeEndTime)
-                            .addComponent(txtAddShowtimeTitle)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(btnAddShowtime)))
-                .addContainerGap(88, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jButton1)
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddShowtimeID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblShowtimeID))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddShowtimeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMovieTitle))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtAddShowtimeStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblStartTime))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAddShowtimeEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEndTime))
-                .addGap(29, 29, 29)
-                .addComponent(btnAddShowtime)
-                .addGap(0, 74, Short.MAX_VALUE))
-        );
+        spnAddStartTimeHour.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        getContentPane().add(spnAddStartTimeHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 390, -1, -1));
 
-        setSize(new java.awt.Dimension(434, 337));
+        spnAddStartTimeMin.setModel(new javax.swing.SpinnerNumberModel(0, 0, 59, 1));
+        getContentPane().add(spnAddStartTimeMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 390, -1, -1));
+
+        lblAddShowtimeHour.setText("Hour: ");
+        getContentPane().add(lblAddShowtimeHour, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 370, -1, -1));
+
+        lblAddShowtimeMin.setText("Minute:");
+        getContentPane().add(lblAddShowtimeMin, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 370, -1, -1));
+
+        tblAddShowtimeScreenObjects.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Screen ID", "Screen Type"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblAddShowtimeScreenObjects);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 240, 260));
+
+        tblAddShowtimeMovieObjects.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Movie ID", "Movie Title"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblAddShowtimeMovieObjects);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 240, 260));
+
+        setSize(new java.awt.Dimension(593, 566));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -145,29 +187,39 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
 
     private void btnAddShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShowtimeActionPerformed
 
-//        byte id = 0;
-//        
-//        try {
-//            id = Byte.parseByte(this.txtAddShowtimeID.getText());
-//        } catch (NumberFormatException e) {
-//            JOptionPane.showMessageDialog(null, "Screen ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
-//        }
-//        
-//        String title = this.txtAddShowtimeTitle.getText();
-//        LocalTime startTime = this.txtAddShowtimeStartTime.getText();
-//        LocalTime endTime = this.txtAddShowtimeEndTime.getText();
-//        
-//        if(!ShowtimeManager.contains(id)) {
-//            ShowtimeManager.addShowtime(new Showtime(id, title, startTime, endTime));
-//        }
-//
-//        this.dispose();
-//        
-//        this.guiMovieElements.resetRows();
-//        
-//        this.guiMovieElements.populateTable();
-//        
-//        this.guiMovieElements.setVisible(true);
+        byte id = 0;
+        
+        try {
+            id = Byte.parseByte(this.txtAddShowtimeID.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Showtime ID must be a number!", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
+        
+        int selectedRowMovie = this.tblAddShowtimeMovieObjects.getSelectedRow();
+        
+        if (selectedRowMovie != -1) {
+            this.tblAddShowtimeMovieObjects.getValueAt(selectedRowMovie, 0);
+        }
+        
+        int selectedRowScreen = this.tblAddShowtimeScreenObjects.getSelectedRow();
+        
+        if (selectedRowScreen != -1) {
+            this.tblAddShowtimeScreenObjects.getValueAt(selectedRowScreen, 0);
+        }
+        
+        //LocalTime startTime = this.FtxtAddShowtimeStartTime.getText();
+        
+        if(!ShowtimeManager.contains(id)) {
+            //ShowtimeManager.addShowtime(new Showtime(id, title, startTime, endTime));
+        }
+
+        this.dispose();
+        
+        this.guiMovieElements.resetRowsShowtime();
+        
+        this.guiMovieElements.populateTableShowtime();
+        
+        this.guiMovieElements.setVisible(true);
 
     }//GEN-LAST:event_btnAddShowtimeActionPerformed
 
@@ -209,13 +261,16 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddShowtime;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel lblEndTime;
-    private javax.swing.JLabel lblMovieTitle;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblAddShowtimeHour;
+    private javax.swing.JLabel lblAddShowtimeMin;
     private javax.swing.JLabel lblShowtimeID;
     private javax.swing.JLabel lblStartTime;
-    private javax.swing.JTextField txtAddShowtimeEndTime;
+    private javax.swing.JSpinner spnAddStartTimeHour;
+    private javax.swing.JSpinner spnAddStartTimeMin;
+    private javax.swing.JTable tblAddShowtimeMovieObjects;
+    private javax.swing.JTable tblAddShowtimeScreenObjects;
     private javax.swing.JTextField txtAddShowtimeID;
-    private javax.swing.JTextField txtAddShowtimeStartTime;
-    private javax.swing.JTextField txtAddShowtimeTitle;
     // End of variables declaration//GEN-END:variables
 }
