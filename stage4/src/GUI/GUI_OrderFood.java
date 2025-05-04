@@ -1,20 +1,56 @@
+package GUI;
+
+import stage4.OrdersAndPayment.*;
+import stage4.FoodRelated.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.JRadioButton;
+import stage4.Customer;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUI;
 
 /**
  *
- * @author hmreg
+ * @author lccra
  */
 public class GUI_OrderFood extends javax.swing.JFrame {
 
+    private DetailFoodBought detail;
+    private ArrayList<Food> foodList;
+    
     /**
-     * Creates new form GUI_OrderFood
+     * Creates new form GUI_OrderFoodOne
      */
     public GUI_OrderFood() {
         initComponents();
+        detail = new DetailFoodBought(); 
+        populateTableFood();
+    }
+    
+    public void populateTableFood() {
+        
+        this.foodList = MenuManager.getMenuList();
+        DefaultTableModel foodModel = (DefaultTableModel) this.tblOrderFood.getModel();
+        
+        Object[][] foodRows = new Object[foodList.size()][4];
+        for (int i = 0; i < foodList.size(); i++) {
+            foodRows[i][0] = foodList.get(i).getMenuId();
+            foodRows[i][1] = foodList.get(i).getMenuName();
+            foodRows[i][2] = foodList.get(i).getPrice();
+            
+            foodModel.addRow(foodRows[i]);
+
+    }
+    }
+    
+    public void reset() {
+        
+        spnAddToOrder.setValue(0);
+        tblOrderFood.clearSelection();
     }
 
     /**
@@ -26,198 +62,165 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnGPayment = new javax.swing.ButtonGroup();
+        btnGPaymentType = new javax.swing.ButtonGroup();
         OrderFoodLbl = new javax.swing.JLabel();
-        OrderFortxt = new javax.swing.JTextField();
+        lblCustomerName = new javax.swing.JLabel();
         CustomerNametxt = new javax.swing.JTextField();
-        BurgerTxt = new javax.swing.JTextField();
-        HotdogTxt = new javax.swing.JTextField();
-        PizzaTxt = new javax.swing.JTextField();
-        FantaTxt = new javax.swing.JTextField();
-        PepsiTxt = new javax.swing.JTextField();
-        CokeTxt = new javax.swing.JTextField();
-        PopcornTxt = new javax.swing.JTextField();
-        jSpinner1 = new javax.swing.JSpinner();
-        jSpinner2 = new javax.swing.JSpinner();
-        jSpinner3 = new javax.swing.JSpinner();
-        jSpinner4 = new javax.swing.JSpinner();
-        jSpinner5 = new javax.swing.JSpinner();
-        jSpinner6 = new javax.swing.JSpinner();
-        jSpinner7 = new javax.swing.JSpinner();
-        CostLbl = new javax.swing.JLabel();
-        CostTxt = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOrderFood = new javax.swing.JTable();
         PaymentTypeLbl = new javax.swing.JLabel();
         CashBtn = new javax.swing.JRadioButton();
         CardBtn = new javax.swing.JRadioButton();
-        OrderBtn = new javax.swing.JButton();
+        txtFoodCost = new javax.swing.JTextField();
+        btnReturnFoodMain = new javax.swing.JButton();
+        spnAddToOrder = new javax.swing.JSpinner();
+        btnTotalFoodPrice = new javax.swing.JButton();
+        btnOrderFood = new javax.swing.JButton();
+        btnAddToOrder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Order Food/Drink");
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(600, 500));
-        setSize(new java.awt.Dimension(0, 0));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         OrderFoodLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         OrderFoodLbl.setText("Order Food/Drink");
+        getContentPane().add(OrderFoodLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 0, -1, -1));
 
-        OrderFortxt.setEditable(false);
-        OrderFortxt.setText("Order For:");
+        lblCustomerName.setText("Order For:");
+        getContentPane().add(lblCustomerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 40, -1, -1));
 
-        BurgerTxt.setEditable(false);
-        BurgerTxt.setText("Burger");
-
-        HotdogTxt.setEditable(false);
-        HotdogTxt.setText("Hotdog");
-
-        PizzaTxt.setEditable(false);
-        PizzaTxt.setText("Pizza");
-
-        FantaTxt.setEditable(false);
-        FantaTxt.setText("Fanta");
-
-        PepsiTxt.setEditable(false);
-        PepsiTxt.setText("Pepsi");
-
-        CokeTxt.setEditable(false);
-        CokeTxt.setText("Coke");
-
-        PopcornTxt.setEditable(false);
-        PopcornTxt.setText("Popcorn");
-
-        CostLbl.setText("Cost:");
-
-        PaymentTypeLbl.setText("Payment Type:");
-
-        btnGPayment.add(CashBtn);
-        CashBtn.setSelected(true);
-        CashBtn.setText("Cash");
-
-        btnGPayment.add(CardBtn);
-        CardBtn.setText("Card");
-
-        OrderBtn.setText("Order");
-        OrderBtn.addActionListener(new java.awt.event.ActionListener() {
+        CustomerNametxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                OrderBtnActionPerformed(evt);
+                CustomerNametxtActionPerformed(evt);
             }
         });
+        getContentPane().add(CustomerNametxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 117, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(122, 122, 122)
-                                .addComponent(OrderFoodLbl))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(BurgerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(FantaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(HotdogTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(PepsiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(OrderFortxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(CustomerNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(PopcornTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(PizzaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(CostLbl)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(CostTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(PaymentTypeLbl, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(CokeTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jSpinner7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(CardBtn)
-                                .addComponent(CashBtn))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
-                        .addComponent(OrderBtn)))
-                .addContainerGap(55, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(OrderFoodLbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(OrderFortxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CustomerNametxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BurgerTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FantaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(HotdogTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PepsiTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PizzaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CokeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(PopcornTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CostLbl)
-                    .addComponent(CostTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(PaymentTypeLbl)
-                    .addComponent(CashBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CardBtn)
-                .addGap(18, 18, 18)
-                .addComponent(OrderBtn)
-                .addGap(23, 23, 23))
-        );
+        tblOrderFood.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Food ID", "Food", "Price"
+            }
+        ));
+        jScrollPane1.setViewportView(tblOrderFood);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 450, 220));
+
+        PaymentTypeLbl.setText("Payment Type:");
+        getContentPane().add(PaymentTypeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
+
+        btnGPaymentType.add(CashBtn);
+        CashBtn.setSelected(true);
+        CashBtn.setText("Cash");
+        getContentPane().add(CashBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, -1, -1));
+
+        btnGPaymentType.add(CardBtn);
+        CardBtn.setText("Card");
+        getContentPane().add(CardBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
+
+        txtFoodCost.setEditable(false);
+        txtFoodCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtFoodCostActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtFoodCost, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 84, -1));
+
+        btnReturnFoodMain.setText("Return");
+        btnReturnFoodMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnFoodMainActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnReturnFoodMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
+
+        spnAddToOrder.setModel(new javax.swing.SpinnerNumberModel(0, 0, 127, 1));
+        getContentPane().add(spnAddToOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+
+        btnTotalFoodPrice.setText("Total: ");
+        btnTotalFoodPrice.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTotalFoodPriceActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnTotalFoodPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 360, -1, -1));
+
+        btnOrderFood.setText("Order");
+        btnOrderFood.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOrderFoodActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnOrderFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, -1));
+
+        btnAddToOrder.setText("Add to Order");
+        btnAddToOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddToOrderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnAddToOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, -1, -1));
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void OrderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderBtnActionPerformed
+    private void btnReturnFoodMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnFoodMainActionPerformed
 
-        new GUI_OrderConfirmation().setVisible(true);
-    }//GEN-LAST:event_OrderBtnActionPerformed
+        new GUI_MainMenuFood().setVisible(true);
+    }//GEN-LAST:event_btnReturnFoodMainActionPerformed
+
+    private void btnTotalFoodPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalFoodPriceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnTotalFoodPriceActionPerformed
+
+    private void btnOrderFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderFoodActionPerformed
+
+        this.detail.setCustomer(new Customer(this.CustomerNametxt.getText()));
+        this.detail.setPaymentAmount(Short.parseShort(this.txtFoodCost.getText()));
+
+        Enumeration<AbstractButton> buttons = this.btnGPaymentType.getElements();
+            
+            while (buttons.hasMoreElements()) {
+                JRadioButton aButton = (JRadioButton) buttons.nextElement();
+                
+                if (aButton.isSelected()) {
+                    this.detail.setPaymentType(aButton.getText());
+                }
+            }
+        
+        new GUI_OrderConfirmation(detail).setVisible(true);
+
+    }//GEN-LAST:event_btnOrderFoodActionPerformed
+
+    private void btnAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToOrderActionPerformed
+
+        byte id = 0;
+        int selectedRow = this.tblOrderFood.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            id = Byte.parseByte(this.tblOrderFood.getValueAt(selectedRow, 0).toString());
+            Food menu = MenuManager.searchMenu(id);
+
+            byte qty = Byte.parseByte(this.spnAddToOrder.getValue().toString());
+            
+            this.detail.addFood(menu, qty);
+            
+            reset();
+        }  
+
+    }//GEN-LAST:event_btnAddToOrderActionPerformed
+
+    private void CustomerNametxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CustomerNametxtActionPerformed
+
+
+
+    }//GEN-LAST:event_CustomerNametxtActionPerformed
+
+    private void txtFoodCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFoodCostActionPerformed
+
+
+    }//GEN-LAST:event_txtFoodCostActionPerformed
 
     /**
      * @param args the command line arguments
@@ -230,7 +233,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -245,6 +248,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GUI_OrderFood.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -255,29 +259,20 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField BurgerTxt;
     private javax.swing.JRadioButton CardBtn;
     private javax.swing.JRadioButton CashBtn;
-    private javax.swing.JTextField CokeTxt;
-    private javax.swing.JLabel CostLbl;
-    private javax.swing.JTextField CostTxt;
     private javax.swing.JTextField CustomerNametxt;
-    private javax.swing.JTextField FantaTxt;
-    private javax.swing.JTextField HotdogTxt;
-    private javax.swing.JButton OrderBtn;
     private javax.swing.JLabel OrderFoodLbl;
-    private javax.swing.JTextField OrderFortxt;
     private javax.swing.JLabel PaymentTypeLbl;
-    private javax.swing.JTextField PepsiTxt;
-    private javax.swing.JTextField PizzaTxt;
-    private javax.swing.JTextField PopcornTxt;
-    private javax.swing.ButtonGroup btnGPayment;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JSpinner jSpinner3;
-    private javax.swing.JSpinner jSpinner4;
-    private javax.swing.JSpinner jSpinner5;
-    private javax.swing.JSpinner jSpinner6;
-    private javax.swing.JSpinner jSpinner7;
+    private javax.swing.JButton btnAddToOrder;
+    private javax.swing.ButtonGroup btnGPaymentType;
+    private javax.swing.JButton btnOrderFood;
+    private javax.swing.JButton btnReturnFoodMain;
+    private javax.swing.JButton btnTotalFoodPrice;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCustomerName;
+    private javax.swing.JSpinner spnAddToOrder;
+    private javax.swing.JTable tblOrderFood;
+    private javax.swing.JTextField txtFoodCost;
     // End of variables declaration//GEN-END:variables
 }
