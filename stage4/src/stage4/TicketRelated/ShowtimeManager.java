@@ -38,8 +38,6 @@ public class ShowtimeManager {
                     String[] showtimeInfo = line.split(";")[0].trim().split(",");
                     String[] seatInfo = line.split(";")[1].trim().split("/");
                     
-                    System.out.println(line.split(";")[1].trim());
-
                     byte showtimeId = Byte.parseByte(showtimeInfo[0].trim());
                     byte movieId = Byte.parseByte(showtimeInfo[1].trim());
                     byte screenId = Byte.parseByte(showtimeInfo[2].trim());

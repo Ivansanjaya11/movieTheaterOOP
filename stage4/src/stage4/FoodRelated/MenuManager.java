@@ -32,7 +32,6 @@ public class MenuManager {
                 while ((line = reader.readLine()) != null) {
 
                     String foodInfo = line.split(";")[0].trim();
-                    String recipeInfo = line.split(";")[1].trim();
 
                     byte foodId = Byte.parseByte(foodInfo.split(",")[0]);
                     String foodName = foodInfo.split(",")[1];
@@ -41,19 +40,23 @@ public class MenuManager {
                     Food food = new Food(foodId, foodName, price);
 
                     TreeMap<Item, Byte> recipe = new TreeMap<>();
+                    
+                    if (line.split(";").length > 1) {
+                        String recipeInfo = line.split(";")[1].trim();
 
-                    String[] recipeList = recipeInfo.split(",");
+                        String[] recipeList = recipeInfo.split(",");
 
-                    for (String aRecipe : recipeList) {
-                        byte itemId = Byte.parseByte(aRecipe.split("/")[0]);
-                        byte qty = Byte.parseByte(aRecipe.split("/")[1]);
+                        for (String aRecipe : recipeList) {
+                            byte itemId = Byte.parseByte(aRecipe.split("/")[0]);
+                            byte qty = Byte.parseByte(aRecipe.split("/")[1]);
 
-                        if (Inventory.contains(itemId)) {
-                            Item anItem = Inventory.getItem(itemId);
-                            recipe.put(anItem, qty);
+                            if (Inventory.contains(itemId)) {
+                                Item anItem = Inventory.getItem(itemId);
+                                recipe.put(anItem, qty);
+                            }
                         }
-                    }
-                                        
+                    }                
+                    
                     food.setRecipe(recipe);
 
                     menuList.add(food);
