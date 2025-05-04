@@ -43,7 +43,7 @@ public class GUI_MovieElements extends javax.swing.JFrame {
         
         populateTableMovies();
         populateTableScreen();
-        //populateTableShowtime();
+        populateTableShowtime();
 
     }
     
