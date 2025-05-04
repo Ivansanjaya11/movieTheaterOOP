@@ -6,6 +6,10 @@ import stage4.TicketRelated.*;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import stage4.TicketRelated.MovieManager;
+import stage4.TicketRelated.Screen;
+import stage4.TicketRelated.ScreenManager;
+
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -21,10 +25,7 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
     private GUI_MovieElements guiMovieElements;
     private ArrayList<Movie> movieList;
     private ArrayList<Screen> screenList;
-    
-//    private LocalTime startTime;
-//    
-//    private LocalTime endTime;
+
 
     
     /**
@@ -197,20 +198,35 @@ public class GUI_ShowtimeAdd extends javax.swing.JFrame {
         
         int selectedRowMovie = this.tblAddShowtimeMovieObjects.getSelectedRow();
         
+        byte movieId = 0;
+        
         if (selectedRowMovie != -1) {
             this.tblAddShowtimeMovieObjects.getValueAt(selectedRowMovie, 0);
+            movieId = (byte) this.tblAddShowtimeMovieObjects.getValueAt(selectedRowMovie, 0);
+
         }
         
         int selectedRowScreen = this.tblAddShowtimeScreenObjects.getSelectedRow();
         
+        byte screenId = 0;
+        
         if (selectedRowScreen != -1) {
             this.tblAddShowtimeScreenObjects.getValueAt(selectedRowScreen, 0);
+            screenId = (byte) this.tblAddShowtimeScreenObjects.getValueAt(selectedRowScreen, 0);
+
         }
         
-        //LocalTime startTime = this.FtxtAddShowtimeStartTime.getText();
+        int hour = (Integer) this.spnAddStartTimeHour.getValue();
+        int minute = (Integer) this.spnAddStartTimeMin.getValue();
+        LocalTime startTime = LocalTime.of(hour, minute);
+        
+        Movie searchMovie = MovieManager.searchMovie(movieId);
+        Screen searchScreen = ScreenManager.searchScreen((byte) screenId);
         
         if(!ShowtimeManager.contains(id)) {
-            //ShowtimeManager.addShowtime(new Showtime(id, title, startTime, endTime));
+            ShowtimeManager.addShowtime(new Showtime(id,searchMovie, searchScreen, startTime));
+            JOptionPane.showMessageDialog(null, "Showtime successfully added!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
         }
 
         this.dispose();

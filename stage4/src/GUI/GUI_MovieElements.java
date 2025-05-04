@@ -467,14 +467,18 @@ public class GUI_MovieElements extends javax.swing.JFrame {
 
     private void btnAddShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddShowtimeActionPerformed
 
-        new GUI_ShowtimeAdd().setVisible(true);
+        
+        new GUI_ShowtimeAdd(this).setVisible(true);
 
     }//GEN-LAST:event_btnAddShowtimeActionPerformed
 
     private void btnUpdateShowtimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateShowtimeActionPerformed
-
-        new GUI_ShowtimeUpdate().setVisible(true);
-       
+        
+        int selectedRow = this.tblEditShowtime.getSelectedRow();
+        
+        if (selectedRow != -1) {        
+        new GUI_ShowtimeUpdate(this, selectedRow).setVisible(true);
+        }
     }//GEN-LAST:event_btnUpdateShowtimeActionPerformed
 
     private void btnUpdateScreenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateScreenActionPerformed
