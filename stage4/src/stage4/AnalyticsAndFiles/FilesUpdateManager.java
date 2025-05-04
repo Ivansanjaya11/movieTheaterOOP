@@ -11,6 +11,7 @@ import stage4.TicketRelated.Screen;
 import stage4.TicketRelated.SeatingArrangement;
 import stage4.TicketRelated.Showtime;
 import stage4.util.Path;
+import stage4.util.DateAndPaymentTracker;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -340,6 +341,22 @@ public class FilesUpdateManager {
             System.err.println(e.getMessage());
         }
 
+    }
+    
+    public static void updateCustomerCounterDataFile() {
+        String str = "";
+        str += DateAndPaymentTracker.foodCustomerNumOfTheDay;
+        str += ";";
+        str += DateAndPaymentTracker.ticketCustomerNumOfTheDay;
+        str += ";";
+        str += DateAndPaymentTracker.currentDate;
+        
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Path.CUSTOMER_COUNTER_DATA_PATH))) {
+                writer.write(str);
+                writer.newLine();
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }

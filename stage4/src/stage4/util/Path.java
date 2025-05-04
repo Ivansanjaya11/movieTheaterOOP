@@ -28,6 +28,7 @@ public final class Path {
     public static final String SCREEN_DATA_PATH = dataPath + "screen.txt";
     public static final String SHOWTIME_DATA_PATH = dataPath + "showtime.txt";
     public static final String STAFF_DATA_PATH = dataPath + "staff.txt";
+    public static final String CUSTOMER_COUNTER_DATA_PATH = dataPath + "customerCounter.txt";
 
     private Path() {}
 
@@ -140,7 +141,17 @@ public final class Path {
             }
         }
 
+        // create the showtime data file if not exists yet
+        File customerDataFile = new File(Path.CUSTOMER_COUNTER_DATA_PATH);
 
+        if (!customerDataFile.exists()) {
+            try {
+                customerDataFile.getParentFile().mkdirs();
+                customerDataFile.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
 
     }
 }

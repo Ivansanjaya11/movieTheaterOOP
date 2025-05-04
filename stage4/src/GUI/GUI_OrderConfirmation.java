@@ -216,6 +216,8 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
         
         FilesUpdateManager.updateTicketSalesFile(paymentId, this.detail);
         
+        FilesUpdateManager.updateCustomerCounterDataFile();
+        
         GUI_Receipt guiReceipt = new GUI_Receipt(this.guiMainMenuTicket, paymentId, this.detail);
         
         this.dispose();
