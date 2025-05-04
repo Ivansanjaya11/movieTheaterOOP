@@ -5,12 +5,29 @@ package GUI;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import stage4.TicketRelated.*;
+import stage4.OrdersAndPayment.*;
+
+import java.util.ArrayList;
+
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lccra
  */
 public class GUI_OrderShowtime extends javax.swing.JFrame {
 
+    private Movie movie;
+    
+    private ArrayList<Showtime> showtimes;
+    
+    private GUI_OrderMovieTicket guiOrderMovieTicket;
+
+    private GUI_MainMenuTicket guiMainMenuTicket;
+    
+    private DetailTicketBought detail;
+    
     /**
      * Creates new form GUI_OrderShowtime
      */
@@ -18,6 +35,44 @@ public class GUI_OrderShowtime extends javax.swing.JFrame {
         initComponents();
     }
 
+    public GUI_OrderShowtime(GUI_MainMenuTicket guiMainMenuTicket, GUI_OrderMovieTicket guiOrderMovieTicket, Movie movie, DetailTicketBought detail) {
+        initComponents();
+        this.movie = movie;
+        this.guiOrderMovieTicket = guiOrderMovieTicket;
+        
+        this.guiMainMenuTicket = guiMainMenuTicket;
+        
+        this.detail = detail;
+        
+        this.labelShowtime.setText("Here is the showtime options for the movie " + movie.getTitle());
+        
+        populateTable();
+    }
+    
+    public void populateTable() {
+        this.showtimes = ShowtimeManager.getShowtimes();
+        
+        DefaultTableModel tableShowtimeModel = (DefaultTableModel) this.tableShowtime.getModel();
+        
+        for (Showtime showtime : this.showtimes) {
+            if (showtime.getMovie().getMovieID() == this.movie.getMovieID()) {
+                Object[] aRow = new Object[4];
+                
+                byte showtimeId = showtime.getShowtimeID();
+                byte screenId = showtime.getScreen().getScreenID();
+                String screenType = showtime.getScreen().getScreenType();
+                String startTime = showtime.getStartTime().toString();
+                
+                aRow[0] = showtimeId;
+                aRow[1] = screenId;
+                aRow[2] = screenType;
+                aRow[3] = startTime;
+                
+                tableShowtimeModel.addRow(aRow);
+            }
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,22 +82,103 @@ public class GUI_OrderShowtime extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableShowtime = new javax.swing.JTable();
+        labelShowtime = new javax.swing.JLabel();
+        nextButton = new javax.swing.JButton();
+        returnButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        tableShowtime.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Showtime ID", "Screen ID", "Screen type", "Start time"
+            }
+        ));
+        jScrollPane1.setViewportView(tableShowtime);
+        if (tableShowtime.getColumnModel().getColumnCount() > 0) {
+            tableShowtime.getColumnModel().getColumn(1).setHeaderValue("Screen ID");
+            tableShowtime.getColumnModel().getColumn(2).setHeaderValue("Screen type");
+            tableShowtime.getColumnModel().getColumn(3).setHeaderValue("Start time");
+        }
+
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
+
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(labelShowtime, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 22, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(returnButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nextButton)
+                        .addGap(23, 23, 23)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labelShowtime, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(returnButton)
+                    .addComponent(nextButton))
+                .addGap(18, 18, 18))
         );
 
         setSize(new java.awt.Dimension(414, 308));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = this.tableShowtime.getSelectedRow();
+
+        if (selectedRow != -1) {
+            byte id = (byte) this.tableShowtime.getValueAt(selectedRow, 0);
+            Showtime showtime = ShowtimeManager.searchShowtime(id);
+            
+            this.detail.setShowtime(showtime);
+            
+            this.setVisible(false);
+            GUI_OrderSeating guiOrderSeating = new GUI_OrderSeating(this.guiMainMenuTicket, this, showtime, this.detail);
+            guiOrderSeating.setVisible(true);
+        }
+    }//GEN-LAST:event_nextButtonActionPerformed
+
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiOrderMovieTicket.setVisible(true);
+    }//GEN-LAST:event_returnButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -80,5 +216,10 @@ public class GUI_OrderShowtime extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelShowtime;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JButton returnButton;
+    private javax.swing.JTable tableShowtime;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,7 +3,14 @@ package GUI;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.*;
+
+import javax.swing.JRadioButton;
+
+import java.util.Enumeration;
+
+import stage4.OrdersAndPayment.*;
 import stage4.TicketRelated.*;
+import stage4.*;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -17,6 +24,10 @@ import stage4.TicketRelated.*;
 public class GUI_OrderMovieTicket extends javax.swing.JFrame {
     
     private ArrayList<Movie> movieList;
+    
+    private GUI_MainMenuTicket guiMainMenuTicket;
+    
+    private DetailTicketBought detail;
             
     /**
      * Creates new form GUI_OrderMovieTicket
@@ -24,18 +35,34 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
     public GUI_OrderMovieTicket() {
         
         initComponents();
+        this.detail = new DetailTicketBought((byte) 10, (byte) 15);
+        populateTable();        
+    }
+    
+    /**
+     * Creates new form GUI_OrderMovieTicket
+     */
+    public GUI_OrderMovieTicket(GUI_MainMenuTicket guiMainMenuTicket) {
+        this.guiMainMenuTicket = guiMainMenuTicket;
+        
+        initComponents();
+        this.detail = new DetailTicketBought((byte) 10, (byte) 15);
+        populateTable();        
+    }
+    
+    public void populateTable() {
         this.movieList = MovieManager.getMovies();
         DefaultTableModel movieModel = (DefaultTableModel) this.tblMovies.getModel();
         
-        Object[][] movieRows = new Object[movieList.size()][3];
+        Object[][] movieRows = new Object[movieList.size()][4];
         for (int i = 0; i < movieList.size(); i++) {
-            movieRows[i][0] = movieList.get(i).getTitle();
-            movieRows[i][1] = movieList.get(i).getGenre();
-            movieRows[i][2] = movieList.get(i).getDurationMinutes();
+            movieRows[i][0] = movieList.get(i).getMovieID();
+            movieRows[i][1] = movieList.get(i).getTitle();
+            movieRows[i][2] = movieList.get(i).getGenre();
+            movieRows[i][3] = movieList.get(i).getDurationMinutes();
             
             movieModel.addRow(movieRows[i]);
-    }
-        
+            }
     }
     
     public GUI_OrderMovieTicket(GUI_LogIn guiLogin) {
@@ -60,7 +87,8 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
         RbtnCredit = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblMovies = new javax.swing.JTable();
-        btnSelectMovie = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
+        returnButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Order Movie Ticket");
@@ -98,11 +126,11 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title ", "Genre", "Duration (Min)"
+                "Movie ID", "Title ", "Genre", "Duration (Min)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                true, true, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -120,15 +148,23 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
             tblMovies.getColumnModel().getColumn(2).setHeaderValue("Duration");
         }
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 310, 200));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 400, 210));
 
-        btnSelectMovie.setText("Select");
-        btnSelectMovie.addActionListener(new java.awt.event.ActionListener() {
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSelectMovieActionPerformed(evt);
+                nextButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSelectMovie, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
+        getContentPane().add(nextButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
+
+        returnButton.setText("Return");
+        returnButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                returnButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(returnButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, -1, -1));
 
         setSize(new java.awt.Dimension(414, 489));
         setLocationRelativeTo(null);
@@ -151,11 +187,36 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
  
     }//GEN-LAST:event_tblMoviesMouseClicked
 
-    private void btnSelectMovieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectMovieActionPerformed
+    private void returnButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnButtonActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiMainMenuTicket.setVisible(true);
+    }//GEN-LAST:event_returnButtonActionPerformed
 
-        new GUI_OrderShowtime().setVisible(true);
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = this.tblMovies.getSelectedRow();
         
-    }//GEN-LAST:event_btnSelectMovieActionPerformed
+        if (selectedRow != -1) {
+            this.detail.setCustomer(new Customer(this.txtCustomerNameTicket.getText()));
+            
+            Enumeration<AbstractButton> buttons = this.btnGPayment.getElements();
+            
+            while (buttons.hasMoreElements()) {
+                JRadioButton aButton = (JRadioButton) buttons.nextElement();
+                
+                if (aButton.isSelected()) {
+                    this.detail.setPaymentType(aButton.getText());
+                }
+            }
+            
+            byte id = (byte) this.tblMovies.getValueAt(selectedRow, 0);
+            Movie movie = MovieManager.searchMovie(id);
+            this.setVisible(false);
+            GUI_OrderShowtime guiOrderShowtime = new GUI_OrderShowtime(this.guiMainMenuTicket, this, movie, this.detail);
+            guiOrderShowtime.setVisible(true);
+        }
+    }//GEN-LAST:event_nextButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -196,10 +257,11 @@ public class GUI_OrderMovieTicket extends javax.swing.JFrame {
     private javax.swing.JRadioButton RbtnCash;
     private javax.swing.JRadioButton RbtnCredit;
     private javax.swing.ButtonGroup btnGPayment;
-    private javax.swing.JButton btnSelectMovie;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCustomerNameTicket;
     private javax.swing.JLabel lblPaymentTypeTicket;
+    private javax.swing.JButton nextButton;
+    private javax.swing.JButton returnButton;
     private javax.swing.JTable tblMovies;
     private javax.swing.JTextField txtCustomerNameTicket;
     // End of variables declaration//GEN-END:variables

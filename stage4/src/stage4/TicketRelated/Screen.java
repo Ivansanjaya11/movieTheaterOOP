@@ -21,6 +21,12 @@ public class Screen {
         this.screenType = screenType;
         this.seating = new SeatingArrangement(screenID);
     }
+    
+    public Screen(Screen anotherScreen) {
+        this.screenID = anotherScreen.getScreenID();
+        this.screenType = anotherScreen.getScreenType();
+        this.seating = new SeatingArrangement(anotherScreen.getScreenID());
+    }
 
     /**
      * Returns screen ID
@@ -84,5 +90,4 @@ public class Screen {
 
         return str;
     }
-
 }

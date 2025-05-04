@@ -37,6 +37,8 @@ public class ShowtimeManager {
                 while ((line = reader.readLine()) != null) {
                     String[] showtimeInfo = line.split(";")[0].trim().split(",");
                     String[] seatInfo = line.split(";")[1].trim().split("/");
+                    
+                    System.out.println(line.split(";")[1].trim());
 
                     byte showtimeId = Byte.parseByte(showtimeInfo[0].trim());
                     byte movieId = Byte.parseByte(showtimeInfo[1].trim());
@@ -45,16 +47,16 @@ public class ShowtimeManager {
                     byte minute = Byte.parseByte(showtimeInfo[4].trim());
 
                     Movie movie = MovieManager.searchMovie(movieId);
-                    Screen screen = ScreenManager.searchScreen(screenId);
+                    Screen screen = new Screen(ScreenManager.searchScreen(screenId));
 
                     SeatingArrangement seatings = new SeatingArrangement(screenId);
 
                     int rows = seatings.getRowCapacity();
                     int cols = seatings.getColCapacity();
-
+                                        
                     for (int i=0; i<rows; i++) {
                         String[] aRow = seatInfo[i].split(",");
-                        for (int j=0; i<cols; i++) {
+                        for (int j=0; j<cols; j++) {
                             if (aRow[j].equals("1")) {
                                 seatings.setSeatStatus(i, j);
                             }
@@ -62,7 +64,7 @@ public class ShowtimeManager {
                     }
 
                     screen.setSeating(seatings);
-
+                    
                     if (movie != null && screen != null) {
                         Showtime showtime = new Showtime(showtimeId, movie, screen, LocalTime.of(hour, minute));
                         showtimes.add(showtime);
@@ -79,6 +81,7 @@ public class ShowtimeManager {
             }
 
         }
+        
     }
 
     /**

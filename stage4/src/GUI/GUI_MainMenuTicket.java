@@ -147,7 +147,8 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
 
     private void btnOrderMovieTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderMovieTicketActionPerformed
         
-        new GUI_OrderMovieTicket().setVisible(true);
+        this.setVisible(false);
+        new GUI_OrderMovieTicket(this).setVisible(true);
         
     }//GEN-LAST:event_btnOrderMovieTicketActionPerformed
 

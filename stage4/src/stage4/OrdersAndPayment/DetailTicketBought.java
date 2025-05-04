@@ -39,7 +39,7 @@ public class DetailTicketBought extends Detail {
     /**
      * Checks if there are available seats in the selected movie screen
      * @param rowNum row number for seating
-     * @param colNum colum number for seating
+     * @param colNum column number for seating
      * @return screen, seating, and seat status
      */
     public boolean checkSeat(byte rowNum, byte colNum) {

@@ -160,8 +160,8 @@ public class OrderTicket extends Order {
         Screen aScreen = showtime.getScreen();
 
         // Prints movie ticke details
-        System.out.println(quantity + " tickets of stage4.TicketRelated.stage4.TicketRelated.stage4.TicketRelated.Movie '" + aMovie.getTitle() + "'.");
-        System.out.println("stage4.TicketRelated.Screen room #" + aScreen.getScreenID() + "; type: " + aScreen.getScreenType());
+        System.out.println(quantity + " Movie '" + aMovie.getTitle() + "'.");
+        System.out.println("Screen room #" + aScreen.getScreenID() + "; type: " + aScreen.getScreenType());
 
         System.out.print("The price for each ticket is $");
 

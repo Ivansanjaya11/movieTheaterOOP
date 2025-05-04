@@ -26,7 +26,10 @@ public class Showtime {
 
         this.showtimeID = showtimeID;
         this.movie = movie;
+        
+        
         this.screen = screen;
+        
         this.startTime = startTime;
         this.endTime = this.startTime.plusMinutes(this.movie.getDurationMinutes());
     }
