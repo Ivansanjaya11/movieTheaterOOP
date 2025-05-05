@@ -41,6 +41,9 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         lblChangeStaffElements = new javax.swing.JLabel();
         btnChangeStaffElements = new javax.swing.JButton();
         AnalyticsButton = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mAboutTicketStaff = new javax.swing.JMenu();
+        mItemTicketStaff = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +91,20 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
             }
         });
 
+        mAboutTicketStaff.setText("About");
+
+        mItemTicketStaff.setText("Ticket Staff");
+        mItemTicketStaff.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mItemTicketStaffActionPerformed(evt);
+            }
+        });
+        mAboutTicketStaff.add(mItemTicketStaff);
+
+        jMenuBar1.add(mAboutTicketStaff);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +115,7 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
                     .addComponent(lblChangeMovieElements)
                     .addComponent(lblOrderTicket)
                     .addComponent(lblChangeStaffElements, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnOrderMovieTicket)
                     .addComponent(btnChangeMovieElements)
@@ -136,12 +153,12 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblChangeStaffElements)
                     .addComponent(btnChangeStaffElements))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(AnalyticsButton)
-                .addContainerGap())
+                .addGap(35, 35, 35))
         );
 
-        setSize(new java.awt.Dimension(414, 308));
+        setSize(new java.awt.Dimension(477, 350));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -183,6 +200,12 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
         
     }//GEN-LAST:event_AnalyticsButtonActionPerformed
 
+    private void mItemTicketStaffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mItemTicketStaffActionPerformed
+
+        new GUI_AboutTicketStaff().setVisible(true);
+
+    }//GEN-LAST:event_mItemTicketStaffActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -223,10 +246,13 @@ public class GUI_MainMenuTicket extends javax.swing.JFrame {
     private javax.swing.JButton btnChangeMovieElements;
     private javax.swing.JButton btnChangeStaffElements;
     private javax.swing.JButton btnOrderMovieTicket;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JLabel lblChangeMovieElements;
     private javax.swing.JLabel lblChangeStaffElements;
     private javax.swing.JLabel lblOrderTicket;
     private javax.swing.JLabel lblTicketStaffFrame;
     private javax.swing.JButton logOutButton;
+    private javax.swing.JMenu mAboutTicketStaff;
+    private javax.swing.JMenuItem mItemTicketStaff;
     // End of variables declaration//GEN-END:variables
 }
