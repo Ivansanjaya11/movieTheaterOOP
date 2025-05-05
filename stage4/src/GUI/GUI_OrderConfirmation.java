@@ -6,9 +6,12 @@ package GUI;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.TreeMap;
 import stage4.TicketRelated.*;
 import stage4.OrdersAndPayment.*;
 import stage4.AnalyticsAndFiles.*;
+import stage4.FoodRelated.Food;
+import stage4.FoodRelated.Inventory;
 import stage4.util.DateAndPaymentTracker;
 
 /**
@@ -17,12 +20,17 @@ import stage4.util.DateAndPaymentTracker;
  */
 public class GUI_OrderConfirmation extends javax.swing.JFrame {
     
-    private DetailTicketBought detail;
+    private DetailTicketBought detailTicket;
+    
+    private DetailFoodBought detailFood;
+    
+    private GUI_OrderFood guiOrderFood;
     
     private GUI_OrderSeating guiOrderSeating;
 
     private GUI_MainMenuTicket guiMainMenuTicket;
     
+    private GUI_MainMenuFood guiMainMenuFood;
     
     /**
      * Creates new form GUI_OrderConfirmation
@@ -38,20 +46,49 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
         
         this.guiOrderSeating = guiOrderSeating;
         
-        this.detail = detail;
+        this.detailTicket = detail;
         
-        printOrderConfirmation();
+        printTicketOrderConfirmation();
         
     }
     
-    public void printOrderConfirmation() {
+    public GUI_OrderConfirmation(GUI_MainMenuFood guiMainMenuFood, GUI_OrderFood guiOrderFood, DetailFoodBought detail) {
+        initComponents();
+        
+        this.guiOrderFood = guiOrderFood;
+        
+        this.guiMainMenuFood = guiMainMenuFood;
+        
+        this.detailFood = detail;
+        
+        printFoodOrderConfirmation();
+        
+    }
+    
+    public void printFoodOrderConfirmation() {
         String str = "";
         
-        Showtime showtime = this.detail.getShowtime();
-        ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
-        byte normalPrice = detail.getNormalPrice();
-        byte imaxPrice = detail.getImaxPrice();
-        byte quantity = (byte) (detail.getImaxNum() + detail.getNormalNum());
+        TreeMap<Food, Byte> orderedFood = this.detailFood.getOrderedFood();
+
+        // print out the ordered food one by one
+        for (Food aFood : orderedFood.keySet()) {
+            str += (aFood.getMenuName() + ": ");
+            str += (orderedFood.get(aFood) + "\n");
+        }
+        
+        str += ("Total price is $" + this.detailFood.getPaymentAmount());
+        
+        this.orderTextArea.setText(str);
+    }
+    
+    public void printTicketOrderConfirmation() {
+        String str = "";
+        
+        Showtime showtime = this.detailTicket.getShowtime();
+        ArrayList<byte[]> chosenSeats = detailTicket.getChosenSeats();
+        byte normalPrice = detailTicket.getNormalPrice();
+        byte imaxPrice = detailTicket.getImaxPrice();
+        byte quantity = (byte) (detailTicket.getImaxNum() + detailTicket.getNormalNum());
 
         Movie aMovie = showtime.getMovie();
         Screen aScreen = showtime.getScreen();
@@ -77,7 +114,20 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
         this.orderTextArea.setText(str);
     }
     
-    public String generatePaymentId() {
+    public String generateFoodPaymentId() {
+        // check the date
+        LocalDate date = checkDate();
+
+        //Increment the customer count for the day
+        DateAndPaymentTracker.foodCustomerNumOfTheDay++;
+
+        // sets the payment ID
+        String paymentId = createPaymentID(date, DateAndPaymentTracker.foodCustomerNumOfTheDay);
+
+        return paymentId;
+    }   
+    
+    public String generateTicketPaymentId() {
         // check the date
         LocalDate date = checkDate();
 
@@ -128,8 +178,8 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
         return date;
     }
     
-    private short calculatePrice() {
-        return (short) (this.detail.getImaxNum()*this.detail.getImaxPrice() + this.detail.getNormalNum()*this.detail.getNormalPrice());
+    private short calculateTicketPrice() {
+        return (short) (this.detailTicket.getImaxNum()*this.detailTicket.getImaxPrice() + this.detailTicket.getNormalNum()*this.detailTicket.getNormalPrice());
     }
     
     /**
@@ -210,26 +260,48 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
 
     private void YesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesBtnActionPerformed
         // TODO add your handling code here:
-        this.detail.setPaymentAmount(calculatePrice());
         
-        String paymentId = generatePaymentId();
-        
-        FilesUpdateManager.updateTicketSalesFile(paymentId, this.detail);
-        
-        FilesUpdateManager.updateCustomerCounterDataFile();
-        
-        GUI_Receipt guiReceipt = new GUI_Receipt(this.guiMainMenuTicket, paymentId, this.detail);
-        
-        this.dispose();
-        
-        guiReceipt.setVisible(true);
+        if (this.detailTicket != null) {
+            this.detailTicket.setPaymentAmount(calculateTicketPrice());
+
+            String paymentId = generateTicketPaymentId();
+
+            FilesUpdateManager.updateTicketSalesFile(paymentId, this.detailTicket);
+
+            FilesUpdateManager.updateCustomerCounterDataFile();
+
+            GUI_Receipt guiReceipt = new GUI_Receipt(this.guiMainMenuTicket, paymentId, this.detailTicket);
+
+            this.dispose();
+
+            guiReceipt.setVisible(true);
+        } else if (this.detailFood != null) {
+            
+            String paymentId = generateFoodPaymentId();
+            
+            Inventory.updateInventory(this.detailFood.getOrderedFood());
+            
+            FilesUpdateManager.updateFoodSalesFile(paymentId, this.detailFood);
+            
+            FilesUpdateManager.updateCustomerCounterDataFile();
+            
+            GUI_Receipt guiReceipt = new GUI_Receipt(this.guiMainMenuFood, paymentId, this.detailFood);
+            
+            this.dispose();
+            
+            guiReceipt.setVisible(true);
+        }
     }//GEN-LAST:event_YesBtnActionPerformed
 
     private void NoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NoBtnActionPerformed
         // TODO add your handling code here:
-        
-        this.dispose();
-        this.guiOrderSeating.setVisible(true);
+        if (this.detailTicket != null) {
+            this.dispose();
+            this.guiOrderSeating.setVisible(true);
+        } else if (this.detailFood != null) {
+            this.dispose();
+            this.guiOrderFood.setVisible(true);
+        }
     }//GEN-LAST:event_NoBtnActionPerformed
 
     /**

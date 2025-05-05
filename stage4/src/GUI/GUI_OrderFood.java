@@ -8,6 +8,9 @@ import java.util.Enumeration;
 import javax.swing.AbstractButton;
 import javax.swing.JRadioButton;
 import stage4.Customer;
+
+import java.util.TreeMap;
+import java.util.Map;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -22,19 +25,28 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     private DetailFoodBought detail;
     private ArrayList<Food> foodList;
     
+    private GUI_MainMenuFood guiMainMenuFood;
+    
     /**
      * Creates new form GUI_OrderFoodOne
      */
     public GUI_OrderFood() {
         initComponents();
-        detail = new DetailFoodBought(); 
-        populateTableFood();
     }
     
-    public void populateTableFood() {
+    public GUI_OrderFood(GUI_MainMenuFood guiMainMenuFood) {
+        initComponents();
+        detail = new DetailFoodBought(); 
+        
+        this.guiMainMenuFood = guiMainMenuFood;
+        
+        populateTableAvailableFood();
+    }
+    
+    public void populateTableAvailableFood() {
         
         this.foodList = MenuManager.getMenuList();
-        DefaultTableModel foodModel = (DefaultTableModel) this.tblOrderFood.getModel();
+        DefaultTableModel foodModel = (DefaultTableModel) this.tblAvailableFood.getModel();
         
         Object[][] foodRows = new Object[foodList.size()][4];
         for (int i = 0; i < foodList.size(); i++) {
@@ -44,15 +56,58 @@ public class GUI_OrderFood extends javax.swing.JFrame {
             
             foodModel.addRow(foodRows[i]);
 
+        }
     }
+    
+    public void populateTableOrderedFood() {
+        TreeMap<Food, Byte> orderedFood = this.detail.getOrderedFood();
+        
+        DefaultTableModel orderedModel = (DefaultTableModel) this.tblOrderedFood.getModel();
+        
+        for (Map.Entry<Food, Byte> entry : orderedFood.entrySet()) {
+            Object[] aRow = new Object[3];
+            
+            byte foodId = entry.getKey().getMenuId();
+            
+            String foodName = entry.getKey().getMenuName();
+            byte qty = entry.getValue();
+            
+            aRow[0] = foodId;
+            aRow[1] = foodName;
+            aRow[2] = qty;
+            
+            orderedModel.addRow(aRow);
+        }
     }
     
     public void reset() {
         
         spnAddToOrder.setValue(0);
-        tblOrderFood.clearSelection();
+        tblAvailableFood.clearSelection();
+    }
+    
+    public void resetOrderedFoodTable() {
+        DefaultTableModel orderedModel = (DefaultTableModel) this.tblOrderedFood.getModel();
+
+        orderedModel.setRowCount(0);
     }
 
+    private short calculateFoodPrice() {
+        short total = 0;
+        
+        for (Food aFood : this.detail.getOrderedFood().keySet()) {
+            total += (aFood.getPrice() * this.detail.getOrderedFood().get(aFood));
+        }
+        
+        return total;
+    }
+    
+    public void updateFoodPrice() {
+        short price = this.detail.getPaymentAmount();
+        
+        this.txtFoodCost.setText(String.valueOf(price));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,7 +122,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
         lblCustomerName = new javax.swing.JLabel();
         CustomerNametxt = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblOrderFood = new javax.swing.JTable();
+        tblAvailableFood = new javax.swing.JTable();
         PaymentTypeLbl = new javax.swing.JLabel();
         CashBtn = new javax.swing.JRadioButton();
         CardBtn = new javax.swing.JRadioButton();
@@ -77,8 +132,11 @@ public class GUI_OrderFood extends javax.swing.JFrame {
         btnTotalFoodPrice = new javax.swing.JButton();
         btnOrderFood = new javax.swing.JButton();
         btnAddToOrder = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblOrderedFood = new javax.swing.JTable();
+        btnRemoveFromOrder = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         OrderFoodLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -95,7 +153,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
         });
         getContentPane().add(CustomerNametxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 40, 117, -1));
 
-        tblOrderFood.setModel(new javax.swing.table.DefaultTableModel(
+        tblAvailableFood.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -103,9 +161,9 @@ public class GUI_OrderFood extends javax.swing.JFrame {
                 "Food ID", "Food", "Price"
             }
         ));
-        jScrollPane1.setViewportView(tblOrderFood);
+        jScrollPane1.setViewportView(tblAvailableFood);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 450, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 400, 220));
 
         PaymentTypeLbl.setText("Payment Type:");
         getContentPane().add(PaymentTypeLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, -1, -1));
@@ -136,7 +194,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
         getContentPane().add(btnReturnFoodMain, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 420, -1, -1));
 
         spnAddToOrder.setModel(new javax.swing.SpinnerNumberModel(0, 0, 127, 1));
-        getContentPane().add(spnAddToOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, -1, -1));
+        getContentPane().add(spnAddToOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, -1, -1));
 
         btnTotalFoodPrice.setText("Total: ");
         btnTotalFoodPrice.addActionListener(new java.awt.event.ActionListener() {
@@ -152,7 +210,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
                 btnOrderFoodActionPerformed(evt);
             }
         });
-        getContentPane().add(btnOrderFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 420, -1, -1));
+        getContentPane().add(btnOrderFood, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 390, -1, -1));
 
         btnAddToOrder.setText("Add to Order");
         btnAddToOrder.addActionListener(new java.awt.event.ActionListener() {
@@ -160,14 +218,38 @@ public class GUI_OrderFood extends javax.swing.JFrame {
                 btnAddToOrderActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAddToOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 370, -1, -1));
+        getContentPane().add(btnAddToOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, -1, -1));
+
+        tblOrderedFood.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Food ID", "Food", "Quantity"
+            }
+        ));
+        jScrollPane2.setViewportView(tblOrderedFood);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 80, 270, 310));
+
+        btnRemoveFromOrder.setText("Remove from Order");
+        btnRemoveFromOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveFromOrderActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRemoveFromOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnFoodMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnFoodMainActionPerformed
 
-        new GUI_MainMenuFood().setVisible(true);
+        this.dispose();
+        this.guiMainMenuFood.setVisible(true);
     }//GEN-LAST:event_btnReturnFoodMainActionPerformed
 
     private void btnTotalFoodPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTotalFoodPriceActionPerformed
@@ -177,7 +259,6 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     private void btnOrderFoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderFoodActionPerformed
 
         this.detail.setCustomer(new Customer(this.CustomerNametxt.getText()));
-        this.detail.setPaymentAmount(Short.parseShort(this.txtFoodCost.getText()));
 
         Enumeration<AbstractButton> buttons = this.btnGPaymentType.getElements();
             
@@ -189,24 +270,35 @@ public class GUI_OrderFood extends javax.swing.JFrame {
                 }
             }
         
-        new GUI_OrderConfirmation(detail).setVisible(true);
+            
+        this.setVisible(false);
+            
+        new GUI_OrderConfirmation(this.guiMainMenuFood, this, detail).setVisible(true);
 
     }//GEN-LAST:event_btnOrderFoodActionPerformed
 
     private void btnAddToOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToOrderActionPerformed
 
         byte id = 0;
-        int selectedRow = this.tblOrderFood.getSelectedRow();
+        int selectedRow = this.tblAvailableFood.getSelectedRow();
         
         if (selectedRow != -1) {
-            id = Byte.parseByte(this.tblOrderFood.getValueAt(selectedRow, 0).toString());
+            id = Byte.parseByte(this.tblAvailableFood.getValueAt(selectedRow, 0).toString());
             Food menu = MenuManager.searchMenu(id);
 
             byte qty = Byte.parseByte(this.spnAddToOrder.getValue().toString());
             
             this.detail.addFood(menu, qty);
             
+            this.detail.setPaymentAmount(calculateFoodPrice());
+            
+            updateFoodPrice();
+            
             reset();
+            
+            resetOrderedFoodTable();            
+            populateTableOrderedFood();
+            
         }  
 
     }//GEN-LAST:event_btnAddToOrderActionPerformed
@@ -221,6 +313,27 @@ public class GUI_OrderFood extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_txtFoodCostActionPerformed
+
+    private void btnRemoveFromOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveFromOrderActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = this.tblOrderedFood.getSelectedRow();
+        
+        if (selectedRow != -1) {
+            
+            byte id = (byte) this.tblOrderedFood.getValueAt(selectedRow, 0);
+            
+            Food aFood = MenuManager.searchMenu(id);
+            
+            this.detail.removeFood(aFood); 
+            
+            this.detail.setPaymentAmount(calculateFoodPrice());
+            
+            updateFoodPrice();
+            
+            resetOrderedFoodTable();            
+            populateTableOrderedFood();
+        }
+    }//GEN-LAST:event_btnRemoveFromOrderActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,12 +380,15 @@ public class GUI_OrderFood extends javax.swing.JFrame {
     private javax.swing.JButton btnAddToOrder;
     private javax.swing.ButtonGroup btnGPaymentType;
     private javax.swing.JButton btnOrderFood;
+    private javax.swing.JButton btnRemoveFromOrder;
     private javax.swing.JButton btnReturnFoodMain;
     private javax.swing.JButton btnTotalFoodPrice;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblCustomerName;
     private javax.swing.JSpinner spnAddToOrder;
-    private javax.swing.JTable tblOrderFood;
+    private javax.swing.JTable tblAvailableFood;
+    private javax.swing.JTable tblOrderedFood;
     private javax.swing.JTextField txtFoodCost;
     // End of variables declaration//GEN-END:variables
 }

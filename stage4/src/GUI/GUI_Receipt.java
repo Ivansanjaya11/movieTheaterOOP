@@ -5,10 +5,16 @@ package GUI;
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.TreeMap;
 import stage4.AnalyticsAndFiles.FilesUpdateManager;
+import stage4.FoodRelated.Food;
+import stage4.FoodRelated.Inventory;
 import stage4.OrdersAndPayment.*;
 import stage4.TicketRelated.*;
+import stage4.util.DateAndPaymentTracker;
+import stage4.util.PrettyPrinter;
 
 /**
  *
@@ -17,9 +23,12 @@ import stage4.TicketRelated.*;
 public class GUI_Receipt extends javax.swing.JFrame {
 
     private String paymentId;
-    private DetailTicketBought detail;
+    private DetailTicketBought detailTicket;
+    private DetailFoodBought detailFood;
 
     private GUI_MainMenuTicket guiMainMenuTicket;
+    
+    private GUI_MainMenuFood guiMainMenuFood;
     
     
     /**
@@ -32,31 +41,77 @@ public class GUI_Receipt extends javax.swing.JFrame {
     public GUI_Receipt(GUI_MainMenuTicket guiMainMenuTicket, String paymentId, DetailTicketBought detail) {
         initComponents();
         this.paymentId = paymentId;
-        this.detail = detail;
+        this.detailTicket = detail;
         
         FilesUpdateManager.updateShowtimeDataFile(ShowtimeManager.getShowtimes());
         
         this.guiMainMenuTicket = guiMainMenuTicket;
         
-        String receiptContent = generateReceipt();
+        String receiptContent = generateTicketReceipt();
         
         this.receiptTextArea.setText(receiptContent);
     }
     
-    public String generateReceipt() {
+    public GUI_Receipt(GUI_MainMenuFood guiMainMenuFood, String paymentId, DetailFoodBought detail) {
+        initComponents();
+        this.paymentId = paymentId;
+        this.detailFood = detail;
+        
+        this.guiMainMenuFood = guiMainMenuFood;
+        
+        String receiptContent = generateFoodReceipt();
+        
+        this.receiptTextArea.setText(receiptContent);
+    }
+    
+    public String generateFoodReceipt() {
         String str = "";
         
         // get all the necessary data to create the receipt
-        byte normalNum = detail.getNormalNum();
-        byte imaxNum = detail.getImaxNum();
+        TreeMap<Food, Byte> orderedFood = detailFood.getOrderedFood();
+        String customerName = detailFood.getCustomer().getName();
+        String paymentType = detailFood.getPaymentType();
+        short paymentAmount = detailFood.getPaymentAmount();
+        
+        // prints out the detail of the transaction on screen
+        str += ("Order #" + paymentId + "\n");
+        str += ("This order is for " + customerName + "\n");
 
-        byte normalPrice = detail.getNormalPrice();
-        byte imaxPrice = detail.getImaxPrice();
+        // prints out the header of the table
+        str += ("Food\t\tQty\t\tprice per qty\n");
 
-        ArrayList<byte[]> chosenSeats = detail.getChosenSeats();
-        String customerName = detail.getCustomer().getName();
-        String paymentType = detail.getPaymentType();
-        short paymentAmount = detail.getPaymentAmount();
+        // display all the food ordered
+        for (Food aFood : orderedFood.keySet()) {
+            str += (aFood.getMenuName() + "\t\t");
+            str += (orderedFood.get(aFood) + "\t\t");
+            str += ("$" + aFood.getPrice());
+            str += "\n";
+        }
+
+        // prints out the price and payment type
+        str += ("Total price is $" + paymentAmount);
+        str += (", paid with " + paymentType);
+        str += ("\nThank you for eating with us!");
+
+        
+        
+        return str;
+    }
+    
+    public String generateTicketReceipt() {
+        String str = "";
+        
+        // get all the necessary data to create the receipt
+        byte normalNum = detailTicket.getNormalNum();
+        byte imaxNum = detailTicket.getImaxNum();
+
+        byte normalPrice = detailTicket.getNormalPrice();
+        byte imaxPrice = detailTicket.getImaxPrice();
+
+        ArrayList<byte[]> chosenSeats = detailTicket.getChosenSeats();
+        String customerName = detailTicket.getCustomer().getName();
+        String paymentType = detailTicket.getPaymentType();
+        short paymentAmount = detailTicket.getPaymentAmount();
         
 
         //Print the receipt
@@ -65,9 +120,9 @@ public class GUI_Receipt extends javax.swing.JFrame {
 
 
         // prints the detail of the showtime
-        str += ("Movie: '" + detail.getShowtime().getMovie().getTitle() + "'\n");
-        str += ("Start time: " + detail.getShowtime().getStartTime().toString() + "\n");
-        str += ("Screen room #" + detail.getShowtime().getScreen().getScreenID() + "\n");
+        str += ("Movie: '" + detailTicket.getShowtime().getMovie().getTitle() + "'\n");
+        str += ("Start time: " + detailTicket.getShowtime().getStartTime().toString() + "\n");
+        str += ("Screen room #" + detailTicket.getShowtime().getScreen().getScreenID() + "\n");
 
 
         str += ("Ticket type\t\tQty\tTotal price\n");
@@ -157,9 +212,14 @@ public class GUI_Receipt extends javax.swing.JFrame {
 
     private void okayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okayButtonActionPerformed
         // TODO add your handling code here:
-        this.dispose();
         
-        this.guiMainMenuTicket.setVisible(true);
+        if (this.guiMainMenuTicket != null) {
+            this.dispose();
+            this.guiMainMenuTicket.setVisible(true);
+        } else if (this.guiMainMenuFood != null) {
+            this.dispose();
+            this.guiMainMenuFood.setVisible(true);
+        }
     }//GEN-LAST:event_okayButtonActionPerformed
 
     /**

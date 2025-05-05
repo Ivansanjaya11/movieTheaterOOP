@@ -152,7 +152,8 @@ public class GUI_MainMenuFood extends javax.swing.JFrame {
 
     private void OrderFoodBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OrderFoodBtnActionPerformed
 
-        new GUI_OrderFood().setVisible(true);
+        this.setVisible(false);
+        new GUI_OrderFood(this).setVisible(true);
     }//GEN-LAST:event_OrderFoodBtnActionPerformed
 
     private void FoodElementsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FoodElementsBtnActionPerformed
