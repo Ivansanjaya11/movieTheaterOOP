@@ -117,13 +117,14 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         RemoveBtn = new javax.swing.JButton();
         UpdateBtn = new javax.swing.JButton();
         DisplayBtn = new javax.swing.JButton();
-        ReturnBtn = new javax.swing.JButton();
+        ReturnBtnCombos = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ItemTbl = new javax.swing.JTable();
         AddItemBtn = new javax.swing.JButton();
         RemoveItemBtn = new javax.swing.JButton();
         UpdateItemBtn = new javax.swing.JButton();
+        ReturnBtnIngredients = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,10 +166,10 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             }
         });
 
-        ReturnBtn.setText("Return to Concession Menu");
-        ReturnBtn.addActionListener(new java.awt.event.ActionListener() {
+        ReturnBtnCombos.setText("Return");
+        ReturnBtnCombos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ReturnBtnActionPerformed(evt);
+                ReturnBtnCombosActionPerformed(evt);
             }
         });
 
@@ -184,8 +185,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
                     .addComponent(Addbtn)
                     .addComponent(UpdateBtn)
                     .addComponent(DisplayBtn)
-                    .addComponent(ReturnBtn))
-                .addGap(0, 17, Short.MAX_VALUE))
+                    .addComponent(ReturnBtnCombos))
+                .addGap(0, 78, Short.MAX_VALUE))
         );
         CombosPnlLayout.setVerticalGroup(
             CombosPnlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,8 +199,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
                 .addComponent(UpdateBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(DisplayBtn)
-                .addGap(51, 51, 51)
-                .addComponent(ReturnBtn)
+                .addGap(78, 78, 78)
+                .addComponent(ReturnBtnCombos)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(CombosPnlLayout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,6 +240,13 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             }
         });
 
+        ReturnBtnIngredients.setText("Return");
+        ReturnBtnIngredients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnBtnIngredientsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -246,12 +254,14 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(AddItemBtn)
                     .addComponent(RemoveItemBtn)
-                    .addComponent(UpdateItemBtn))
-                .addContainerGap(108, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(ReturnBtnIngredients, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(UpdateItemBtn, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +276,9 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(RemoveItemBtn)
                         .addGap(18, 18, 18)
-                        .addComponent(UpdateItemBtn)))
+                        .addComponent(UpdateItemBtn)
+                        .addGap(92, 92, 92)
+                        .addComponent(ReturnBtnIngredients)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -336,10 +348,10 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
         
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
-    private void ReturnBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnBtnActionPerformed
+    private void ReturnBtnCombosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnBtnCombosActionPerformed
         this.dispose();
         this.guiMainMenuFood.setVisible(true);
-    }//GEN-LAST:event_ReturnBtnActionPerformed
+    }//GEN-LAST:event_ReturnBtnCombosActionPerformed
 
     private void AddItemBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddItemBtnActionPerformed
 
@@ -370,6 +382,12 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
             guiItemUpdate.setVisible(true);
         }
     }//GEN-LAST:event_UpdateItemBtnActionPerformed
+
+    private void ReturnBtnIngredientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnBtnIngredientsActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        this.guiMainMenuFood.setVisible(true);
+    }//GEN-LAST:event_ReturnBtnIngredientsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -416,7 +434,8 @@ public class GUI_ConcessionElements extends javax.swing.JFrame {
     private javax.swing.JTable ItemTbl;
     private javax.swing.JButton RemoveBtn;
     private javax.swing.JButton RemoveItemBtn;
-    private javax.swing.JButton ReturnBtn;
+    private javax.swing.JButton ReturnBtnCombos;
+    private javax.swing.JButton ReturnBtnIngredients;
     private javax.swing.JButton UpdateBtn;
     private javax.swing.JButton UpdateItemBtn;
     private javax.swing.JPanel jPanel1;

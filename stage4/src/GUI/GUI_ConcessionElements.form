@@ -64,9 +64,9 @@
                           <Component id="Addbtn" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="UpdateBtn" min="-2" max="-2" attributes="0"/>
                           <Component id="DisplayBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="ReturnBtn" min="-2" max="-2" attributes="0"/>
+                          <Component id="ReturnBtnCombos" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="78" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -81,8 +81,8 @@
                       <Component id="UpdateBtn" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="DisplayBtn" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
-                      <Component id="ReturnBtn" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
+                      <Component id="ReturnBtnCombos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -145,12 +145,12 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DisplayBtnActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="ReturnBtn">
+            <Component class="javax.swing.JButton" name="ReturnBtnCombos">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Return to Concession Menu"/>
+                <Property name="text" type="java.lang.String" value="Return"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReturnBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReturnBtnCombosActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -170,13 +170,16 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="AddItemBtn" min="-2" max="-2" attributes="0"/>
                           <Component id="RemoveItemBtn" min="-2" max="-2" attributes="0"/>
-                          <Component id="UpdateItemBtn" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="ReturnBtnIngredients" alignment="0" max="32767" attributes="0"/>
+                              <Component id="UpdateItemBtn" alignment="0" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="108" max="32767" attributes="0"/>
+                      <EmptySpace pref="102" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -195,6 +198,8 @@
                               <Component id="RemoveItemBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="UpdateItemBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
+                              <Component id="ReturnBtnIngredients" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="29" max="32767" attributes="0"/>
@@ -246,6 +251,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UpdateItemBtnActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="ReturnBtnIngredients">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Return"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ReturnBtnIngredientsActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

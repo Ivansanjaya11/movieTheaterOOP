@@ -1,7 +1,8 @@
-import stage4.Menus.MainMenu;
+import GUI.GUI_LogIn;
+
 
 public class Main {
 	public static void main(String[] args) {
-		MainMenu.showMenu(); // show menu
-	}
+            GUI_LogIn.main(args);
+        }
 }
