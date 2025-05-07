@@ -244,6 +244,7 @@ public class GUI_OrderFood extends javax.swing.JFrame {
         getContentPane().add(btnRemoveFromOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 400, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnReturnFoodMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnFoodMainActionPerformed

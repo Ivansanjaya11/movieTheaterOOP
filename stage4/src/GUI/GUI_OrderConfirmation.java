@@ -256,6 +256,7 @@ public class GUI_OrderConfirmation extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void YesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_YesBtnActionPerformed

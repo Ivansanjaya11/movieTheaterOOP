@@ -189,6 +189,7 @@ public class GUI_StaffUpdate extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void StaffNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StaffNameActionPerformed
