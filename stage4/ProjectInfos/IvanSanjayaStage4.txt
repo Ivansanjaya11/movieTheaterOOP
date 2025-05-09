@@ -1,0 +1,4 @@
+Ivan Sanjaya
+Stage 4
+
+I did some of the main menus, analytics pages, and staff elements. I also helped with integrating all the files. Also helped with the user guide. And making sure the data persistence works fine.
