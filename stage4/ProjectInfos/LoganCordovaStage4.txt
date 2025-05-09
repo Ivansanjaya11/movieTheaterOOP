@@ -1,0 +1,21 @@
+Logan Cordova: 
+* Experienced GitHub issues with committing under Insights Contributors page(My commits did not register in the Commits Page). Accurate commits shown under Commits section in GitHum*
+Worked on User Guide with Ivan and Heather
+* GUI_AboutFoodStaff
+* GUI_AboutTicketStaff
+* GUI_MainMenuTicket
+* GUI_MovieAdd
+* GUI_MovieElements
+* GUI_MovieUpdate
+* GUI_ScreenAdd
+* GUI_ScreenUpdate
+* GUI_ShowtimeAdd
+* GUI_ShowtimeUpdate
+* GUI_OrderFood
+
+
+
+
+
+
+
