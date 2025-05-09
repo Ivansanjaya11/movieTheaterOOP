@@ -1,0 +1,9 @@
+Heather Santos
+Stage 4
+
+Did the food related items in the gui, my food order jframe got deleted and changed, I did the UML diagram since i was paying or it, started on the GUI user guide and uploaded the images for the food side. I started these since logan and ivan were finishing up some of the GUI and if i were to help them it would have resulted in another merge issue. 
+
+had some frames deleted because of merging issues. 
+
+
+
